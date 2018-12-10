@@ -1,0 +1,70 @@
+
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,
+pre,form,fieldset,input,textarea,p,blockquote,th,td{
+	margin: 0;
+	padding: 0;
+}
+div{
+	outline: none;
+}
+
+/*列表*/
+#list{
+	overflow: hidden;
+}
+.firstList, .secondList {
+	float: left;
+	position: relative;
+	top: 0px;
+}
+.listItem {
+	font-size: 16px;
+	padding: 0 20px;
+	cursor: pointer;
+	text-align: center;
+	line-height: 40px;
+	height: 40px;
+	border: 1px solid transparent;
+}
+.listItem.focus{
+	color: red;
+	border-color: #FF0000;
+}
+.listItem .list{
+	margin-left: 30px;
+}
+.listItem.disabled{
+	color: #CDC9C9;
+}
+
+
+/*channel scan*/
+.channelScan{
+	font-size: 16px;
+}
+
+/*channelSkip*/
+#channelSkip{
+	overflow: hidden;
+}
+.channelSkip{
+	position: relative;
+	top: 0px;
+}
+#channelSkip .listItem div{
+	display: inline-block;
+	width: 200px;
+}
+#channelSkip .listItem .sel{
+	color: #CDC9C9;
+}
+#channelSkip .listItem .sel.hasSel{
+	color: #FF0000;
+}
+
+/*Channel Edit Detail*/
+#channelEditDetail .listItem div{
+	display: inline-block;
+	font-size: 16px;
+}
+
