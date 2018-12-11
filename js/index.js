@@ -1,8 +1,8 @@
 window.onload = function() {
-	
-//	var child=gMenuTvChannelSkip;
-//	channelSkip(child);
-//	gMenuPageName='channelSkip';
+
+	//	var child=gMenuTvChannelSkip;
+	//	channelSkip(child);
+	//	gMenuPageName='channelSkip';
 
 	//页面加载渲染数据
 	var parent = Menu;
@@ -184,24 +184,26 @@ window.onload = function() {
 					}
 					//valType===scan
 					if(typeof child[0] == 'object') {
-						gMenuPageName=child[curIndex].renderFuc;
+						gMenuPageName = child[curIndex].renderFuc;
 						eval(child[curIndex].renderFuc)(child[curIndex].value);
 					}
 				}
 			}
 			e.stopPropagation();
-		}else if(gMenuPageName=='channelScan'){
+		} else if(gMenuPageName == 'channelScan') {
 			channelScanKeyEvent(e);
-		}else if(gMenuPageName=='updateScan'){
+		} else if(gMenuPageName == 'updateScan') {
 			updateScanKeyEvent(e);
-		}else if(gMenuPageName=='analogManualScan'){
+		} else if(gMenuPageName == 'analogManualScan') {
 			analogManualScanKeyEvent(e);
-		}else if(gMenuPageName=='singleRFScan'){
+		} else if(gMenuPageName == 'singleRFScan') {
 			singleRFScanKeyEvent(e);
-		}else if(gMenuPageName=='channelSkip'){
+		} else if(gMenuPageName == 'channelSkip') {
 			channelSkipKeyEvent(e);
-		}else if(gMenuPageName=='channelEditDetail'){
+		} else if(gMenuPageName == 'channelEditDetail') {
 			channelEditDetailKeyEvent(e);
+		} else if(gMenuPageName == 'cleanChannelList') {
+			cleanChannelListKeyEvent(e);
 		}
 	}
 

@@ -1,12 +1,12 @@
 //Channel Skip
-let stage = 6;
+gMenuStage = 6;
 let list = [];
 let page = 0;
 let channelList;
 
 function channelSkip(value) {
 	channelList=value;
-	sliceArr(channelList.data, stage);
+	sliceArr(channelList.data, gMenuStage);
 	channelSkinRender(0);
 //	console.log(value);
 }
@@ -28,7 +28,19 @@ function channelSkinRender(fIndex) {
 							<div>${list[page][i].value}</div>
 						</div>`;
 			}
-		} else { //Channel Skip || Channel Sort
+		}else if(channelList.name=='gMenuTvAnalogChannel'){
+			if(i == fIndex) {
+				html += `<div class="listItem focus">
+							<div>${list[page][i].name}</div>
+							<div>${list[page][i].value}</div>
+						</div>`;
+			} else {
+				html += `<div class="listItem">
+							<div>${list[page][i].name}</div>
+							<div>${list[page][i].value}</div>
+						</div>`;
+			}
+		}else { //Channel Skip || Channel Sort
 			if(list[page][i].sel) {
 				if(i == fIndex) {
 					html += `<div class="listItem focus">
@@ -141,11 +153,14 @@ function channelSkipKeyEvent(e) {
 	}
 	//enter键
 	if(e.keyCode == KeyEvent.DOM_VK_ENTER) {
+		console.log(channelList.name);
 		if(channelList.name=='gMenuTvChannelEdit'){  //编辑具体内容
 			gMenuPageName='channelEditDetail';
 			channelEditDetail(list[page][curIndex]);
-		}else{  //选中
-			console.log(channelList.name);
+		}else if(channelList.name=='gMenuTvAnalogChannel'){  //Analog Channel Fine Tune 详情页面
+			
+		}else{
+			
 		}
 	}
 }

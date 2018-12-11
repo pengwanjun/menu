@@ -704,6 +704,19 @@ var gMenuTvChannelEdit={
 		}
 	]
 };
+var gMenuTvAnalogChannel={
+	name:'gMenuTvAnalogChannel',
+	data:[
+		{
+			name: '901',
+			value: '95.25MHz'
+		},
+		{
+			name: '902',
+			value: '291.44MHz'
+		}
+	]
+};
 var gMenuTvChannels = [{
 		name: 'Channel Scan',
 		value: {
@@ -771,15 +784,17 @@ var gMenuTvChannels = [{
 	},
 	{
 		name: 'Analog Channel Fine Tune',
-		value: [],
+		value: gMenuTvAnalogChannel,
 		valType: 'scan',
-		opera: false
+		opera: true,
+		renderFuc: 'channelSkip'
 	},
 	{
 		name: 'Clean Channel List',
 		value: [],
 		valType: 'scan',
-		opera: true
+		opera: true,
+		renderFuc: 'cleanChannelList'
 	}
 ];
 
@@ -1399,3 +1414,4 @@ var Menu = [{
 	}
 ];
 var gMenuPageName='list';
+

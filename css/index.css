@@ -68,3 +68,27 @@ div{
 	font-size: 16px;
 }
 
+/*cleanChannelList*/
+#cleanChannelList{
+	position: relative;
+}
+#cleanChannelList .cleanChannelList{
+	background: rgba(0,0,0,.5);
+	font-size: 16px;
+	margin: 200px auto;
+	padding: 100px 50px;
+}
+#cleanChannelList .sure,
+#cleanChannelList .cancel{
+	background: #333;
+	color: #fff;
+	border-radius: 10px;
+	display: inline-block;
+	width: 60px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+}
+#cleanChannelList .btn .focus{
+	background: #FF0000;
+}
