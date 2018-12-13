@@ -8,14 +8,28 @@ div{
 	outline: none;
 }
 
+#container{
+	background: #333333;
+	color: #fff;
+	font-size: 16px;
+}
+
 /*列表*/
 #list{
+	height: 360px;
 	overflow: hidden;
+	position: relative;
 }
 .firstList, .secondList {
-	float: left;
-	position: relative;
+	width: 300px;
+	position: absolute;
 	top: 0px;
+}
+.firstList{
+	left: 0px;
+}
+.secondList {
+	left: 300px;
 }
 .listItem {
 	font-size: 16px;
@@ -23,7 +37,7 @@ div{
 	cursor: pointer;
 	text-align: center;
 	line-height: 40px;
-	height: 40px;
+	height: 38px;
 	border: 1px solid transparent;
 }
 .listItem.focus{
@@ -69,17 +83,17 @@ div{
 }
 
 /*cleanChannelList*/
-#cleanChannelList{
+#popBoxShow{
 	position: relative;
 }
-#cleanChannelList .cleanChannelList{
+#popBoxShow .popBoxShow{
 	background: rgba(0,0,0,.5);
 	font-size: 16px;
 	margin: 200px auto;
 	padding: 100px 50px;
 }
-#cleanChannelList .sure,
-#cleanChannelList .cancel{
+#popBoxShow .sure,
+#popBoxShow .cancel{
 	background: #333;
 	color: #fff;
 	border-radius: 10px;
@@ -89,6 +103,46 @@ div{
 	line-height: 30px;
 	text-align: center;
 }
-#cleanChannelList .btn .focus{
+#popBoxShow .btn .focus{
 	background: #FF0000;
+}
+
+/*divXRegistration*/
+#divXRegistration div{
+	margin-top: 50px;
+	font-size: 16px;
+}
+#divXRegistration .sure{
+	border-radius: 10px;
+	background: #FF0000;
+	width: 80px;
+	height: 36px;
+	line-height: 36px;
+	text-align: center;
+	border: 1px solid #FF0000;
+}
+
+/*divXDeactivation*/
+#divXDeactivation div{
+	margin-top: 50px;
+	font-size: 16px;
+}
+#divXDeactivation .item{
+	display: inline-block;
+	width: 60px;
+	height: 36px;
+	text-align: center;
+	line-height: 36px;
+	border-radius: 10px;
+	border: 1px solid transparent;
+}
+#divXDeactivation .item.focus{
+	border: 1px solid #FF0000;
+}
+
+/*Information*/
+#Information span{
+	display: inline-block;
+	width: 200px;
+	text-align: center;
 }

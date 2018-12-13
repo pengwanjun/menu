@@ -1,12 +1,16 @@
 //Update Scan
-function updateScan(value) {
-	var html = '';
-	for(var k in value) {
-		html += '<div class="channelScan">' + k + '：' + value[k] + '</div>';
+var updateScan = {
+	render: function(value) {
+		var html = '';
+		for(var k in value.data) {
+			html += '<div class="channelScan">' + k + '：' + value.data[k] + '</div>';
+		}
+		document.querySelector('#container').innerHTML = html;
+	},
+	keyEvent: function(e) {
+		//exit---返回键
+		if(e.keyCode == KeyEvent.DOM_VK_BACK_SPACE) {
+			returnListPage();
+		}
 	}
-	document.querySelector('#container').innerHTML = html;
-}
-//响应键盘
-function channelScanKeyEvent(e){
-	console.log(e);
 }
