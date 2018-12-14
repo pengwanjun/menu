@@ -34,95 +34,432 @@ var gMenuVideoCt = [{
 			data: ['User', 'Cool', 'Standard', 'Warm']
 		},
 		curVal: 'User',
-		opera: true
+		opera: true,
+		msg: function(key) {
+			if(key == 'get') {
+				//				return {
+				//					"method": "mtk.webui.config.getMinMaxValue",
+				//					"params": {
+				//						"configId": "g_video__clr_gain_r"
+				//					}
+				//				};
+			} else {
+				//				return {
+				//					"method": "mtk.webui.config.setValue",
+				//					"params": {
+				//						"configId": "g_video__clr_gain_r",
+				//						"value": this.value.data,
+				//						"apply": true
+				//					}
+				//				};
+			}
+		},
+		getCallback: function(data) { //获取value值
+			console.log(data);
+			//			this.value.min=data.result.min;
+			//			this.value.max=data.result.max;
+			//			this.value.data=data.result.current;
+		}
 	},
 	{
 		name: 'R Gain',
 		value: {
 			valType: 'num',
-			data: 0
+			data: 0,
+			min: -20,
+			max: 20
 		},
-		opera: true
+		opera: true,
+		msg: function(key) {
+			if(key == 'get') {
+				return {
+					"method": "mtk.webui.config.getMinMaxValue",
+					"params": {
+						"configId": "g_video__clr_gain_r"
+					}
+				};
+			} else {
+				return {
+					"method": "mtk.webui.config.setValue",
+					"params": {
+						"configId": "g_video__clr_gain_r",
+						"value": this.value.data,
+						"apply": true
+					}
+				};
+			}
+		},
+		getCallback: function(data) { //获取value值
+			//			console.log(data);
+			this.value.min = data.result.min;
+			this.value.max = data.result.max;
+			this.value.data = data.result.current;
+		}
 	},
 	{
 		name: 'G Gain',
 		value: {
 			valType: 'num',
-			data: 0
+			data: 0,
+			min: -20,
+			max: 20
 		},
-		opera: true
+		opera: true,
+		msg: function(key) {
+			if(key == 'get') {
+				return {
+					"method": "mtk.webui.config.getMinMaxValue",
+					"params": {
+						"configId": "g_video__clr_gain_g"
+					}
+				};
+			} else {
+				return {
+					"method": "mtk.webui.config.setValue",
+					"params": {
+						"configId": "g_video__clr_gain_g",
+						"value": this.value.data,
+						"apply": true
+					}
+				};
+			}
+		},
+		getCallback: function(data) { //获取value值
+			//			console.log(data);
+			this.value.min = data.result.min;
+			this.value.max = data.result.max;
+			this.value.data = data.result.current;
+		}
 	},
 	{
 		name: 'B Gain',
 		value: {
 			valType: 'num',
-			data: 0
+			data: 0,
+			min: -20,
+			max: 20
 		},
-		opera: true
+		opera: true,
+		msg: function(key) {
+			if(key == 'get') {
+				return {
+					"method": "mtk.webui.config.getMinMaxValue",
+					"params": {
+						"configId": "g_video__clr_gain_b"
+					}
+				};
+			} else {
+				return {
+					"method": "mtk.webui.config.setValue",
+					"params": {
+						"configId": "g_video__clr_gain_b",
+						"value": this.value.data,
+						"apply": true
+					}
+				};
+			}
+		},
+		getCallback: function(data) { //获取value值
+			//			console.log(data);
+			this.value.min = data.result.min;
+			this.value.max = data.result.max;
+			this.value.data = data.result.current;
+		}
 	}
 ];
 var gMenuVideoAv = [{
 		name: 'DNR',
 		value: {
 			valType: 'sel',
-			data: ['Medium', 'strong', 'Auto', 'Off', 'Low']
+			data: [],
+			dataList: ['Off', 'Low', 'Medium', 'strong', 'Auto', ] //0-4
 		},
-		curVal: 'Medium',
-		opera: true
+		curVal: 0,
+		opera: true,
+		msg: function(key) {
+			if(key == 'get') {
+				return {
+					"method": "mtk.webui.config.getMinMaxValue",
+					"params": {
+						"configId": "g_video__vid_nr"
+					}
+				};
+			} else {
+				return {
+					"method": "mtk.webui.config.setValue",
+					"params": {
+						"configId": "g_video__vid_nr",
+						"value": gMenuoIndex,
+						"apply": true
+					}
+				};
+			}
+		},
+		getCallback: function(data) { //获取value值
+			//			console.log(data.result);
+			let arr = [];
+			for(let i = data.result.min; i <= data.result.max; i++) {
+				arr.push(this.value.dataList[i]);
+			}
+			this.value.data = arr;
+			this.curVal = data.result.current;
+		},
+		setCallback: function(data) { //设置value值
+			//			console.log(data.result);
+			this.curVal = data.result.current;
+		}
 	},
 	{
 		name: 'MPEG NR',
 		value: {
 			valType: 'sel',
-			data: ['Medium', 'strong', 'Off', 'Low']
+			data: [],
+			dataList: ['Off', 'Low', 'Medium', 'strong'] //0-3
 		},
-		curVal: 'Medium',
-		opera: true
+		curVal: 0,
+		opera: true,
+		msg: function(key) {
+			if(key == 'get') {
+				return {
+					"method": "mtk.webui.config.getMinMaxValue",
+					"params": {
+						"configId": "g_video__vid_mpeg_nr"
+					}
+				};
+			} else {
+				return {
+					"method": "mtk.webui.config.setValue",
+					"params": {
+						"configId": "g_video__vid_mpeg_nr",
+						"value": gMenuoIndex,
+						"apply": true
+					}
+				};
+			}
+		},
+		getCallback: function(data) { //获取value值
+			//						console.log(data.result);
+			let arr = [];
+			for(let i = data.result.min; i <= data.result.max; i++) {
+				arr.push(this.value.dataList[i]);
+			}
+			this.value.data = arr;
+			this.curVal = data.result.current;
+		},
+		setCallback: function(data) { //设置value值
+			//			console.log(data.result);
+			this.curVal = data.result.current;
+		}
 	},
 	{
 		name: 'Adaptive Luma Control',
 		value: {
 			valType: 'sel',
-			data: ['Medium', 'strong', 'Off', 'Low']
+			data: [],
+			dataList: ['Off', 'Low', 'Medium', 'strong']
 		},
-		curVal: 'Medium',
-		opera: true
+		curVal: 0,
+		opera: true,
+		msg: function(key) {
+			if(key == 'get') {
+				return {
+					"method": "mtk.webui.config.getMinMaxValue",
+					"params": {
+						"configId": "g_video__vid_luma"
+					}
+				};
+			} else {
+				return {
+					"method": "mtk.webui.config.setValue",
+					"params": {
+						"configId": "g_video__vid_luma",
+						"value": gMenuoIndex,
+						"apply": true
+					}
+				};
+			}
+		},
+		getCallback: function(data) { //获取value值
+			//						console.log(data.result);
+			let arr = [];
+			for(let i = data.result.min; i <= data.result.max; i++) {
+				arr.push(this.value.dataList[i]);
+			}
+			this.value.data = arr;
+			this.curVal = data.result.current;
+		},
+		setCallback: function(data) { //设置value值
+			//			console.log(data.result);
+			this.curVal = data.result.current;
+		}
 	},
 	{
 		name: 'Flesh Tone',
 		value: {
 			valType: 'sel',
-			data: ['Medium', 'High', 'Off', 'Low']
+			data: [],
+			dataList: ['Off', 'Low', 'Middle', 'Strong']
 		},
-		curVal: 'Medium',
-		opera: true
+		curVal: 0,
+		opera: true,
+		msg: function(key) {
+			if(key == 'get') {
+				return {
+					"method": "mtk.webui.config.getMinMaxValue",
+					"params": {
+						"configId": "g_video__vid_flash_tone"
+					}
+				};
+			} else {
+				return {
+					"method": "mtk.webui.config.setValue",
+					"params": {
+						"configId": "g_video__vid_flash_tone",
+						"value": gMenuoIndex,
+						"apply": true
+					}
+				};
+			}
+		},
+		getCallback: function(data) { //获取value值
+			//						console.log(data.result);
+			let arr = [];
+			for(let i = data.result.min; i <= data.result.max; i++) {
+				arr.push(this.value.dataList[i]);
+			}
+			this.value.data = arr;
+			this.curVal = data.result.current;
+		},
+		setCallback: function(data) { //设置value值
+			//			console.log(data.result);
+			this.curVal = data.result.current;
+		}
 	},
 	{
 		name: 'Dl Film Mode',
 		value: {
 			valType: 'sel',
-			data: ['Auto', 'Off']
+			data:[],
+			dataList: ['Off', 'Auto']
 		},
-		curVal: 'Auto',
-		opera: true
+		curVal: 0,
+		opera: true,
+		msg: function(key) {
+			if(key == 'get') {
+				return {
+					"method": "mtk.webui.config.getMinMaxValue",
+					"params": {
+						"configId": "g_video__vid_di_film_mode"
+					}
+				};
+			} else {
+				return {
+					"method": "mtk.webui.config.setValue",
+					"params": {
+						"configId": "g_video__vid_di_film_mode",
+						"value": gMenuoIndex,
+						"apply": true
+					}
+				};
+			}
+		},
+		getCallback: function(data) { //获取value值
+			//						console.log(data.result);
+			let arr = [];
+			for(let i = data.result.min; i <= data.result.max; i++) {
+				arr.push(this.value.dataList[i]);
+			}
+			this.value.data = arr;
+			this.curVal = data.result.current;
+		},
+		setCallback: function(data) { //设置value值
+			//			console.log(data.result);
+			this.curVal = data.result.current;
+		}
 	},
 	{
 		name: 'Blue stretch',
 		value: {
 			valType: 'sel',
-			data: ['Off', 'On']
+			data:[],
+			dataList: ['Off', 'On']
 		},
-		curVal: 'Off',
-		opera: true
+		curVal: 0,
+		opera: true,
+		msg: function(key) {
+			if(key == 'get') {
+				return {
+					"method": "mtk.webui.config.getMinMaxValue",
+					"params": {
+						"configId": "g_video__vid_blue_stretch"
+					}
+				};
+			} else {
+				return {
+					"method": "mtk.webui.config.setValue",
+					"params": {
+						"configId": "g_video__vid_blue_stretch",
+						"value": gMenuoIndex,
+						"apply": true
+					}
+				};
+			}
+		},
+		getCallback: function(data) { //获取value值
+			//						console.log(data.result);
+			let arr = [];
+			for(let i = data.result.min; i <= data.result.max; i++) {
+				arr.push(this.value.dataList[i]);
+			}
+			this.value.data = arr;
+			this.curVal = data.result.current;
+		},
+		setCallback: function(data) { //设置value值
+			//			console.log(data.result);
+			this.curVal = data.result.current;
+		}
 	},
 	{
 		name: 'Game Mode',
 		value: {
 			valType: 'sel',
-			data: ['Off', 'On']
+			data:[],
+			dataList: ['Off', 'On']
 		},
-		curVal: 'Off',
-		opera: false
+		curVal: 0,
+		opera: false,
+		msg: function(key) {
+			if(key == 'get') {
+				return {
+					"method": "mtk.webui.config.getMinMaxValue",
+					"params": {
+						"configId": "g_video__vid_game_mode"
+					}
+				};
+			} else {
+				return {
+					"method": "mtk.webui.config.setValue",
+					"params": {
+						"configId": "g_video__vid_game_mode",
+						"value": gMenuoIndex,
+						"apply": true
+					}
+				};
+			}
+		},
+		getCallback: function(data) { //获取value值
+			//						console.log(data.result);
+			let arr = [];
+			for(let i = data.result.min; i <= data.result.max; i++) {
+				arr.push(this.value.dataList[i]);
+			}
+			this.value.data = arr;
+			this.curVal = data.result.current;
+		},
+		setCallback: function(data) { //设置value值
+			//			console.log(data.result);
+			this.curVal = data.result.current;
+		}
 	},
 	{
 		name: 'MJC',
@@ -136,52 +473,127 @@ var gMenuVideoAv = [{
 		name: 'Black Bar Detection',
 		value: {
 			valType: 'sel',
-			data: ['Off', 'On']
+			data:[],
+			dataList: ['Off', 'On']
 		},
-		curVal: 'Off',
-		opera: true
+		curVal: 0,
+		opera: true,
+		msg: function(key) {
+//			if(key == 'get') {
+//				return {
+//					"method": "mtk.webui.config.getMinMaxValue",
+//					"params": {
+//						"configId": "g_video__vid_black_bar_detect"
+//					}
+//				};
+//			} else {
+//				return {
+//					"method": "mtk.webui.config.setValue",
+//					"params": {
+//						"configId": "g_video__vid_black_bar_detect",
+//						"value": gMenuoIndex,
+//						"apply": true
+//					}
+//				};
+//			}
+		},
+		getCallback: function(data) { //获取value值
+			//						console.log(data.result);
+//			let arr = [];
+//			for(let i = data.result.min; i <= data.result.max; i++) {
+//				arr.push(this.value.dataList[i]);
+//			}
+//			this.value.data = arr;
+//			this.curVal = data.result.current;
+		},
+		setCallback: function(data) { //设置value值
+			//			console.log(data.result);
+//			this.curVal = data.result.current;
+		}
 	},
 	{
 		name: 'Super Resolution',
 		value: {
 			valType: 'sel',
-			data: ['On', 'Off']
+			data:[],
+			dataList: ['On', 'Off']
 		},
-		curVal: 'On',
-		opera: true
+		curVal: 0,
+		opera: true,
+		msg: function(key) {
+//			if(key == 'get') {
+//				return {
+//					"method": "mtk.webui.config.getMinMaxValue",
+//					"params": {
+//						"configId": "g_video__vid_super_resolution"
+//					}
+//				};
+//			} else {
+//				return {
+//					"method": "mtk.webui.config.setValue",
+//					"params": {
+//						"configId": "g_video__vid_super_resolution",
+//						"value": gMenuoIndex,
+//						"apply": true
+//					}
+//				};
+//			}
+		},
+		getCallback: function(data) { //获取value值
+			//						console.log(data.result);
+//			let arr = [];
+//			for(let i = data.result.min; i <= data.result.max; i++) {
+//				arr.push(this.value.dataList[i]);
+//			}
+//			this.value.data = arr;
+//			this.curVal = data.result.current;
+		},
+		setCallback: function(data) { //设置value值
+			//			console.log(data.result);
+//			this.curVal = data.result.current;
+		}
 	}
 ];
 var gMenuVideo = [{
 		name: 'Picture Mode',
 		value: {
 			valType: 'sel',
-			data: ['User', 'Cinema', 'Sport', 'Vivid', 'Hi-Bright']
+			data: [],
+			dataList: ['User', 'Cinema', 'Sport', 'Vivid', 'Hi-Bright']
 		},
-		curVal: 'User',
+		curVal: 0,
 		opera: true,
-		msg: function(key) { //请求参数
+		msg: function(key) {
 			if(key == 'get') {
-				var msg = {
-					"method": "org.mtk.webview.video.query.picmode"
-				}
+				return {
+					"method": "mtk.webui.config.getMinMaxValue",
+					"params": {
+						"configId": "g_video__picture_mode"
+					}
+				};
 			} else {
-				var msg = {
-					"method": "org.mtk.webview.video.set.picmode"
-				}
+				return {
+					"method": "mtk.webui.config.setValue",
+					"params": {
+						"configId": "g_video__picture_mode",
+						"value": gMenuoIndex,
+						"apply": true
+					}
+				};
 			}
-			return msg;
 		},
 		getCallback: function(data) { //获取value值
 			//			console.log(data.result);
-			for(k in data.result.List) {
-				if(k == data.result.val) {
-					this.curVal = data.result.List[k];
-				}
-				this.value.push(data.result.List[k]);
+			let arr = [];
+			for(let i = data.result.min; i <= data.result.max; i++) {
+				arr.push(this.value.dataList[i]);
 			}
+			this.value.data = arr;
+			this.curVal = data.result.current;
 		},
-		setCallback: function(data) { //设置curVal值
-			console.log(data);
+		setCallback: function(data) { //设置value值
+			//			console.log(data.result);
+			this.curVal = data.result.current;
 		}
 	},
 	{
@@ -189,8 +601,8 @@ var gMenuVideo = [{
 		value: {
 			valType: 'num',
 			data: 50,
-			max:0,
-			min:100
+			min: 0,
+			max: 100
 		},
 		opera: true,
 		msg: function(key) {
@@ -201,7 +613,7 @@ var gMenuVideo = [{
 						"configId": "g_disp__disp_back_light"
 					}
 				};
-			} else{
+			} else {
 				return {
 					"method": "mtk.webui.config.setValue",
 					"params": {
@@ -213,9 +625,10 @@ var gMenuVideo = [{
 			}
 		},
 		getCallback: function(data) { //获取value值
-			this.value.min=data.result.min;
-			this.value.max=data.result.max;
-			this.value.data=data.result.current;
+			//			console.log(data);
+			this.value.min = data.result.min;
+			this.value.max = data.result.max;
+			this.value.data = data.result.current;
 		}
 	},
 	{
@@ -223,8 +636,8 @@ var gMenuVideo = [{
 		value: {
 			valType: 'num',
 			data: 50,
-			max:0,
-			min:100
+			min: 0,
+			max: 100
 		},
 		opera: true,
 		msg: function(key) {
@@ -247,10 +660,10 @@ var gMenuVideo = [{
 			}
 		},
 		getCallback: function(data) { //获取value值
-//			console.log(data);
-			this.value.min=data.result.min;
-			this.value.max=data.result.max;
-			this.value.data=data.result.current;
+			//			console.log(data);
+			this.value.min = data.result.min;
+			this.value.max = data.result.max;
+			this.value.data = data.result.current;
 		}
 	},
 	{
@@ -258,8 +671,8 @@ var gMenuVideo = [{
 		value: {
 			valType: 'num',
 			data: 80,
-			max:0,
-			min:100
+			min: 0,
+			max: 100
 		},
 		opera: true,
 		msg: function(key) {
@@ -282,29 +695,54 @@ var gMenuVideo = [{
 			}
 		},
 		getCallback: function(data) { //获取value值
-//			console.log(data);
-			this.value.min=data.result.min;
-			this.value.max=data.result.max;
-			this.value.data=data.result.current;
+			//			console.log(data);
+			this.value.min = data.result.min;
+			this.value.max = data.result.max;
+			this.value.data = data.result.current;
 		}
 	},
 	{
 		name: 'Saturation',
 		value: {
 			valType: 'num',
-			data: 60,
-			max:0,
-			min:100
+			data: 0,
+			min: 0,
+			max: 100
 		},
-		opera: true
+		opera: true,
+		msg: function(key) {
+			if(key == 'get') {
+				//				return {
+				//					"method": "mtk.webui.config.getMinMaxValue",
+				//					"params": {
+				//						"configId": "g_disp__disp_back_light"
+				//					}
+				//				};
+			} else {
+				//				return {
+				//					"method": "mtk.webui.config.setValue",
+				//					"params": {
+				//						"configId": "g_disp__disp_back_light",
+				//						"value": this.value.data,
+				//						"apply": true
+				//					}
+				//				};
+			}
+		},
+		getCallback: function(data) { //获取value值
+			//			console.log(data);
+			//			this.value.min=data.result.min;
+			//			this.value.max=data.result.max;
+			//			this.value.data=data.result.current;
+		}
 	},
 	{
 		name: 'HUE',
 		value: {
 			valType: 'num',
 			data: -13,
-			max:50,
-			min:-50
+			min: -50,
+			max: 50
 		},
 		opera: true,
 		msg: function(key) {
@@ -327,58 +765,205 @@ var gMenuVideo = [{
 			}
 		},
 		getCallback: function(data) { //获取value值
-//			console.log(data);
-			this.value.min=data.result.min;
-			this.value.max=data.result.max;
-			this.value.data=data.result.current;
+			//			console.log(data);
+			this.value.min = data.result.min;
+			this.value.max = data.result.max;
+			this.value.data = data.result.current;
 		}
 	},
 	{
 		name: 'Sharpness',
 		value: {
 			valType: 'num',
-			data: 12,
-			min:0,
-			max:20
+			data: 0,
+			min: 0,
+			max: 20
 		},
-		opera: true
+		opera: true,
+		msg: function(key) {
+			if(key == 'get') {
+				//				return {
+				//					"method": "mtk.webui.config.getMinMaxValue",
+				//					"params": {
+				//						"configId": "g_disp__disp_back_light"
+				//					}
+				//				};
+			} else {
+				//				return {
+				//					"method": "mtk.webui.config.setValue",
+				//					"params": {
+				//						"configId": "g_disp__disp_back_light",
+				//						"value": this.value.data,
+				//						"apply": true
+				//					}
+				//				};
+			}
+		},
+		getCallback: function(data) { //获取value值
+			//			console.log(data);
+			//			this.value.min=data.result.min;
+			//			this.value.max=data.result.max;
+			//			this.value.data=data.result.current;
+		}
 	},
 	{
 		name: 'Blue Light',
 		value: {
 			valType: 'num',
 			data: 0,
-			min:0,
-			max:100
+			min: 0,
+			max: 100
 		},
-		opera: true
+		opera: true,
+		msg: function(key) {
+			if(key == 'get') {
+				//				return {
+				//					"method": "mtk.webui.config.getMinMaxValue",
+				//					"params": {
+				//						"configId": "g_disp__disp_back_light"
+				//					}
+				//				};
+			} else {
+				//				return {
+				//					"method": "mtk.webui.config.setValue",
+				//					"params": {
+				//						"configId": "g_disp__disp_back_light",
+				//						"value": this.value.data,
+				//						"apply": true
+				//					}
+				//				};
+			}
+		},
+		getCallback: function(data) { //获取value值
+			//			console.log(data);
+			//			this.value.min=data.result.min;
+			//			this.value.max=data.result.max;
+			//			this.value.data=data.result.current;
+		}
 	},
 	{
 		name: 'Dolby Vision Notification',
 		value: {
 			valType: 'sel',
-			data: ['Off', 'On']
+			data: [],
+			dataList: ['Off', 'On']
 		},
-		curVal: 'Off',
-		opera: true
+		curVal: 0,
+		opera: true,
+		msg: function(key) {
+			if(key == 'get') {
+				//				return {
+				//					"method": "mtk.webui.config.getMinMaxValue",
+				//					"params": {
+				//						"configId": "g_disp__disp_back_light"
+				//					}
+				//				};
+			} else {
+				//				return {
+				//					"method": "mtk.webui.config.setValue",
+				//					"params": {
+				//						"configId": "g_disp__disp_back_light",
+				//						"value": gMenuoIndex,
+				//						"apply": true
+				//					}
+				//				};
+			}
+		},
+		getCallback: function(data) { //获取value值
+			//			console.log(data.result);
+			//			let arr=[];
+			//			for(let i=data.result.min;i<=data.result.max;i++){
+			//				arr.push(this.value.dataList[i]);
+			//			}
+			//			this.value.data=arr;
+			//			this.curVal=data.result.current;
+		},
+		setCallback: function(data) { //设置value值
+			//			console.log(data.result);
+			//			this.curVal=data.result.current;
+		}
 	},
 	{
 		name: 'Gamma',
 		value: {
 			valType: 'sel',
-			data: ['Middle', 'Bright', 'Dark']
+			data: [],
+			dataList: ['Dark', 'Middle', 'Bright']
 		},
-		curVal: 'Middle',
-		opera: true
+		curVal: 0,
+		opera: true,
+		msg: function(key) {
+			if(key == 'get') {
+				return {
+					"method": "mtk.webui.config.getMinMaxValue",
+					"params": {
+						"configId": "g_disp__disp_gamma"
+					}
+				};
+			} else {
+				return {
+					"method": "mtk.webui.config.setValue",
+					"params": {
+						"configId": "g_disp__disp_gamma",
+						"value": parseInt(gMenuoIndex) + 1,
+						"apply": true
+					}
+				};
+			}
+		},
+		getCallback: function(data) { //获取value值
+			let arr = [];
+			for(let i = data.result.min - 1; i <= data.result.max - 1; i++) {
+				arr.push(this.value.dataList[i]);
+			}
+			this.value.data = arr;
+			this.curVal = data.result.current - 1;
+		},
+		setCallback: function(data) { //设置value值
+			//			console.log(data.result);
+			this.curVal = data.result.current - 1;
+		}
 	},
 	{
 		name: 'HDR',
 		value: {
 			valType: 'sel',
-			data: ['Auto', 'Off']
+			data: [],
+			dataList: ['Auto', 'Off']
 		},
 		curVal: 'Auto',
-		opera: true
+		opera: true,
+		msg: function(key) {
+			//			if(key == 'get') {
+			//				return {
+			//					"method": "mtk.webui.config.getMinMaxValue",
+			//					"params": {
+			//						"configId": "g_video__vid_hdr"
+			//					}
+			//				};
+			//			} else {
+			//				return {
+			//					"method": "mtk.webui.config.setValue",
+			//					"params": {
+			//						"configId": "g_video__vid_hdr",
+			//						"value": parseInt(gMenuoIndex),
+			//						"apply": true
+			//					}
+			//				};
+			//			}
+		},
+		getCallback: function(data) { //获取value值
+			//			let arr = [];
+			//			for(let i = data.result.min ; i <= data.result.max ; i++) {
+			//				arr.push(this.value.dataList[i]);
+			//			}
+			//			this.value.data = arr;
+			//			this.curVal = data.result.current;
+		},
+		setCallback: function(data) { //设置value值
+			//			console.log(data.result);
+			//			this.curVal = data.result.current;
+		}
 	},
 	{
 		name: 'Color Temperature',
@@ -463,7 +1048,32 @@ var gMenuAudio = [{
 			data: ['On', 'Off']
 		},
 		curVal: 'On',
-		opera: true
+		opera: true,
+		msg: function(key) {
+			if(key == 'get') {
+				//				return {
+				//					"method": "mtk.webui.config.getMinMaxValue",
+				//					"params": {
+				//						"configId": "g_disp__disp_back_light"
+				//					}
+				//				};
+			} else {
+				//				return {
+				//					"method": "mtk.webui.config.setValue",
+				//					"params": {
+				//						"configId": "g_disp__disp_back_light",
+				//						"value": this.value.data,
+				//						"apply": true
+				//					}
+				//				};
+			}
+		},
+		getCallback: function(data) { //获取value值
+			//			console.log(data);
+			//			this.value.min=data.result.min;
+			//			this.value.max=data.result.max;
+			//			this.value.data=data.result.current;
+		}
 	},
 	{
 		name: 'SPDIF Type',
@@ -472,15 +1082,67 @@ var gMenuAudio = [{
 			data: ['PCM', 'Dolby Digital', 'Dolby Digital Plus', 'Off']
 		},
 		curVal: 'PCM',
-		opera: true
+		opera: true,
+		msg: function(key) {
+			if(key == 'get') {
+				//				return {
+				//					"method": "mtk.webui.config.getMinMaxValue",
+				//					"params": {
+				//						"configId": "g_disp__disp_back_light"
+				//					}
+				//				};
+			} else {
+				//				return {
+				//					"method": "mtk.webui.config.setValue",
+				//					"params": {
+				//						"configId": "g_disp__disp_back_light",
+				//						"value": this.value.data,
+				//						"apply": true
+				//					}
+				//				};
+			}
+		},
+		getCallback: function(data) { //获取value值
+			//			console.log(data);
+			//			this.value.min=data.result.min;
+			//			this.value.max=data.result.max;
+			//			this.value.data=data.result.current;
+		}
 	},
 	{
 		name: 'SPDIF Delay',
 		value: {
 			valType: 'num',
-			data: 140
+			data: 140,
+			min: 0,
+			max: 100
 		},
-		opera: true
+		opera: true,
+		msg: function(key) {
+			if(key == 'get') {
+				return {
+					"method": "mtk.webui.config.getMinMaxValue",
+					"params": {
+						"configId": "g_audio__spdif_delay"
+					}
+				};
+			} else {
+				return {
+					"method": "mtk.webui.config.setValue",
+					"params": {
+						"configId": "g_audio__spdif_delay",
+						"value": this.value.data,
+						"apply": true
+					}
+				};
+			}
+		},
+		getCallback: function(data) { //获取value值
+			//			console.log(data);
+			this.value.min = data.result.min;
+			this.value.max = data.result.max;
+			this.value.data = data.result.current;
+		}
 	},
 	{
 		name: 'Type',
@@ -489,7 +1151,32 @@ var gMenuAudio = [{
 			data: ['Normal', 'Hearing Impaired', 'Visually Impaired']
 		},
 		curVal: 'Normal',
-		opera: true
+		opera: true,
+		msg: function(key) {
+			if(key == 'get') {
+				//				return {
+				//					"method": "mtk.webui.config.getMinMaxValue",
+				//					"params": {
+				//						"configId": "g_audio__spdif_delay"
+				//					}
+				//				};
+			} else {
+				//				return {
+				//					"method": "mtk.webui.config.setValue",
+				//					"params": {
+				//						"configId": "g_audio__spdif_delay",
+				//						"value": this.value.data,
+				//						"apply": true
+				//					}
+				//				};
+			}
+		},
+		getCallback: function(data) { //获取value值
+			console.log(data);
+			//			this.value.min=data.result.min;
+			//			this.value.max=data.result.max;
+			//			this.value.data=data.result.current;
+		}
 	},
 	{
 		name: 'Visually Impaired',
@@ -507,7 +1194,32 @@ var gMenuAudio = [{
 			data: ['Surround', 'Stereo', 'Auto Stereo']
 		},
 		curVal: 'Surround',
-		opera: true
+		opera: true,
+		msg: function(key) {
+			if(key == 'get') {
+				//				return {
+				//					"method": "mtk.webui.config.getMinMaxValue",
+				//					"params": {
+				//						"configId": "g_audio__spdif_delay"
+				//					}
+				//				};
+			} else {
+				//				return {
+				//					"method": "mtk.webui.config.setValue",
+				//					"params": {
+				//						"configId": "g_audio__spdif_delay",
+				//						"value": this.value.data,
+				//						"apply": true
+				//					}
+				//				};
+			}
+		},
+		getCallback: function(data) { //获取value值
+			console.log(data);
+			//			this.value.min=data.result.min;
+			//			this.value.max=data.result.max;
+			//			this.value.data=data.result.current;
+		}
 	},
 	{
 		name: 'Soundtracks',

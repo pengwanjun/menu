@@ -17,9 +17,11 @@ function listKeyEvent(e) {
 				window.gSocket.send(gMenuParent.data[gMenuoIndex].msg('get'), function(data) {
 					gMenuParent.data[gMenuoIndex].getCallback(data);
 					gMenuRenderSecond();
-					changePage(gMenuoIndex, gMenuClassName);
 				});
+			} else {
+				gMenuRenderSecond();
 			}
+			changePage(gMenuoIndex, gMenuClassName);
 		} else {
 			if(gMenuChild.valType == 'scan') {
 				gMenuoIndex = canOperaDown(gMenuChild, curIndex);
@@ -48,12 +50,15 @@ function listKeyEvent(e) {
 			removeClass(curList[curIndex], 'focus');
 			addClass(curList[gMenuoIndex], 'focus');
 			gMenuChild = gMenuParent.data[gMenuoIndex].value;
-			//获取数据
-			//				window.gSocket.send(gMenuParent[gMenuoIndex].msg('get'), function(data) {
-			//					gMenuParent[gMenuoIndex].getCallback(data);
-			//					gMenuRenderSecond();
-			//				});
-			gMenuRenderSecond();
+			if(gMenuChild.valType == 'num' || gMenuChild.valType == 'sel') {
+				//获取数据
+				window.gSocket.send(gMenuParent.data[gMenuoIndex].msg('get'), function(data) {
+					gMenuParent.data[gMenuoIndex].getCallback(data);
+					gMenuRenderSecond();
+				});
+			} else {
+				gMenuRenderSecond();
+			}
 			changePage(gMenuoIndex, gMenuClassName);
 		} else {
 			if(gMenuChild.valType == 'scan') {
@@ -150,10 +155,13 @@ function listKeyEvent(e) {
 		if(gMenuClassName == 'secondList') {
 			//valType===sel
 			if(gMenuChild.valType == 'sel') {
-				//				gMenuoIndex = gMenuNavlist[gMenuNavlist.length - 1].mark;
-				//				window.gSocket.send(gMenuParent[gMenuoIndex].msg('set'), function(data) {
-				//					gMenuParent[gMenuoIndex].setCallback(data);
-				//				});
+				let mark = gMenuNavlist[gMenuNavlist.length - 1].mark;
+				let thisData = gMenuNavlist[gMenuNavlist.length - 1].arr.data[mark];
+				window.gSocket.send(gMenuNavlist[gMenuNavlist.length - 1].arr.data[mark].msg('set'), function(data) {
+					if(data.error.code == 0) {
+						thisData.setCallback(data);
+					}
+				});
 			}
 			//valType===scan
 			if(gMenuChild.valType == 'scan') {
@@ -176,20 +184,20 @@ function enterAndRight(curIndex, curFocus, curList) {
 	if(gMenuChild.valType == 'list') {
 		gMenuParent = gMenuChild;
 		gMenuoIndex = canOperaDown(gMenuParent, -1);
-		changePage(gMenuoIndex, gMenuClassName);
 		gMenuChild = gMenuParent.data[gMenuoIndex].value;
-		if(gMenuChild.valType != 'list') {
-			//			window.gSocket.send(gMenuParent[gMenuoIndex].msg('get'), function(data) {
-			//				gMenuParent[gMenuoIndex].getCallback(data);
-			//				gMenuRenderFirst();
-			//				gMenuRenderSecond();
-			//			});
-			gMenuRenderFirst();
-			gMenuRenderSecond();
-		}
+		window.gSocket.send(gMenuParent.data[gMenuoIndex].msg('get'), function(data) {
+			if(data.error.code == 0) {
+				gMenuParent.data[gMenuoIndex].getCallback(data);
+				gMenuRenderFirst();
+				gMenuRenderSecond();
+			}
+		});
+		gMenuRenderFirst();
+		gMenuRenderSecond();
+		changePage(gMenuoIndex, gMenuClassName);
 	} else if(gMenuChild.valType == 'sel') {
 		for(var i = 0; i < gMenuChild.data.length; i++) {
-			if(gMenuParent.data[curIndex].curVal == gMenuChild.data[i]) {
+			if(gMenuParent.data[curIndex].curVal == i) {
 				gMenuoIndex = i;
 				break;
 			}
