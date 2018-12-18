@@ -174,7 +174,7 @@ function listKeyEvent(e) {
 	e.stopPropagation();
 }
 
-//enter键选中或者right键进入
+//第一列  enter键选中或者right键进入  第二列
 function enterAndRight(curIndex, curFocus, curList) {
 	var obj = {
 		arr: gMenuParent,
@@ -185,13 +185,16 @@ function enterAndRight(curIndex, curFocus, curList) {
 		gMenuParent = gMenuChild;
 		gMenuoIndex = canOperaDown(gMenuParent, -1);
 		gMenuChild = gMenuParent.data[gMenuoIndex].value;
-		window.gSocket.send(gMenuParent.data[gMenuoIndex].msg('get'), function(data) {
-			if(data.error.code == 0) {
-				gMenuParent.data[gMenuoIndex].getCallback(data);
-				gMenuRenderFirst();
-				gMenuRenderSecond();
-			}
-		});
+		if(gMenuParent.data[gMenuoIndex].value.valType == 'num' ||
+			gMenuParent.data[gMenuoIndex].value.valType == 'sel') {
+			window.gSocket.send(gMenuParent.data[gMenuoIndex].msg('get'), function(data) {
+				if(data.error.code == 0) {
+					gMenuParent.data[gMenuoIndex].getCallback(data);
+					gMenuRenderFirst();
+					gMenuRenderSecond();
+				}
+			});
+		}
 		gMenuRenderFirst();
 		gMenuRenderSecond();
 		changePage(gMenuoIndex, gMenuClassName);
@@ -205,6 +208,8 @@ function enterAndRight(curIndex, curFocus, curList) {
 		var nextList = curFocus.parentElement.nextElementSibling.children;
 		removeClass(curList[curIndex], 'focus');
 		addClass(nextList[gMenuoIndex], 'focus');
+		gMenuClassName = 'secondList';
+		changePage(gMenuoIndex, gMenuClassName);
 	} else if(gMenuChild.valType == 'scan') {
 		if(gMenuChild.data.length == 0) {
 			gMenuNavlist.pop();
