@@ -103,7 +103,11 @@ function listKeyEvent(e) {
 			} else if(gMenuChild.valType == 'scan') {
 				let scanValue = gMenuChild.data[curIndex].value;
 				gMenuPageName = scanValue.renderFuc;
-				eval(scanValue.renderFuc).render(scanValue);
+				if(Object.prototype.toString.call(scanValue.data) === '[object Array]'){
+					eval(scanValue.renderFuc).render(scanValue);
+				}else{
+					eval(scanValue.renderFuc).render(scanValue.data.name);
+				}
 			}
 		}
 	}
@@ -167,7 +171,11 @@ function listKeyEvent(e) {
 			if(gMenuChild.valType == 'scan') {
 				let scanValue = gMenuChild.data[curIndex].value;
 				gMenuPageName = scanValue.renderFuc;
-				eval(scanValue.renderFuc).render(scanValue);
+				if(Object.prototype.toString.call(scanValue.data) === '[object Array]'){
+					eval(scanValue.renderFuc).render(scanValue);
+				}else{
+					eval(scanValue.renderFuc).render(scanValue.data.name);
+				}
 			}
 		}
 	}
@@ -211,16 +219,23 @@ function enterAndRight(curIndex, curFocus, curList) {
 		gMenuClassName = 'secondList';
 		changePage(gMenuoIndex, gMenuClassName);
 	} else if(gMenuChild.valType == 'scan') {
-		if(gMenuChild.data.length == 0) {
+		if(Object.prototype.toString.call(gMenuChild.data) === '[object Array]') {
+			if(gMenuChild.data.length == 0) {
+				gMenuNavlist.pop();
+				gMenuPageName = gMenuChild.renderFuc;
+				eval(gMenuChild.renderFuc).render();
+			} else {
+				gMenuoIndex = canOperaDown(gMenuChild, -1);
+				var nextList = curFocus.parentElement.nextElementSibling.children;
+				removeClass(curList[curIndex], 'focus');
+				addClass(nextList[gMenuoIndex], 'focus');
+			}
+		} else {
 			gMenuNavlist.pop();
 			gMenuPageName = gMenuChild.renderFuc;
-			eval(gMenuChild.renderFuc).render();
-		} else {
-			gMenuoIndex = canOperaDown(gMenuChild, -1);
-			var nextList = curFocus.parentElement.nextElementSibling.children;
-			removeClass(curList[curIndex], 'focus');
-			addClass(nextList[gMenuoIndex], 'focus');
+			eval(gMenuChild.renderFuc).render(gMenuChild.data.name);
 		}
+
 	} else {
 		var nextList = curFocus.parentElement.nextElementSibling.children;
 		removeClass(curList[curIndex], 'focus');

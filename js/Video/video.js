@@ -1,8 +1,9 @@
-var licenseInfo={
+
+var mjcDemo = {
 	render: function() {
 		var html = `
-		<div id="licenseInfo">
-			licenseInfo
+		<div id="mjcDemo">
+			<div>MJC Demo</div>
 		</div>
 	`;
 		document.querySelector('#container').innerHTML = html;

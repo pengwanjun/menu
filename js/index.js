@@ -12,27 +12,6 @@ window.onload = function() {
 		}else{
 			eval(gMenuPageName).keyEvent(e);
 		}
-//		else if(gMenuPageName == 'channelScan') {
-//			channelScanKeyEvent(e);
-//		} else if(gMenuPageName == 'updateScan') {
-//			updateScanKeyEvent(e);
-//		} else if(gMenuPageName == 'analogManualScan') {
-//			analogManualScanKeyEvent(e);
-//		} else if(gMenuPageName == 'singleRFScan') {
-//			singleRFScanKeyEvent(e);
-//		} else if(gMenuPageName == 'channelSkip') {
-//			channelSkipKeyEvent(e);
-//		} else if(gMenuPageName == 'channelEditDetail') {
-//			channelEditDetailKeyEvent(e);
-//		} else if(gMenuPageName == 'popBoxShow') {
-//			popBoxShowKeyEvent(e);
-//		}else if(gMenuPageName=='divXRegistration'){
-//			divXRegistrationKeyEvent(e);
-//		}else if(gMenuPageName=='divXDeactivation'){
-//			divXDeactivationKeyEvent(e);
-//		}else if(gMenuPageName == 'divXDeactivationOk'){
-//			divXDeactivationKeyEventOK(e);
-//		}
 	}
 
 }

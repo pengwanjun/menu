@@ -927,35 +927,31 @@ var gMenuVideo = [{
 		opera: true,
 		msg: function(key) {
 			if(key == 'get') {
-				//				return {
-				//					"method": "mtk.webui.config.getMinMaxValue",
-				//					"params": {
-				//						"configId": "g_disp__disp_back_light"
-				//					}
-				//				};
+				return {
+					"method": "mtk.webui.config.getValue",
+					"params": {
+						"configId": "g_video__dovi_user_swicth"
+					}
+				};
 			} else {
-				//				return {
-				//					"method": "mtk.webui.config.setValue",
-				//					"params": {
-				//						"configId": "g_disp__disp_back_light",
-				//						"value": gMenuoIndex,
-				//						"apply": true
-				//					}
-				//				};
+				return {
+					"method": "mtk.webui.config.setValue",
+					"params": {
+						"configId": "g_video__dovi_user_swicth",
+						"value": gMenuoIndex,
+						"apply": true
+					}
+				};
 			}
 		},
 		getCallback: function(data) { //获取value值
-			//			console.log(data.result);
-			//			let arr=[];
-			//			for(let i=data.result.min;i<=data.result.max;i++){
-			//				arr.push(this.value.dataList[i]);
-			//			}
-			//			this.value.data=arr;
-			//			this.curVal=data.result.current;
+			//						console.log(data);
+			this.value.data = this.value.dataList;
+			this.curVal = data.result.current;
 		},
 		setCallback: function(data) { //设置value值
 			//			console.log(data.result);
-			//			this.curVal=data.result.current;
+			this.curVal = data.result.current;
 		}
 	},
 	{
@@ -1276,6 +1272,174 @@ var gMenuAudioAdvanced = [{
 	opera: true
 }];
 
+var gMenuAudioVisuallyImpaired = [{
+		name: 'Speaker',
+		value: {
+			valType: 'sel',
+			data:[],
+			dataList: ['Off', 'On']
+		},
+		curVal: 0,
+		opera: true,
+		msg: function(key) {
+			if(key == 'get') {
+				return {
+					"method": "mtk.webui.config.getMinMaxValue",
+					"params": {
+						"configId": "g_audio__aud_ad_speaker"
+					}
+				};
+			} else {
+				return {
+					"method": "mtk.webui.config.setValue",
+					"params": {
+						"configId": "g_audio__aud_ad_speaker",
+						"value": gMenuoIndex,
+						"apply": true
+					}
+				};
+			}
+		},
+		getCallback: function(data) { //获取value值
+			let arr = [];
+			for(let i = data.result.min; i <= data.result.max; i++) {
+				arr.push(this.value.dataList[i]);
+			}
+			this.value.data = arr;
+			this.curVal = data.result.current;
+		},
+		setCallback: function(data) { //设置value值
+			//			console.log(data.result);
+			this.curVal = data.result.current;
+		}
+	},
+	{
+		name: 'Headphone',
+		value: {
+			valType: 'sel',
+			data:[],
+			dataList: ['Off', 'On']
+		},
+		curVal: 0,
+		opera: true,
+		msg: function(key) {
+			if(key == 'get') {
+				return {
+					"method": "mtk.webui.config.getMinMaxValue",
+					"params": {
+						"configId": "g_audio__aud_ad_hdphone"
+					}
+				};
+			} else {
+				return {
+					"method": "mtk.webui.config.setValue",
+					"params": {
+						"configId": "g_audio__aud_ad_hdphone",
+						"value": gMenuoIndex,
+						"apply": true
+					}
+				};
+			}
+		},
+		getCallback: function(data) { //获取value值
+			let arr = [];
+			for(let i = data.result.min; i <= data.result.max; i++) {
+				arr.push(this.value.dataList[i]);
+			}
+			this.value.data = arr;
+			this.curVal = data.result.current;
+		},
+		setCallback: function(data) { //设置value值
+			//			console.log(data.result);
+			this.curVal = data.result.current;
+		}
+	},
+	{
+		name: 'Volume',
+		value: {
+			valType: 'num',
+			data: 0,
+			min:0,
+			max:100
+		},
+		opera: true,
+		msg: function(key) {
+			if(key == 'get') {
+				return {
+					"method": "mtk.webui.config.getMinMaxValue",
+					"params": {
+						"configId": "g_audio__aud_ad_volume"
+					}
+				};
+			} else {
+				return {
+					"method": "mtk.webui.config.setValue",
+					"params": {
+						"configId": "g_audio__aud_ad_volume",
+						"value": this.value.data,
+						"apply": true
+					}
+				};
+			}
+		},
+		getCallback: function(data) { //获取value值
+			//			console.log(data);
+			this.value.min = data.result.min;
+			this.value.max = data.result.max;
+			this.value.data = data.result.current;
+		}
+	},
+	{
+		name: 'Pan and Fade',
+		value: {
+			valType: 'sel',
+			data:[],
+			dataList: ['Off','On']
+		},
+		curVal:0,
+		opera: true,
+		msg: function(key) {
+			if(key == 'get') {
+				return {
+					"method": "mtk.webui.config.getMinMaxValue",
+					"params": {
+						"configId": "g_audio__aud_ad_fade_pan"
+					}
+				};
+			} else {
+				return {
+					"method": "mtk.webui.config.setValue",
+					"params": {
+						"configId": "g_audio__aud_ad_fade_pan",
+						"value": gMenuoIndex,
+						"apply": true
+					}
+				};
+			}
+		},
+		getCallback: function(data) { //获取value值
+			let arr = [];
+			for(let i = data.result.min; i <= data.result.max; i++) {
+				arr.push(this.value.dataList[i]);
+			}
+			this.value.data = arr;
+			this.curVal = data.result.current;
+		},
+		setCallback: function(data) { //设置value值
+			//			console.log(data.result);
+			this.curVal = data.result.current;
+		}
+	},
+	{
+		name: 'Visually Impaired Audio',
+		value: {
+			valType: 'scan',
+			data:[]
+		},
+		opera: true
+	}
+];
+
 var gMenuAudio = [{
 		name: 'Balance',
 		value: {
@@ -1475,16 +1639,16 @@ var gMenuAudio = [{
 		msg: function(key) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getMinMaxValue",
+					"method": "mtk.webui.config.getValue",
 					"params": {
-						"configId": "g_audio__aud_ad_speaker"
+						"configId": "g_audio__aud_out_port"
 					}
 				};
 			} else {
 				return {
 					"method": "mtk.webui.config.setValue",
 					"params": {
-						"configId": "g_audio__aud_ad_speaker",
+						"configId": "g_audio__aud_out_port",
 						"value": gMenuoIndex,
 						"apply": true
 					}
@@ -1492,11 +1656,8 @@ var gMenuAudio = [{
 			}
 		},
 		getCallback: function(data) { //获取value值
-			let arr = [];
-			for(let i = data.result.min; i <= data.result.max; i++) {
-				arr.push(this.value.dataList[i]);
-			}
-			this.value.data = arr;
+			//			console.log(data);
+			this.value.data = this.value.dataList;
 			this.curVal = data.result.current;
 		},
 		setCallback: function(data) { //设置value值
@@ -1594,14 +1755,14 @@ var gMenuAudio = [{
 				return {
 					"method": "mtk.webui.config.getMinMaxValue",
 					"params": {
-						"configId": "g_audio__aud_ad_volume"
+						"configId": "g_audio__agc"
 					}
 				};
 			} else {
 				return {
 					"method": "mtk.webui.config.setValue",
 					"params": {
-						"configId": "g_audio__aud_ad_volume",
+						"configId": "g_audio__agc",
 						"value": gMenuoIndex,
 						"apply": true
 					}
@@ -1609,11 +1770,8 @@ var gMenuAudio = [{
 			}
 		},
 		getCallback: function(data) { //获取value值
-			let arr = [];
-			for(let i = data.result.min; i <= data.result.max; i++) {
-				arr.push(this.value.dataList[i]);
-			}
-			this.value.data = arr;
+			//			console.log(data);
+			this.value.data = this.value.dataList;
 			this.curVal = data.result.current;
 		},
 		setCallback: function(data) { //设置value值
@@ -1662,10 +1820,10 @@ var gMenuAudio = [{
 	{
 		name: 'Visually Impaired',
 		value: {
-			valType: 'scan',
-			data: []
+			valType: 'list',
+			data: gMenuAudioVisuallyImpaired
 		},
-		opera: false
+		opera: true
 
 	},
 	{
@@ -1725,333 +1883,12 @@ var gMenuAudio = [{
 ];
 
 //tv下所有数据
-var gMenuTvChannelSkip = {
-	name: 'gMenuTvChannelSkip',
-	data: [{
-			name: '0',
-			type: 'Digital',
-			value: 'BBC ONE N West',
-			sel: true
-		},
-		{
-			name: '1',
-			type: 'Digital',
-			value: 'BBC ONE N West',
-			sel: true
-		},
-		{
-			name: '2',
-			type: 'Digital',
-			value: 'BBC ONE N West',
-			sel: true
-		},
-		{
-			name: '3',
-			type: 'Digital',
-			value: 'BBC ONE N West',
-			sel: false
-		},
-		{
-			name: '4',
-			type: 'Digital',
-			value: 'BBC ONE N West',
-			sel: false
-		},
-		{
-			name: '5',
-			type: 'Digital',
-			value: 'BBC ONE N West',
-			sel: false
-		},
-		{
-			name: '6',
-			type: 'Digital',
-			value: 'BBC ONE N West',
-			sel: false
-		},
-		{
-			name: '7',
-			type: 'Digital',
-			value: 'BBC ONE N West',
-			sel: false
-		},
-		{
-			name: '8',
-			type: 'Digital',
-			value: 'BBC ONE N West',
-			sel: false
-		},
-		{
-			name: '9',
-			type: 'Digital',
-			value: 'BBC ONE N West',
-			sel: false
-		},
-		{
-			name: '10',
-			type: 'Digital',
-			value: 'BBC ONE N West',
-			sel: false
-		},
-		{
-			name: '11',
-			type: 'Digital',
-			value: 'BBC ONE N West',
-			sel: false
-		},
-		{
-			name: '12',
-			type: 'Digital',
-			value: 'BBC ONE N West',
-			sel: false
-		},
-		{
-			name: '13',
-			type: 'Digital',
-			value: 'BBC ONE N West',
-			sel: false
-		},
-		{
-			name: '14',
-			type: 'Digital',
-			value: 'BBC ONE N West',
-			sel: false
-		}
-	]
-};
-var gMenuTvChannelSort = {
-	name: 'gMenuTvChannelSort',
-	data: [{
-			name: '0',
-			type: 'Digital',
-			value: 'BBC ONE N West',
-			sel: true
-		},
-		{
-			name: '1',
-			type: 'Digital',
-			value: 'BBC ONE N West',
-			sel: true
-		},
-		{
-			name: '2',
-			type: 'Digital',
-			value: 'BBC ONE N West',
-			sel: true
-		},
-		{
-			name: '3',
-			type: 'Digital',
-			value: 'BBC ONE N West',
-			sel: false
-		},
-		{
-			name: '4',
-			type: 'Digital',
-			value: 'BBC ONE N West',
-			sel: false
-		},
-		{
-			name: '5',
-			type: 'Digital',
-			value: 'BBC ONE N West',
-			sel: false
-		},
-		{
-			name: '6',
-			type: 'Digital',
-			value: 'BBC ONE N West',
-			sel: false
-		},
-		{
-			name: '7',
-			type: 'Digital',
-			value: 'BBC ONE N West',
-			sel: false
-		},
-		{
-			name: '8',
-			type: 'Digital',
-			value: 'BBC ONE N West',
-			sel: false
-		},
-		{
-			name: '9',
-			type: 'Digital',
-			value: 'BBC ONE N West',
-			sel: false
-		},
-		{
-			name: '10',
-			type: 'Digital',
-			value: 'BBC ONE N West',
-			sel: false
-		},
-		{
-			name: '11',
-			type: 'Digital',
-			value: 'BBC ONE N West',
-			sel: false
-		},
-		{
-			name: '12',
-			type: 'Digital',
-			value: 'BBC ONE N West',
-			sel: false
-		},
-		{
-			name: '13',
-			type: 'Digital',
-			value: 'BBC ONE N West',
-			sel: false
-		},
-		{
-			name: '14',
-			type: 'Digital',
-			value: 'BBC ONE N West',
-			sel: false
-		},
-		{
-			name: '15',
-			type: 'Digital',
-			value: 'BBC ONE N West',
-			sel: false
-		},
-		{
-			name: '16',
-			type: 'Digital',
-			value: 'BBC ONE N West',
-			sel: false
-		}
-	]
-};
 
-var gMenuTvChannelEdit = {
-	name: 'gMenuTvChannelEdit',
-	data: [{
-			name: '0',
-			type: 'Digital',
-			value: 'BBC ONE N West'
-		},
-		{
-			name: '1',
-			type: 'Digital',
-			value: 'BBC ONE N West'
-		},
-		{
-			name: '2',
-			type: 'Digital',
-			value: 'BBC ONE N West'
-		},
-		{
-			name: '3',
-			type: 'Digital',
-			value: 'BBC ONE N West'
-		},
-		{
-			name: '4',
-			type: 'Digital',
-			value: 'BBC ONE N West'
-		},
-		{
-			name: '5',
-			type: 'Digital',
-			value: 'BBC ONE N West'
-		},
-		{
-			name: '6',
-			type: 'Digital',
-			value: 'BBC ONE N West'
-		},
-		{
-			name: '7',
-			type: 'Digital',
-			value: 'BBC ONE N West'
-		},
-		{
-			name: '8',
-			type: 'Digital',
-			value: 'BBC ONE N West'
-		},
-		{
-			name: '9',
-			type: 'Digital',
-			value: 'BBC ONE N West'
-		},
-		{
-			name: '10',
-			type: 'Digital',
-			value: 'BBC ONE N West'
-		},
-		{
-			name: '11',
-			type: 'Digital',
-			value: 'BBC ONE N West'
-		},
-		{
-			name: '12',
-			type: 'Digital',
-			value: 'BBC ONE N West'
-		},
-		{
-			name: '13',
-			type: 'Digital',
-			value: 'BBC ONE N West'
-		},
-		{
-			name: '14',
-			type: 'Digital',
-			value: 'BBC ONE N West'
-		},
-		{
-			name: '15',
-			type: 'Digital',
-			value: 'BBC ONE N West'
-		},
-		{
-			name: '16',
-			type: 'Digital',
-			value: 'BBC ONE N West'
-		},
-		{
-			name: '17',
-			type: 'Digital',
-			value: 'BBC ONE N West'
-		},
-		{
-			name: '18',
-			type: 'Digital',
-			value: 'BBC ONE N West'
-		},
-		{
-			name: '19',
-			type: 'Digital',
-			value: 'BBC ONE N West'
-		}
-	]
-};
-var gMenuTvAnalogChannel = {
-	name: 'gMenuTvAnalogChannel',
-	data: [{
-			name: '901',
-			value: '95.25MHz'
-		},
-		{
-			name: '902',
-			value: '291.44MHz'
-		}
-	]
-};
 var gMenuTvChannels = [{
 		name: 'Channel Scan',
 		value: {
 			valType: 'scan',
-			data: {
-				'Status': 'Scanning',
-				'Analog Channels': '0',
-				'Digital Channels': '61',
-				'Progress Bar': '69%'
-			},
+			data: [],
 			renderFuc: 'channelScan'
 		},
 		opera: true
@@ -2060,12 +1897,7 @@ var gMenuTvChannels = [{
 		name: 'Update Scan',
 		value: {
 			valType: 'scan',
-			data: {
-				'Status': 'Scanning',
-				'Analog Channels': '0',
-				'Digital Channels': '61',
-				'Progress Bar': '50%'
-			},
+			data: [],
 			renderFuc: 'updateScan'
 		},
 		opera: true
@@ -2100,7 +1932,7 @@ var gMenuTvChannels = [{
 		name: 'Channel Skip',
 		value: {
 			valType: 'scan',
-			data: gMenuTvChannelSkip,
+			data: {name: 'gMenuTvChannelSkip'},
 			renderFuc: 'channelSkip'
 		},
 		opera: true
@@ -2109,7 +1941,7 @@ var gMenuTvChannels = [{
 		name: 'Channel Sort',
 		value: {
 			valType: 'scan',
-			data: gMenuTvChannelSort,
+			data: {name: 'gMenuTvChannelSort'},
 			renderFuc: 'channelSkip'
 		},
 		opera: true
@@ -2118,7 +1950,7 @@ var gMenuTvChannels = [{
 		name: 'Channel Edit',
 		value: {
 			valType: 'scan',
-			data: gMenuTvChannelEdit,
+			data: {name: 'gMenuTvChannelEdit'},
 			renderFuc: 'channelSkip'
 		},
 		opera: true
@@ -2127,7 +1959,7 @@ var gMenuTvChannels = [{
 		name: 'Analog Channel Fine Tune',
 		value: {
 			valType: 'scan',
-			data: gMenuTvAnalogChannel,
+			data: {name:'gMenuTvAnalogChannel'},
 			renderFuc: 'channelSkip'
 		},
 		opera: true
@@ -2150,7 +1982,7 @@ var gMenuTv = [{
 			data: ['Antenna', 'Cable', 'Satellite']
 		},
 		curVal: 'Antenna',
-		opera: true
+		opera: false
 	},
 	{
 		name: 'Audio Channel',
@@ -2159,7 +1991,7 @@ var gMenuTv = [{
 			data: ['Stereo', 'Dual1', 'Dual2', 'Mono']
 		},
 		curVal: 'Stereo',
-		opera: true
+		opera: false
 	},
 	{
 		name: 'Channels',
@@ -2941,7 +2773,7 @@ var gMenuParentalProgramBlock = [{
 		}
 	},
 	getCallback: function(data) { //获取value值
-//		console.log(data.result);
+		//		console.log(data.result);
 		let arr = [];
 		for(let i = data.result.min; i <= data.result.max; i++) {
 			arr.push(this.value.dataList[i]);
@@ -2958,8 +2790,8 @@ var gMenuParentalShow = [{
 		name: 'Channel Block',
 		value: {
 			valType: 'scan',
-			data: [],
-			renderFuc: 'channelBlock'
+			data: {name:'gMenuParentalChannelBlock'},
+			renderFuc: 'channelSkip'
 		},
 		opera: true
 	},
@@ -3053,14 +2885,6 @@ var Menu = {
 			},
 			opera: true
 		},
-		{
-			name: 'Parental',
-			value: {
-				valType: 'list',
-				data: gMenuParentalShow
-			},
-			opera: true
-		},
 //		{
 //			name: 'Parental',
 //			value: {
@@ -3068,7 +2892,15 @@ var Menu = {
 //				data: gMenuParental
 //			},
 //			opera: true
-//		}
+//		},
+				{
+					name: 'Parental',
+					value: {
+						valType: 'list',
+						data: gMenuParentalShow
+					},
+					opera: true
+				}
 	]
 };
 var gMenuoIndex = 0;
