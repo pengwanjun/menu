@@ -1,6 +1,8 @@
 //渲染数据
 var popBoxShow = {
-	render: function(value) {
+	pageName: '',
+	render: function(pName) {
+		this.pageName = pName;
 		var html = `
 		<div id="popBoxShow">
 			<div class="popBoxShow">
@@ -37,7 +39,29 @@ var popBoxShow = {
 			if(hasClass(curFocus, 'cancel')) {
 				returnListPage();
 			} else {
-				console.log(2222);
+				console.log(this.pageName);
+				if(this.pageName == 'gMenuCleanChannelList') { //Clean Channel List
+					var msg = {
+						"params": {
+							"SvlId": 1,
+							"cleanLol": true
+						},
+						"method": "mtk.webui.channelList.cleanChannellist"
+					}
+					window.gSocket.send(msg, function(data) {
+						if(data.error.code == 0) {
+							for(var i=0;i<gMenuTvChannels.length;i++){
+								if(gMenuTvChannels[i].name=='Channel Skip' || gMenuTvChannels[i].name=='Channel Sort'
+								|| gMenuTvChannels[i].name=='Channel Edit' || gMenuTvChannels[i].name=='Analog Channel Fine Tune'
+								|| gMenuTvChannels[i].name=='Clean Channel List'){
+									gMenuTvChannels[i].opera=false;
+								}
+							}
+							gMenuoIndex=0;
+							returnListPage();
+						}
+					});
+				}
 			}
 		}
 		//exit---返回键

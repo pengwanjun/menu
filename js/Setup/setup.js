@@ -1,5 +1,6 @@
 
-var addBissKey={
+
+var addBissKey = {
 	render: function() {
 		var html = `
 		<div id="addBissKey">
@@ -39,7 +40,7 @@ var addBissKey={
 	}
 }
 
-var bissKey={
+var bissKey = {
 	render: function() {
 		var html = `
 		<div id="bissKey">
@@ -59,7 +60,6 @@ var bissKey={
 		}
 	}
 }
-
 
 var bluetoothSetting = {
 	render: function() {
@@ -134,7 +134,6 @@ var connectionTest = {
 	}
 }
 
-
 var divXDeactivation = {
 	render: function(value) {
 		if(gMenuPageName == 'divXDeactivationOk') {
@@ -204,7 +203,6 @@ var divXDeactivation = {
 	}
 }
 
-
 var divXRegistration = {
 	render: function() {
 		var html = `
@@ -240,7 +238,6 @@ var divXRegistration = {
 	}
 }
 
-
 var ESN = {
 	render: function() {
 		var html = `
@@ -251,7 +248,7 @@ var ESN = {
 		document.querySelector('#container').innerHTML = html;
 	},
 	keyEvent: function(e) {
-		
+
 	}
 }
 
@@ -303,7 +300,7 @@ var Information = {
 	}
 }
 
-var systemInformation={
+var systemInformation = {
 	render: function() {
 		var html = `
 		<div id="systemInformation">
@@ -320,8 +317,7 @@ var systemInformation={
 	}
 }
 
-
-var systemInformation={
+var systemInformation = {
 	render: function() {
 		var html = `
 		<div id="systemInformation">
@@ -338,8 +334,7 @@ var systemInformation={
 	}
 }
 
-
-var versionInfo={
+var versionInfo = {
 	render: function() {
 		var html = `
 		<div id="versionInfo">
@@ -371,7 +366,6 @@ var versionInfo={
 	}
 }
 
-
 var WFD = {
 	render: function() {
 		var html = `
@@ -382,7 +376,7 @@ var WFD = {
 		document.querySelector('#container').innerHTML = html;
 	},
 	keyEvent: function(e) {
-		
+
 	}
 }
 
@@ -396,7 +390,7 @@ var WIFI_DIRECT = {
 		document.querySelector('#container').innerHTML = html;
 	},
 	keyEvent: function(e) {
-		
+
 	}
 }
 

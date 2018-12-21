@@ -67,27 +67,51 @@ var analogManualScan = {
 	}
 }
 
-//Channel Edit detail
-var channelEditDetail = {
-	prevValue: {},
+//AnalogChannelDetail
+var AnalogChannelDetail={
 	prevPage: '',
 	prevPageIndex: '',
-	render: function(value, page, index, curItem) {
-		this.prevValue = value;
+	prevValue: {},
+	render:function(page, index, curItem){
 		this.prevPage = page;
 		this.prevPageIndex = index;
+		this.prevValue = curItem;
+		var html = `<div id="AnalogChannelDetail">
+						
+					</div>`;
+		document.querySelector('#container').innerHTML=html;
+	},
+	keyEvent:function(e){
+		//exit---返回键
+		if(e.keyCode == KeyEvent.DOM_VK_BACK_SPACE) {
+			gMenuPageName = 'channelSkip';
+			channelSkip.render('gMenuTvAnalogChannel');
+		}
+	}
+}
+
+
+//Channel Edit detail
+var channelEditDetail = {
+	prevPage: '',
+	prevPageIndex: '',
+	prevValue: {},
+	render: function(page, index, curItem) {
+		this.prevPage = page;
+		this.prevPageIndex = index;
+		this.prevValue = curItem;
 		var html = `<div id="channelEditDetail">
 				<div class="listItem">
 					<div>Network Name:</div>
-					<div>ABC Sydney</div>
+					<div>${curItem.nwName}</div>
 				</div>
-				<div class="opera listItem focus">
+				<div class="opera listItem majorNum focus">
 					<div>Channel Number:</div>
-					<div>${curItem.name}</div>
+					<div class="majorNum_input">${curItem.majorNum}</div>
 				</div>
-				<div class="opera listItem">
+				<div class="opera listItem acName">
 					<div>Channel Name:</div>
-					<div>${curItem.value}</div>
+					<div class="acName_input">${curItem.acName}</div>
 				</div>
 				<div class="disabled listItem">
 					<div>Frequency</div>
@@ -113,6 +137,41 @@ var channelEditDetail = {
 		let curList = curFocus.parentElement.children;
 		let curIndex = [].indexOf.call(curList, curFocus);
 		let nextIndex;
+		//数字键
+		if(e.keyCode == KeyEvent.DOM_VK_0 || e.keyCode == KeyEvent.DOM_VK_1 || e.keyCode == KeyEvent.DOM_VK_2 ||
+			e.keyCode == KeyEvent.DOM_VK_3 || e.keyCode == KeyEvent.DOM_VK_4 || e.keyCode == KeyEvent.DOM_VK_5 ||
+			e.keyCode == KeyEvent.DOM_VK_6 || e.keyCode == KeyEvent.DOM_VK_7 || e.keyCode == KeyEvent.DOM_VK_8 ||
+			e.keyCode == KeyEvent.DOM_VK_9) {
+			if(hasClass(curFocus, 'majorNum')) {
+				var html = document.querySelector('.majorNum_input').innerHTML;
+				if(html.length < 4) {
+					html += e.key;
+				} else {
+					html = e.key;
+				}
+				document.querySelector('.majorNum_input').innerHTML = html;
+			}
+		}
+		//字母键
+		if(e.keyCode == KeyEvent.DOM_VK_A || e.keyCode == KeyEvent.DOM_VK_B || e.keyCode == KeyEvent.DOM_VK_C ||
+			e.keyCode == KeyEvent.DOM_VK_D || e.keyCode == KeyEvent.DOM_VK_E || e.keyCode == KeyEvent.DOM_VK_F ||
+			e.keyCode == KeyEvent.DOM_VK_G || e.keyCode == KeyEvent.DOM_VK_H || e.keyCode == KeyEvent.DOM_VK_I ||
+			e.keyCode == KeyEvent.DOM_VK_J || e.keyCode == KeyEvent.DOM_VK_K || e.keyCode == KeyEvent.DOM_VK_L ||
+			e.keyCode == KeyEvent.DOM_VK_M || e.keyCode == KeyEvent.DOM_VK_N || e.keyCode == KeyEvent.DOM_VK_O ||
+			e.keyCode == KeyEvent.DOM_VK_P || e.keyCode == KeyEvent.DOM_VK_Q || e.keyCode == KeyEvent.DOM_VK_R ||
+			e.keyCode == KeyEvent.DOM_VK_S || e.keyCode == KeyEvent.DOM_VK_T || e.keyCode == KeyEvent.DOM_VK_U ||
+			e.keyCode == KeyEvent.DOM_VK_V || e.keyCode == KeyEvent.DOM_VK_W || e.keyCode == KeyEvent.DOM_VK_X ||
+			e.keyCode == KeyEvent.DOM_VK_Y || e.keyCode == KeyEvent.DOM_VK_Z) {
+			if(hasClass(curFocus, 'acName')) {
+				var html = document.querySelector('.acName_input').innerHTML;
+				if(html.length < 16) {
+					html += e.key.toUpperCase();
+				} else {
+					html = e.key.toUpperCase();
+				}
+				document.querySelector('.acName_input').innerHTML = html;
+			}
+		}
 		//下键
 		if(e.keyCode == KeyEvent.DOM_VK_DOWN) {
 			if(curIndex == curList.length - 1) {
@@ -171,25 +230,65 @@ var channelEditDetail = {
 		}
 		//右键
 		if(e.keyCode == KeyEvent.DOM_VK_RIGHT) {
-
+			if(hasClass(curFocus, 'delete')) {
+				this.channelDelete();
+			}
 		}
 		//左键
 		if(e.keyCode == KeyEvent.DOM_VK_LEFT) {
-
+			if(hasClass(curFocus, 'acName')) {
+				document.querySelector('.acName_input').innerHTML = '';
+			}
 		}
 		//enter键
 		if(e.keyCode == KeyEvent.DOM_VK_ENTER) {
-			if(hasClass(curList[curIndex], 'delete')) {
-				console.log(curList[curIndex]);
+			if(hasClass(curFocus, 'delete')) {
+				this.channelDelete();
+			}
+			if(hasClass(curFocus, 'acName') || hasClass(curFocus, 'majorNum')) {
+				var msg = {
+					"params": {
+						"operator": "UPDATA",
+						"List": [{
+							"SvlId": 1,
+							"svlRecId": this.prevValue.svlRecId,
+							"acName": document.querySelector('.acName_input').innerHTML,
+							"majorNum": document.querySelector('.majorNum_input').innerHTML
+						}]
+					},
+					"method": "mtk.webui.channelList.setSvlTslRec"
+				}
+				window.gSocket.send(msg, function(data) {
+					if(data.error.code == 0) {
+						gMenuPageName = 'channelSkip';
+						channelSkip.render('gMenuTvChannelEdit');
+					}
+				}.bind(this));
 			}
 		}
 		//exit---返回键
 		if(e.keyCode == KeyEvent.DOM_VK_BACK_SPACE) {
 			gMenuPageName = 'channelSkip';
-			channelSkip.page = this.prevPage;
-			channelSkip.focusIndex = this.prevPageIndex;
-			channelSkip.render(this.prevValue);
+			channelSkip.render('gMenuTvChannelEdit');
 		}
+	},
+	channelDelete: function() {
+		var msg = {
+			"params": {
+				"operator": "DELETE",
+				"List": [{
+					"SvlId": 1,
+					"svlRecId": this.value.svlRecId
+				}]
+			},
+			"method": "mtk.webui.channelList.setSvlTslRec"
+		}
+		window.gSocket.send(msg, function(data) {
+			if(data.error.code == 0) {
+				gMenuPageName = 'channelSkip';
+				channelSkip.render('gMenuTvChannelEdit');
+			}
+		}.bind(this));
 	}
 }
 
@@ -213,7 +312,7 @@ var channelScan = {
 //Channel Skip
 
 var channelSkip = {
-	pageName:'',
+	pageName: '',
 	list: [],
 	page: 0,
 	value: [],
@@ -221,10 +320,16 @@ var channelSkip = {
 	channelSkipBit: 8,
 	channelBlockBit: 256,
 	render: function(name) {
+		console.log(name);
 		this.pageName = name;
 		window.gSocket.send({
 			"method": "mtk.webui.channelList.queryChannelList"
 		}, function(data) {
+			if(this.pageName == 'gMenuTvChannelSort') {
+				for(var i = 0; i < data.result.List.length; i++) {
+					data.result.List[i].hasSel = 'false';
+				}
+			}
 			this.value = data.result.List;
 			this.list = sliceArr(this.value, 9);
 			this.renderData(this.focusIndex);
@@ -268,7 +373,7 @@ var channelSkip = {
 					}
 				}
 			} else if(this.pageName == 'gMenuTvChannelSort') { //ChannelSort
-				if(this.list[this.page][i].sel) {
+				if(this.list[this.page][i].hasSel == 'true') {
 					if(i == fIndex) {
 						html += `<div class="listItem focus">
 							<div>${this.list[this.page][i].majorNum}</div>
@@ -301,6 +406,7 @@ var channelSkip = {
 						</div>`;
 					}
 				}
+
 			} else if(this.pageName == 'gMenuTvChannelEdit') { //ChannelEdit
 				if(i == fIndex) {
 					html += `<div class="listItem focus">
@@ -318,13 +424,13 @@ var channelSkip = {
 			} else if(this.pageName == 'gMenuTvAnalogChannel') { //analogChannelFineTune
 				if(i == fIndex) {
 					html += `<div class="listItem focus">
-							<div>${this.list[this.page][i].name}</div>
-							<div>${this.list[this.page][i].value}</div>
+							<div>${this.list[this.page][i].majorNum}</div>
+							<div>${this.list[this.page][i].brdcstType}</div>
 						</div>`;
 				} else {
 					html += `<div class="listItem">
-							<div>${this.list[this.page][i].name}</div>
-							<div>${this.list[this.page][i].value}</div>
+							<div>${this.list[this.page][i].majorNum}</div>
+							<div>${this.list[this.page][i].brdcstType}</div>
 						</div>`;
 				}
 			} else { //gMenuParentalChannelBlock
@@ -433,7 +539,7 @@ var channelSkip = {
 		}
 		//enter键
 		if(e.keyCode == KeyEvent.DOM_VK_ENTER) {
-			if(this.pageName == 'gMenuTvChannelSkip'||this.pageName == 'gMenuTvChannelBlock'){
+			if(this.pageName == 'gMenuTvChannelSkip' || this.pageName == 'gMenuParentalChannelBlock') {
 				var curData = this.list[this.page][curIndex];
 				if(this.pageName == 'gMenuTvChannelSkip') {
 					if(this.checkChannelSkip(curData.nwMask)) {
@@ -441,7 +547,7 @@ var channelSkip = {
 					} else {
 						curData.nwMask = this.setChannelSkip(curData.nwMask);
 					}
-				} else {
+				} else{
 					if(this.checkChannelBlock(curData.nwMask)) {
 						curData.nwMask = this.setChannelUnBlock(curData.nwMask);
 					} else {
@@ -466,14 +572,40 @@ var channelSkip = {
 				}.bind(this));
 			}
 			if(this.pageName == 'gMenuTvChannelSort') {
-
-			} 
+				var hasSel = this.sortHasSel();
+				if(hasSel == -1) {
+					var valueIndex = [].indexOf.call(this.value, this.list[this.page][curIndex]);
+					this.value[valueIndex].hasSel = 'true';
+					this.renderData(curIndex);
+				} else {
+					var valueIndex = [].indexOf.call(this.value, this.list[this.page][curIndex]);
+					if(hasSel == valueIndex) {
+						this.value[valueIndex].hasSel = 'false';
+						this.renderData(curIndex);
+					} else {
+						var msg = {
+							"params": {
+								"SvlId": 1,
+								"ChNum1": this.value[hasSel].channelId,
+								"ChNum2": this.list[this.page][curIndex].channelId
+							},
+							"method": "mtk.webui.channelList.swapChannels"
+						};
+						window.gSocket.send(msg, function(data) {
+							if(data.error.code == 0) {
+								this.render(this.pageName);
+							}
+						}.bind(this));
+					}
+				}
+			}
 			if(this.pageName == 'gMenuTvChannelEdit') {
 				gMenuPageName = 'channelEditDetail';
-				channelEditDetail.render(this.value, this.page, this.focusIndex, this.list[this.page][this.focusIndex]);
-			} 
+				channelEditDetail.render(this.page, curIndex, this.list[this.page][curIndex]);
+			}
 			if(this.pageName == 'gMenuTvAnalogChannel') { //Analog Channel Fine Tune
-
+				gMenuPageName = 'AnalogChannelDetail';
+				AnalogChannelDetail.render(this.page, curIndex, this.list[this.page][curIndex]);
 			}
 		}
 		//exit---返回键
@@ -505,6 +637,18 @@ var channelSkip = {
 	},
 	setChannelUnSkip: function(nwMask) {
 		return nwMask & (~this.channelSkipBit);
+	},
+	sortHasSel: function() {
+		var hasSelIndex;
+		for(var i = 0; i < this.value.length; i++) {
+			if(this.value[i].hasSel == 'true') {
+				hasSelIndex = i;
+				break;
+			} else {
+				hasSelIndex = -1;
+			}
+		}
+		return hasSelIndex;
 	}
 }
 

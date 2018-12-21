@@ -103,9 +103,9 @@ function listKeyEvent(e) {
 			} else if(gMenuChild.valType == 'scan') {
 				let scanValue = gMenuChild.data[curIndex].value;
 				gMenuPageName = scanValue.renderFuc;
-				if(Object.prototype.toString.call(scanValue.data) === '[object Array]'){
+				if(Object.prototype.toString.call(scanValue.data) === '[object Array]') {
 					eval(scanValue.renderFuc).render(scanValue);
-				}else{
+				} else {
 					eval(scanValue.renderFuc).render(scanValue.data.name);
 				}
 			}
@@ -171,9 +171,9 @@ function listKeyEvent(e) {
 			if(gMenuChild.valType == 'scan') {
 				let scanValue = gMenuChild.data[curIndex].value;
 				gMenuPageName = scanValue.renderFuc;
-				if(Object.prototype.toString.call(scanValue.data) === '[object Array]'){
+				if(Object.prototype.toString.call(scanValue.data) === '[object Array]') {
 					eval(scanValue.renderFuc).render(scanValue);
-				}else{
+				} else {
 					eval(scanValue.renderFuc).render(scanValue.data.name);
 				}
 			}
@@ -192,20 +192,27 @@ function enterAndRight(curIndex, curFocus, curList) {
 	if(gMenuChild.valType == 'list') {
 		gMenuParent = gMenuChild;
 		gMenuoIndex = canOperaDown(gMenuParent, -1);
-		gMenuChild = gMenuParent.data[gMenuoIndex].value;
 		if(gMenuParent.data[gMenuoIndex].value.valType == 'num' ||
 			gMenuParent.data[gMenuoIndex].value.valType == 'sel') {
 			window.gSocket.send(gMenuParent.data[gMenuoIndex].msg('get'), function(data) {
 				if(data.error.code == 0) {
 					gMenuParent.data[gMenuoIndex].getCallback(data);
+					gMenuChild = gMenuParent.data[gMenuoIndex].value;
 					gMenuRenderFirst();
 					gMenuRenderSecond();
+					changePage(gMenuoIndex, gMenuClassName);
 				}
 			});
+		} else {
+			if(gMenuParent.data[gMenuoIndex].name == 'Configuration') {
+				gMenuParent.data[gMenuoIndex].checkOpera();
+			} else {
+				gMenuChild = gMenuParent.data[gMenuoIndex].value;
+				gMenuRenderFirst();
+				gMenuRenderSecond();
+				changePage(gMenuoIndex, gMenuClassName);
+			}
 		}
-		gMenuRenderFirst();
-		gMenuRenderSecond();
-		changePage(gMenuoIndex, gMenuClassName);
 	} else if(gMenuChild.valType == 'sel') {
 		for(var i = 0; i < gMenuChild.data.length; i++) {
 			if(gMenuParent.data[curIndex].curVal == i) {
@@ -271,16 +278,16 @@ function gMenuRenderSecond() {
 	var html2 = '';
 	var type = gMenuChild.valType;
 	if(type == 'list' || type == 'scan') {
-		for(var j = 0; j < gMenuChild.data.length; j++) {
-			if(gMenuChild.data[j].opera) {
-				html2 += '<div class="listItem">' + gMenuChild.data[j].name + '<span>>></span></div>';
+		for(var i = 0; i < gMenuChild.data.length; i++) {
+			if(gMenuChild.data[i].opera) {
+				html2 += '<div class="listItem">' + gMenuChild.data[i].name + '<span>>></span></div>';
 			} else {
-				html2 += '<div class="listItem disabled">' + gMenuChild.data[j].name + '<span>>></span></div>';
+				html2 += '<div class="listItem disabled">' + gMenuChild.data[i].name + '<span>>></span></div>';
 			}
 		}
 	} else if(type == 'sel') {
-		for(var j = 0; j < gMenuChild.data.length; j++) {
-			html2 += '<div class="listItem"><span>请选择：</span>' + gMenuChild.data[j] + '</div>';
+		for(var i = 0; i < gMenuChild.data.length; i++) {
+			html2 += '<div class="listItem"><span>请选择：</span>' + gMenuChild.data[i] + '</div>';
 		}
 	} else { //type == 'str' || type == 'num'
 		html2 += '<div class="listItem"><span>' + type + '值为：</span>' + gMenuChild.data + '</div>';

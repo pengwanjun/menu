@@ -247,7 +247,7 @@ var gMenuVideoAv = [{
 		value: {
 			valType: 'sel',
 			data: [],
-			dataList: ['Off', 'Low', 'Medium', 'strong', 'Auto', ] //0-4
+			dataList: ['Off', 'Low', 'Medium', 'strong', 'Auto', ]
 		},
 		curVal: 0,
 		opera: true,
@@ -1276,7 +1276,7 @@ var gMenuAudioVisuallyImpaired = [{
 		name: 'Speaker',
 		value: {
 			valType: 'sel',
-			data:[],
+			data: [],
 			dataList: ['Off', 'On']
 		},
 		curVal: 0,
@@ -1317,7 +1317,7 @@ var gMenuAudioVisuallyImpaired = [{
 		name: 'Headphone',
 		value: {
 			valType: 'sel',
-			data:[],
+			data: [],
 			dataList: ['Off', 'On']
 		},
 		curVal: 0,
@@ -1359,8 +1359,8 @@ var gMenuAudioVisuallyImpaired = [{
 		value: {
 			valType: 'num',
 			data: 0,
-			min:0,
-			max:100
+			min: 0,
+			max: 100
 		},
 		opera: true,
 		msg: function(key) {
@@ -1393,10 +1393,10 @@ var gMenuAudioVisuallyImpaired = [{
 		name: 'Pan and Fade',
 		value: {
 			valType: 'sel',
-			data:[],
-			dataList: ['Off','On']
+			data: [],
+			dataList: ['Off', 'On']
 		},
-		curVal:0,
+		curVal: 0,
 		opera: true,
 		msg: function(key) {
 			if(key == 'get') {
@@ -1434,7 +1434,7 @@ var gMenuAudioVisuallyImpaired = [{
 		name: 'Visually Impaired Audio',
 		value: {
 			valType: 'scan',
-			data:[]
+			data: []
 		},
 		opera: true
 	}
@@ -1932,7 +1932,9 @@ var gMenuTvChannels = [{
 		name: 'Channel Skip',
 		value: {
 			valType: 'scan',
-			data: {name: 'gMenuTvChannelSkip'},
+			data: {
+				name: 'gMenuTvChannelSkip'
+			},
 			renderFuc: 'channelSkip'
 		},
 		opera: true
@@ -1941,7 +1943,9 @@ var gMenuTvChannels = [{
 		name: 'Channel Sort',
 		value: {
 			valType: 'scan',
-			data: {name: 'gMenuTvChannelSort'},
+			data: {
+				name: 'gMenuTvChannelSort'
+			},
 			renderFuc: 'channelSkip'
 		},
 		opera: true
@@ -1950,7 +1954,9 @@ var gMenuTvChannels = [{
 		name: 'Channel Edit',
 		value: {
 			valType: 'scan',
-			data: {name: 'gMenuTvChannelEdit'},
+			data: {
+				name: 'gMenuTvChannelEdit'
+			},
 			renderFuc: 'channelSkip'
 		},
 		opera: true
@@ -1959,7 +1965,9 @@ var gMenuTvChannels = [{
 		name: 'Analog Channel Fine Tune',
 		value: {
 			valType: 'scan',
-			data: {name:'gMenuTvAnalogChannel'},
+			data: {
+				name: 'gMenuTvAnalogChannel'
+			},
 			renderFuc: 'channelSkip'
 		},
 		opera: true
@@ -1968,7 +1976,9 @@ var gMenuTvChannels = [{
 		name: 'Clean Channel List',
 		value: {
 			valType: 'scan',
-			data: [],
+			data: {
+				name: 'gMenuCleanChannelList'
+			},
 			renderFuc: 'popBoxShow'
 		},
 		opera: true
@@ -2077,10 +2087,39 @@ var gMenuSetupHbbTV = [{
 		name: 'HbbTV Support',
 		value: {
 			valType: 'sel',
-			data: ['On', 'Off']
+			data: [],
+			dataList: ['Off', 'On']
 		},
-		curVal: 'On',
-		opera: true
+		curVal: 0,
+		opera: true,
+		msg: function(key) {
+			if(key == 'get') {
+				return {
+					"method": "mtk.webui.config.getValue",
+					"params": {
+						"configId": "g_menu__hbbtv"
+					}
+				};
+			} else {
+				return {
+					"method": "mtk.webui.config.setValue",
+					"params": {
+						"configId": "g_menu__hbbtv",
+						"value": gMenuoIndex,
+						"apply": true
+					}
+				};
+			}
+		},
+		getCallback: function(data) { //获取value值
+			//			console.log(data);
+			this.value.data = this.value.dataList;
+			this.curVal = data.result.current;
+		},
+		setCallback: function(data) { //设置value值
+			//			console.log(data.result);
+			this.curVal = data.result.current;
+		}
 	},
 	{
 		name: 'Do Not Track',
@@ -2182,19 +2221,77 @@ var gMenuSetupHDMI = [{
 	name: 'Singal Format',
 	value: {
 		valType: 'sel',
-		data: ['4K@60Hz 4:2:0', '4K@60Hz 4:4:4/4:2:0']
+		data: [],
+		dataList: ['4K@60Hz 4:2:0', '4K@60Hz 4:4:4/4:2:0']
 	},
-	curVal: '4K@60Hz 4:2:0',
-	opera: true
+	curVal: 0,
+	opera: true,
+	msg: function(key) {
+		if(key == 'get') {
+			return {
+				"method": "mtk.webui.config.getValue",
+				"params": {
+					"configId": "g_menu_only__hdmi_edid_index"
+				}
+			};
+		} else {
+			return {
+				"method": "mtk.webui.config.setValue",
+				"params": {
+					"configId": "g_menu_only__hdmi_edid_index",
+					"value": gMenuoIndex,
+					"apply": true
+				}
+			};
+		}
+	},
+	getCallback: function(data) { //获取value值
+		//			console.log(data);
+		this.value.data = this.value.dataList;
+		this.curVal = data.result.current;
+	},
+	setCallback: function(data) { //设置value值
+		//			console.log(data.result);
+		this.curVal = data.result.current;
+	}
 }];
 var gMenuSetupSubtitle = [{
 		name: 'Analog Subtitle',
 		value: {
 			valType: 'sel',
-			data: ['On', 'Mute', 'Off']
+			data: [],
+			dataList: ['Off', 'On', 'Mute']
 		},
-		curVal: 'On',
-		opera: true
+		curVal: 0,
+		opera: true,
+		msg: function(key) {
+			if(key == 'get') {
+				return {
+					"method": "mtk.webui.config.getValue",
+					"params": {
+						"configId": "g_subtitle__subtitle_enable"
+					}
+				};
+			} else {
+				return {
+					"method": "mtk.webui.config.setValue",
+					"params": {
+						"configId": "g_subtitle__subtitle_enable",
+						"value": gMenuoIndex,
+						"apply": true
+					}
+				};
+			}
+		},
+		getCallback: function(data) { //获取value值
+			//			console.log(data);
+			this.value.data = this.value.dataList;
+			this.curVal = data.result.current;
+		},
+		setCallback: function(data) { //设置value值
+			//			console.log(data.result);
+			this.curVal = data.result.current;
+		}
 	},
 	{
 		name: 'Digital Subtitle Lang.',
@@ -2218,10 +2315,39 @@ var gMenuSetupSubtitle = [{
 		name: 'Subtitle Type',
 		value: {
 			valType: 'sel',
-			data: ['Normal', 'Hearing Impaired']
+			data: [],
+			dataList: ['Normal', 'Hearing Impaired']
 		},
-		curVal: 'Normal',
-		opera: true
+		curVal: 0,
+		opera: true,
+		msg: function(key) {
+			if(key == 'get') {
+				return {
+					"method": "mtk.webui.config.getValue",
+					"params": {
+						"configId": "g_subtitle__subtitle_attr"
+					}
+				};
+			} else {
+				return {
+					"method": "mtk.webui.config.setValue",
+					"params": {
+						"configId": "g_subtitle__subtitle_attr",
+						"value": gMenuoIndex,
+						"apply": true
+					}
+				};
+			}
+		},
+		getCallback: function(data) { //获取value值
+			//			console.log(data);
+			this.value.data = this.value.dataList;
+			this.curVal = data.result.current;
+		},
+		setCallback: function(data) { //设置value值
+			//			console.log(data.result);
+			this.curVal = data.result.current;
+		}
 	}
 ];
 var gMenuSetupTeletext = [{
@@ -2237,19 +2363,77 @@ var gMenuSetupTeletext = [{
 		name: 'Decoding Page Language',
 		value: {
 			valType: 'sel',
-			data: ['WEST EUR']
+			data: [],
+			dataList: ['WEST EUR', 'EAST EUR', 'RUSSIA', 'RUSSIA-2', 'GREEK', 'Turkey', 'Arab/Hbrw', 'Farsian', 'Arab', 'BYELORUSSIAN']
 		},
-		curVal: 'WEST EUR',
-		opera: true
+		curVal: 0,
+		opera: true,
+		msg: function(key) {
+			if(key == 'get') {
+				return {
+					"method": "mtk.webui.config.getValue",
+					"params": {
+						"configId": "g_ttx_lang__ttx_decode_lang"
+					}
+				};
+			} else {
+				return {
+					"method": "mtk.webui.config.setValue",
+					"params": {
+						"configId": "g_ttx_lang__ttx_decode_lang",
+						"value": gMenuoIndex,
+						"apply": true
+					}
+				};
+			}
+		},
+		getCallback: function(data) { //获取value值
+			//			console.log(data);
+			this.value.data = this.value.dataList;
+			this.curVal = data.result.current;
+		},
+		setCallback: function(data) { //设置value值
+			//			console.log(data.result);
+			this.curVal = data.result.current;
+		}
 	},
 	{
 		name: 'TTX Presentation Level',
 		value: {
 			valType: 'sel',
-			data: ['Level 2.5', 'Level 1.5']
+			data: [],
+			dataList: ['Level 1.5', 'Level 2.5']
 		},
-		curVal: 'Level 2.5',
-		opera: true
+		curVal: 0,
+		opera: true,
+		msg: function(key) {
+			if(key == 'get') {
+				return {
+					"method": "mtk.webui.config.getValue",
+					"params": {
+						"configId": "g_ttx_lang__ttx_presentation_level"
+					}
+				};
+			} else {
+				return {
+					"method": "mtk.webui.config.setValue",
+					"params": {
+						"configId": "g_ttx_lang__ttx_presentation_level",
+						"value": gMenuoIndex,
+						"apply": true
+					}
+				};
+			}
+		},
+		getCallback: function(data) { //获取value值
+			//			console.log(data);
+			this.value.data = this.value.dataList;
+			this.curVal = data.result.current;
+		},
+		setCallback: function(data) { //设置value值
+			//			console.log(data.result);
+			this.curVal = data.result.current;
+		}
 	}
 ];
 var gMenuSetupCI = [{
@@ -2275,10 +2459,64 @@ var gMenuSetupNetworkConf = [{
 		name: 'Internet Connection',
 		value: {
 			valType: 'sel',
-			data: ['Off', 'On']
+			data: [],
+			dataList: ['Off', 'On']
 		},
-		curVal: 'Off',
-		opera: true
+		curVal: 0,
+		opera: true,
+		msg: function(key) {
+			if(key == 'get') {
+				return {
+					"method": "mtk.webui.network.queryInternetConnection"
+				};
+			} else {
+				return {
+					"method": "mtk.webui.network.setInternetConnection",
+					"params": {
+						"enable": gMenuoIndex == 0 ? false : true
+					}
+				};
+			}
+		},
+		getCallback: function(data) { //获取value值
+			//			console.log(data);
+			if(data.error.code == 0) {
+				this.value.data = this.value.dataList;
+				if(data.result.enable) {
+					this.curVal = 1;
+				} else {
+					this.curVal = 0;
+				}
+			}
+		},
+		setCallback: function(data) { //设置value值
+			//			console.log(data.result);
+			if(data.error.code == 0) {
+				this.curVal = gMenuoIndex;
+				if(gMenuoIndex == 0) {
+					for(var i = 0; i < gMenuSetupNetworkConf.length; i++) {
+						if(gMenuSetupNetworkConf[i].name == 'Interface' || gMenuSetupNetworkConf[i].name == 'Wake On Lan' ||
+							gMenuSetupNetworkConf[i].name == 'Information' || gMenuSetupNetworkConf[i].name == 'IP Setting' ||
+							gMenuSetupNetworkConf[i].name == 'Connection Test' || gMenuSetupNetworkConf[i].name == 'IP Prefer' ||
+							gMenuSetupNetworkConf[i].name == 'IPv6 Information' || gMenuSetupNetworkConf[i].name == 'IPv6 Configuration IP' ||
+							gMenuSetupNetworkConf[i].name == 'IPv6 Connection Test') {
+							gMenuSetupNetworkConf[i].opera = false;
+						}
+					}
+				} else {
+					for(var i = 0; i < gMenuSetupNetworkConf.length; i++) {
+						if(gMenuSetupNetworkConf[i].name == 'Internet Connection' || gMenuSetupNetworkConf[i].name == 'Interface' || gMenuSetupNetworkConf[i].name == 'Wake On Lan' ||
+							gMenuSetupNetworkConf[i].name == 'Information' || gMenuSetupNetworkConf[i].name == 'IP Setting' ||
+							gMenuSetupNetworkConf[i].name == 'Connection Test' || gMenuSetupNetworkConf[i].name == 'IP Prefer' ||
+							gMenuSetupNetworkConf[i].name == 'IPv6 Information' || gMenuSetupNetworkConf[i].name == 'IPv6 Configuration IP' ||
+							gMenuSetupNetworkConf[i].name == 'IPv6 Connection Test') {
+							gMenuSetupNetworkConf[i].opera = true;
+						}
+					}
+				}
+				gMenuRenderFirst();
+			}
+		}
 	},
 	{
 		name: 'Interface',
@@ -2286,8 +2524,67 @@ var gMenuSetupNetworkConf = [{
 			valType: 'sel',
 			data: ['Ethernet', 'Wireless']
 		},
-		curVal: 'Ethernet',
-		opera: true
+		curVal: 0,
+		opera: false,
+		msg: function(key) {
+			if(key == 'get') {
+				return {
+					"method": "mtk.webui.network.queryInternetInterface"
+				};
+			} else {
+				var type;
+				if(gMenuoIndex == 0) {
+					type = 'etherent';
+				} else {
+					type = 'wireless';
+				}
+				return {
+					"method": "mtk.webui.network.setInternetInterface",
+					"params": {
+						"type": type
+					}
+				};
+			}
+		},
+		getCallback: function(data) { //获取value值
+			if(data.error.code == 0) {
+				if(data.result.type == "etherent") {
+					this.curVal = 0;
+				} else {
+					this.curVal = 1;
+				}
+			}
+
+		},
+		setCallback: function(data) { //设置value值
+			//						console.log(data.result);
+			if(data.error.code == 0) {
+				if(gMenuoIndex == 0) {
+					this.curVal = 0;
+					for(var i = 0; i < gMenuSetupNetworkConf.length; i++) {
+						if(gMenuSetupNetworkConf[i].name == 'Wake On Lan') {
+							gMenuSetupNetworkConf[i].opera = true;
+						}
+						if(gMenuSetupNetworkConf[i].name == 'Wake On Wlan' ||
+							gMenuSetupNetworkConf[i].name == 'Wireless Setting') {
+							gMenuSetupNetworkConf[i].opera = false;
+						}
+					}
+				} else {
+					this.curVal = 1;
+					for(var i = 0; i < gMenuSetupNetworkConf.length; i++) {
+						if(gMenuSetupNetworkConf[i].name == 'Wake On Lan') {
+							gMenuSetupNetworkConf[i].opera = false;
+						}
+						if(gMenuSetupNetworkConf[i].name == 'Wake On Wlan' ||
+							gMenuSetupNetworkConf[i].name == 'Wireless Setting') {
+							gMenuSetupNetworkConf[i].opera = true;
+						}
+					}
+				}
+				gMenuRenderFirst();
+			}
+		}
 	},
 	{
 		name: 'Wake On Lan',
@@ -2305,7 +2602,7 @@ var gMenuSetupNetworkConf = [{
 			data: ['Off', 'On']
 		},
 		curVal: 'Off',
-		opera: true
+		opera: false
 	},
 	{
 		name: 'Wireless Setting',
@@ -2314,7 +2611,7 @@ var gMenuSetupNetworkConf = [{
 			data: [],
 			renderFuc: 'wirelessSetting'
 		},
-		opera: true
+		opera: false
 	},
 	{
 		name: 'Information',
@@ -2323,7 +2620,7 @@ var gMenuSetupNetworkConf = [{
 			data: [],
 			renderFuc: 'Information'
 		},
-		opera: true
+		opera: false
 	},
 	{
 		name: 'IP Setting',
@@ -2332,7 +2629,7 @@ var gMenuSetupNetworkConf = [{
 			data: [],
 			renderFuc: 'IPSetting'
 		},
-		opera: true
+		opera: false
 	},
 	{
 		name: 'Connection Test',
@@ -2341,7 +2638,7 @@ var gMenuSetupNetworkConf = [{
 			data: [],
 			renderFuc: 'connectionTest'
 		},
-		opera: true
+		opera: false
 	},
 	{
 		name: 'IP Prefer',
@@ -2350,7 +2647,7 @@ var gMenuSetupNetworkConf = [{
 			data: ['IPv6', 'IPv4']
 		},
 		curVal: 'IPv6',
-		opera: true
+		opera: false
 	},
 	{
 		name: 'IPv6 Information',
@@ -2359,7 +2656,7 @@ var gMenuSetupNetworkConf = [{
 			data: [],
 			renderFuc: 'IPv6Information'
 		},
-		opera: true
+		opera: false
 	},
 	{
 		name: 'IPv6 Configuration IP',
@@ -2368,7 +2665,7 @@ var gMenuSetupNetworkConf = [{
 			data: [],
 			renderFuc: 'IPv6ConfigurationIP'
 		},
-		opera: true
+		opera: false
 	},
 	{
 		name: 'IPv6 Connection Test',
@@ -2377,7 +2674,7 @@ var gMenuSetupNetworkConf = [{
 			data: [],
 			renderFuc: 'IPv6ConnectionTest'
 		},
-		opera: true
+		opera: false
 	}
 ];
 var gMenuSetupNetworkNetflix = [{
@@ -2432,8 +2729,73 @@ var gMenuSetupNetwork = [{
 			valType: 'list',
 			data: gMenuSetupNetworkConf
 		},
-		curVal: 'Default',
-		opera: true
+		opera: true,
+		checkOpera: function() {
+			var msg1 = {
+				"method": "mtk.webui.network.queryInternetConnection"
+			}
+			window.gSocket.send(msg1, function(data1) {
+				if(data1.error.code == 0) {
+					if(data1.result.enable) {
+						var msg2 = {
+							"method": "mtk.webui.network.queryInternetInterface"
+						}
+						window.gSocket.send(msg2, function(data2) {
+							if(data2.error.code == 0) {
+								if(data2.result.type == 'etherent') {
+									for(var i = 0; i < gMenuSetupNetworkConf.length; i++) {
+										if(gMenuSetupNetworkConf[i].name == 'Interface' ||
+											gMenuSetupNetworkConf[i].name == 'Wake On Lan' ||
+											gMenuSetupNetworkConf[i].name == 'Information' ||
+											gMenuSetupNetworkConf[i].name == 'IP Setting' ||
+											gMenuSetupNetworkConf[i].name == 'Connection Test' ||
+											gMenuSetupNetworkConf[i].name == 'IP Prefer' ||
+											gMenuSetupNetworkConf[i].name == 'IPv6 Information' ||
+											gMenuSetupNetworkConf[i].name == 'IPv6 Configuration IP' ||
+											gMenuSetupNetworkConf[i].name == 'IPv6 Connection Test') {
+											gMenuSetupNetworkConf[i].opera = true;
+										}
+									}
+								} else {
+									for(var i = 0; i < gMenuSetupNetworkConf.length; i++) {
+										if(gMenuSetupNetworkConf[i].name == 'Interface' ||
+											gMenuSetupNetworkConf[i].name == 'Wake On Wlan' ||
+											gMenuSetupNetworkConf[i].name == 'Wireless Setting' ||
+											gMenuSetupNetworkConf[i].name == 'Information' ||
+											gMenuSetupNetworkConf[i].name == 'IP Setting' ||
+											gMenuSetupNetworkConf[i].name == 'Connection Test' ||
+											gMenuSetupNetworkConf[i].name == 'IP Prefer' ||
+											gMenuSetupNetworkConf[i].name == 'IPv6 Information' ||
+											gMenuSetupNetworkConf[i].name == 'IPv6 Configuration IP' ||
+											gMenuSetupNetworkConf[i].name == 'IPv6 Connection Test') {
+											gMenuSetupNetworkConf[i].opera = true;
+										}
+									}
+								}
+								gMenuChild = gMenuParent.data[gMenuoIndex].value;
+								gMenuRenderFirst();
+								gMenuRenderSecond();
+								changePage(gMenuoIndex, gMenuClassName);
+							}
+						})
+					} else {
+						for(var i = 0; i < gMenuSetupNetworkConf.length; i++) {
+							if(gMenuSetupNetworkConf[i].name == 'Interface' || gMenuSetupNetworkConf[i].name == 'Wake On Lan' ||
+								gMenuSetupNetworkConf[i].name == 'Information' || gMenuSetupNetworkConf[i].name == 'IP Setting' ||
+								gMenuSetupNetworkConf[i].name == 'Connection Test' || gMenuSetupNetworkConf[i].name == 'IP Prefer' ||
+								gMenuSetupNetworkConf[i].name == 'IPv6 Information' || gMenuSetupNetworkConf[i].name == 'IPv6 Configuration IP' ||
+								gMenuSetupNetworkConf[i].name == 'IPv6 Connection Test') {
+								gMenuSetupNetworkConf[i].opera = false;
+							}
+						}
+						gMenuChild = gMenuParent.data[gMenuoIndex].value;
+						gMenuRenderFirst();
+						gMenuRenderSecond();
+						changePage(gMenuoIndex, gMenuClassName);
+					}
+				}
+			});
+		}
 	},
 	{
 		name: 'WFD',
@@ -2520,29 +2882,116 @@ var gMenuSetupRecord = [{
 		name: 'Time Shifting Mode',
 		value: {
 			valType: 'sel',
-			data: ['Off', 'On']
+			data: [],
+			dataList: ['Off', 'On']
 		},
-		curVal: 'Off',
-		opera: true
+		curVal: 0,
+		opera: true,
+		msg: function(key) {
+			if(key == 'get') {
+				return {
+					"method": "mtk.webui.config.getValue",
+					"params": {
+						"configId": "g_record__rec_tshift_mode"
+					}
+				};
+			} else {
+				return {
+					"method": "mtk.webui.config.setValue",
+					"params": {
+						"configId": "g_record__rec_tshift_mode",
+						"value": gMenuoIndex,
+						"apply": true
+					}
+				};
+			}
+		},
+		getCallback: function(data) { //获取value值
+			//			console.log(data);
+			this.value.data = this.value.dataList;
+			this.curVal = data.result.current;
+		},
+		setCallback: function(data) { //设置value值
+			//			console.log(data.result);
+			this.curVal = data.result.current;
+		}
 	}
 ];
 var gMenuSetupUpdate = [{
 		name: 'Auto Channel Update',
 		value: {
 			valType: 'sel',
-			data: ['On', 'Off']
+			data: [],
+			dataList: ['Off', 'On']
 		},
-		curVal: 'On',
-		opera: true
+		curVal: 0,
+		opera: true,
+		msg: function(key) {
+			if(key == 'get') {
+				return {
+					"method": "mtk.webui.config.getValue",
+					"params": {
+						"configId": "g_menu__auto_ch_update"
+					}
+				};
+			} else {
+				return {
+					"method": "mtk.webui.config.setValue",
+					"params": {
+						"configId": "g_menu__auto_ch_update",
+						"value": gMenuoIndex,
+						"apply": true
+					}
+				};
+			}
+		},
+		getCallback: function(data) { //获取value值
+			//			console.log(data);
+			this.value.data = this.value.dataList;
+			this.curVal = data.result.current;
+		},
+		setCallback: function(data) { //设置value值
+			//			console.log(data.result);
+			this.curVal = data.result.current;
+		}
 	},
 	{
 		name: 'Channel Update Message',
 		value: {
 			valType: 'sel',
-			data: ['On', 'Off']
+			data: [],
+			dataList: ['Off', 'On']
 		},
-		curVal: 'On',
-		opera: true
+		curVal: 0,
+		opera: true,
+		msg: function(key) {
+			if(key == 'get') {
+				return {
+					"method": "mtk.webui.config.getValue",
+					"params": {
+						"configId": "g_menu__ch_update_msg"
+					}
+				};
+			} else {
+				return {
+					"method": "mtk.webui.config.setValue",
+					"params": {
+						"configId": "g_menu__ch_update_msg",
+						"value": gMenuoIndex,
+						"apply": true
+					}
+				};
+			}
+		},
+		getCallback: function(data) { //获取value值
+			//			console.log(data);
+			this.value.data = this.value.dataList;
+			this.curVal = data.result.current;
+		},
+		setCallback: function(data) { //设置value值
+			//			console.log(data.result);
+			this.curVal = data.result.current;
+		}
 	}
 ];
 var gMenuSetup = [{
@@ -2552,43 +3001,159 @@ var gMenuSetup = [{
 			data: ['English', 'Vasco', 'Catalan', 'Hrvatski']
 		},
 		curVal: 'English',
-		opera: true
+		opera: false
 	},
 	{
 		name: 'Blue Mute',
 		value: {
 			valType: 'sel',
-			data: ['Off', 'On']
+			data: [],
+			dataList: ['Off', 'On']
 		},
-		curVal: 'Off',
-		opera: true
+		curVal: 0,
+		opera: false,
+		msg: function(key) {
+			if(key == 'get') {
+				return {
+					"method": "mtk.webui.config.getValue",
+					"params": {
+						"configId": "g_video__vid_blue_mute"
+					}
+				};
+			} else {
+				return {
+					"method": "mtk.webui.config.setValue",
+					"params": {
+						"configId": "g_video__vid_blue_mute",
+						"value": gMenuoIndex,
+						"apply": true
+					}
+				};
+			}
+		},
+		getCallback: function(data) { //获取value值
+			//			console.log(data);
+			this.value.data = this.value.dataList;
+			this.curVal = data.result.current;
+		},
+		setCallback: function(data) { //设置value值
+			//			console.log(data.result);
+			this.curVal = data.result.current;
+		}
 	},
 	{
 		name: 'Hot Boot',
 		value: {
 			valType: 'sel',
-			data: ['On', 'Off']
+			data: [],
+			dataList: ['Off', 'On']
 		},
-		curVal: 'On',
-		opera: true
+		curVal: 0,
+		opera: false,
+		msg: function(key) {
+			if(key == 'get') {
+				return {
+					"method": "mtk.webui.config.getValue",
+					"params": {
+						"configId": "g_menu__fast_boot"
+					}
+				};
+			} else {
+				return {
+					"method": "mtk.webui.config.setValue",
+					"params": {
+						"configId": "g_menu__fast_boot",
+						"value": gMenuoIndex,
+						"apply": true
+					}
+				};
+			}
+		},
+		getCallback: function(data) { //获取value值
+			//			console.log(data);
+			this.value.data = this.value.dataList;
+			this.curVal = data.result.current;
+		},
+		setCallback: function(data) { //设置value值
+			//			console.log(data.result);
+			this.curVal = data.result.current;
+		}
 	},
 	{
 		name: 'Interaction Channel',
 		value: {
 			valType: 'sel',
-			data: ['Off', 'On']
+			data: [],
+			dataList: ['Off', 'On']
 		},
-		curVal: 'Off',
-		opera: true
+		curVal: 0,
+		opera: false,
+		msg: function(key) {
+			if(key == 'get') {
+				return {
+					"method": "mtk.webui.config.getValue",
+					"params": {
+						"configId": "g_misc__mheg_inter_ch"
+					}
+				};
+			} else {
+				return {
+					"method": "mtk.webui.config.setValue",
+					"params": {
+						"configId": "g_misc__mheg_inter_ch",
+						"value": gMenuoIndex,
+						"apply": true
+					}
+				};
+			}
+		},
+		getCallback: function(data) { //获取value值
+			//			console.log(data);
+			this.value.data = this.value.dataList;
+			this.curVal = data.result.current;
+		},
+		setCallback: function(data) { //设置value值
+			//			console.log(data.result);
+			this.curVal = data.result.current;
+		}
 	},
 	{
 		name: 'MHEG PIN Protection',
 		value: {
 			valType: 'sel',
-			data: ['Off', 'On']
+			data: [],
+			dataList: ['Off', 'On']
 		},
-		curVal: 'Off',
-		opera: true
+		curVal: 0,
+		opera: false,
+		msg: function(key) {
+			if(key == 'get') {
+				return {
+					"method": "mtk.webui.config.getValue",
+					"params": {
+						"configId": "g_misc__mheg_pin_protection"
+					}
+				};
+			} else {
+				return {
+					"method": "mtk.webui.config.setValue",
+					"params": {
+						"configId": "g_misc__mheg_pin_protection",
+						"value": gMenuoIndex,
+						"apply": true
+					}
+				};
+			}
+		},
+		getCallback: function(data) { //获取value值
+			//			console.log(data);
+			this.value.data = this.value.dataList;
+			this.curVal = data.result.current;
+		},
+		setCallback: function(data) { //设置value值
+			//			console.log(data.result);
+			this.curVal = data.result.current;
+		}
 	},
 	{
 		name: 'HbbTV Settings',
@@ -2596,7 +3161,7 @@ var gMenuSetup = [{
 			valType: 'list',
 			data: gMenuSetupHbbTV
 		},
-		opera: true
+		opera: false
 	},
 	{
 		name: 'Time Setup',
@@ -2604,7 +3169,7 @@ var gMenuSetup = [{
 			valType: 'list',
 			data: gMenuSetupTS
 		},
-		opera: true
+		opera: false
 	},
 	{
 		name: 'HDMI2.0 Setting',
@@ -2612,7 +3177,7 @@ var gMenuSetup = [{
 			valType: 'list',
 			data: gMenuSetupHDMI
 		},
-		opera: true
+		opera: false
 	},
 	{
 		name: 'DivX(R) Registration',
@@ -2621,7 +3186,7 @@ var gMenuSetup = [{
 			data: [],
 			renderFuc: 'divXRegistration'
 		},
-		opera: true
+		opera: false
 	},
 	{
 		name: 'DivX(R) Deactivation',
@@ -2630,7 +3195,7 @@ var gMenuSetup = [{
 			data: [],
 			renderFuc: 'divXDeactivation'
 		},
-		opera: true
+		opera: false
 	},
 	{
 		name: 'Subtitle',
@@ -2638,7 +3203,7 @@ var gMenuSetup = [{
 			valType: 'list',
 			data: gMenuSetupSubtitle
 		},
-		opera: true
+		opera: false
 	},
 	{
 		name: 'Teletext',
@@ -2646,7 +3211,7 @@ var gMenuSetup = [{
 			valType: 'list',
 			data: gMenuSetupTeletext
 		},
-		opera: true
+		opera: false
 	},
 	{
 		name: 'Common Interface',
@@ -2654,7 +3219,7 @@ var gMenuSetup = [{
 			valType: 'list',
 			data: gMenuSetupCI
 		},
-		opera: true
+		opera: false
 	},
 	{
 		name: 'Network',
@@ -2790,7 +3355,9 @@ var gMenuParentalShow = [{
 		name: 'Channel Block',
 		value: {
 			valType: 'scan',
-			data: {name:'gMenuParentalChannelBlock'},
+			data: {
+				name: 'gMenuParentalChannelBlock'
+			},
 			renderFuc: 'channelSkip'
 		},
 		opera: true
@@ -2885,22 +3452,22 @@ var Menu = {
 			},
 			opera: true
 		},
-//		{
-//			name: 'Parental',
-//			value: {
-//				valType: 'scan',
-//				data: gMenuParental
-//			},
-//			opera: true
-//		},
-				{
-					name: 'Parental',
-					value: {
-						valType: 'list',
-						data: gMenuParentalShow
-					},
-					opera: true
-				}
+		{
+			name: 'Parental',
+			value: {
+				valType: 'scan',
+				data: gMenuParental
+			},
+			opera: true
+		},
+		//		{
+		//			name: 'Parental',
+		//			value: {
+		//				valType: 'list',
+		//				data: gMenuParentalShow
+		//			},
+		//			opera: true
+		//		}
 	]
 };
 var gMenuoIndex = 0;
