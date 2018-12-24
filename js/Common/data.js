@@ -2547,6 +2547,7 @@ var gMenuSetupNetworkConf = [{
 			}
 		},
 		getCallback: function(data) { //获取value值
+			//			console.log(data);
 			if(data.error.code == 0) {
 				if(data.result.type == "etherent") {
 					this.curVal = 0;
@@ -2554,7 +2555,6 @@ var gMenuSetupNetworkConf = [{
 					this.curVal = 1;
 				}
 			}
-
 		},
 		setCallback: function(data) { //设置value值
 			//						console.log(data.result);
@@ -2570,6 +2570,7 @@ var gMenuSetupNetworkConf = [{
 							gMenuSetupNetworkConf[i].opera = false;
 						}
 					}
+					gMenuSetupNetworkConf[0].value.dataList=['Off','On'];
 				} else {
 					this.curVal = 1;
 					for(var i = 0; i < gMenuSetupNetworkConf.length; i++) {
@@ -2581,38 +2582,39 @@ var gMenuSetupNetworkConf = [{
 							gMenuSetupNetworkConf[i].opera = true;
 						}
 					}
+					gMenuSetupNetworkConf[0].value.dataList=['On'];
 				}
 				gMenuRenderFirst();
 			}
 		}
 	},
-	{
-		name: 'Wake On Lan',
-		value: {
-			valType: 'sel',
-			data: ['Off', 'On']
-		},
-		curVal: 'Off',
-		opera: false
-	},
-	{
-		name: 'Wake On Wlan',
-		value: {
-			valType: 'sel',
-			data: ['Off', 'On']
-		},
-		curVal: 'Off',
-		opera: false
-	},
-	{
-		name: 'Wireless Setting',
-		value: {
-			valType: 'scan',
-			data: [],
-			renderFuc: 'wirelessSetting'
-		},
-		opera: false
-	},
+//	{
+//		name: 'Wake On Lan',
+//		value: {
+//			valType: 'sel',
+//			data: ['Off', 'On']
+//		},
+//		curVal: 'Off',
+//		opera: false
+//	},
+//	{
+//		name: 'Wake On Wlan',
+//		value: {
+//			valType: 'sel',
+//			data: ['Off', 'On']
+//		},
+//		curVal: 'Off',
+//		opera: false
+//	},
+//	{
+//		name: 'Wireless Setting',
+//		value: {
+//			valType: 'scan',
+//			data: [],
+//			renderFuc: 'wirelessSetting'
+//		},
+//		opera: false
+//	},
 	{
 		name: 'Information',
 		value: {
@@ -2771,6 +2773,7 @@ var gMenuSetupNetwork = [{
 											gMenuSetupNetworkConf[i].opera = true;
 										}
 									}
+									gMenuSetupNetworkConf[0].value.dataList = ['On'];
 								}
 								gMenuChild = gMenuParent.data[gMenuoIndex].value;
 								gMenuRenderFirst();
