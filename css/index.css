@@ -10,8 +10,8 @@ div{
 
 #container{
 	background: #333333;
-	color: #fff;
 	font-size: 16px;
+	color: #fff;
 }
 
 /*列表*/
@@ -21,15 +21,19 @@ div{
 	position: relative;
 }
 .firstList, .secondList {
-	width: 300px;
 	position: absolute;
 	top: 0px;
 }
 .firstList{
+	height: 360px;
+	width: 100px;
 	left: 0px;
+	border-right: 1px solid #CDC9C9;
+	padding: 0 50px;
 }
 .secondList {
-	left: 300px;
+	width: 500px;
+	left: 200px;
 }
 .listItem {
 	font-size: 16px;
@@ -39,16 +43,76 @@ div{
 	line-height: 40px;
 	height: 38px;
 	border: 1px solid transparent;
+	position: relative;
 }
 .listItem.focus{
-	color: red;
+	color: #FF0000;
 	border-color: #FF0000;
 }
 .listItem .list{
 	margin-left: 30px;
 }
 .listItem.disabled{
-	color: #CDC9C9;
+	background: #CDC9C9;
+}
+.listItem .left{
+	position: absolute;
+	left: 0;
+}
+.listItem .right{
+	position: absolute;
+	right: 0;
+}
+.listItem .right span{
+	display: inline-block;
+	width: 80px;
+	margin-left: 20px;
+}
+.progress{
+	display: inline-block;
+	position: relative;
+	vertical-align: middle;
+	height: 2px;
+	width: 100px;
+	background: #fff;
+}
+.progress .front{
+	position: absolute;
+	top: -3px;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: #fff;
+}
+
+#showNum{
+	width: 300px;
+}
+#showNum .operate{
+	position: relative;
+	height: 30px;
+	line-height: 30px;
+}
+#showNum .operate .left{
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+#showNum .operate .right{
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+.selectBox{
+	height: 160px;
+	overflow: hidden;
+	position: relative;
+}
+.selectList{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
 }
 
 

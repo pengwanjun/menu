@@ -7,6 +7,10 @@ window.onload = function() {
 	document.onkeyup = function(e) {
 		if(gMenuPageName == 'list') {
 			listKeyEvent(e);
+		}else if(gMenuPageName == 'showNum'){
+			showNum.keyEvent(e);
+		}else if(gMenuPageName=='showSelect'){
+			showSelect.keyEvent(e);
 		} else if(gMenuPageName == 'divXDeactivationOk'){
 			divXDeactivation.keyEventOK(e);
 		}else{

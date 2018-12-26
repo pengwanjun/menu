@@ -44,9 +44,8 @@ function returnListPage() {
 					</div>
 				</div>
 			`;
-	gMenuRenderFirst();
-	gMenuRenderSecond();
-	addClass(document.querySelector('.' + gMenuClassName + '').children[gMenuoIndex], 'focus');
-	changePage(gMenuoIndex, gMenuClassName);
 	gMenuPageName = 'list';
+	gMenuRenderSecond();
+	gMenuRenderFirst();
+	changePage();
 }

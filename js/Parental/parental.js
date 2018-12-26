@@ -64,173 +64,8 @@ var changePassword = {
 	}
 };
 
-//channelBlock
-
-//var channelBlock = {
-//	list: [],
-//	page: 0,
-//	value: [],
-//	focusIndex: 0,
-//	channelBlockBit: 256,
-//	render: function() {
-//		window.gSocket.send({
-//			"method": "mtk.webui.channelList.queryChannelList"
-//		}, function(data) {
-//			//			console.log(data);
-//			this.value = data.result.List;
-//			this.list = sliceArr(this.value, 9);
-//			this.renderData(this.focusIndex);
-//		}.bind(channelBlock));
-//	},
-//	renderData: function(fIndex) {
-//		var html = '<div id="channelSkip"><div class="channelSkip">';
-//		for(var i = 0; i < this.list[this.page].length; i++) {
-//			if(this.checkChannelBlock(parseInt(this.list[this.page][i].nwMask))) {
-//				if(i == fIndex) {
-//					html += `<div class="listItem focus">
-//										<div>${this.list[this.page][i].majorNum}</div>
-//										<div>${this.list[this.page][i].brdcstType}</div>
-//										<div>${this.list[this.page][i].acName}</div>
-//										<div class="sel hasSel">选中</div>
-//									</div>`;
-//				} else {
-//					html += `<div class="listItem">
-//										<div>${this.list[this.page][i].majorNum}</div>
-//										<div>${this.list[this.page][i].brdcstType}</div>
-//										<div>${this.list[this.page][i].acName}</div>
-//										<div class="sel hasSel">选中</div>
-//									</div>`;
-//				}
-//			} else {
-//				if(i == fIndex) {
-//					html += `<div class="listItem focus">
-//										<div>${this.list[this.page][i].majorNum}</div>
-//										<div>${this.list[this.page][i].brdcstType}</div>
-//										<div>${this.list[this.page][i].acName}</div>
-//										<div class="sel">未选中</div>
-//									</div>`;
-//				} else {
-//					html += `<div class="listItem">
-//										<div>${this.list[this.page][i].majorNum}</div>
-//										<div>${this.list[this.page][i].brdcstType}</div>
-//										<div>${this.list[this.page][i].acName}</div>
-//										<div class="sel">未选中</div>
-//									</div>`;
-//				}
-//			}
-//		}
-//		document.querySelector('#container').innerHTML = html + '</div></div>';
-//	},
-//	keyEvent: function(e) {
-//		var curFocus = document.querySelector(".focus");
-//		var curList = curFocus.parentElement.children;
-//		var curIndex = [].indexOf.call(curList, curFocus);
-//		//下键
-//		if(e.keyCode == KeyEvent.DOM_VK_DOWN) {
-//			if(curIndex == curList.length - 1) {
-//				if(this.page == this.list.length - 1) {
-//					this.page = 0;
-//				} else {
-//					this.page++;
-//				}
-//				this.listIndex = 0;
-//				this.renderData(this.listIndex);
-//			} else {
-//				removeClass(curList[curIndex], 'focus');
-//				addClass(curList[curIndex + 1], 'focus');
-//			}
-//		}
-//		//上键
-//		if(e.keyCode == KeyEvent.DOM_VK_UP) {
-//			if(curIndex == 0) {
-//				if(this.page == 0) {
-//					this.page = this.list.length - 1;
-//				} else {
-//					this.page--;
-//				}
-//				this.listIndex = this.list[this.page].length - 1;
-//				this.renderData(this.listIndex);
-//			} else {
-//				removeClass(curList[curIndex], 'focus');
-//				addClass(curList[curIndex - 1], 'focus');
-//			}
-//		}
-//		//右键
-//		if(e.keyCode == KeyEvent.DOM_VK_RIGHT) {
-//			if(curIndex == curList.length - 1) {
-//				if(this.page == this.list.length - 1) {
-//					this.page = 0;
-//				} else {
-//					this.page++;
-//				}
-//				this.listIndex = this.list[this.page].length - 1;
-//				this.renderData(this.listIndex);
-//			} else {
-//				removeClass(curList[curIndex], 'focus');
-//				addClass(curList[curList.length - 1], 'focus');
-//			}
-//		}
-//		//左键
-//		if(e.keyCode == KeyEvent.DOM_VK_LEFT) {
-//			if(curIndex == 0) {
-//				if(this.page == 0) {
-//					this.page = this.list.length - 1;
-//				} else {
-//					this.page--;
-//				}
-//				this.listIndex = 0;
-//				this.renderData(this.listIndex);
-//			} else {
-//				removeClass(curList[curIndex], 'focus');
-//				addClass(curList[0], 'focus');
-//			}
-//		}
-//		//enter键
-//		if(e.keyCode == KeyEvent.DOM_VK_ENTER) {
-//			var curData=this.list[this.page][curIndex];
-//			if(this.checkChannelBlock(curData.nwMask)){
-//				curData.nwMask=this.setChannelUnBlock(curData.nwMask);
-//			}else{
-//				curData.nwMask=this.setChannelBlock(curData.nwMask);
-//			}
-//			var msg = {
-//				"params":{
-//					"operator":"UPDATA",
-//					"List":[{
-//						"svlRecId":curData.svlRecId,
-//						"nwMask":curData.nwMask
-//					}]
-//				},
-//				"method":"mtk.webui.channelList.setSvlTslRec"
-//			}
-//			window.gSocket.send(msg, function(data) {
-//				if(data.error.code == 0) {
-//					this.focusIndex = curIndex;
-//					this.render();
-//				}
-//			}.bind(this));
-//		}
-//		//exit---返回键
-//		if(e.keyCode == KeyEvent.DOM_VK_BACK_SPACE) {
-//			returnListPage();
-//		}
-//	},
-//	checkChannelBlock: function(nwMask) {
-//		if((nwMask & this.channelBlockBit) == this.channelBlockBit) {
-//			return true;
-//		}
-//		return false;
-//	},
-//	setChannelBlock: function(nwMask) {
-//		return nwMask | this.channelBlockBit;
-//	},
-//	setChannelUnBlock: function(nwMask) {
-//		return nwMask& ( ~ this.channelBlockBit);
-//	}
-//}
 
 //Input Block
-
 var inputBlock = {
 	list: [],
 	page: 0,
@@ -525,15 +360,14 @@ var password = {
 			e.keyCode == KeyEvent.DOM_VK_3 || e.keyCode == KeyEvent.DOM_VK_4 || e.keyCode == KeyEvent.DOM_VK_5 ||
 			e.keyCode == KeyEvent.DOM_VK_6 || e.keyCode == KeyEvent.DOM_VK_7 || e.keyCode == KeyEvent.DOM_VK_8 ||
 			e.keyCode == KeyEvent.DOM_VK_9) {
-			if(pwd == '123' && e.keyCode == KeyEvent.DOM_VK_4) {
+			if(pwd == '111' && e.keyCode == KeyEvent.DOM_VK_1) {
 				Menu.data[4].value = {
 					valType: 'list',
 					data: gMenuParentalShow
 				}
 				gMenuChild = gMenuParent.data[4].value;
-				gMenuoIndex = 4;
-				gMenuClassName = 'firstList';
-				gMenuNavlist = [];
+				gMenuoIndex = canOperaDown(gMenuChild, -1);
+				gMenuClassName = 'secondList';
 				returnListPage();
 			} else if(pwd.length == 3) {
 				document.querySelector('.input').innerHTML = '';

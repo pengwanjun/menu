@@ -62,26 +62,26 @@ var analogManualScan = {
 		}
 		//exit---返回键
 		if(e.keyCode == KeyEvent.DOM_VK_BACK_SPACE) {
-			returnListPage();
+//			returnListPage();
 		}
 	}
 }
 
 //AnalogChannelDetail
-var AnalogChannelDetail={
+var AnalogChannelDetail = {
 	prevPage: '',
 	prevPageIndex: '',
 	prevValue: {},
-	render:function(page, index, curItem){
+	render: function(page, index, curItem) {
 		this.prevPage = page;
 		this.prevPageIndex = index;
 		this.prevValue = curItem;
 		var html = `<div id="AnalogChannelDetail">
 						
 					</div>`;
-		document.querySelector('#container').innerHTML=html;
+		document.querySelector('#container').innerHTML = html;
 	},
-	keyEvent:function(e){
+	keyEvent: function(e) {
 		//exit---返回键
 		if(e.keyCode == KeyEvent.DOM_VK_BACK_SPACE) {
 			gMenuPageName = 'channelSkip';
@@ -90,16 +90,12 @@ var AnalogChannelDetail={
 	}
 }
 
-
 //Channel Edit detail
 var channelEditDetail = {
-	prevPage: '',
-	prevPageIndex: '',
 	prevValue: {},
-	render: function(page, index, curItem) {
-		this.prevPage = page;
-		this.prevPageIndex = index;
+	render: function(curItem) {
 		this.prevValue = curItem;
+		console.log(this.prevValue);
 		var html = `<div id="channelEditDetail">
 				<div class="listItem">
 					<div>Network Name:</div>
@@ -246,6 +242,7 @@ var channelEditDetail = {
 				this.channelDelete();
 			}
 			if(hasClass(curFocus, 'acName') || hasClass(curFocus, 'majorNum')) {
+				console.log(this.prevValue);
 				var msg = {
 					"params": {
 						"operator": "UPDATA",
@@ -263,7 +260,7 @@ var channelEditDetail = {
 						gMenuPageName = 'channelSkip';
 						channelSkip.render('gMenuTvChannelEdit');
 					}
-				}.bind(this));
+				});
 			}
 		}
 		//exit---返回键
@@ -278,27 +275,40 @@ var channelEditDetail = {
 				"operator": "DELETE",
 				"List": [{
 					"SvlId": 1,
-					"svlRecId": this.value.svlRecId
+					"svlRecId": this.prevValue.svlRecId
 				}]
 			},
 			"method": "mtk.webui.channelList.setSvlTslRec"
 		}
 		window.gSocket.send(msg, function(data) {
 			if(data.error.code == 0) {
+				channelSkip.page = 0;
+				channelSkip.focusIndex = 0;
 				gMenuPageName = 'channelSkip';
 				channelSkip.render('gMenuTvChannelEdit');
 			}
-		}.bind(this));
+		});
 	}
 }
 
 //Channel Scan
 var channelScan = {
-	render: function(value) {
-		var html = '';
-		for(var k in value.data) {
-			html += '<div class="channelScan">' + k + '：' + value.data[k] + '</div>';
+	render: function() {
+		var html = '<div class="channelScan">11111：etertergdfgdfgf</div>';
+		document.querySelector('#container').innerHTML = html;
+	},
+	keyEvent: function(e) {
+		//exit---返回键
+		if(e.keyCode == KeyEvent.DOM_VK_BACK_SPACE) {
+			returnListPage();
 		}
+	}
+}
+
+//Update Scan
+var updateScan = {
+	render: function() {
+		var html = '<div class="channelScan">11111：etertergdfgdfgf</div>';
 		document.querySelector('#container').innerHTML = html;
 	},
 	keyEvent: function(e) {
@@ -320,7 +330,6 @@ var channelSkip = {
 	channelSkipBit: 8,
 	channelBlockBit: 256,
 	render: function(name) {
-		console.log(name);
 		this.pageName = name;
 		window.gSocket.send({
 			"method": "mtk.webui.channelList.queryChannelList"
@@ -547,7 +556,7 @@ var channelSkip = {
 					} else {
 						curData.nwMask = this.setChannelSkip(curData.nwMask);
 					}
-				} else{
+				} else {
 					if(this.checkChannelBlock(curData.nwMask)) {
 						curData.nwMask = this.setChannelUnBlock(curData.nwMask);
 					} else {
@@ -565,6 +574,7 @@ var channelSkip = {
 					"method": "mtk.webui.channelList.setSvlTslRec"
 				}
 				window.gSocket.send(msg, function(data) {
+					console.log(data);
 					if(data.error.code == 0) {
 						this.focusIndex = curIndex;
 						this.render(this.pageName);
@@ -601,7 +611,7 @@ var channelSkip = {
 			}
 			if(this.pageName == 'gMenuTvChannelEdit') {
 				gMenuPageName = 'channelEditDetail';
-				channelEditDetail.render(this.page, curIndex, this.list[this.page][curIndex]);
+				channelEditDetail.render(this.list[this.page][curIndex]);
 			}
 			if(this.pageName == 'gMenuTvAnalogChannel') { //Analog Channel Fine Tune
 				gMenuPageName = 'AnalogChannelDetail';

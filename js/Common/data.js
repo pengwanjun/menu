@@ -8,7 +8,7 @@ var gMenuVideoMjc = [{
 		},
 		curVal: 0,
 		opera: true,
-		msg: function(key) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getMinMaxValue",
@@ -21,7 +21,7 @@ var gMenuVideoMjc = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_video__vid_mjc_effect",
-						"value": gMenuoIndex,
+						"value": val,
 						"apply": true
 					}
 				};
@@ -50,7 +50,7 @@ var gMenuVideoMjc = [{
 		},
 		curVal: 0,
 		opera: true,
-		msg: function(key) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getMinMaxValue",
@@ -63,7 +63,7 @@ var gMenuVideoMjc = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_video__vid_mjc_demo",
-						"value": gMenuoIndex,
+						"value": val,
 						"apply": true
 					}
 				};
@@ -103,7 +103,7 @@ var gMenuVideoCt = [{
 		},
 		curVal: 0,
 		opera: true,
-		msg: function(key) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getMinMaxValue",
@@ -116,7 +116,7 @@ var gMenuVideoCt = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_video__clr_temp",
-						"value": gMenuoIndex,
+						"value": val,
 						"apply": true
 					}
 				};
@@ -145,7 +145,7 @@ var gMenuVideoCt = [{
 			max: 20
 		},
 		opera: true,
-		msg: function(key) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getMinMaxValue",
@@ -158,7 +158,7 @@ var gMenuVideoCt = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_video__clr_gain_r",
-						"value": this.value.data,
+						"value": val,
 						"apply": true
 					}
 				};
@@ -180,7 +180,7 @@ var gMenuVideoCt = [{
 			max: 20
 		},
 		opera: true,
-		msg: function(key) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getMinMaxValue",
@@ -193,7 +193,7 @@ var gMenuVideoCt = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_video__clr_gain_g",
-						"value": this.value.data,
+						"value": val,
 						"apply": true
 					}
 				};
@@ -215,7 +215,7 @@ var gMenuVideoCt = [{
 			max: 20
 		},
 		opera: true,
-		msg: function(key) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getMinMaxValue",
@@ -228,7 +228,7 @@ var gMenuVideoCt = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_video__clr_gain_b",
-						"value": this.value.data,
+						"value": val,
 						"apply": true
 					}
 				};
@@ -251,7 +251,7 @@ var gMenuVideoAv = [{
 		},
 		curVal: 0,
 		opera: true,
-		msg: function(key) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getMinMaxValue",
@@ -264,7 +264,7 @@ var gMenuVideoAv = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_video__vid_nr",
-						"value": gMenuoIndex,
+						"value": val,
 						"apply": true
 					}
 				};
@@ -293,7 +293,7 @@ var gMenuVideoAv = [{
 		},
 		curVal: 0,
 		opera: true,
-		msg: function(key) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getMinMaxValue",
@@ -306,7 +306,7 @@ var gMenuVideoAv = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_video__vid_mpeg_nr",
-						"value": gMenuoIndex,
+						"value": val,
 						"apply": true
 					}
 				};
@@ -335,7 +335,7 @@ var gMenuVideoAv = [{
 		},
 		curVal: 0,
 		opera: true,
-		msg: function(key) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getMinMaxValue",
@@ -348,7 +348,7 @@ var gMenuVideoAv = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_video__vid_luma",
-						"value": gMenuoIndex,
+						"value": val,
 						"apply": true
 					}
 				};
@@ -377,7 +377,7 @@ var gMenuVideoAv = [{
 		},
 		curVal: 0,
 		opera: true,
-		msg: function(key) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getMinMaxValue",
@@ -390,7 +390,7 @@ var gMenuVideoAv = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_video__vid_flash_tone",
-						"value": gMenuoIndex,
+						"value": val,
 						"apply": true
 					}
 				};
@@ -419,7 +419,7 @@ var gMenuVideoAv = [{
 		},
 		curVal: 0,
 		opera: true,
-		msg: function(key) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getMinMaxValue",
@@ -432,7 +432,7 @@ var gMenuVideoAv = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_video__vid_di_film_mode",
-						"value": gMenuoIndex,
+						"value": val,
 						"apply": true
 					}
 				};
@@ -461,7 +461,7 @@ var gMenuVideoAv = [{
 		},
 		curVal: 0,
 		opera: true,
-		msg: function(key) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getMinMaxValue",
@@ -474,7 +474,7 @@ var gMenuVideoAv = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_video__vid_blue_stretch",
-						"value": gMenuoIndex,
+						"value": val,
 						"apply": true
 					}
 				};
@@ -503,7 +503,7 @@ var gMenuVideoAv = [{
 		},
 		curVal: 0,
 		opera: false,
-		msg: function(key) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getMinMaxValue",
@@ -516,7 +516,7 @@ var gMenuVideoAv = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_video__vid_game_mode",
-						"value": gMenuoIndex,
+						"value": val,
 						"apply": true
 					}
 				};
@@ -553,7 +553,7 @@ var gMenuVideoAv = [{
 		},
 		curVal: 0,
 		opera: true,
-		msg: function(key) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getMinMaxValue",
@@ -566,14 +566,14 @@ var gMenuVideoAv = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_video__vid_black_bar_detect",
-						"value": gMenuoIndex,
+						"value": val,
 						"apply": true
 					}
 				};
 			}
 		},
 		getCallback: function(data) { //获取value值
-			//						console.log(data.result);
+			//									console.log(data.result);
 			let arr = [];
 			for(let i = data.result.min; i <= data.result.max; i++) {
 				arr.push(this.value.dataList[i]);
@@ -595,7 +595,7 @@ var gMenuVideoAv = [{
 		},
 		curVal: 0,
 		opera: true,
-		msg: function(key) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getMinMaxValue",
@@ -608,14 +608,14 @@ var gMenuVideoAv = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_video__vid_super_resolution",
-						"value": gMenuoIndex,
+						"value": val,
 						"apply": true
 					}
 				};
 			}
 		},
 		getCallback: function(data) { //获取value值
-			//						console.log(data.result);
+			//									console.log(data.result);
 			let arr = [];
 			for(let i = data.result.min; i <= data.result.max; i++) {
 				arr.push(this.value.dataList[i]);
@@ -638,7 +638,7 @@ var gMenuVideo = [{
 		},
 		curVal: 0,
 		opera: true,
-		msg: function(key) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getMinMaxValue",
@@ -651,14 +651,14 @@ var gMenuVideo = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_video__picture_mode",
-						"value": gMenuoIndex,
+						"value": val,
 						"apply": true
 					}
 				};
 			}
 		},
 		getCallback: function(data) { //获取value值
-			//			console.log(data.result);
+			//						console.log(data.result);
 			let arr = [];
 			for(let i = data.result.min; i <= data.result.max; i++) {
 				arr.push(this.value.dataList[i]);
@@ -667,7 +667,7 @@ var gMenuVideo = [{
 			this.curVal = data.result.current;
 		},
 		setCallback: function(data) { //设置value值
-			//			console.log(data.result);
+			//						console.log(data);
 			this.curVal = data.result.current;
 		}
 	},
@@ -680,7 +680,7 @@ var gMenuVideo = [{
 			max: 100
 		},
 		opera: true,
-		msg: function(key) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getMinMaxValue",
@@ -693,14 +693,14 @@ var gMenuVideo = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_disp__disp_back_light",
-						"value": this.value.data,
+						"value": val,
 						"apply": true
 					}
 				};
 			}
 		},
 		getCallback: function(data) { //获取value值
-			//			console.log(data);
+			//						console.log(data.result);
 			this.value.min = data.result.min;
 			this.value.max = data.result.max;
 			this.value.data = data.result.current;
@@ -715,7 +715,7 @@ var gMenuVideo = [{
 			max: 100
 		},
 		opera: true,
-		msg: function(key) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getMinMaxValue",
@@ -728,7 +728,7 @@ var gMenuVideo = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_video__brightness",
-						"value": this.value.data,
+						"value": val,
 						"apply": true
 					}
 				};
@@ -750,7 +750,7 @@ var gMenuVideo = [{
 			max: 100
 		},
 		opera: true,
-		msg: function(key) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getMinMaxValue",
@@ -763,7 +763,7 @@ var gMenuVideo = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_video__contrast",
-						"value": this.value.data,
+						"value": val,
 						"apply": true
 					}
 				};
@@ -785,7 +785,7 @@ var gMenuVideo = [{
 			max: 100
 		},
 		opera: true,
-		msg: function(key) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getMinMaxValue",
@@ -798,7 +798,7 @@ var gMenuVideo = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_video__vid_sat",
-						"value": this.value.data,
+						"value": val,
 						"apply": true
 					}
 				};
@@ -820,7 +820,7 @@ var gMenuVideo = [{
 			max: 50
 		},
 		opera: true,
-		msg: function(key) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getMinMaxValue",
@@ -833,7 +833,7 @@ var gMenuVideo = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_video__vid_hue",
-						"value": this.value.data,
+						"value": val,
 						"apply": true
 					}
 				};
@@ -855,7 +855,7 @@ var gMenuVideo = [{
 			max: 20
 		},
 		opera: true,
-		msg: function(key) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getMinMaxValue",
@@ -868,7 +868,7 @@ var gMenuVideo = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_video__vid_shp",
-						"value": this.value.data,
+						"value": val,
 						"apply": true
 					}
 				};
@@ -890,7 +890,7 @@ var gMenuVideo = [{
 			max: 100
 		},
 		opera: true,
-		msg: function(key) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getMinMaxValue",
@@ -903,7 +903,7 @@ var gMenuVideo = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_video__vid_blue_light",
-						"value": this.value.data,
+						"value": val,
 						"apply": true
 					}
 				};
@@ -925,7 +925,7 @@ var gMenuVideo = [{
 		},
 		curVal: 0,
 		opera: true,
-		msg: function(key) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getValue",
@@ -938,7 +938,7 @@ var gMenuVideo = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_video__dovi_user_swicth",
-						"value": gMenuoIndex,
+						"value": val,
 						"apply": true
 					}
 				};
@@ -963,7 +963,7 @@ var gMenuVideo = [{
 		},
 		curVal: 0,
 		opera: true,
-		msg: function(key) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getMinMaxValue",
@@ -976,7 +976,7 @@ var gMenuVideo = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_disp__disp_gamma",
-						"value": parseInt(gMenuoIndex) + 1,
+						"value": parseInt(val) + 1,
 						"apply": true
 					}
 				};
@@ -1004,7 +1004,7 @@ var gMenuVideo = [{
 		},
 		curVal: 1,
 		opera: true,
-		msg: function(key) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getMinMaxValue",
@@ -1017,7 +1017,7 @@ var gMenuVideo = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_video__vid_hdr",
-						"value": gMenuoIndex,
+						"value": val,
 						"apply": true
 					}
 				};
@@ -1065,7 +1065,7 @@ var gMenuAudioDol = [{
 		},
 		curVal: 0,
 		opera: true,
-		msg: function(key) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getMinMaxValue",
@@ -1078,7 +1078,7 @@ var gMenuAudioDol = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_audio__dolby_audio_processing",
-						"value": gMenuoIndex,
+						"value": val,
 						"apply": true
 					}
 				};
@@ -1106,7 +1106,7 @@ var gMenuAudioDol = [{
 		},
 		curVal: 0,
 		opera: true,
-		msg: function(key) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getMinMaxValue",
@@ -1119,7 +1119,7 @@ var gMenuAudioDol = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_audio__dolby_sound_mode",
-						"value": gMenuoIndex,
+						"value": val,
 						"apply": true
 					}
 				};
@@ -1147,7 +1147,7 @@ var gMenuAudioDol = [{
 		},
 		curVal: 0,
 		opera: true,
-		msg: function(key) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getMinMaxValue",
@@ -1160,7 +1160,7 @@ var gMenuAudioDol = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_audio__volume_leveler",
-						"value": gMenuoIndex,
+						"value": val,
 						"apply": true
 					}
 				};
@@ -1188,7 +1188,7 @@ var gMenuAudioDol = [{
 		},
 		curVal: 0,
 		opera: true,
-		msg: function(key) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getMinMaxValue",
@@ -1201,7 +1201,7 @@ var gMenuAudioDol = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_audio__dialogue_enhancer",
-						"value": gMenuoIndex,
+						"value": val,
 						"apply": true
 					}
 				};
@@ -1229,7 +1229,7 @@ var gMenuAudioDol = [{
 		},
 		curVal: 0,
 		opera: true,
-		msg: function(key) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getMinMaxValue",
@@ -1242,7 +1242,7 @@ var gMenuAudioDol = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_audio__speaker_virtualizer",
-						"value": gMenuoIndex,
+						"value": val,
 						"apply": true
 					}
 				};
@@ -1281,7 +1281,7 @@ var gMenuAudioVisuallyImpaired = [{
 		},
 		curVal: 0,
 		opera: true,
-		msg: function(key) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getMinMaxValue",
@@ -1294,7 +1294,7 @@ var gMenuAudioVisuallyImpaired = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_audio__aud_ad_speaker",
-						"value": gMenuoIndex,
+						"value": val,
 						"apply": true
 					}
 				};
@@ -1322,7 +1322,7 @@ var gMenuAudioVisuallyImpaired = [{
 		},
 		curVal: 0,
 		opera: true,
-		msg: function(key) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getMinMaxValue",
@@ -1335,7 +1335,7 @@ var gMenuAudioVisuallyImpaired = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_audio__aud_ad_hdphone",
-						"value": gMenuoIndex,
+						"value": val,
 						"apply": true
 					}
 				};
@@ -1363,7 +1363,7 @@ var gMenuAudioVisuallyImpaired = [{
 			max: 100
 		},
 		opera: true,
-		msg: function(key) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getMinMaxValue",
@@ -1376,7 +1376,7 @@ var gMenuAudioVisuallyImpaired = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_audio__aud_ad_volume",
-						"value": this.value.data,
+						"value": val,
 						"apply": true
 					}
 				};
@@ -1398,7 +1398,7 @@ var gMenuAudioVisuallyImpaired = [{
 		},
 		curVal: 0,
 		opera: true,
-		msg: function(key) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getMinMaxValue",
@@ -1411,7 +1411,7 @@ var gMenuAudioVisuallyImpaired = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_audio__aud_ad_fade_pan",
-						"value": gMenuoIndex,
+						"value": val,
 						"apply": true
 					}
 				};
@@ -1434,7 +1434,8 @@ var gMenuAudioVisuallyImpaired = [{
 		name: 'Visually Impaired Audio',
 		value: {
 			valType: 'scan',
-			data: []
+			data: [],
+			renderFuc: 'visuallyImpairedAudio'
 		},
 		opera: true
 	}
@@ -1449,7 +1450,7 @@ var gMenuAudio = [{
 			max: 50
 		},
 		opera: true,
-		msg: function(key) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getMinMaxValue",
@@ -1462,7 +1463,7 @@ var gMenuAudio = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_audio__aud_balance",
-						"value": this.value.data,
+						"value": val,
 						"apply": true
 					}
 				};
@@ -1484,7 +1485,7 @@ var gMenuAudio = [{
 			max: 100
 		},
 		opera: true,
-		msg: function(key) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getMinMaxValue",
@@ -1497,7 +1498,7 @@ var gMenuAudio = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_audio__aud_bass",
-						"value": this.value.data,
+						"value": val,
 						"apply": true
 					}
 				};
@@ -1519,7 +1520,7 @@ var gMenuAudio = [{
 			max: 100
 		},
 		opera: true,
-		msg: function(key) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getMinMaxValue",
@@ -1532,7 +1533,7 @@ var gMenuAudio = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_audio__aud_treble",
-						"value": this.value.data,
+						"value": val,
 						"apply": true
 					}
 				};
@@ -1554,7 +1555,7 @@ var gMenuAudio = [{
 		},
 		curVal: 0,
 		opera: true,
-		msg: function(key) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getMinMaxValue",
@@ -1567,7 +1568,7 @@ var gMenuAudio = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_audio__aud_surround",
-						"value": gMenuoIndex,
+						"value": val,
 						"apply": true
 					}
 				};
@@ -1595,7 +1596,7 @@ var gMenuAudio = [{
 		},
 		curVal: 0,
 		opera: true,
-		msg: function(key) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getMinMaxValue",
@@ -1608,7 +1609,7 @@ var gMenuAudio = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_audio__aud_equalizer",
-						"value": gMenuoIndex,
+						"value": val,
 						"apply": true
 					}
 				};
@@ -1636,7 +1637,7 @@ var gMenuAudio = [{
 		},
 		curVal: 1,
 		opera: true,
-		msg: function(key) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getValue",
@@ -1649,7 +1650,7 @@ var gMenuAudio = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_audio__aud_out_port",
-						"value": gMenuoIndex,
+						"value": val,
 						"apply": true
 					}
 				};
@@ -1674,7 +1675,7 @@ var gMenuAudio = [{
 		},
 		curVal: 0,
 		opera: true,
-		msg: function(key) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getMinMaxValue",
@@ -1687,7 +1688,7 @@ var gMenuAudio = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_audio__spdif",
-						"value": gMenuoIndex,
+						"value": val,
 						"apply": true
 					}
 				};
@@ -1715,7 +1716,7 @@ var gMenuAudio = [{
 			max: 100
 		},
 		opera: true,
-		msg: function(key) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getMinMaxValue",
@@ -1728,7 +1729,7 @@ var gMenuAudio = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_audio__spdif_delay",
-						"value": this.value.data,
+						"value": val,
 						"apply": true
 					}
 				};
@@ -1750,7 +1751,7 @@ var gMenuAudio = [{
 		},
 		curVal: 0,
 		opera: true,
-		msg: function(key) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getMinMaxValue",
@@ -1763,7 +1764,7 @@ var gMenuAudio = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_audio__agc",
-						"value": gMenuoIndex,
+						"value": val,
 						"apply": true
 					}
 				};
@@ -1788,7 +1789,7 @@ var gMenuAudio = [{
 		},
 		curVal: 0,
 		opera: true,
-		msg: function(key) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getValue",
@@ -1801,7 +1802,7 @@ var gMenuAudio = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_audio__aud_type",
-						"value": gMenuoIndex,
+						"value": val,
 						"apply": true
 					}
 				};
@@ -1835,7 +1836,7 @@ var gMenuAudio = [{
 		},
 		curVal: 0,
 		opera: true,
-		msg: function(key) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getValue",
@@ -1848,7 +1849,7 @@ var gMenuAudio = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_audio__dolby_dmix",
-						"value": gMenuoIndex,
+						"value": val,
 						"apply": true
 					}
 				};
@@ -1985,28 +1986,47 @@ var gMenuTvChannels = [{
 	}
 ];
 
-var gMenuTv = [{
-		name: 'Tuner Mode',
-		value: {
-			valType: 'sel',
-			data: ['Antenna', 'Cable', 'Satellite']
-		},
-		curVal: 'Antenna',
-		opera: false
-	},
-	{
-		name: 'Audio Channel',
-		value: {
-			valType: 'sel',
-			data: ['Stereo', 'Dual1', 'Dual2', 'Mono']
-		},
-		curVal: 'Stereo',
-		opera: false
-	},
+var gMenuTv = [
+	//{
+	//		name: 'Tuner Mode',
+	//		value: {
+	//			valType: 'sel',
+	//			data: ['Antenna', 'Cable', 'Satellite']
+	//		},
+	//		curVal: 'Antenna',
+	//		opera: false,
+	//		msg:function(){
+	//			
+	//		},
+	//		getCallback:function(){
+	//			
+	//		},
+	//		setCallback:function(){
+	//			
+	//		}
+	//	},
+	//	{
+	//		name: 'Audio Channel',
+	//		value: {
+	//			valType: 'sel',
+	//			data: ['Stereo', 'Dual1', 'Dual2', 'Mono']
+	//		},
+	//		curVal: 'Stereo',
+	//		opera: false,
+	//		msg:function(){
+	//			
+	//		},
+	//		getCallback:function(){
+	//			
+	//		},
+	//		setCallback:function(){
+	//			
+	//		}
+	//	},
 	{
 		name: 'Channels',
 		value: {
-			valType: 'scan',
+			valType: 'list',
 			data: gMenuTvChannels
 		},
 		opera: true
@@ -2092,7 +2112,7 @@ var gMenuSetupHbbTV = [{
 		},
 		curVal: 0,
 		opera: true,
-		msg: function(key) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getValue",
@@ -2105,7 +2125,7 @@ var gMenuSetupHbbTV = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_menu__hbbtv",
-						"value": gMenuoIndex,
+						"value": val,
 						"apply": true
 					}
 				};
@@ -2226,7 +2246,7 @@ var gMenuSetupHDMI = [{
 	},
 	curVal: 0,
 	opera: true,
-	msg: function(key) {
+	msg: function(key,val) {
 		if(key == 'get') {
 			return {
 				"method": "mtk.webui.config.getValue",
@@ -2239,7 +2259,7 @@ var gMenuSetupHDMI = [{
 				"method": "mtk.webui.config.setValue",
 				"params": {
 					"configId": "g_menu_only__hdmi_edid_index",
-					"value": gMenuoIndex,
+					"value": val,
 					"apply": true
 				}
 			};
@@ -2264,7 +2284,7 @@ var gMenuSetupSubtitle = [{
 		},
 		curVal: 0,
 		opera: true,
-		msg: function(key) {
+		msg: function(key,val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getValue",
@@ -2277,7 +2297,7 @@ var gMenuSetupSubtitle = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_subtitle__subtitle_enable",
-						"value": gMenuoIndex,
+						"value": val,
 						"apply": true
 					}
 				};
@@ -2320,7 +2340,7 @@ var gMenuSetupSubtitle = [{
 		},
 		curVal: 0,
 		opera: true,
-		msg: function(key) {
+		msg: function(key,val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getValue",
@@ -2333,7 +2353,7 @@ var gMenuSetupSubtitle = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_subtitle__subtitle_attr",
-						"value": gMenuoIndex,
+						"value": val,
 						"apply": true
 					}
 				};
@@ -2368,7 +2388,7 @@ var gMenuSetupTeletext = [{
 		},
 		curVal: 0,
 		opera: true,
-		msg: function(key) {
+		msg: function(key,val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getValue",
@@ -2381,7 +2401,7 @@ var gMenuSetupTeletext = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_ttx_lang__ttx_decode_lang",
-						"value": gMenuoIndex,
+						"value": val,
 						"apply": true
 					}
 				};
@@ -2406,7 +2426,7 @@ var gMenuSetupTeletext = [{
 		},
 		curVal: 0,
 		opera: true,
-		msg: function(key) {
+		msg: function(key,val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getValue",
@@ -2419,7 +2439,7 @@ var gMenuSetupTeletext = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_ttx_lang__ttx_presentation_level",
-						"value": gMenuoIndex,
+						"value": val,
 						"apply": true
 					}
 				};
@@ -2464,7 +2484,7 @@ var gMenuSetupNetworkConf = [{
 		},
 		curVal: 0,
 		opera: true,
-		msg: function(key) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.network.queryInternetConnection"
@@ -2473,7 +2493,69 @@ var gMenuSetupNetworkConf = [{
 				return {
 					"method": "mtk.webui.network.setInternetConnection",
 					"params": {
-						"enable": gMenuoIndex == 0 ? false : true
+						"enable": val == 0 ? false : true
+					}
+				};
+			}
+		},
+		getCallback: function(data) { //获取value值
+//			console.log(data.result.enable);
+			if(data.error.code == 0) {
+				this.value.data = this.value.dataList;
+				if(this.value.data.length == 1) {
+					this.curVal = 0;
+				}else{			
+					if(data.result.enable) {
+						this.curVal = 1;
+					} else {
+						this.curVal = 0;
+					}
+				}
+			}
+		},
+		setCallback: function(data, selIndex) { //设置value值
+			if(data.error.code == 0) {
+				this.curVal = selIndex;
+				if(this.curVal == 0) {
+					for(var i = 0; i < gMenuSetupNetworkConf.length; i++) {
+						if(gMenuSetupNetworkConf[i].name == 'Internet Connection') {
+							gMenuSetupNetworkConf[i].opera = true;
+						} else {
+							gMenuSetupNetworkConf[i].opera = false;
+						}
+					}
+				} else {
+					for(var i = 0; i < gMenuSetupNetworkConf.length; i++) {
+						if(gMenuSetupNetworkConf[i].name == 'Wake On Wlan' ||
+							gMenuSetupNetworkConf[i].name == 'Wireless Setting') {
+							gMenuSetupNetworkConf[i].opera = false;
+						} else {
+							gMenuSetupNetworkConf[i].opera = true;
+						}
+					}
+				}
+			}
+		}
+	},
+	{
+		name: 'Interface',
+		value: {
+			valType: 'sel',
+			data: [],
+			dataList: ['Ethernet', 'Wireless']
+		},
+		curVal: 0,
+		opera: false,
+		msg: function(key, val) {
+			if(key == 'get') {
+				return {
+					"method": "mtk.webui.network.queryInternetInterface"
+				};
+			} else {
+				return {
+					"method": "mtk.webui.network.setInternetInterface",
+					"params": {
+						"type": val == 0 ? 'etherent' : 'wireless'
 					}
 				};
 			}
@@ -2482,73 +2564,6 @@ var gMenuSetupNetworkConf = [{
 			//			console.log(data);
 			if(data.error.code == 0) {
 				this.value.data = this.value.dataList;
-				if(data.result.enable) {
-					this.curVal = 1;
-				} else {
-					this.curVal = 0;
-				}
-			}
-		},
-		setCallback: function(data) { //设置value值
-			//			console.log(data.result);
-			if(data.error.code == 0) {
-				this.curVal = gMenuoIndex;
-				if(gMenuoIndex == 0) {
-					for(var i = 0; i < gMenuSetupNetworkConf.length; i++) {
-						if(gMenuSetupNetworkConf[i].name == 'Interface' || gMenuSetupNetworkConf[i].name == 'Wake On Lan' ||
-							gMenuSetupNetworkConf[i].name == 'Information' || gMenuSetupNetworkConf[i].name == 'IP Setting' ||
-							gMenuSetupNetworkConf[i].name == 'Connection Test' || gMenuSetupNetworkConf[i].name == 'IP Prefer' ||
-							gMenuSetupNetworkConf[i].name == 'IPv6 Information' || gMenuSetupNetworkConf[i].name == 'IPv6 Configuration IP' ||
-							gMenuSetupNetworkConf[i].name == 'IPv6 Connection Test') {
-							gMenuSetupNetworkConf[i].opera = false;
-						}
-					}
-				} else {
-					for(var i = 0; i < gMenuSetupNetworkConf.length; i++) {
-						if(gMenuSetupNetworkConf[i].name == 'Internet Connection' || gMenuSetupNetworkConf[i].name == 'Interface' || gMenuSetupNetworkConf[i].name == 'Wake On Lan' ||
-							gMenuSetupNetworkConf[i].name == 'Information' || gMenuSetupNetworkConf[i].name == 'IP Setting' ||
-							gMenuSetupNetworkConf[i].name == 'Connection Test' || gMenuSetupNetworkConf[i].name == 'IP Prefer' ||
-							gMenuSetupNetworkConf[i].name == 'IPv6 Information' || gMenuSetupNetworkConf[i].name == 'IPv6 Configuration IP' ||
-							gMenuSetupNetworkConf[i].name == 'IPv6 Connection Test') {
-							gMenuSetupNetworkConf[i].opera = true;
-						}
-					}
-				}
-				gMenuRenderFirst();
-			}
-		}
-	},
-	{
-		name: 'Interface',
-		value: {
-			valType: 'sel',
-			data: ['Ethernet', 'Wireless']
-		},
-		curVal: 0,
-		opera: false,
-		msg: function(key) {
-			if(key == 'get') {
-				return {
-					"method": "mtk.webui.network.queryInternetInterface"
-				};
-			} else {
-				var type;
-				if(gMenuoIndex == 0) {
-					type = 'etherent';
-				} else {
-					type = 'wireless';
-				}
-				return {
-					"method": "mtk.webui.network.setInternetInterface",
-					"params": {
-						"type": type
-					}
-				};
-			}
-		},
-		getCallback: function(data) { //获取value值
-			//			console.log(data);
-			if(data.error.code == 0) {
 				if(data.result.type == "etherent") {
 					this.curVal = 0;
 				} else {
@@ -2556,11 +2571,10 @@ var gMenuSetupNetworkConf = [{
 				}
 			}
 		},
-		setCallback: function(data) { //设置value值
-			//						console.log(data.result);
+		setCallback: function(data, selIndex) { //设置value值
 			if(data.error.code == 0) {
-				if(gMenuoIndex == 0) {
-					this.curVal = 0;
+				this.curVal = selIndex;
+				if(this.curVal == 0) {
 					for(var i = 0; i < gMenuSetupNetworkConf.length; i++) {
 						if(gMenuSetupNetworkConf[i].name == 'Wake On Lan') {
 							gMenuSetupNetworkConf[i].opera = true;
@@ -2570,9 +2584,8 @@ var gMenuSetupNetworkConf = [{
 							gMenuSetupNetworkConf[i].opera = false;
 						}
 					}
-					gMenuSetupNetworkConf[0].value.dataList=['Off','On'];
+					gMenuSetupNetworkConf[0].value.dataList = ['Off', 'On'];
 				} else {
-					this.curVal = 1;
 					for(var i = 0; i < gMenuSetupNetworkConf.length; i++) {
 						if(gMenuSetupNetworkConf[i].name == 'Wake On Lan') {
 							gMenuSetupNetworkConf[i].opera = false;
@@ -2582,39 +2595,42 @@ var gMenuSetupNetworkConf = [{
 							gMenuSetupNetworkConf[i].opera = true;
 						}
 					}
-					gMenuSetupNetworkConf[0].value.dataList=['On'];
+					gMenuSetupNetworkConf[0].value.dataList = ['On'];
 				}
-				gMenuRenderFirst();
 			}
 		}
 	},
-//	{
-//		name: 'Wake On Lan',
-//		value: {
-//			valType: 'sel',
-//			data: ['Off', 'On']
-//		},
-//		curVal: 'Off',
-//		opera: false
-//	},
-//	{
-//		name: 'Wake On Wlan',
-//		value: {
-//			valType: 'sel',
-//			data: ['Off', 'On']
-//		},
-//		curVal: 'Off',
-//		opera: false
-//	},
-//	{
-//		name: 'Wireless Setting',
-//		value: {
-//			valType: 'scan',
-//			data: [],
-//			renderFuc: 'wirelessSetting'
-//		},
-//		opera: false
-//	},
+	{
+		name: 'Wake On Lan',
+		value: {
+			valType: 'scan',
+			//				valType: 'sel',
+			data: [],
+			dataList: ['Off', 'On']
+		},
+		curVal: 0,
+		opera: false
+	},
+	{
+		name: 'Wake On Wlan',
+		value: {
+			valType: 'scan',
+			//				valType: 'sel',
+			data: [],
+			dataList: ['Off', 'On']
+		},
+		curVal: 0,
+		opera: false
+	},
+	{
+		name: 'Wireless Setting',
+		value: {
+			valType: 'scan',
+			data: [],
+			renderFuc: 'wirelessSetting'
+		},
+		opera: false
+	},
 	{
 		name: 'Information',
 		value: {
@@ -2642,15 +2658,15 @@ var gMenuSetupNetworkConf = [{
 		},
 		opera: false
 	},
-	{
-		name: 'IP Prefer',
-		value: {
-			valType: 'sel',
-			data: ['IPv6', 'IPv4']
-		},
-		curVal: 'IPv6',
-		opera: false
-	},
+	//	{
+	//		name: 'IP Prefer',
+	//		value: {
+	//			valType: 'sel',
+	//			data: ['IPv6', 'IPv4']
+	//		},
+	//		curVal: 'IPv6',
+	//		opera: false
+	//	},
 	{
 		name: 'IPv6 Information',
 		value: {
@@ -2731,74 +2747,7 @@ var gMenuSetupNetwork = [{
 			valType: 'list',
 			data: gMenuSetupNetworkConf
 		},
-		opera: true,
-		checkOpera: function() {
-			var msg1 = {
-				"method": "mtk.webui.network.queryInternetConnection"
-			}
-			window.gSocket.send(msg1, function(data1) {
-				if(data1.error.code == 0) {
-					if(data1.result.enable) {
-						var msg2 = {
-							"method": "mtk.webui.network.queryInternetInterface"
-						}
-						window.gSocket.send(msg2, function(data2) {
-							if(data2.error.code == 0) {
-								if(data2.result.type == 'etherent') {
-									for(var i = 0; i < gMenuSetupNetworkConf.length; i++) {
-										if(gMenuSetupNetworkConf[i].name == 'Interface' ||
-											gMenuSetupNetworkConf[i].name == 'Wake On Lan' ||
-											gMenuSetupNetworkConf[i].name == 'Information' ||
-											gMenuSetupNetworkConf[i].name == 'IP Setting' ||
-											gMenuSetupNetworkConf[i].name == 'Connection Test' ||
-											gMenuSetupNetworkConf[i].name == 'IP Prefer' ||
-											gMenuSetupNetworkConf[i].name == 'IPv6 Information' ||
-											gMenuSetupNetworkConf[i].name == 'IPv6 Configuration IP' ||
-											gMenuSetupNetworkConf[i].name == 'IPv6 Connection Test') {
-											gMenuSetupNetworkConf[i].opera = true;
-										}
-									}
-								} else {
-									for(var i = 0; i < gMenuSetupNetworkConf.length; i++) {
-										if(gMenuSetupNetworkConf[i].name == 'Interface' ||
-											gMenuSetupNetworkConf[i].name == 'Wake On Wlan' ||
-											gMenuSetupNetworkConf[i].name == 'Wireless Setting' ||
-											gMenuSetupNetworkConf[i].name == 'Information' ||
-											gMenuSetupNetworkConf[i].name == 'IP Setting' ||
-											gMenuSetupNetworkConf[i].name == 'Connection Test' ||
-											gMenuSetupNetworkConf[i].name == 'IP Prefer' ||
-											gMenuSetupNetworkConf[i].name == 'IPv6 Information' ||
-											gMenuSetupNetworkConf[i].name == 'IPv6 Configuration IP' ||
-											gMenuSetupNetworkConf[i].name == 'IPv6 Connection Test') {
-											gMenuSetupNetworkConf[i].opera = true;
-										}
-									}
-									gMenuSetupNetworkConf[0].value.dataList = ['On'];
-								}
-								gMenuChild = gMenuParent.data[gMenuoIndex].value;
-								gMenuRenderFirst();
-								gMenuRenderSecond();
-								changePage(gMenuoIndex, gMenuClassName);
-							}
-						})
-					} else {
-						for(var i = 0; i < gMenuSetupNetworkConf.length; i++) {
-							if(gMenuSetupNetworkConf[i].name == 'Interface' || gMenuSetupNetworkConf[i].name == 'Wake On Lan' ||
-								gMenuSetupNetworkConf[i].name == 'Information' || gMenuSetupNetworkConf[i].name == 'IP Setting' ||
-								gMenuSetupNetworkConf[i].name == 'Connection Test' || gMenuSetupNetworkConf[i].name == 'IP Prefer' ||
-								gMenuSetupNetworkConf[i].name == 'IPv6 Information' || gMenuSetupNetworkConf[i].name == 'IPv6 Configuration IP' ||
-								gMenuSetupNetworkConf[i].name == 'IPv6 Connection Test') {
-								gMenuSetupNetworkConf[i].opera = false;
-							}
-						}
-						gMenuChild = gMenuParent.data[gMenuoIndex].value;
-						gMenuRenderFirst();
-						gMenuRenderSecond();
-						changePage(gMenuoIndex, gMenuClassName);
-					}
-				}
-			});
-		}
+		opera: true
 	},
 	{
 		name: 'WFD',
@@ -2890,7 +2839,7 @@ var gMenuSetupRecord = [{
 		},
 		curVal: 0,
 		opera: true,
-		msg: function(key) {
+		msg: function(key,val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getValue",
@@ -2903,7 +2852,7 @@ var gMenuSetupRecord = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_record__rec_tshift_mode",
-						"value": gMenuoIndex,
+						"value": val,
 						"apply": true
 					}
 				};
@@ -2929,7 +2878,7 @@ var gMenuSetupUpdate = [{
 		},
 		curVal: 0,
 		opera: true,
-		msg: function(key) {
+		msg: function(key,val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getValue",
@@ -2942,7 +2891,7 @@ var gMenuSetupUpdate = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_menu__auto_ch_update",
-						"value": gMenuoIndex,
+						"value": val,
 						"apply": true
 					}
 				};
@@ -2967,7 +2916,7 @@ var gMenuSetupUpdate = [{
 		},
 		curVal: 0,
 		opera: true,
-		msg: function(key) {
+		msg: function(key,val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getValue",
@@ -2980,7 +2929,7 @@ var gMenuSetupUpdate = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_menu__ch_update_msg",
-						"value": gMenuoIndex,
+						"value": val,
 						"apply": true
 					}
 				};
@@ -2997,15 +2946,16 @@ var gMenuSetupUpdate = [{
 		}
 	}
 ];
-var gMenuSetup = [{
-		name: 'OSD Language',
-		value: {
-			valType: 'sel',
-			data: ['English', 'Vasco', 'Catalan', 'Hrvatski']
-		},
-		curVal: 'English',
-		opera: false
-	},
+var gMenuSetup = [
+	//{
+	//		name: 'OSD Language',
+	//		value: {
+	//			valType: 'sel',
+	//			data: ['English', 'Vasco', 'Catalan', 'Hrvatski']
+	//		},
+	//		curVal: 'English',
+	//		opera: false
+	//	},
 	{
 		name: 'Blue Mute',
 		value: {
@@ -3015,7 +2965,7 @@ var gMenuSetup = [{
 		},
 		curVal: 0,
 		opera: false,
-		msg: function(key) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getValue",
@@ -3028,7 +2978,7 @@ var gMenuSetup = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_video__vid_blue_mute",
-						"value": gMenuoIndex,
+						"value": val,
 						"apply": true
 					}
 				};
@@ -3053,7 +3003,7 @@ var gMenuSetup = [{
 		},
 		curVal: 0,
 		opera: false,
-		msg: function(key) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getValue",
@@ -3066,7 +3016,7 @@ var gMenuSetup = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_menu__fast_boot",
-						"value": gMenuoIndex,
+						"value": val,
 						"apply": true
 					}
 				};
@@ -3091,7 +3041,7 @@ var gMenuSetup = [{
 		},
 		curVal: 0,
 		opera: false,
-		msg: function(key) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getValue",
@@ -3104,7 +3054,7 @@ var gMenuSetup = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_misc__mheg_inter_ch",
-						"value": gMenuoIndex,
+						"value": val,
 						"apply": true
 					}
 				};
@@ -3129,7 +3079,7 @@ var gMenuSetup = [{
 		},
 		curVal: 0,
 		opera: false,
-		msg: function(key) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getValue",
@@ -3142,7 +3092,7 @@ var gMenuSetup = [{
 					"method": "mtk.webui.config.setValue",
 					"params": {
 						"configId": "g_misc__mheg_pin_protection",
-						"value": gMenuoIndex,
+						"value": val,
 						"apply": true
 					}
 				};
@@ -3321,7 +3271,7 @@ var gMenuParentalProgramBlock = [{
 	},
 	curVal: 0,
 	opera: true,
-	msg: function(key) {
+	msg: function(key,val) {
 		if(key == 'get') {
 			return {
 				"method": "mtk.webui.config.getMinMaxValue",
@@ -3334,7 +3284,7 @@ var gMenuParentalProgramBlock = [{
 				"method": "mtk.webui.config.setValue",
 				"params": {
 					"configId": "g_rating__rating_age",
-					"value": gMenuoIndex,
+					"value": val,
 					"apply": true
 				}
 			};
@@ -3404,7 +3354,7 @@ var gMenuParentalShow = [{
 		name: 'Clean All',
 		value: {
 			valType: 'scan',
-			data: [],
+			data: {name:'cleanAll'},
 			renderFuc: 'popBoxShow'
 		},
 		opera: true
