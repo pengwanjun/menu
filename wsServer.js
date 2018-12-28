@@ -37,7 +37,7 @@ var channelList={
 	"result": {
 		"List":[{"majorNum":'9',
 					"svlRecId": "0",
-	                  "channelId":"1",
+	                  "channelId":"0",
 	                  "nwMask":"2", 
 	                  "OptionMask":"3",
 	                  "Option2Mask":"",
@@ -59,9 +59,9 @@ var channelList={
 	                  "nwName":""
 	            },
 	            {"majorNum":'12',
-					"svlRecId": "0",
+					"svlRecId": "1",
 	                  "channelId":"1",
-	                  "nwMask":"2", 
+	                  "nwMask":"256", 
 	                  "OptionMask":"3",
 	                  "Option2Mask":"",
 	                  "progId":"",
@@ -82,8 +82,8 @@ var channelList={
 	                  "nwName":""
 	            },
 				{"majorNum":'13',
-					"svlRecId": "0",
-	                  "channelId":"1",
+					"svlRecId": "2",
+	                  "channelId":"2",
 	                  "nwMask":"2", 
 	                  "OptionMask":"3",
 	                  "Option2Mask":"",
@@ -105,8 +105,8 @@ var channelList={
 	                  "nwName":""
 	            },
 	            {"majorNum":'14',
-					"svlRecId": "0",
-	                  "channelId":"1",
+					"svlRecId": "3",
+	                  "channelId":"3",
 	                  "nwMask":"2", 
 	                  "OptionMask":"3",
 	                  "Option2Mask":"",
@@ -128,8 +128,8 @@ var channelList={
 	                  "nwName":""
 	            },
 	            {"majorNum":'16',
-					"svlRecId": "0",
-	                  "channelId":"1",
+					"svlRecId": "4",
+	                  "channelId":"4",
 	                  "nwMask":"2", 
 	                  "OptionMask":"3",
 	                  "Option2Mask":"",
@@ -151,8 +151,8 @@ var channelList={
 	                  "nwName":""
 	            },
 	            {"majorNum":'18',
-					"svlRecId": "0",
-	                  "channelId":"1",
+					"svlRecId": "5",
+	                  "channelId":"5",
 	                  "nwMask":"2", 
 	                  "OptionMask":"3",
 	                  "Option2Mask":"",
@@ -174,8 +174,8 @@ var channelList={
 	                  "nwName":""
 	            },
 	            {"majorNum":'24',
-					"svlRecId": "0",
-	                  "channelId":"1",
+					"svlRecId": "6",
+	                  "channelId":"6",
 	                  "nwMask":"2", 
 	                  "OptionMask":"3",
 	                  "Option2Mask":"",
@@ -197,8 +197,8 @@ var channelList={
 	                  "nwName":""
 	            },
 	            {"majorNum":'35',
-					"svlRecId": "0",
-	                  "channelId":"1",
+					"svlRecId": "7",
+	                  "channelId":"7",
 	                  "nwMask":"2", 
 	                  "OptionMask":"3",
 	                  "Option2Mask":"",
@@ -220,8 +220,8 @@ var channelList={
 	                  "nwName":""
 	            },
 	            {"majorNum":'37',
-					"svlRecId": "0",
-	                  "channelId":"1",
+					"svlRecId": "8",
+	                  "channelId":"8",
 	                  "nwMask":"2", 
 	                  "OptionMask":"3",
 	                  "Option2Mask":"",
@@ -243,8 +243,8 @@ var channelList={
 	                  "nwName":""
 	            },
 	            {"majorNum":'48',
-					"svlRecId": "0",
-	                  "channelId":"1",
+					"svlRecId": "9",
+	                  "channelId":"9",
 	                  "nwMask":"2", 
 	                  "OptionMask":"3",
 	                  "Option2Mask":"",
@@ -266,8 +266,8 @@ var channelList={
 	                  "nwName":""
 	            },
 	            {"majorNum":'55',
-					"svlRecId": "0",
-	                  "channelId":"1",
+					"svlRecId": "10",
+	                  "channelId":"10",
 	                  "nwMask":"2", 
 	                  "OptionMask":"3",
 	                  "Option2Mask":"",
@@ -289,8 +289,8 @@ var channelList={
 	                  "nwName":""
 	            },
 	            {"majorNum":'101',
-					"svlRecId": "0",
-	                  "channelId":"1",
+					"svlRecId": "11",
+	                  "channelId":"11",
 	                  "nwMask":"2", 
 	                  "OptionMask":"3",
 	                  "Option2Mask":"",
@@ -312,8 +312,8 @@ var channelList={
 	                  "nwName":""
 	            },
 	            {"majorNum":'112',
-					"svlRecId": "0",
-	                  "channelId":"1",
+					"svlRecId": "12",
+	                  "channelId":"12",
 	                  "nwMask":"2", 
 	                  "OptionMask":"3",
 	                  "Option2Mask":"",
@@ -335,8 +335,8 @@ var channelList={
 	                  "nwName":""
 	            },
 	            {"majorNum":'137',
-					"svlRecId": "0",
-	                  "channelId":"1",
+					"svlRecId": "13",
+	                  "channelId":"13",
 	                  "nwMask":"2", 
 	                  "OptionMask":"3",
 	                  "Option2Mask":"",
@@ -358,8 +358,8 @@ var channelList={
 	                  "nwName":""
 	            },
 	            {"majorNum":'145',
-					"svlRecId": "0",
-	                  "channelId":"1",
+					"svlRecId": "14",
+	                  "channelId":"14",
 	                  "nwMask":"2", 
 	                  "OptionMask":"3",
 	                  "Option2Mask":"",
@@ -381,8 +381,8 @@ var channelList={
 	                  "nwName":""
 	            },
 	            {"majorNum":'166',
-					"svlRecId": "0",
-	                  "channelId":"1",
+					"svlRecId": "15",
+	                  "channelId":"15",
 	                  "nwMask":"2", 
 	                  "OptionMask":"3",
 	                  "Option2Mask":"",
@@ -404,8 +404,8 @@ var channelList={
 	                  "nwName":""
 	            },
 	            {"majorNum":'167',
-					"svlRecId": "0",
-	                  "channelId":"1",
+					"svlRecId": "16",
+	                  "channelId":"16",
 	                  "nwMask":"2", 
 	                  "OptionMask":"3",
 	                  "Option2Mask":"",
@@ -427,8 +427,8 @@ var channelList={
 	                  "nwName":""
 	            },
 	            {"majorNum":'168',
-					"svlRecId": "0",
-	                  "channelId":"1",
+					"svlRecId": "17",
+	                  "channelId":"17",
 	                  "nwMask":"2", 
 	                  "OptionMask":"3",
 	                  "Option2Mask":"",
@@ -450,9 +450,9 @@ var channelList={
 	                  "nwName":""
 	            },
 	            {"majorNum":'169',
-					"svlRecId": "0",
-	                  "channelId":"1",
-	                  "nwMask":"2", 
+					"svlRecId": "18",
+	                  "channelId":"18",
+	                  "nwMask":"256", 
 	                  "OptionMask":"3",
 	                  "Option2Mask":"",
 	                  "progId":"",
@@ -477,6 +477,98 @@ var channelList={
 	"error":{"code":"0", "message":"OK"}
 };
 testData['mtk.webui.channelList.queryChannelList']= channelList;
+testData['mtk.webui.channelList.setSvlTslRec']= {
+	"method": "mtk.webui.channelList.setSvlTslRec",
+	"error":{"code":"0", "message":"OK"}
+}
+testData['mtk.webui.channelList.swapChannels']={
+	"method": "mtk.webui.channelList.swapChannels",
+	"error":{"code":"0", "message":"OK"}
+}
+testData['mtk.webui.channelList.cleanChannellist']={
+	"method":"mtk.webui.channelList.cleanChannellist",
+	"error":{"code":"0", "message":"OK"}
+}
+var internetConnection={"enable":"true"};
+testData['mtk.webui.network.queryInternetConnection']={
+	"method":"mtk.webui.network.queryInternetConnection",
+	"result":internetConnection,
+	"error":{"code":"0", "message":"OK"}
+}
+testData['mtk.webui.network.setInternetConnection']={
+	"method":"mtk.webui.network.setInternetConnection",
+	"error":{"code":"0", "message":"OK"}
+}
+var interFace={"type":"etherent"};//"wireless"
+testData['mtk.webui.network.queryInternetInterface']={
+	"method":"mtk.webui.network.queryInternetInterface",
+	"result":interFace,
+	"error":{"code":"0", "message":"OK"}
+}
+testData['mtk.webui.network.setInternetInterface']={
+	"method":"mtk.webui.network.setInternetInterface",
+	"error":{"code":"0", "message":"OK"}
+}
+var ipInformation={"ip":"192.168.1.100",
+	          "netmask":"255.255.255.0",
+	          "gateway":"192.168.1.1",
+	          "1stDNS":"192.168.1.1",
+	          "2ndDNS":"192.168.1.1"
+	          }
+testData['mtk.webui.network.queryInternetInformation']={
+	"method":"mtk.webui.network.queryInternetInformation",
+	"result":ipInformation,
+	"error":{"code":"0", "message":"OK"}
+}
+var addrType={"type":"auto"};
+testData['mtk.webui.network.queryAddressType']={
+	"method":"mtk.webui.network.queryAddressType",
+	"result":addrType,
+	"error":{"code":"0", "message":"OK"}
+}
+testData['mtk.webui.network.setAddressType']={
+	"method":"mtk.webui.network.setAddressType",
+	"error":{"code":"0", "message":"OK"}
+}
+var ipv6Information={"ipv6":"fe80::23ef",
+	"lenOfPrefix":64,
+	"gateway":"fe80::23ef",
+	"1stDNS":"fe80::23ef",
+	"2ndDNS":""
+	};
+testData['mtk.webui.network.queryIPv6Information']={
+	"method":"mtk.webui.network.queryIPv6Information",
+	"result":ipv6Information,
+	"error":{"code":"0", "message":"OK"}
+}
+var ipv6AddrType={"type":"auto"};
+testData['mtk.webui.network.queryIPv6AddressType']={
+	"method":"mtk.webui.network.queryIPv6AddressType",
+	"result":ipv6AddrType,
+	"error":{"code":"0", "message":"OK"}
+}
+testData['mtk.webui.network.setIPv6AddressType']={
+	"method":"mtk.webui.network.setIPv6AddressType",
+	"error":{"code":"0", "message":"OK"}
+}
+var ipv6DNSType={"type":"auto"};
+testData['mtk.webui.network.queryIPv6DNSType']={
+	"method":"mtk.webui.network.queryIPv6DNSType",
+	"result":ipv6DNSType,
+	"error":{"code":"0", "message":"OK"}
+}
+testData["mtk.webui.network.setIPv6DNSType"]={
+	"method":"mtk.webui.network.setIPv6DNSType",
+	"error":{"code":"0", "message":"OK"}
+}
+testData['mtk.webui.network.queryConnectionTest']={
+	"method":"mtk.webui.network.queryConnectionTest",
+	"error":{"code":"0", "message":"OK"}
+}
+testData['mtk.webui.network.queryIPv6ConnectionTest']={
+	"method":"mtk.webui.network.queryIPv6ConnectionTest",
+	"error":{"code":"0", "message":"OK"}
+}
 
 
 
@@ -521,8 +613,31 @@ var configObj = {
 	"g_audio__aud_treble":{"configId":'g_audio__aud_treble',"min":0, "max":100,"current":51},
 	"g_audio__aud_surround":{"configId":'g_audio__aud_surround',"min":0, "max":1,"current":1},
 	"g_audio__aud_equalizer":{"configId":'g_audio__aud_equalizer',"min":0, "max":7,"current":1},
-	"g_audio__aud_ad_volume":{"configId":'g_audio__aud_ad_volume',"min":0, "max":1,"current":1},
 	"g_rating__rating_age":{"configId":'g_rating__rating_age',"min":0, "max":16,"current":1},
+	"g_video__dovi_user_swicth":{"configId":'g_video__dovi_user_swicth',"min":0, "max":1,"current":1},
+	"g_audio__aud_ad_fade_pan":{"configId":'g_audio__aud_ad_fade_pan',"min":0, "max":1,"current":1},
+	"g_audio__aud_ad_hdphone":{"configId":'g_audio__aud_ad_hdphone',"min":0, "max":1,"current":1},
+	"g_audio__aud_out_port":{"configId":'g_audio__aud_out_port',"min":0, "max":1,"current":1},
+	"g_audio__agc":{"configId":'g_audio__agc',"min":0, "max":1,"current":1},
+	"g_audio__aud_ad_volume":{"configId":'g_audio__aud_ad_volume',"min":0, "max":100,"current":41},
+	"g_video__vid_blue_mute":{"configId":'g_video__vid_blue_mute',"min":0, "max":1,"current":0},
+	"g_menu__fast_boot":{"configId":'g_menu__fast_boot',"min":0, "max":1,"current":1},
+	"g_misc__mheg_inter_ch":{"configId":'g_misc__mheg_inter_ch',"min":0, "max":1,"current":0},
+	"g_misc__mheg_pin_protection":{"configId":'g_misc__mheg_pin_protection',"min":0, "max":1,"current":1},
+	"g_menu__hbbtv":{"configId":'g_menu__hbbtv',"min":0, "max":1,"current":1},
+	"g_menu_only__hdmi_edid_index":{"configId":'g_menu_only__hdmi_edid_index',"min":0, "max":1,"current":1},
+	"g_subtitle__subtitle_enable":{"configId":'g_subtitle__subtitle_enable',"min":0, "max":1,"current":1},
+	"g_subtitle__subtitle_attr":{"configId":'g_subtitle__subtitle_attr',"min":0, "max":1,"current":1},
+	"g_ttx_lang__ttx_decode_lang":{"configId":'g_ttx_lang__ttx_decode_lang',"min":0, "max":9,"current":1},
+	"g_ttx_lang__ttx_presentation_level":{"configId":'g_ttx_lang__ttx_presentation_level',"min":0, "max":1,"current":0},
+	"g_record__rec_tshift_mode":{"configId":'g_record__rec_tshift_mode',"min":0, "max":1,"current":1},
+	"g_menu__auto_ch_update":{"configId":'g_menu__auto_ch_update',"min":0, "max":1,"current":0},
+	"g_menu__ch_update_msg":{"configId":'g_menu__ch_update_msg',"min":0, "max":1,"current":0},
+	"g_menu__hbbtv_donot_track":{"configId":'g_menu__hbbtv_donot_track',"min":0, "max":2,"current":0},
+	"g_menu__hbbtv_cookies":{"configId":'g_menu__hbbtv_cookies',"min":0, "max":2,"current":0},
+	"g_menu__hbbtv_persistent_storage":{"configId":'g_menu__hbbtv_persistent_storage',"min":0, "max":1,"current":0},
+	"g_menu__hbbtv_blk_tracking_sites":{"configId":'g_menu__hbbtv_blk_tracking_sites',"min":0, "max":1,"current":0},
+	"g_menu__hbbtv_device_id":{"configId":'g_menu__hbbtv_device_id',"min":0, "max":1,"current":0},
 };
 
 
@@ -531,7 +646,7 @@ var configObj = {
 var server = ws.createServer(function(conn){
 //  console.log('New connection')
     conn.on("text",function(str){
-//      console.log("Received"+str)
+        console.log("Received"+str)
         // conn.sendText(str.toUpperCase()+"!!!") //大写收到的数据
         try{
             var data = JSON.parse(str);
@@ -589,13 +704,144 @@ var server = ws.createServer(function(conn){
                     break;
                     case "mtk.webui.channelList.queryChannelList":
                     	var response = testData[data.method];
-                    	console.log(testData[data.method]);
 	                    if(response){
-	                    	console.log(response);
 	                        response.id = data.id;
 	                        conn.sendText(JSON.stringify(response));
 	                       return;
 	                    }
+                    break;
+                    case "mtk.webui.channelList.setSvlTslRec":
+                    	if(data.params.operator=='UPDATA'){
+                    		for(var i=0;i<channelList.result.List.length;i++){
+                    			if(data.params.List[0].hasOwnProperty('nwMask') && channelList.result.List[i].svlRecId==data.params.List[0].svlRecId){
+                    				channelList.result.List[i].nwMask=data.params.List[0].nwMask;
+	                    		}
+	                    		if(data.params.List[0].hasOwnProperty('acName') && channelList.result.List[i].svlRecId==data.params.List[0].svlRecId){
+		                  			channelList.result.List[i].acName=data.params.List[0].acName;
+		                  			channelList.result.List[i].majorNum=data.params.List[0].majorNum;
+	                    		}
+                    		}
+                    	}else{
+                    		var thisIndex;
+                    		for(var i=0;i<channelList.result.List.length;i++){
+	                    		if(channelList.result.List[i].svlRecId==data.params.List[0].svlRecId){
+	                    			thisIndex=i;
+	                    		}
+                    		}
+                    		channelList.result.List.splice(thisIndex, 1);
+                    	}
+                            					testData[data.method].id = data.id;   
+												conn.sendText(JSON.stringify(testData[data.method]));
+                    break;
+                    case "mtk.webui.channelList.swapChannels":
+                    	var list1,list1Index,list2,list2Index,temp;
+                    	for(var i=0;i<channelList.result.List.length;i++){
+                    		if(channelList.result.List[i].channelId==data.params.ChNum1){
+                    			list1=channelList.result.List[i];
+                    			list1Index=i;
+                    		}
+                    		if(channelList.result.List[i].channelId==data.params.ChNum2){
+                    			list2=channelList.result.List[i];
+                    			list2Index=i;
+                    		}
+                    	}
+                    	temp=list1;
+                    	list1=list2;
+                    	list2=temp;
+                    	channelList.result.List[list1Index]=list1;
+                    	channelList.result.List[list2Index]=list2;
+                            					testData[data.method].id = data.id;   
+												conn.sendText(JSON.stringify(testData[data.method]));
+                    break;
+                    case "mtk.webui.channelList.cleanChannellist":
+                    	channelList.result.List=[];
+                            					testData[data.method].id = data.id;   
+												conn.sendText(JSON.stringify(testData[data.method]));
+                    break;
+                    case "mtk.webui.network.queryInternetConnection":
+                            					testData[data.method].id = data.id;   
+												conn.sendText(JSON.stringify(testData[data.method]));
+                    break;
+                    case "mtk.webui.network.setInternetConnection":
+                    	internetConnection.enable=data.params.enable;
+                            					testData[data.method].id = data.id;   
+												conn.sendText(JSON.stringify(testData[data.method]));
+                    break;
+                    case "mtk.webui.network.queryInternetInterface":
+                            					testData[data.method].id = data.id;   
+												conn.sendText(JSON.stringify(testData[data.method]));
+                    break;
+                    case "mtk.webui.network.setInternetInterface":
+                    	interFace.type=data.params.type;
+                            					testData[data.method].id = data.id;   
+												conn.sendText(JSON.stringify(testData[data.method]));
+                    break;
+                    case "mtk.webui.network.queryInternetInformation":
+                            					testData[data.method].id = data.id;   
+												conn.sendText(JSON.stringify(testData[data.method]));
+                    break;
+                    case "mtk.webui.network.queryAddressType":
+                            					testData[data.method].id = data.id;   
+												conn.sendText(JSON.stringify(testData[data.method]));
+                    break;
+                    case "mtk.webui.network.setAddressType":
+                    	addrType.type=data.params.type;
+                    	ipInformation.ip=data.params.ip;
+                    	ipInformation.netmask=data.params.netmask;
+                    	ipInformation.gateway=data.params.gateway;
+                    	ipInformation["1stDNS"]=data.params["1stDNS"];
+                    	ipInformation["2ndDNS"]=data.params["2ndDNS"];
+                            					testData[data.method].id = data.id;   
+												conn.sendText(JSON.stringify(testData[data.method]));
+                    break;
+                    case "mtk.webui.network.queryIPv6Information":
+                            					testData[data.method].id = data.id;   
+												conn.sendText(JSON.stringify(testData[data.method]));
+                    break;
+                    case "mtk.webui.network.queryIPv6AddressType":
+                            					testData[data.method].id = data.id;   
+												conn.sendText(JSON.stringify(testData[data.method]));
+                    break;
+                    case "mtk.webui.network.setIPv6AddressType":                   
+                    	ipv6AddrType.type=data.params.type;
+                    	ipv6Information.ipv6=data.params.ipv6;
+                    	ipv6Information.lenOfPrefix=data.params.lenOfPrefix;
+                    	ipv6Information.gateway=data.params.gateway;
+                            					testData[data.method].id = data.id;   
+												conn.sendText(JSON.stringify(testData[data.method]));
+                    break;
+                    case "mtk.webui.network.queryIPv6DNSType":
+                            					testData[data.method].id = data.id;   
+												conn.sendText(JSON.stringify(testData[data.method]));
+                    break;
+                    case "mtk.webui.network.setIPv6DNSType":
+                    	ipv6DNSType.type=data.params.type;
+                    	ipv6Information['1stDNS']=data.params['1stDNS'];
+                    	ipv6Information['2ndDNS']=data.params['2ndDNS'];
+                            					testData[data.method].id = data.id;   
+												conn.sendText(JSON.stringify(testData[data.method]));
+                    break;
+                    case "mtk.webui.network.queryConnectionTest":
+                    	var returnData={
+                    		"method":"mtk.webui.network.notify",
+                    		"param":{
+                    			"notifyType":"connectionTest",
+                    			"connection":"fail"
+                    		}
+                    	}
+                    	returnData.id = data.id;   
+                    	conn.sendText(JSON.stringify(returnData));
+                    break;
+                    case "mtk.webui.network.queryIPv6ConnectionTest":
+                    	var returnData={
+                    		"method":"mtk.webui.network.notify",
+                    		"param":{
+                    			"notifyType":"IPv6connectionTest",
+                    			"connection":"fail"
+                    		}
+                    	}
+                    	returnData.id = data.id;   
+                    	conn.sendText(JSON.stringify(returnData));
                     break;
                     
                     default:
