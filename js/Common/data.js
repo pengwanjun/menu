@@ -1871,7 +1871,8 @@ var gMenuAudio = [{
 			valType: 'scan',
 			data: []
 		},
-		opera: false
+		opera: false,
+		renderFuc: 'soundtracks'
 	},
 	{
 		name: 'Advanced',
@@ -2145,52 +2146,197 @@ var gMenuSetupHbbTV = [{
 		name: 'Do Not Track',
 		value: {
 			valType: 'sel',
-			data: ['Default', 'Off', 'On']
+			data:[],
+			dataList: ['Default', 'Off', 'On']
 		},
-		curVal: 'Default',
-		opera: true
+		curVal: 0,
+		opera: true,
+		msg: function(key, val) {
+			if(key == 'get') {
+				return {
+					"method": "mtk.webui.config.getValue",
+					"params": {
+						"configId": "g_menu__hbbtv_donot_track"
+					}
+				};
+			} else {
+				return {
+					"method": "mtk.webui.config.setValue",
+					"params": {
+						"configId": "g_menu__hbbtv_donot_track",
+						"value": val,
+						"apply": true
+					}
+				};
+			}
+		},
+		getCallback: function(data) { //获取value值
+			//			console.log(data);
+			this.value.data = this.value.dataList;
+			this.curVal = data.result.current;
+		},
+		setCallback: function(data) { //设置value值
+			//			console.log(data.result);
+			this.curVal = data.result.current;
+		}
 	},
 	{
 		name: 'Cookie Settings',
 		value: {
 			valType: 'sel',
-			data: ['Default', 'Block All', 'Blcok 3rd Cookie']
+			data:[],
+			dataList: ['Default', 'Block All', 'Blcok 3rd Cookie']
 		},
-		curVal: 'Default',
-		opera: true
+		curVal: 0,
+		opera: true,
+		msg: function(key, val) {
+			if(key == 'get') {
+				return {
+					"method": "mtk.webui.config.getValue",
+					"params": {
+						"configId": "g_menu__hbbtv_cookies"
+					}
+				};
+			} else {
+				return {
+					"method": "mtk.webui.config.setValue",
+					"params": {
+						"configId": "g_menu__hbbtv_cookies",
+						"value": val,
+						"apply": true
+					}
+				};
+			}
+		},
+		getCallback: function(data) { //获取value值
+			//			console.log(data);
+			this.value.data = this.value.dataList;
+			this.curVal = data.result.current;
+		},
+		setCallback: function(data) { //设置value值
+			//			console.log(data.result);
+			this.curVal = data.result.current;
+		}
 	},
 	{
 		name: 'Persistent Storage',
 		value: {
 			valType: 'sel',
-			data: ['On', 'Off']
+			data:[],
+			dataList: ['On', 'Off']
 		},
-		curVal: 'On',
-		opera: true
+		curVal: 0,
+		opera: true,
+		msg: function(key, val) {
+			if(key == 'get') {
+				return {
+					"method": "mtk.webui.config.getValue",
+					"params": {
+						"configId": "g_menu__hbbtv_persistent_storage"
+					}
+				};
+			} else {
+				return {
+					"method": "mtk.webui.config.setValue",
+					"params": {
+						"configId": "g_menu__hbbtv_persistent_storage",
+						"value": val,
+						"apply": true
+					}
+				};
+			}
+		},
+		getCallback: function(data) { //获取value值
+			//			console.log(data);
+			this.value.data = this.value.dataList;
+			this.curVal = data.result.current;
+		},
+		setCallback: function(data) { //设置value值
+			//			console.log(data.result);
+			this.curVal = data.result.current;
+		}
 	},
 	{
 		name: 'Blcok Tracking Sites',
 		value: {
 			valType: 'sel',
-			data: ['Off', 'On']
+			data:[],
+			dataList: ['Off', 'On']
 		},
-		curVal: 'Off',
-		opera: true
+		curVal: 0,
+		opera: true,
+		msg: function(key, val) {
+			if(key == 'get') {
+				return {
+					"method": "mtk.webui.config.getValue",
+					"params": {
+						"configId": "g_menu__hbbtv_blk_tracking_sites"
+					}
+				};
+			} else {
+				return {
+					"method": "mtk.webui.config.setValue",
+					"params": {
+						"configId": "g_menu__hbbtv_blk_tracking_sites",
+						"value": val,
+						"apply": true
+					}
+				};
+			}
+		},
+		getCallback: function(data) { //获取value值
+			//			console.log(data);
+			this.value.data = this.value.dataList;
+			this.curVal = data.result.current;
+		},
+		setCallback: function(data) { //设置value值
+			//			console.log(data.result);
+			this.curVal = data.result.current;
+		}
 	},
 	{
 		name: 'Device ID',
 		value: {
 			valType: 'sel',
-			data: ['On', 'Off']
+			data:[],
+			dataList: ['On', 'Off']
 		},
-		curVal: 'On',
-		opera: true
+		curVal: 0,
+		opera: true,
+		msg: function(key, val) {
+			if(key == 'get') {
+				return {
+					"method": "mtk.webui.config.getValue",
+					"params": {
+						"configId": "g_menu__hbbtv_device_id"
+					}
+				};
+			} else {
+				return {
+					"method": "mtk.webui.config.setValue",
+					"params": {
+						"configId": "g_menu__hbbtv_device_id",
+						"value": val,
+						"apply": true
+					}
+				};
+			}
+		},
+		getCallback: function(data) { //获取value值
+			//			console.log(data);
+			this.value.data = this.value.dataList;
+			this.curVal = data.result.current;
+		},
+		setCallback: function(data) { //设置value值
+			//			console.log(data.result);
+			this.curVal = data.result.current;
+		}
 	},
 	{
 		name: 'Reset Device ID',
 		value: {
 			valType: 'scan',
-			data: [],
+			data: {name:'resetDeviceID'},
 			renderFuc: 'popBoxShow'
 		},
 		opera: true
@@ -2246,7 +2392,7 @@ var gMenuSetupHDMI = [{
 	},
 	curVal: 0,
 	opera: true,
-	msg: function(key,val) {
+	msg: function(key, val) {
 		if(key == 'get') {
 			return {
 				"method": "mtk.webui.config.getValue",
@@ -2284,7 +2430,7 @@ var gMenuSetupSubtitle = [{
 		},
 		curVal: 0,
 		opera: true,
-		msg: function(key,val) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getValue",
@@ -2340,7 +2486,7 @@ var gMenuSetupSubtitle = [{
 		},
 		curVal: 0,
 		opera: true,
-		msg: function(key,val) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getValue",
@@ -2388,7 +2534,7 @@ var gMenuSetupTeletext = [{
 		},
 		curVal: 0,
 		opera: true,
-		msg: function(key,val) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getValue",
@@ -2426,7 +2572,7 @@ var gMenuSetupTeletext = [{
 		},
 		curVal: 0,
 		opera: true,
-		msg: function(key,val) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getValue",
@@ -2475,6 +2621,7 @@ var gMenuSetupCI = [{
 		opera: true
 	}
 ];
+
 var gMenuSetupNetworkConf = [{
 		name: 'Internet Connection',
 		value: {
@@ -2499,12 +2646,12 @@ var gMenuSetupNetworkConf = [{
 			}
 		},
 		getCallback: function(data) { //获取value值
-//			console.log(data.result.enable);
+			//			console.log(data.result.enable);
 			if(data.error.code == 0) {
 				this.value.data = this.value.dataList;
 				if(this.value.data.length == 1) {
 					this.curVal = 0;
-				}else{			
+				} else {
 					if(data.result.enable) {
 						this.curVal = 1;
 					} else {
@@ -2658,15 +2805,15 @@ var gMenuSetupNetworkConf = [{
 		},
 		opera: false
 	},
-	//	{
-	//		name: 'IP Prefer',
-	//		value: {
-	//			valType: 'sel',
-	//			data: ['IPv6', 'IPv4']
-	//		},
-	//		curVal: 'IPv6',
-	//		opera: false
-	//	},
+//	{
+//		name: 'IP Prefer',
+//		value: {
+//			valType: 'sel',
+//			data: ['IPv6', 'IPv4']
+//		},
+//		curVal: 'IPv6',
+//		opera: false
+//	},
 	{
 		name: 'IPv6 Information',
 		value: {
@@ -2839,7 +2986,7 @@ var gMenuSetupRecord = [{
 		},
 		curVal: 0,
 		opera: true,
-		msg: function(key,val) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getValue",
@@ -2878,7 +3025,7 @@ var gMenuSetupUpdate = [{
 		},
 		curVal: 0,
 		opera: true,
-		msg: function(key,val) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getValue",
@@ -2916,7 +3063,7 @@ var gMenuSetupUpdate = [{
 		},
 		curVal: 0,
 		opera: true,
-		msg: function(key,val) {
+		msg: function(key, val) {
 			if(key == 'get') {
 				return {
 					"method": "mtk.webui.config.getValue",
@@ -3271,7 +3418,7 @@ var gMenuParentalProgramBlock = [{
 	},
 	curVal: 0,
 	opera: true,
-	msg: function(key,val) {
+	msg: function(key, val) {
 		if(key == 'get') {
 			return {
 				"method": "mtk.webui.config.getMinMaxValue",
@@ -3354,7 +3501,9 @@ var gMenuParentalShow = [{
 		name: 'Clean All',
 		value: {
 			valType: 'scan',
-			data: {name:'cleanAll'},
+			data: {
+				name: 'cleanAll'
+			},
 			renderFuc: 'popBoxShow'
 		},
 		opera: true

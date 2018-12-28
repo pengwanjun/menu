@@ -74,11 +74,11 @@ var inputBlock = {
 	render: function() {
 		window.gSocket.send({
 			"method": "mtk.webui.input.querySourceInfo"
-		}, function(data) {
+		}, (data)=> {
 			this.value = data.result.List;
 			this.list = sliceArr(this.value, 9);
 			this.renderData(this.focusIndex);
-		}.bind(inputBlock));
+		});
 	},
 	renderData: function(fIndex) {
 		var html = '<div id="channelSkip"><div class="channelSkip">';
@@ -188,12 +188,12 @@ var inputBlock = {
 					"block": !this.list[this.page][curIndex].block
 				}
 			}
-			window.gSocket.send(msg, function(data) {
+			window.gSocket.send(msg, (data)=> {
 				if(data.error.code == 0) {
 					this.focusIndex = curIndex;
 					this.render();
 				}
-			}.bind(inputBlock));
+			});
 		}
 		//exit---返回键
 		if(e.keyCode == KeyEvent.DOM_VK_BACK_SPACE) {
@@ -212,7 +212,7 @@ var inputSkip = {
 	render: function() {
 		window.gSocket.send({
 			"method": "mtk.webui.input.querySourceInfo"
-		}, function(data) {
+		}, (data)=> {
 			this.value = data.result.List;
 			for(var i = 0; i < this.value.length; i++) {
 				if(this.value[i].index == data.result.curMainVal) {
@@ -221,7 +221,7 @@ var inputSkip = {
 			}
 			this.list = sliceArr(this.value, 9);
 			this.renderData(this.focusIndex);
-		}.bind(inputSkip));
+		});
 	},
 	renderData: function(fIndex) {
 		var html = '<div id="channelSkip"><div class="channelSkip">';
@@ -331,12 +331,12 @@ var inputSkip = {
 					"skip": !this.list[this.page][curIndex].skip
 				}
 			}
-			window.gSocket.send(msg, function(data) {
+			window.gSocket.send(msg, (data)=> {
 				if(data.error.code == 0) {
 					this.focusIndex = curIndex;
 					this.render();
 				}
-			}.bind(inputSkip));
+			});
 		}
 		//exit---返回键
 		if(e.keyCode == KeyEvent.DOM_VK_BACK_SPACE) {

@@ -32,3 +32,12 @@ var visuallyImpairedAudio={
 		}
 	}
 }
+
+var soundtracks={
+	render:function(){
+		
+	},
+	keyEvent:function(){
+		
+	}
+}

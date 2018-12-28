@@ -333,7 +333,7 @@ var channelSkip = {
 		this.pageName = name;
 		window.gSocket.send({
 			"method": "mtk.webui.channelList.queryChannelList"
-		}, function(data) {
+		}, (data)=> {
 			if(this.pageName == 'gMenuTvChannelSort') {
 				for(var i = 0; i < data.result.List.length; i++) {
 					data.result.List[i].hasSel = 'false';
@@ -342,7 +342,7 @@ var channelSkip = {
 			this.value = data.result.List;
 			this.list = sliceArr(this.value, 9);
 			this.renderData(this.focusIndex);
-		}.bind(this));
+		});
 	},
 	renderData: function(fIndex) {
 		let html = '<div id="channelSkip"><div class="channelSkip">';
@@ -573,13 +573,13 @@ var channelSkip = {
 					},
 					"method": "mtk.webui.channelList.setSvlTslRec"
 				}
-				window.gSocket.send(msg, function(data) {
+				window.gSocket.send(msg, (data)=> {
 					console.log(data);
 					if(data.error.code == 0) {
 						this.focusIndex = curIndex;
 						this.render(this.pageName);
 					}
-				}.bind(this));
+				});
 			}
 			if(this.pageName == 'gMenuTvChannelSort') {
 				var hasSel = this.sortHasSel();
@@ -601,11 +601,11 @@ var channelSkip = {
 							},
 							"method": "mtk.webui.channelList.swapChannels"
 						};
-						window.gSocket.send(msg, function(data) {
+						window.gSocket.send(msg, (data)=> {
 							if(data.error.code == 0) {
 								this.render(this.pageName);
 							}
-						}.bind(this));
+						});
 					}
 				}
 			}

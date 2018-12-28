@@ -215,3 +215,38 @@ div{
 #changePassword .listItem div{
 	display: inline-block;
 }
+
+/*IPSetting*/
+#IPSetting .listItem,
+#ipv6Config .listItem{
+	position: relative;
+}
+#IPSetting .listItem .label,
+#ipv6Config .listItem .label{
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+#IPSetting .listItem .content,
+#ipv6Config .listItem .content{
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+#IPSetting .listItem .content div,
+#ipv6Config .listItem .content div{
+	display: inline-block;
+}
+#IPSetting .inputItem,
+#ipv6Config .inputItem{
+	width: 80px;
+	background: #FFB5C5;
+	border-radius: 7px;
+	height: 30px;
+	vertical-align: middle;
+	border: 1px solid transparent;
+}
+#IPSetting .inputItem.focus,
+#ipv6Config .inputItem.focus{
+	border-color: #FF0000;
+}

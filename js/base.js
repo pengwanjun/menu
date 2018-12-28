@@ -221,7 +221,7 @@ var MtvWebsocket = function(wsUrlStr){
         }
     };
     var recv = function(data){
-//      console.log(data);
+//    console.log(data);
         if (typeof data == 'string') {
             try{
                 data = JSON.parse(data);
@@ -232,13 +232,14 @@ var MtvWebsocket = function(wsUrlStr){
                         //TODO:receive reponse
                         if(__callbackMap[data.id]){
                             __callbackMap[data.id](data);
+							delete __callbackMap[data.id];
                         }
                     } else {
                         //TODO:notify data flow
-                        console.log("data.method = "+data.method);
+//                      console.log("data.method = "+data.method);
                         var funList = MtvWebsocket.prototype.listenerList[data.method];
                         funList.forEach(function (element, index, array) {
-                            element.apply(null, data);
+                            element.apply(null, [data]);
                         });
                     }
                 }
@@ -320,6 +321,17 @@ MtvWebsocket.prototype.addEventListener = function(name, notifyFunc){
             if (idx < 0){
                 MtvWebsocket.prototype.listenerList[name].push(notifyFunc);
             }
+        }
+    }
+};
+
+MtvWebsocket.prototype.removeEventListener = function(name, notifyFunc){
+    if(notifyFunc instanceof Function){
+        if (MtvWebsocket.prototype.listenerList.hasOwnProperty(name)) {
+			var index  = MtvWebsocket.prototype.listenerList[name].indexOf(notifyFunc);
+			if (index > -1) {
+				MtvWebsocket.prototype.listenerList[name].splice(index, 1);
+			}
         }
     }
 };
