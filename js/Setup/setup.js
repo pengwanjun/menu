@@ -146,12 +146,12 @@ var IPv6ConnectionTest = {
 			"method": "mtk.webui.network.queryIPv6ConnectionTest"
 		}, function(data) {
 			console.log(data);
-						var html = `
+			var html = `
 							<div id="connectionTest">
 								The network connection test is ${data.param.connection}!
 							</div>
 						`;
-						document.querySelector('#container').innerHTML = html;
+			document.querySelector('#container').innerHTML = html;
 		});
 		window.gSocket.addEventListener("mtk.webui.network.notify", (data) => {
 			console.log(data);
@@ -332,7 +332,7 @@ var Information = {
 						</div>
 						<div class="listItem">
 							<span>Ethernet MAC</span>
-							<span>00:12:SS:32</span>
+							<span>${data.result.MACAddr}</span>
 						</div>
 					</div>
 				`;
@@ -632,24 +632,18 @@ var IPv6Information = {
 				}, function(data1) {
 					//					console.log(data1);
 					if(data1.error.code == 0) {
-						var addrType;
-						if(data1.result.type == 'auto') {
+						var addrType, dnsType;
+						if(data1.result.IPtype == 'auto') {
 							addrType = "AUTO";
 						} else {
 							addrType = 'Manual';
 						}
-						window.gSocket.send({
-							"method": 'mtk.webui.network.queryIPv6DNSType'
-						}, function(data2) {
-							if(data.error.code == 0) {
-								//								console.log(data2);
-								var dnsType;
-								if(data2.result.type == 'auto') {
-									dnsType = 'AUTO';
-								} else {
-									dnsType = 'Manual';
-								}
-								var html = `
+						if(data1.result.DNStype == 'auto') {
+							dnsType = 'AUTO';
+						} else {
+							dnsType = 'Manual';
+						}
+						var html = `
 									<div id="Information">
 										<div class="listItem">
 											<span>Interface</span>
@@ -685,13 +679,12 @@ var IPv6Information = {
 										</div>
 										<div class="listItem">
 											<span>Ethernet MAC</span>
-											<span>34:0C:22:DF</span>
+											<span>${data.result['MACAddr']}</span>
 										</div>
 									</div>
 								`;
-								document.querySelector('#container').innerHTML = html;
-							}
-						})
+						document.querySelector('#container').innerHTML = html;
+
 					}
 				});
 			}
@@ -713,25 +706,20 @@ var IPv6ConfigurationIP = {
 		window.gSocket.send({
 			"method": 'mtk.webui.network.queryIPv6AddressType'
 		}, (data) => {
+//			console.log(data);
 			if(data.error.code == 0) {
-				this.addrType = data.result.type;
-				window.gSocket.send({
-					"method": 'mtk.webui.network.queryIPv6DNSType'
-				}, (data1) => {
-					if(data1.error.code == 0) {
-						this.dnsType = data1.result.type;
-						var html = `
+				this.addrType = data.result.IPtype;
+				this.dnsType = data.result.DNStype;
+				var html = `
 							<div id="ipv6Config">
 								<div id="addrType"></div>
 								<div id="dnsType"></div>
 							</div>
 						`;
-						document.querySelector('#container').innerHTML = html;
-						this.renderHtmlAddr();
-						this.renderHtmlDNS();
-						removeClass(document.querySelector('#dnsType').firstElementChild, 'focus');
-					}
-				});
+				document.querySelector('#container').innerHTML = html;
+				this.renderHtmlAddr();
+				this.renderHtmlDNS();
+				removeClass(document.querySelector('#dnsType').firstElementChild, 'focus');
 			}
 		});
 	},
@@ -748,19 +736,19 @@ var IPv6ConfigurationIP = {
 							<div class="listItem disabled">
 								<div class="label">IP Address</div>
 								<div class="content">
-									<div class="inputItem addrTypeInput">1::0</div>
+									<div class="inputItem addrTypeInput"></div>
 								</div>
 							</div>
 							<div class="listItem disabled">
 								<div class="label">Length Of Prefix</div>
 								<div class="content">
-									<div class="inputItem addrTypeInput">0</div>
+									<div class="inputItem addrTypeInput"></div>
 								</div>
 							</div>
 							<div class="listItem disabled">
 								<div class="label">Default Gateway</div>
 								<div class="content">
-									<div class="inputItem addrTypeInput">1::0</div>
+									<div class="inputItem addrTypeInput"></div>
 								</div>
 							</div>
 					`;
@@ -776,19 +764,19 @@ var IPv6ConfigurationIP = {
 							<div class="listItem">
 								<div class="label">IP Address</div>
 								<div class="content">
-									<div class="inputItem addrTypeInput">1::0</div>
+									<div class="inputItem addrTypeInput"></div>
 								</div>
 							</div>
 							<div class="listItem">
 								<div class="label">Length Of Prefix</div>
 								<div class="content">
-									<div class="inputItem addrTypeInput">0</div>
+									<div class="inputItem addrTypeInput"></div>
 								</div>
 							</div>
 							<div class="listItem">
 								<div class="label">Default Gateway</div>
 								<div class="content">
-									<div class="inputItem addrTypeInput">1::0</div>
+									<div class="inputItem addrTypeInput"></div>
 								</div>
 							</div>
 					`;
@@ -808,13 +796,13 @@ var IPv6ConfigurationIP = {
 							<div class="listItem disabled">
 								<div class="label">Primary DNS</div>
 								<div class="content">
-									<div class="inputItem dnsTypeInput">1::0</div>
+									<div class="inputItem dnsTypeInput"></div>
 								</div>
 							</div>
 							<div class="listItem disabled">
 								<div class="label">Secondary DNS</div>
 								<div class="content">
-									<div class="inputItem dnsTypeInput">1::0</div>
+									<div class="inputItem dnsTypeInput"></div>
 								</div>
 							</div>
 					`;
@@ -830,13 +818,13 @@ var IPv6ConfigurationIP = {
 							<div class="listItem">
 								<div class="label">Primary DNS</div>
 								<div class="content">
-									<div class="inputItem dnsTypeInput">1::0</div>
+									<div class="inputItem dnsTypeInput"></div>
 								</div>
 							</div>
 							<div class="listItem">
 								<div class="label">Secondary DNS</div>
 								<div class="content">
-									<div class="inputItem dnsTypeInput">1::0</div>
+									<div class="inputItem dnsTypeInput"></div>
 								</div>
 							</div>
 					`;
@@ -987,75 +975,39 @@ var IPv6ConfigurationIP = {
 		//exit---返回键
 		if(e.keyCode == KeyEvent.DOM_VK_BACK_SPACE) {
 			if(hasClass(curFocus, 'listItem')) {
-				let p1, p2;
-				if(this.addrType == 'auto' && this.dnsType == 'auto') {
-					returnListPage();
-				} else {
-					if(this.addrType == 'manual' && this.dnsType == 'manual') {
-						p1 = this.setAddrType();
-						p2 = this.setDNSType();
-					} else if(this.addrType == 'manual' && this.dnsType == 'auto') {
-						p1 = this.setAddrType();
-					} else if(this.addrType == 'auto' && this.dnsType == 'manual') {
-						p2 = this.setDNSType();
-					}
-					Promise.all([p1, p2]).then(res => {
-						returnListPage();
-					}).catch(function(reason) {
-						console.log(reason);
-					});
+				var addrTypeInput = document.getElementsByClassName('addrTypeInput');
+				var arrd = [];
+				for(var i = 0; i < addrTypeInput.length; i++) {
+					arrd.push(addrTypeInput[i].innerHTML);
 				}
+				var dnsTypeInput = document.getElementsByClassName('dnsTypeInput');
+				var dns = [];
+				for(var i = 0; i < dnsTypeInput.length; i++) {
+					dns.push(dnsTypeInput[i].innerHTML);
+				}
+				var msg = {
+					"method": "mtk.webui.network.setIPv6AddressType",
+					"params": {
+						"IPtype": this.addrType,
+						"DNStype": this.dnsType,
+						"ipv6": arrd[0],
+						"lenOfPrefix": arrd[1],
+						"gateway": arrd[2],
+						"1stDNS": dns[0],
+						"2ndDNS": dns[1]
+					}
+				};
+				window.gSocket.send(msg, (data) => {
+					if(data.error.code == 0) {
+						returnListPage();
+					}
+				});
 			}
 			if(hasClass(curFocus, 'inputItem')) {
 				addClass(curFocus.parentElement.parentElement, 'focus');
 				removeClass(curFocus, 'focus');
 			}
 		}
-	},
-	setAddrType: function() {
-		return new Promise((resolve, reject) => {
-			var addrTypeInput = document.getElementsByClassName('addrTypeInput');
-			var arr = [];
-			for(var i = 0; i < addrTypeInput.length; i++) {
-				arr.push(addrTypeInput[i].innerHTML);
-			}
-			var msg = {
-				"method": "mtk.webui.network.setIPv6AddressType",
-				"params": {
-					"type": "manual",
-					"ipv6": arr[0],
-					"lenOfPrefix": arr[1],
-					"gateway": arr[2]
-				}
-			}
-			window.gSocket.send(msg, (data) => {
-				if(data.error.code == 0) {
-					resolve(data);
-				}
-			});
-		});
-	},
-	setDNSType: function() {
-		return new Promise((resolve, reject) => {
-			var dnsTypeInput = document.getElementsByClassName('dnsTypeInput');
-			var arr = [];
-			for(var i = 0; i < dnsTypeInput.length; i++) {
-				arr.push(dnsTypeInput[i].innerHTML);
-			}
-			var msg = {
-				"method": "mtk.webui.network.setIPv6DNSType",
-				"params": {
-					"type": "manual",
-					"1stDNS": arr[0],
-					"2ndDNS": arr[1]
-				}
-			}
-			window.gSocket.send(msg, (data) => {
-				if(data.error.code == 0) {
-					resolve(data);
-				}
-			});
-		});
 	}
 }
 
@@ -1095,27 +1047,31 @@ var systemInformation = {
 
 var versionInfo = {
 	render: function() {
-		var html = `
-		<div id="versionInfo">
-			<div class="versionInfo">
-				<div>Model Name:</div>
-				<div>eu_linux</div>
-			</div>
-			<div class="versionInfo">
-				<div>Version:</div>
-				<div></div>
-			</div>
-			<div class="versionInfo">
-				<div>Serial Number:</div>
-				<div></div>
-			</div>
-			<div class="versionInfo">
-				<div>Website:</div>
-				<div></div>
-			</div>
-		</div>
-	`;
-		document.querySelector('#container').innerHTML = html;
+		window.gSocket.send({
+			"method": "mtk.webui.system.queryVersionInfo"
+		}, (data) => {
+			var html = `
+				<div id="versionInfo">
+					<div class="versionInfo">
+						<div>Model Name:</div>
+						<div>${data.result.modelName}</div>
+					</div>
+					<div class="versionInfo">
+						<div>Version:</div>
+						<div>${data.result.version}</div>
+					</div>
+					<div class="versionInfo">
+						<div>Serial Number:</div>
+						<div>${data.result.serialNumber}</div>
+					</div>
+					<div class="versionInfo">
+						<div>Website:</div>
+						<div>${data.result.website}</div>
+					</div>
+				</div>
+			`;
+			document.querySelector('#container').innerHTML = html;
+		});
 	},
 	keyEvent: function(e) {
 		//exit---返回键
@@ -1155,6 +1111,36 @@ var WIFI_DIRECT = {
 
 var wirelessSetting = {
 	render: function() {
+		var p1 = new Promise((resolve, reject) => {
+			window.gSocket.send({
+				"method": "mtk.webui.network.queryWirelessStatus"
+			}, (data) => {
+				console.log(data);
+			});
+		});
+		var p2 = new Promise((resolve, reject) => {
+			window.gSocket.send({
+				"method": "mtk.webui.network.queryWirelessScan"
+			}, (data) => {
+				console.log(data);
+			});
+		});
+		var p3 = new Promise((resolve, reject) => {
+			window.gSocket.send({
+				"method": "mtk.webui.network.queryWirelessAssociate",
+				"param": {
+					"ssid": "mtktmp",
+					"password": "12345678"
+				}
+			}, (data) => {
+				console.log(data);
+			});
+		});
+		Promise.all([p1, p2, p3]).then(res => {
+			console.log(res);
+		}).catch(function(reason) {
+			console.log(reason);
+		});
 		var html = `
 		<div id="wirelessSetting">
 			<div>Wireless Setting</div>

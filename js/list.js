@@ -12,6 +12,8 @@ function listKeyEvent(e) {
 			removeClass(curList[curIndex], 'focus');
 			addClass(curList[gMenuoIndex], 'focus');
 			gMenuChild = gMenuParent.data[gMenuoIndex].value;
+			gMenuCurrent=gMenuParent.data[gMenuoIndex].name;
+			document.querySelector('#menuNav span').innerHTML='Menu-'+gMenuCurrent;
 			gMenuRenderSecond();
 		} else {
 			gMenuoIndex = canOperaDown(gMenuChild, curIndex);
@@ -27,6 +29,8 @@ function listKeyEvent(e) {
 			removeClass(curList[curIndex], 'focus');
 			addClass(curList[gMenuoIndex], 'focus');
 			gMenuChild = gMenuParent.data[gMenuoIndex].value;
+			gMenuCurrent=gMenuParent.data[gMenuoIndex].name;
+			document.querySelector('#menuNav span').innerHTML='Menu-'+gMenuCurrent;
 			gMenuRenderSecond();
 		} else {
 			gMenuoIndex = canOperaUp(gMenuChild, curIndex);
@@ -133,7 +137,7 @@ function listKeyEvent(e) {
 	if(e.keyCode == KeyEvent.DOM_VK_LEFT) {
 		if(gMenuClassName == 'secondList') {
 			if(gMenuNavlist.length == 1) {
-				document.querySelector('.secondList').style.top = '0px';
+				document.querySelector('.secondList').style.top = '0rem';
 				var prevList = curFocus.parentElement.previousElementSibling;
 				gMenuoIndex = gMenuNavlist[gMenuNavlist.length - 1].mark;
 				removeClass(curList[curIndex], 'focus');
@@ -150,28 +154,22 @@ function listKeyEvent(e) {
 	e.stopPropagation();
 }
 
-//列表分页效果
-function changePage() {
-	//	var itemHeight = document.querySelector(".listItem.focus").offsetHeight;
-	var floorIndex = Math.floor(gMenuoIndex / 9);
-	document.querySelector('.secondList').style.top = -(floorIndex * 9 * Number(40)) + 'px';
-}
-
 //渲染数据--第一列
 function gMenuRenderFirst() {
 	var html1 = '';
 	for(var i = 0; i < gMenuParent.data.length; i++) {
 		if(gMenuClassName == 'firstList' && i == gMenuoIndex) {
-			html1 += '<div class="listItem focus">' + gMenuParent.data[i].name + '<span>>></span></div>';
+			html1 += '<div class="listItem focus '+gMenuParent.data[i].name+'">' + gMenuParent.data[i].name + '</div>';
 		} else {
 			if(gMenuParent.data[i].opera) {
-				html1 += '<div class="listItem">' + gMenuParent.data[i].name + '<span>>></span></div>';
+				html1 += '<div class="listItem '+gMenuParent.data[i].name+'">' + gMenuParent.data[i].name + '</div>';
 			} else {
-				html1 += '<div class="listItem disabled">' + gMenuParent.data[i].name + '<span>>></span></div>';
+				html1 += '<div class="listItem disabled '+gMenuParent.data[i].name+'">' + gMenuParent.data[i].name + '</div>';
 			}
 		}
 	}
 	document.querySelector('.firstList').innerHTML = html1;
+	document.querySelector('.firstList .listItem').style.height='3rem';
 }
 //渲染数据--第二列
 function gMenuRenderSecond() {
@@ -211,7 +209,8 @@ function renderList() {
 								${gMenuChild.data[i].name}
 							</div>
 							<div class="right">
-								<span>${gMenuChild.data[i].value.dataList[gMenuChild.data[i].curVal]}</span>
+								<div class="selName">${gMenuChild.data[i].value.dataList[gMenuChild.data[i].curVal]}</div>
+								<span>></span>
 							</div>
 						</div>
 					`;
@@ -222,7 +221,8 @@ function renderList() {
 								${gMenuChild.data[i].name}
 							</div>
 							<div class="right">
-								<span>${gMenuChild.data[i].value.dataList[gMenuChild.data[i].curVal]}</span>
+								<div class="selName">${gMenuChild.data[i].value.dataList[gMenuChild.data[i].curVal]}</div>
+								<span>></span>
 							</div>
 						</div>
 					`;
@@ -234,7 +234,8 @@ function renderList() {
 							${gMenuChild.data[i].name}
 						</div>
 						<div class="right">
-							<span>${gMenuChild.data[i].value.dataList[gMenuChild.data[i].curVal]}</span>
+							<div class="selName">${gMenuChild.data[i].value.dataList[gMenuChild.data[i].curVal]}</div>
+							<span>></span>
 						</div>
 					</div>
 				`;
@@ -249,7 +250,7 @@ function renderList() {
 							</div>
 							<div class="right">
 								<div class="progress">
-									<div style="left:${(gMenuChild.data[i].value.data - gMenuChild.data[i].value.min) / (gMenuChild.data[i].value.max - gMenuChild.data[i].value.min) * 100-4}px" class="front"></div>
+									<div style="left:${(gMenuChild.data[i].value.data - gMenuChild.data[i].value.min) / (gMenuChild.data[i].value.max - gMenuChild.data[i].value.min) * 20-0.3}rem" class="front"></div>
 								</div>
 								<span>${gMenuChild.data[i].value.data}</span>
 							</div>
@@ -263,7 +264,7 @@ function renderList() {
 							</div>
 							<div class="right">
 								<div class="progress">
-									<div style="left:${(gMenuChild.data[i].value.data - gMenuChild.data[i].value.min) / (gMenuChild.data[i].value.max - gMenuChild.data[i].value.min) * 100-4}px" class="front"></div>
+									<div style="left:${((gMenuChild.data[i].value.data - gMenuChild.data[i].value.min) / (gMenuChild.data[i].value.max - gMenuChild.data[i].value.min) * 20)-0.3}rem" class="front"></div>
 								</div>
 								<span>${gMenuChild.data[i].value.data}</span>
 							</div>
@@ -322,7 +323,17 @@ function renderList() {
 		}
 	}
 	document.querySelector('.secondList').innerHTML = html2;
+	document.querySelector('.secondList .listItem').style.height='3rem';
 }
+
+//列表分页效果
+function changePage() {
+//	var itemHeight = document.querySelector(".listItem.focus").style.height;
+//	itemHeight=itemHeight.substring(0,1);
+	var floorIndex = Math.floor(gMenuoIndex / 9);
+	document.querySelector('.secondList').style.top = -(floorIndex * 9 * Number(3)) + 'rem';
+}
+
 
 function getCurVal(value, min, max) {
 	//	console.log((value - min) / (max - min) * 100);

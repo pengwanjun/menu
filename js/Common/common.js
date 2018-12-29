@@ -37,10 +37,22 @@ function sliceArr(array, size) {
 //返回到list页面
 function returnListPage() {
 	document.querySelector('#container').innerHTML = `
-				<div id="list">
-					<div class="firstList">
+				<div id="menuNav">
+					<span>Menu-${gMenuCurrent}</span>
+				</div>
+				<div id="listContainer">
+					<div id="list">
+						<div class="firstList">
+						</div>
+						<div class="secondList">
+						</div>
 					</div>
-					<div class="secondList">
+				</div>
+				<div id="menuOperate">
+					<div class="menuOperate">
+						<div>Enter</div>
+						<div>Select</div>
+						<div>Exit</div>
 					</div>
 				</div>
 			`;

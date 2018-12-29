@@ -193,7 +193,7 @@ var showSelect = {
 					}else if(gMenuChild.data[gMenuoIndex].name=='Interface'){
 						gMenuChild.data[gMenuoIndex].setCallback(data,curIndex);
 					}else{
-						gMenuChild.data[gMenuoIndex].setCallback(data);
+//						gMenuChild.data[gMenuoIndex].setCallback(data);
 					}
 				}
 			});

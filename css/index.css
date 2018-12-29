@@ -9,14 +9,50 @@ div{
 }
 
 #container{
-	background: #333333;
 	font-size: 16px;
 	color: #fff;
+	width: 80rem;
+	height: 45rem;
+	background-color:#232B3E;
+	position: relative;
+}
+
+/*menuNav*/
+#menuNav{
+	height: 5.65rem;
+	text-align: center;
+	font-size: 1.5rem;
+	position: relative;
+	border-bottom: 0.25rem solid #2B374F;
+}
+#menuNav span{
+	position: absolute;
+	bottom: 2rem;
+	left: 5rem;
+}
+#menuOperate{
+	height: 5.65rem;
+	font-size: 1.25rem;
+	border-top: 0.25rem solid #2B374F;
+}
+#menuOperate .menuOperate{
+	margin-left: 26rem;
+}
+#menuOperate .menuOperate div{
+	display: inline-block;
+	margin-top: 2rem;
+	margin-right: 3rem;
 }
 
 /*列表*/
+#listContainer{
+	width: 100%;
+	height: 29rem;
+	padding-top: 2rem;
+	padding-bottom: 2rem;
+}
 #list{
-	height: 360px;
+	height: 27rem;
 	overflow: hidden;
 	position: relative;
 }
@@ -25,68 +61,86 @@ div{
 	top: 0px;
 }
 .firstList{
-	height: 360px;
-	width: 100px;
+	width: 20rem;
+	padding-right: 3rem;
 	left: 0px;
-	border-right: 1px solid #CDC9C9;
-	padding: 0 50px;
+}
+.firstList .listItem{
+	margin-bottom: 2rem;
+	/*background-image: url('../img/timg.jpg');
+	background-size: 0.75rem 1rem;
+	background-repeat: no-repeat;
+	background-position: 90% center;*/
 }
 .secondList {
-	width: 500px;
-	left: 200px;
+	width: 57rem;
+	left: 23rem;
 }
 .listItem {
-	font-size: 16px;
-	padding: 0 20px;
+	font-size: 1.33rem;
 	cursor: pointer;
 	text-align: center;
-	line-height: 40px;
-	height: 38px;
-	border: 1px solid transparent;
+	line-height: 3rem;
+	height: 3rem;
 	position: relative;
+	border-radius: 0.2rem;
 }
 .listItem.focus{
-	color: #FF0000;
-	border-color: #FF0000;
+	background-color:#68CAD5;
+	color: #000;
 }
 .listItem .list{
-	margin-left: 30px;
+	margin-left: 1.25rem;
 }
 .listItem.disabled{
 	background: #CDC9C9;
 }
+.listItem.Video{
+	/*background-image:*/
+}
 .listItem .left{
 	position: absolute;
-	left: 0;
+	left: 3rem;
 }
 .listItem .right{
 	position: absolute;
-	right: 0;
+	right: 3rem;
 }
 .listItem .right span{
 	display: inline-block;
-	width: 80px;
-	margin-left: 20px;
+	width: 7rem;
+	margin-left: 1rem;
 }
 .progress{
 	display: inline-block;
 	position: relative;
 	vertical-align: middle;
-	height: 2px;
-	width: 100px;
+	height: 0.1rem;
+	width: 20rem;
 	background: #fff;
 }
 .progress .front{
 	position: absolute;
-	top: -3px;
-	width: 8px;
-	height: 8px;
+	top: -0.25rem;
+	width: 0.6rem;
+	height: 0.6rem;
 	border-radius: 50%;
 	background: #fff;
 }
+.selName{
+	display: inline-block;
+	text-align: center;
+	width: 20rem;
+}
 
 #showNum{
-	width: 300px;
+	position: absolute;
+	bottom: 2rem;
+	left: 3rem;
+	background-color: rgba(43,55,79,0.8);
+	width: 12.5rem;
+	padding: 2rem 3rem;
+	border-radius: 0.2rem;
 }
 #showNum .operate{
 	position: relative;

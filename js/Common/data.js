@@ -668,7 +668,7 @@ var gMenuVideo = [{
 		},
 		setCallback: function(data) { //设置value值
 			//						console.log(data);
-			this.curVal = data.result.current;
+			//			this.curVal = data.result.current;
 		}
 	},
 	{
@@ -1987,25 +1987,44 @@ var gMenuTvChannels = [{
 	}
 ];
 
-var gMenuTv = [
-	//{
-	//		name: 'Tuner Mode',
-	//		value: {
-	//			valType: 'sel',
-	//			data: ['Antenna', 'Cable', 'Satellite']
-	//		},
-	//		curVal: 'Antenna',
-	//		opera: false,
-	//		msg:function(){
-	//			
-	//		},
-	//		getCallback:function(){
-	//			
-	//		},
-	//		setCallback:function(){
-	//			
-	//		}
-	//	},
+var gMenuTv = [{
+		name: 'Tuner Mode',
+		value: {
+			valType: 'sel',
+			data: [],
+			dataList: ['Antenna', 'Cable', 'Satellite(Operator Only)', 'Satellite(All Satellites)']
+		},
+		curVal: 0,
+		opera: true,
+		msg: function(key, val) {
+			if(key == 'get') {
+				return {
+					"method": "mtk.webui.config.getValue",
+					"params": {
+						"configId": "g_bs__bs_src"
+					}
+				};
+			} else {
+				return {
+					"method": "mtk.webui.config.setValue",
+					"params": {
+						"configId": "g_bs__bs_src",
+						"value": val,
+						"apply": true
+					}
+				};
+			}
+		},
+		getCallback: function(data) { //获取value值
+			//			console.log(data);
+			this.value.data = this.value.dataList;
+			this.curVal = data.result.current;
+		},
+		setCallback: function(data) { //设置value值
+			//			console.log(data.result);
+			this.curVal = data.result.current;
+		}
+	},
 	//	{
 	//		name: 'Audio Channel',
 	//		value: {
@@ -2146,7 +2165,7 @@ var gMenuSetupHbbTV = [{
 		name: 'Do Not Track',
 		value: {
 			valType: 'sel',
-			data:[],
+			data: [],
 			dataList: ['Default', 'Off', 'On']
 		},
 		curVal: 0,
@@ -2184,7 +2203,7 @@ var gMenuSetupHbbTV = [{
 		name: 'Cookie Settings',
 		value: {
 			valType: 'sel',
-			data:[],
+			data: [],
 			dataList: ['Default', 'Block All', 'Blcok 3rd Cookie']
 		},
 		curVal: 0,
@@ -2222,7 +2241,7 @@ var gMenuSetupHbbTV = [{
 		name: 'Persistent Storage',
 		value: {
 			valType: 'sel',
-			data:[],
+			data: [],
 			dataList: ['On', 'Off']
 		},
 		curVal: 0,
@@ -2260,7 +2279,7 @@ var gMenuSetupHbbTV = [{
 		name: 'Blcok Tracking Sites',
 		value: {
 			valType: 'sel',
-			data:[],
+			data: [],
 			dataList: ['Off', 'On']
 		},
 		curVal: 0,
@@ -2298,7 +2317,7 @@ var gMenuSetupHbbTV = [{
 		name: 'Device ID',
 		value: {
 			valType: 'sel',
-			data:[],
+			data: [],
 			dataList: ['On', 'Off']
 		},
 		curVal: 0,
@@ -2336,7 +2355,9 @@ var gMenuSetupHbbTV = [{
 		name: 'Reset Device ID',
 		value: {
 			valType: 'scan',
-			data: {name:'resetDeviceID'},
+			data: {
+				name: 'resetDeviceID'
+			},
 			renderFuc: 'popBoxShow'
 		},
 		opera: true
@@ -2805,15 +2826,41 @@ var gMenuSetupNetworkConf = [{
 		},
 		opera: false
 	},
-//	{
-//		name: 'IP Prefer',
-//		value: {
-//			valType: 'sel',
-//			data: ['IPv6', 'IPv4']
-//		},
-//		curVal: 'IPv6',
-//		opera: false
-//	},
+	{
+		name: 'IP Prefer',
+		value: {
+			valType: 'sel',
+			data: [],
+			dataList: ['IPv6', 'IPv4']
+		},
+		curVal: 0,
+		opera: false,
+		msg: function(key, val) {
+			if(key == 'get') {
+				return {
+					"method": "mtk.webui.network.queryIPv6Perfer"
+				};
+			} else {
+				return {
+					"method": "mtk.webui.network.setIPv6Perfer",
+					"params": val == 0 ? 'true' : 'false'
+				};
+			}
+		},
+		getCallback: function(data) { //获取value值
+			//			console.log(data);
+			this.value.data = this.value.dataList;
+			if(data.result == "true") {
+				this.curVal = 0;
+			} else {
+				this.curVal = 1;
+			}
+		},
+		setCallback: function(data) { //设置value值
+			//			console.log(data);
+			this.curVal = selIndex;
+		}
+	},
 	{
 		name: 'IPv6 Information',
 		value: {
@@ -3578,3 +3625,4 @@ var gMenuPageName = 'list';
 var gMenuParent = Menu;
 var gMenuChild = Menu.data[0].value;
 var gMenuNavlist = [];
+var gMenuCurrent='Video';

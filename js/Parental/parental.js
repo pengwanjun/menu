@@ -47,7 +47,16 @@ var changePassword = {
 						removeClass(document.querySelector('.confirm'), 'focus');
 						addClass(document.querySelector('.new'), 'focus');
 					} else {
-						returnListPage();
+						window.gSocket.send({
+							"method": "mtk.webui.config.setValue",
+							"params": {
+								"configId": "g_password__password",
+								"value": pwd,
+								"apply": true
+							}
+						},data=>{
+							returnListPage();
+						});
 					}
 				} else {
 					pwd += e.key;
@@ -64,7 +73,6 @@ var changePassword = {
 	}
 };
 
-
 //Input Block
 var inputBlock = {
 	list: [],
@@ -74,7 +82,7 @@ var inputBlock = {
 	render: function() {
 		window.gSocket.send({
 			"method": "mtk.webui.input.querySourceInfo"
-		}, (data)=> {
+		}, (data) => {
 			this.value = data.result.List;
 			this.list = sliceArr(this.value, 9);
 			this.renderData(this.focusIndex);
@@ -188,7 +196,7 @@ var inputBlock = {
 					"block": !this.list[this.page][curIndex].block
 				}
 			}
-			window.gSocket.send(msg, (data)=> {
+			window.gSocket.send(msg, (data) => {
 				if(data.error.code == 0) {
 					this.focusIndex = curIndex;
 					this.render();
@@ -212,7 +220,7 @@ var inputSkip = {
 	render: function() {
 		window.gSocket.send({
 			"method": "mtk.webui.input.querySourceInfo"
-		}, (data)=> {
+		}, (data) => {
 			this.value = data.result.List;
 			for(var i = 0; i < this.value.length; i++) {
 				if(this.value[i].index == data.result.curMainVal) {
@@ -331,7 +339,7 @@ var inputSkip = {
 					"skip": !this.list[this.page][curIndex].skip
 				}
 			}
-			window.gSocket.send(msg, (data)=> {
+			window.gSocket.send(msg, (data) => {
 				if(data.error.code == 0) {
 					this.focusIndex = curIndex;
 					this.render();
@@ -346,13 +354,25 @@ var inputSkip = {
 }
 
 var password = {
+	curPwd: '',
 	render: function() {
-		var html = `
-		<div id="password">
-			<div class="input" data-pwd=""></div>
-		</div>
-	`;
-		document.querySelector('#container').innerHTML = html;
+		window.gSocket.send({
+			"method": "mtk.webui.config.getValue",
+			"params": {
+				"configId": "g_password__password"
+			}
+		}, (data) => {
+			console.log(data);
+			if(data.error.code == 0) {
+				this.curPwd += data.result.current;
+				var html = `
+					<div id="password">
+						<div class="input" data-pwd=""></div>
+					</div>
+				`;
+				document.querySelector('#container').innerHTML = html;
+			}
+		})
 	},
 	keyEvent: function(e) {
 		var pwd = document.querySelector('.input').getAttribute('data-pwd');
@@ -360,7 +380,7 @@ var password = {
 			e.keyCode == KeyEvent.DOM_VK_3 || e.keyCode == KeyEvent.DOM_VK_4 || e.keyCode == KeyEvent.DOM_VK_5 ||
 			e.keyCode == KeyEvent.DOM_VK_6 || e.keyCode == KeyEvent.DOM_VK_7 || e.keyCode == KeyEvent.DOM_VK_8 ||
 			e.keyCode == KeyEvent.DOM_VK_9) {
-			if(pwd == '111' && e.keyCode == KeyEvent.DOM_VK_1) {
+			if(pwd == this.curPwd.substring(0, this.curPwd.length - 1) && e.key == this.curPwd.substring(this.curPwd.length - 1, this.curPwd.length)) {
 				Menu.data[4].value = {
 					valType: 'list',
 					data: gMenuParentalShow
