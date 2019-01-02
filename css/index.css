@@ -23,7 +23,7 @@ div{
 	text-align: center;
 	font-size: 1.5rem;
 	position: relative;
-	border-bottom: 0.25rem solid #2B374F;
+	border-bottom: 0.12rem solid #3C5277;
 }
 #menuNav span{
 	position: absolute;
@@ -33,7 +33,7 @@ div{
 #menuOperate{
 	height: 5.65rem;
 	font-size: 1.25rem;
-	border-top: 0.25rem solid #2B374F;
+	border-top: 0.12rem solid #3C5277;
 }
 #menuOperate .menuOperate{
 	margin-left: 26rem;
@@ -135,17 +135,30 @@ div{
 
 #showNum{
 	position: absolute;
-	bottom: 2rem;
-	left: 3rem;
+	bottom: 1.8rem;
+	left: 2rem;
 	background-color: rgba(43,55,79,0.8);
-	width: 12.5rem;
+	width: 35rem;
 	padding: 2rem 3rem;
 	border-radius: 0.2rem;
 }
+#showNum .title{
+	border-bottom: 0.12rem solid #3C5277;
+	position: relative;
+	padding-bottom: 0.8rem;
+}
+#showNum .title span{
+	position: absolute;
+	right: 0;
+}
+#showNum .progress{
+	width: 30rem;
+}
 #showNum .operate{
 	position: relative;
-	height: 30px;
-	line-height: 30px;
+	height: 2rem;
+	line-height: 2rem;
+	padding-top: 0.8rem;
 }
 #showNum .operate .left{
 	position: absolute;
@@ -158,7 +171,7 @@ div{
 	top: 0;
 }
 .selectBox{
-	height: 160px;
+	height: 12rem;
 	overflow: hidden;
 	position: relative;
 }
@@ -205,10 +218,10 @@ div{
 	position: relative;
 }
 #popBoxShow .popBoxShow{
-	background: rgba(0,0,0,.5);
-	font-size: 16px;
-	margin: 200px auto;
-	padding: 100px 50px;
+	width: 35rem;
+	text-align: center;
+	line-height: 4rem;
+	padding: 10rem 5rem;
 }
 #popBoxShow .sure,
 #popBoxShow .cancel{
@@ -303,4 +316,9 @@ div{
 #IPSetting .inputItem.focus,
 #ipv6Config .inputItem.focus{
 	border-color: #FF0000;
+}
+
+/*versionInfo*/
+.versionInfo div{
+	display: inline-block;
 }

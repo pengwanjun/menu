@@ -273,13 +273,16 @@ var ESN = {
 	render: function() {
 		var html = `
 		<div id="ESN">
-			
+			Not available.
 		</div>
 	`;
 		document.querySelector('#container').innerHTML = html;
 	},
 	keyEvent: function(e) {
-
+		//exit---返回键
+		if(e.keyCode == KeyEvent.DOM_VK_BACK_SPACE) {
+			returnListPage();
+		}
 	}
 }
 
@@ -1081,17 +1084,22 @@ var versionInfo = {
 	}
 }
 
-var WFD = {
+var NetworkWFD = {
 	render: function() {
 		var html = `
 		<div id="WFD">
-			
+			Enable WFD
 		</div>
 	`;
 		document.querySelector('#container').innerHTML = html;
 	},
 	keyEvent: function(e) {
-
+		//exit---返回键
+		if(e.keyCode == KeyEvent.DOM_VK_BACK_SPACE) {
+			gMenuPageName='popBoxShow';
+			popBoxShow.render(gMenuChild.data[gMenuoIndex].name);
+//			returnListPage();
+		}
 	}
 }
 
@@ -1099,13 +1107,16 @@ var WIFI_DIRECT = {
 	render: function() {
 		var html = `
 		<div id="WIFI_DIRECT">
-			
+			Enable WFD
 		</div>
 	`;
 		document.querySelector('#container').innerHTML = html;
 	},
 	keyEvent: function(e) {
-
+		//exit---返回键
+		if(e.keyCode == KeyEvent.DOM_VK_BACK_SPACE) {
+			returnListPage();
+		}
 	}
 }
 

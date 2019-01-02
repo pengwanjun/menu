@@ -2740,55 +2740,101 @@ var gMenuSetupNetworkConf = [{
 			}
 		},
 		setCallback: function(data, selIndex) { //设置value值
-			if(data.error.code == 0) {
-				this.curVal = selIndex;
-				if(this.curVal == 0) {
-					for(var i = 0; i < gMenuSetupNetworkConf.length; i++) {
-						if(gMenuSetupNetworkConf[i].name == 'Wake On Lan') {
-							gMenuSetupNetworkConf[i].opera = true;
-						}
-						if(gMenuSetupNetworkConf[i].name == 'Wake On Wlan' ||
-							gMenuSetupNetworkConf[i].name == 'Wireless Setting') {
-							gMenuSetupNetworkConf[i].opera = false;
-						}
+			this.curVal = selIndex;
+			if(this.curVal == 0) {
+				for(var i = 0; i < gMenuSetupNetworkConf.length; i++) {
+					if(gMenuSetupNetworkConf[i].name == 'Wake On Lan') {
+						gMenuSetupNetworkConf[i].opera = true;
 					}
-					gMenuSetupNetworkConf[0].value.dataList = ['Off', 'On'];
-				} else {
-					for(var i = 0; i < gMenuSetupNetworkConf.length; i++) {
-						if(gMenuSetupNetworkConf[i].name == 'Wake On Lan') {
-							gMenuSetupNetworkConf[i].opera = false;
-						}
-						if(gMenuSetupNetworkConf[i].name == 'Wake On Wlan' ||
-							gMenuSetupNetworkConf[i].name == 'Wireless Setting') {
-							gMenuSetupNetworkConf[i].opera = true;
-						}
+					if(gMenuSetupNetworkConf[i].name == 'Wake On Wlan' ||
+						gMenuSetupNetworkConf[i].name == 'Wireless Setting') {
+						gMenuSetupNetworkConf[i].opera = false;
 					}
-					gMenuSetupNetworkConf[0].value.dataList = ['On'];
 				}
+				gMenuSetupNetworkConf[0].value.dataList = ['Off', 'On'];
+			} else {
+				for(var i = 0; i < gMenuSetupNetworkConf.length; i++) {
+					if(gMenuSetupNetworkConf[i].name == 'Wake On Lan') {
+						gMenuSetupNetworkConf[i].opera = false;
+					}
+					if(gMenuSetupNetworkConf[i].name == 'Wake On Wlan' ||
+						gMenuSetupNetworkConf[i].name == 'Wireless Setting') {
+						gMenuSetupNetworkConf[i].opera = true;
+					}
+				}
+				gMenuSetupNetworkConf[0].value.dataList = ['On'];
 			}
 		}
 	},
 	{
 		name: 'Wake On Lan',
 		value: {
-			valType: 'scan',
-			//				valType: 'sel',
+			valType: 'sel',
 			data: [],
 			dataList: ['Off', 'On']
 		},
 		curVal: 0,
-		opera: false
+		opera: false,
+		msg: function(key, val) {
+			if(key == 'get') {
+				return {
+					"method": "mtk.webui.network.queryWakeOnEthernet"
+				};
+			} else {
+				return {
+					"method": "mtk.webui.network.setWakeOnEtherne",
+					"params": val == 0 ? "unenable" : "enable"
+				};
+			}
+		},
+		getCallback: function(data) { //获取value值
+			//			console.log(data);
+			this.value.data = this.value.dataList;
+			if(data.result == 'enable') {
+				this.curVal = 1;
+			} else {
+				this.curVal = 0;
+			}
+		},
+		setCallback: function(data, selIndex) { //设置value值
+			//			console.log(data);
+			this.curVal = selIndex;
+		}
 	},
 	{
 		name: 'Wake On Wlan',
 		value: {
-			valType: 'scan',
-			//				valType: 'sel',
+			valType: 'sel',
 			data: [],
 			dataList: ['Off', 'On']
 		},
 		curVal: 0,
-		opera: false
+		opera: false,
+		msg: function(key, val) {
+			if(key == 'get') {
+				return {
+					"method": "mtk.webui.network.queryWakeOnWireless"
+				};
+			} else {
+				return {
+					"method": "mtk.webui.network.setWakeOnWireless",
+					"params": val == 0 ? "unenable" : "enable"
+				};
+			}
+		},
+		getCallback: function(data) { //获取value值
+			//			console.log(data);
+			this.value.data = this.value.dataList;
+			if(data.result == 'enable') {
+				this.curVal = 1;
+			} else {
+				this.curVal = 0;
+			}
+		},
+		setCallback: function(data, selIndex) { //设置value值
+			//			console.log(data);
+			this.curVal = selIndex;
+		}
 	},
 	{
 		name: 'Wireless Setting',
@@ -2856,7 +2902,7 @@ var gMenuSetupNetworkConf = [{
 				this.curVal = 1;
 			}
 		},
-		setCallback: function(data) { //设置value值
+		setCallback: function(data,selIndex) { //设置value值
 			//			console.log(data);
 			this.curVal = selIndex;
 		}
@@ -2908,24 +2954,25 @@ var gMenuSetupNetworkNetflix = [{
 		opera: true
 	}
 ];
-var gMenuSetupNetworkApp = [{
-		name: 'DLNA',
-		value: {
-			valType: 'sel',
-			data: ['On', 'Off']
-		},
-		curVal: 'On',
-		opera: true
-	},
-	{
-		name: 'DMR',
-		value: {
-			valType: 'sel',
-			data: ['On', 'Off']
-		},
-		curVal: 'On',
-		opera: true
-	},
+var gMenuSetupNetworkApp = [
+//	{
+//		name: 'DLNA',
+//		value: {
+//			valType: 'sel',
+//			data: ['On', 'Off']
+//		},
+//		curVal: 'On',
+//		opera: true
+//	},
+//	{
+//		name: 'DMR',
+//		value: {
+//			valType: 'sel',
+//			data: ['On', 'Off']
+//		},
+//		curVal: 'On',
+//		opera: true
+//	},
 	{
 		name: 'Netflix',
 		value: {
@@ -2948,7 +2995,7 @@ var gMenuSetupNetwork = [{
 		value: {
 			valType: 'scan',
 			data: [],
-			renderFuc: 'WFD'
+			renderFuc: 'NetworkWFD'
 		},
 		opera: true
 	},
@@ -3448,8 +3495,8 @@ var gMenuSetup = [
 		name: 'Reset Default',
 		value: {
 			valType: 'scan',
-			data: [],
-			renderFuc: 'resetDefault'
+			data: {name:'resetDefault'},
+			renderFuc: 'popBoxShow'
 		},
 		opera: true
 	}
@@ -3625,4 +3672,4 @@ var gMenuPageName = 'list';
 var gMenuParent = Menu;
 var gMenuChild = Menu.data[0].value;
 var gMenuNavlist = [];
-var gMenuCurrent='Video';
+var gMenuCurrent = 'Video';

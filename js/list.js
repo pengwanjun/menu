@@ -292,7 +292,7 @@ function renderList() {
 								${gMenuChild.data[i].name}
 							</div>
 							<div class="right">
-								<span>>></span>
+								<span>></span>
 							</div>
 						</div>
 					`;
@@ -303,7 +303,7 @@ function renderList() {
 								${gMenuChild.data[i].name}
 							</div>
 							<div class="right">
-								<span>>></span>
+								<span>></span>
 							</div>
 						</div>
 					`;
@@ -315,7 +315,7 @@ function renderList() {
 							${gMenuChild.data[i].name}
 						</div>
 						<div class="right">
-							<span>>></span>
+							<span>></span>
 						</div>
 					</div>
 				`;

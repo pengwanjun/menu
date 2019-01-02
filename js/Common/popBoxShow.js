@@ -4,17 +4,33 @@ var popBoxShow = {
 	render: function(pName) {
 		console.log(pName);
 		this.pageName = pName;
-		var html = `
-		<div id="popBoxShow">
-			<div class="popBoxShow">
-				<div>Are you sure?</div>
-				<div class="btn">
-					<div class="sure">OK</div>
-					<div class="cancel focus">Cancel</div>
+		if(this.pageName=='WFD'){
+			var html = `
+				<div id="popBoxShow">
+					<div class="popBoxShow">
+						<div>Wi-Fi Direct</div>
+						<div>Are you sure to exit?</div>
+						<div>Please Confirm</div>
+						<div class="btn">
+							<div class="sure">Yes</div>
+							<div class="cancel focus">Cancel</div>
+						</div>
+					</div>
 				</div>
-			</div>
-		</div>
-	`;
+			`;
+		}else{
+			var html = `
+				<div id="popBoxShow">
+					<div class="popBoxShow">
+						<div>Are you sure?</div>
+						<div class="btn">
+							<div class="sure">OK</div>
+							<div class="cancel focus">Cancel</div>
+						</div>
+					</div>
+				</div>
+			`;
+		}
 		document.querySelector('#container').innerHTML = html;
 	},
 	keyEvent: function(e) {
@@ -38,7 +54,12 @@ var popBoxShow = {
 		//enter键
 		if(e.keyCode == KeyEvent.DOM_VK_ENTER) {
 			if(hasClass(curFocus, 'cancel')) {
-				returnListPage();
+				if(this.pageName=='WFD'){
+					gMenuPageName='NetworkWFD';
+					NetworkWFD.render();
+				}else{				
+					returnListPage();
+				}
 			} else {
 				if(this.pageName == 'gMenuCleanChannelList') { //Clean Channel List
 					var msg = {
@@ -62,14 +83,33 @@ var popBoxShow = {
 						}
 					});
 				}
+				if(this.pageName=='WFD'){
+					returnListPage();
+				}
 				if(this.pageName=='cleanAll'){  //Clean All
+					var msg = {
+						"method": "mtk.webui.system.resetParentalInfo"
+					}
+					window.gSocket.send(msg, function(data) {
+						if(data.error.code == 0) {
+							console.log(data);
+						}
+					});
+				}
+				if(this.pageName=='resetDeviceID'){
+					
+				}
+				if(this.pageName=='resetDefault'){
 					
 				}
 			}
 		}
 		//exit---返回键
 		if(e.keyCode == KeyEvent.DOM_VK_BACK_SPACE) {
-			returnListPage();
+			if(this.pageName=='WFD'){
+			}else{
+				returnListPage();
+			}
 		}
 	}
 }
@@ -79,14 +119,15 @@ var showNum = {
 	render: function() {
 		var html = `
 			<div id="showNum">
-				<div>${gMenuChild.data[gMenuoIndex].name}</div>
+				<div class="title">
+					${gMenuChild.data[gMenuoIndex].name}
+					<span>HDMI2</span>
+				</div>
 				<div>
-					<span>Min</span>
-					<div class="progress" style="margin: 20px 30px;">
-						<div style="left:${(gMenuChild.data[gMenuoIndex].value.data - gMenuChild.data[gMenuoIndex].value.min) / (gMenuChild.data[gMenuoIndex].value.max - gMenuChild.data[gMenuoIndex].value.min) * 100-4}px" class="front focus"></div>
+					<div class="progress" style="margin: 3.5rem 0;">
+						<div style="left:${(gMenuChild.data[gMenuoIndex].value.data - gMenuChild.data[gMenuoIndex].value.min) / (gMenuChild.data[gMenuoIndex].value.max - gMenuChild.data[gMenuoIndex].value.min) * 30-0.3}rem" class="front focus"></div>
 					</div>
-					<span>Max</span>
-					<span style="margin-left: 40px;">${gMenuChild.data[gMenuoIndex].value.data}</span>
+					<span style="margin-left: 1.7rem;">${(gMenuChild.data[gMenuoIndex].value.data - gMenuChild.data[gMenuoIndex].value.min) / (gMenuChild.data[gMenuoIndex].value.max - gMenuChild.data[gMenuoIndex].value.min)*100}%</span>
 				</div>
 				<div class="operate">
 					<div class="left">Adjust</div>
@@ -129,7 +170,10 @@ var showSelect = {
 	render: function() {
 		var html1 = `
 			<div id="showNum">
-				<div>${gMenuChild.data[gMenuoIndex].name}</div>
+				<div class="title">
+					${gMenuChild.data[gMenuoIndex].name}
+					<span>HDMI2</span>
+				</div>
 				<div class="selectBox">
 				<div class="selectList">
 		`;
@@ -186,15 +230,22 @@ var showSelect = {
 		if(e.keyCode == KeyEvent.DOM_VK_ENTER) {
 			window.gSocket.send(gMenuChild.data[gMenuoIndex].msg('set',curIndex),function(data){
 				if(data.error.code==0){
-					if(gMenuChild.data[gMenuoIndex].name=='Internet Connection'){
-						if(gMenuChild.data[gMenuoIndex].value.data.length>1){
-							gMenuChild.data[gMenuoIndex].setCallback(data,curIndex);
-						}
-					}else if(gMenuChild.data[gMenuoIndex].name=='Interface'){
-						gMenuChild.data[gMenuoIndex].setCallback(data,curIndex);
+					if(data.result){
+						gMenuChild.data[gMenuoIndex].setCallback(data);
 					}else{
-//						gMenuChild.data[gMenuoIndex].setCallback(data);
+						gMenuChild.data[gMenuoIndex].setCallback(data,curIndex);
 					}
+//					if(gMenuChild.data[gMenuoIndex].name=='Internet Connection'){
+//						if(gMenuChild.data[gMenuoIndex].value.data.length>1){
+//							gMenuChild.data[gMenuoIndex].setCallback(data,curIndex);
+//						}
+//					}else if(gMenuChild.data[gMenuoIndex].name=='Interface'){
+//						gMenuChild.data[gMenuoIndex].setCallback(data,curIndex);
+//					}else if(gMenuChild.data[gMenuoIndex].name=='Wake On Lan'){
+//						gMenuChild.data[gMenuoIndex].setCallback(data,curIndex);
+//					}else{
+//						gMenuChild.data[gMenuoIndex].setCallback(data);
+//					}
 				}
 			});
 		}
@@ -206,6 +257,6 @@ var showSelect = {
 	changePage: function(index) {
 //		var itemHeight = document.querySelector(".listItem.focus").offsetHeight;
 		var floorIndex = Math.floor(index / 4);
-		document.querySelector('.selectList').style.top = -(floorIndex * 4 * Number(40)) + 'px';
+		document.querySelector('.selectList').style.top = -(floorIndex * 4 * Number(3)) + 'rem';
 	}
 }

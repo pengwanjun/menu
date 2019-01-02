@@ -294,7 +294,24 @@ var channelEditDetail = {
 //Channel Scan
 var channelScan = {
 	render: function() {
-		var html = '<div class="channelScan">11111：etertergdfgdfgf</div>';
+		var html = `
+			<div id="showNum">
+				<div class="title">Channel Scan</div>
+				<div style="margin: 1rem 0;">Status:Scanning...</div>
+				<div style="margin: 1rem 0;">Analog Channels:0</div>
+				<div style="margin: 1rem 0;">Digital Channels:0</div>
+				<div>
+					<div class="progress" style="margin-bottom: 1rem;">
+						<div style="left:2rem" class="front"></div>
+					</div>
+					<span style="margin-left: 1.7rem;">35%</span>
+				</div>
+				<div class="operate">
+					<div class="left">Adjust</div>
+					<div class="right">Back</div>
+				</div>
+			</div>
+		`;
 		document.querySelector('#container').innerHTML = html;
 	},
 	keyEvent: function(e) {
