@@ -127,7 +127,7 @@ var showNum = {
 					<div class="progress" style="margin: 3.5rem 0;">
 						<div style="left:${(gMenuChild.data[gMenuoIndex].value.data - gMenuChild.data[gMenuoIndex].value.min) / (gMenuChild.data[gMenuoIndex].value.max - gMenuChild.data[gMenuoIndex].value.min) * 30-0.3}rem" class="front focus"></div>
 					</div>
-					<span style="margin-left: 1.7rem;">${(gMenuChild.data[gMenuoIndex].value.data - gMenuChild.data[gMenuoIndex].value.min) / (gMenuChild.data[gMenuoIndex].value.max - gMenuChild.data[gMenuoIndex].value.min)*100}%</span>
+					<span style="margin-left: 1rem;">${Math.round(((gMenuChild.data[gMenuoIndex].value.data - gMenuChild.data[gMenuoIndex].value.min) /(gMenuChild.data[gMenuoIndex].value.max - gMenuChild.data[gMenuoIndex].value.min)) * 10000) / 100.00}%</span>
 				</div>
 				<div class="operate">
 					<div class="left">Adjust</div>
@@ -140,22 +140,25 @@ var showNum = {
 	keyEvent: function(e) {
 		if(e.keyCode == KeyEvent.DOM_VK_RIGHT) {
 			if(gMenuChild.data[gMenuoIndex].value.data < gMenuChild.data[gMenuoIndex].value.max) {
-				window.gSocket.send(gMenuChild.data[gMenuoIndex].msg('set',++gMenuChild.data[gMenuoIndex].value.data), function(data) {
+				var curVal=gMenuChild.data[gMenuoIndex].value.data;
+				window.gSocket.send(gMenuChild.data[gMenuoIndex].msg('set',++curVal), (data)=> {
+//					console.log(data);
 					if(data.error.code == 0) {
-						gMenuChild.data[gMenuoIndex].getCallback(data);
+						++gMenuChild.data[gMenuoIndex].value.data;
+						this.render();
 					}
 				});
-				this.render();
 			}
 		}
 		if(e.keyCode == KeyEvent.DOM_VK_LEFT) {
 			if(gMenuChild.data[gMenuoIndex].value.data > gMenuChild.data[gMenuoIndex].value.min) {
-				window.gSocket.send(gMenuChild.data[gMenuoIndex].msg('set',--gMenuChild.data[gMenuoIndex].value.data), function(data) {
+				var curVal=gMenuChild.data[gMenuoIndex].value.data;
+				window.gSocket.send(gMenuChild.data[gMenuoIndex].msg('set',--curVal), (data)=> {
 					if(data.error.code == 0) {
-						gMenuChild.data[gMenuoIndex].getCallback(data);
+						--gMenuChild.data[gMenuoIndex].value.data;
+						this.render();
 					}
 				});
-				this.render();
 			}
 		}
 		//exit---返回键
@@ -167,11 +170,14 @@ var showNum = {
 
 //选项选择
 var showSelect = {
-	render: function() {
+	curObj:{},
+	render: function(obj) {
+//		console.log(obj);
+		this.curObj=obj;
 		var html1 = `
 			<div id="showNum">
 				<div class="title">
-					${gMenuChild.data[gMenuoIndex].name}
+					${this.curObj.name}
 					<span>HDMI2</span>
 				</div>
 				<div class="selectBox">
@@ -187,22 +193,23 @@ var showSelect = {
 			</div>
 			`;
 		var html = ``;
-		for(var i = 0; i < gMenuChild.data[gMenuoIndex].value.data.length; i++) {
-			if(i == gMenuChild.data[gMenuoIndex].curVal) {
+		for(var i = 0; i < this.curObj.value.data.length; i++) {
+			if(i == this.curObj.curVal) {
 				html += `
-					<div class="listItem focus">${gMenuChild.data[gMenuoIndex].value.data[i]}</div>		
+					<div class="listItem focus">${this.curObj.value.data[i]}</div>		
 				`;
 			} else {
 				html += `
-					<div class="listItem">${gMenuChild.data[gMenuoIndex].value.data[i]}</div>		
+					<div class="listItem">${this.curObj.value.data[i]}</div>		
 				`;
 			}
 		}
-		document.querySelector('#container').innerHTML = html1 + html + html2;
-		this.changePage(gMenuChild.data[gMenuoIndex].curVal);
+		document.querySelector('#popBoxShow').style.display='block';
+		document.querySelector('#popBoxShow').innerHTML = html1 + html + html2;
+		this.changePage(this.curObj.curVal);
 	},
 	keyEvent: function(e) {
-		var curFocus = document.querySelector(".listItem.focus");
+		var curFocus = document.querySelector("#showNum .listItem.focus");
 		var curList = curFocus.parentElement.children;
 		var curIndex = [].indexOf.call(curList, curFocus);
 		if(e.keyCode == KeyEvent.DOM_VK_DOWN) {
@@ -228,30 +235,37 @@ var showSelect = {
 			}
 		}
 		if(e.keyCode == KeyEvent.DOM_VK_ENTER) {
-			window.gSocket.send(gMenuChild.data[gMenuoIndex].msg('set',curIndex),function(data){
-				if(data.error.code==0){
-					if(data.result){
-						gMenuChild.data[gMenuoIndex].setCallback(data);
-					}else{
-						gMenuChild.data[gMenuoIndex].setCallback(data,curIndex);
+			if(this.curObj.name=='Auto Synchronization'){
+				timeSetupTime.autoSync=this.curObj.value.data[curIndex];
+			}else if(this.curObj.name=='Power On Timer'){
+				timeSetupTime.onTimer=this.curObj.value.data[curIndex];
+			}else if(this.curObj.name=='Power Off Timer'){
+				timeSetupTime.offTimer=this.curObj.value.data[curIndex];
+			}else if(this.curObj.name=='singleRFScan'){
+//					window.gSocket.send({},data=>{});
+			}else if(this.curObj.name=='cableSingleRFScan'){
+				cableSingleRFScan.modulation=this.curObj.value.data[curIndex];
+				cableSingleRFScan.frequency=this.curObj.frequency;
+				cableSingleRFScan.symbolRate=this.curObj.symbolRate;
+			}else{
+				window.gSocket.send(this.curObj.msg('set',curIndex),function(data){
+					// console.log(data);
+					if(data.error.code==0){
+						this.curObj.setCallback(curIndex);
 					}
-//					if(gMenuChild.data[gMenuoIndex].name=='Internet Connection'){
-//						if(gMenuChild.data[gMenuoIndex].value.data.length>1){
-//							gMenuChild.data[gMenuoIndex].setCallback(data,curIndex);
-//						}
-//					}else if(gMenuChild.data[gMenuoIndex].name=='Interface'){
-//						gMenuChild.data[gMenuoIndex].setCallback(data,curIndex);
-//					}else if(gMenuChild.data[gMenuoIndex].name=='Wake On Lan'){
-//						gMenuChild.data[gMenuoIndex].setCallback(data,curIndex);
-//					}else{
-//						gMenuChild.data[gMenuoIndex].setCallback(data);
-//					}
-				}
-			});
+				}.bind(this));
+			}
 		}
 		//exit---返回键
 		if(e.keyCode == KeyEvent.DOM_VK_BACK_SPACE) {
-			returnListPage();
+			document.querySelector('#popBoxShow').style.display='none';
+			if(!this.curObj.msg){
+				gMenuPageName=this.curObj.name;
+				eval(this.curObj.name).render();
+			}else{
+				gMenuRenderSecond();
+				gMenuPageName='list';
+			}
 		}
 	},
 	changePage: function(index) {

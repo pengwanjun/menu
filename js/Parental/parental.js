@@ -12,7 +12,7 @@ var changePassword = {
 				</div>
 			</div>
 		`;
-		document.querySelector('#container').innerHTML = html;
+		document.querySelector('#showList').innerHTML = html;
 	},
 	keyEvent: function(e) {
 		var curFocus = document.querySelector('.focus');
@@ -94,34 +94,39 @@ var inputBlock = {
 			if(this.list[this.page][i].block) {
 				if(i == fIndex) {
 					html += `<div class="listItem focus">
-							<div>${this.list[this.page][i].index}</div>
-							<div>${this.list[this.page][i].name}</div>
+							<div class="number">${this.list[this.page][i].index}</div>
+							<div class="acName">${this.list[this.page][i].name}</div>
 							<div class="sel hasSel">选中</div>
 						</div>`;
 				} else {
 					html += `<div class="listItem">
-							<div>${this.list[this.page][i].index}</div>
-							<div>${this.list[this.page][i].name}</div>
+							<div class="number">${this.list[this.page][i].index}</div>
+							<div class="acName">${this.list[this.page][i].name}</div>
 							<div class="sel hasSel">选中</div>
 						</div>`;
 				}
 			} else {
 				if(i == fIndex) {
 					html += `<div class="listItem focus">
-							<div>${this.list[this.page][i].index}</div>
-							<div>${this.list[this.page][i].name}</div>
+							<div class="number">${this.list[this.page][i].index}</div>
+							<div class="acName">${this.list[this.page][i].name}</div>
 							<div class="sel">未选中</div>
 						</div>`;
 				} else {
 					html += `<div class="listItem">
-							<div>${this.list[this.page][i].index}</div>
-							<div>${this.list[this.page][i].name}</div>
+							<div class="number">${this.list[this.page][i].index}</div>
+							<div class="acName">${this.list[this.page][i].name}</div>
 							<div class="sel">未选中</div>
 						</div>`;
 				}
 			}
 		}
-		document.querySelector('#container').innerHTML = html + '</div></div>';
+		document.querySelector('#showList').innerHTML = html + '</div></div>';
+		document.querySelector('.menuOperate').innerHTML=`
+			<div class="operaEnter">Set</div>
+			<div class="operaSelect">Select</div>
+			<div class="operaExit">Back</div>
+		`;
 	},
 	keyEvent: function(e) {
 		var curFocus = document.querySelector(".focus");
@@ -237,34 +242,39 @@ var inputSkip = {
 			if(this.list[this.page][i].skip) {
 				if(i == fIndex) {
 					html += `<div class="listItem focus">
-							<div>${this.list[this.page][i].index}</div>
-							<div>${this.list[this.page][i].name}</div>
+							<div class="number">${this.list[this.page][i].index}</div>
+							<div class="acName">${this.list[this.page][i].name}</div>
 							<div class="sel hasSel">选中</div>
 						</div>`;
 				} else {
 					html += `<div class="listItem">
-							<div>${this.list[this.page][i].index}</div>
-							<div>${this.list[this.page][i].name}</div>
+							<div class="number">${this.list[this.page][i].index}</div>
+							<div class="acName">${this.list[this.page][i].name}</div>
 							<div class="sel hasSel">选中</div>
 						</div>`;
 				}
 			} else {
 				if(i == fIndex) {
 					html += `<div class="listItem focus">
-							<div>${this.list[this.page][i].index}</div>
-							<div>${this.list[this.page][i].name}</div>
+							<div class="number">${this.list[this.page][i].index}</div>
+							<div class="acName">${this.list[this.page][i].name}</div>
 							<div class="sel">未选中</div>
 						</div>`;
 				} else {
 					html += `<div class="listItem">
-							<div>${this.list[this.page][i].index}</div>
-							<div>${this.list[this.page][i].name}</div>
+							<div class="number">${this.list[this.page][i].index}</div>
+							<div class="acName">${this.list[this.page][i].name}</div>
 							<div class="sel">未选中</div>
 						</div>`;
 				}
 			}
 		}
-		document.querySelector('#container').innerHTML = html + '</div></div>';
+		document.querySelector('#showList').innerHTML = html + '</div></div>';
+		document.querySelector('.menuOperate').innerHTML=`
+			<div class="operaEnter">Set</div>
+			<div class="operaSelect">Select</div>
+			<div class="operaExit">Back</div>
+		`;
 	},
 	keyEvent: function(e) {
 		var curFocus = document.querySelector(".focus");
@@ -362,7 +372,7 @@ var password = {
 				"configId": "g_password__password"
 			}
 		}, (data) => {
-			console.log(data);
+//			console.log(data);
 			if(data.error.code == 0) {
 				this.curPwd += data.result.current;
 				var html = `
@@ -370,7 +380,7 @@ var password = {
 						<div class="input" data-pwd=""></div>
 					</div>
 				`;
-				document.querySelector('#container').innerHTML = html;
+				document.querySelector('#showList').innerHTML = html;
 			}
 		})
 	},
@@ -387,7 +397,7 @@ var password = {
 				}
 				gMenuChild = gMenuParent.data[4].value;
 				gMenuoIndex = canOperaDown(gMenuChild, -1);
-				gMenuClassName = 'secondList';
+				gMenuClassName = 'showList';
 				returnListPage();
 			} else if(pwd.length == 3) {
 				document.querySelector('.input').innerHTML = '';

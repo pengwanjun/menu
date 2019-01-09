@@ -38,13 +38,13 @@ function sliceArr(array, size) {
 function returnListPage() {
 	document.querySelector('#container').innerHTML = `
 				<div id="menuNav">
-					<span>Menu-${gMenuCurrent}</span>
+					<span>Menu-Video</span>
 				</div>
 				<div id="listContainer">
-					<div id="list">
-						<div class="firstList">
-						</div>
-						<div class="secondList">
+					<div class="menuList">
+					</div>
+					<div id="showList">
+						<div class="showList">
 						</div>
 					</div>
 				</div>

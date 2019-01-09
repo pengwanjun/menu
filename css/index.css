@@ -8,6 +8,11 @@ div{
 	outline: none;
 }
 
+.containerBox{
+	width: 80rem;
+	height: 45rem;
+	position: relative;
+}
 #container{
 	font-size: 16px;
 	color: #fff;
@@ -46,35 +51,67 @@ div{
 
 /*列表*/
 #listContainer{
-	width: 100%;
+	width: 80rem;
 	height: 29rem;
 	padding-top: 2rem;
 	padding-bottom: 2rem;
 }
-#list{
+#listContainer .menuList, #showList{
 	height: 27rem;
 	overflow: hidden;
 	position: relative;
+	display:inline-block;
 }
-.firstList, .secondList {
-	position: absolute;
-	top: 0px;
-}
-.firstList{
+#listContainer .menuList{
 	width: 20rem;
-	padding-right: 3rem;
-	left: 0px;
+	margin-right: 2rem;
 }
-.firstList .listItem{
+#listContainer .menuList .listItem{
 	margin-bottom: 2rem;
 	/*background-image: url('../img/timg.jpg');
 	background-size: 0.75rem 1rem;
 	background-repeat: no-repeat;
 	background-position: 90% center;*/
 }
-.secondList {
+.menuList .listItem span{
+	position: absolute;
+	right: 1.5rem;
+	top: 1.1rem;
+	vertical-align: middle;
+	display: inline-block;
+	width: 0.6rem;
+    height: 0.6rem;
+    border-top: 0.2rem solid transparent;
+    border-right: 0.2rem solid transparent;
+    transform: rotate(45deg);
+}
+.menuList .listItem.focus span{
+    border-color: #232B3E;
+}
+.menuList .listItem span.itemIcon{
+	border-color: #fff;
+}
+#showList{
 	width: 57rem;
-	left: 23rem;
+}
+#showList .showList{
+	position: relative;
+	top: 0px;
+}
+.showList .listItem .itemFocusIcon{	
+	position: absolute;
+	right: 1.5rem;
+	top: 1.1rem;
+	vertical-align: middle;
+	display: inline-block;
+	width: 0.6rem;
+    height: 0.6rem;
+    border-top: 0.2rem solid #fff;
+    border-right: 0.2rem solid #fff;
+    transform: rotate(45deg);
+}
+.showList .listItem.focus .itemFocusIcon{
+    border-color: #232B3E;
 }
 .listItem {
 	font-size: 1.33rem;
@@ -89,29 +126,34 @@ div{
 	background-color:#68CAD5;
 	color: #000;
 }
-.listItem .list{
+.showList .listItem .list{
 	margin-left: 1.25rem;
 }
-.listItem.disabled{
+.showList .listItem.disabled{
 	background: #CDC9C9;
 }
-.listItem.Video{
+.showList .listItem.Video{
 	/*background-image:*/
 }
-.listItem .left{
+.showList .listItem .left{
 	position: absolute;
 	left: 3rem;
 }
-.listItem .right{
+.showList .listItem .right{
 	position: absolute;
 	right: 3rem;
+	width: 30rem;
 }
-.listItem .right span{
+.showList .listItem .right .itemNumShow{
+	position: absolute;
+	right: 1.1rem;
+}
+.showList .listItem .right .selName{
+	width: 20rem;
+	text-align: center;
 	display: inline-block;
-	width: 7rem;
-	margin-left: 1rem;
 }
-.progress{
+.showList .progress{
 	display: inline-block;
 	position: relative;
 	vertical-align: middle;
@@ -119,18 +161,13 @@ div{
 	width: 20rem;
 	background: #fff;
 }
-.progress .front{
+.showList .progress .front{
 	position: absolute;
 	top: -0.25rem;
 	width: 0.6rem;
 	height: 0.6rem;
 	border-radius: 50%;
 	background: #fff;
-}
-.selName{
-	display: inline-block;
-	text-align: center;
-	width: 20rem;
 }
 
 #showNum{
@@ -170,18 +207,17 @@ div{
 	right: 0;
 	top: 0;
 }
-.selectBox{
+#showNum .selectBox{
 	height: 12rem;
 	overflow: hidden;
 	position: relative;
 }
-.selectList{
+#showNum .selectList{
 	position: absolute;
 	top: 0;
 	left: 0;
 	width: 100%;
 }
-
 
 /*channel scan*/
 .channelScan{
@@ -192,50 +228,79 @@ div{
 #channelSkip{
 	overflow: hidden;
 }
-.channelSkip{
+.channelSkip .listItem{
 	position: relative;
 	top: 0px;
 }
-#channelSkip .listItem div{
-	display: inline-block;
-	width: 200px;
+#channelSkip .listItem div.number{
+	width: 5rem;
+	position: absolute;
+	top: 0;
+	left: 0;
 }
-#channelSkip .listItem .sel{
+#channelSkip .listItem div.sel{
 	color: #CDC9C9;
+	width: 5rem;
+	position: absolute;
+	right: 0;
+	top: 0;
 }
 #channelSkip .listItem .sel.hasSel{
 	color: #FF0000;
+}
+#channelSkip .listItem div.acName{
+	margin-left: 5rem;
+	margin-right: 5rem;
+	text-align: left;
+	display:flex;
+	flex:1;
+}
+#channelSkip .listItem div.acName div{
+	display: inline-block;
+	width: 50%;
+	text-align: center;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }
 
 /*Channel Edit Detail*/
 #channelEditDetail .listItem div{
 	display: inline-block;
-	font-size: 16px;
 }
 
 /*cleanChannelList*/
 #popBoxShow{
-	position: relative;
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	z-index: 999;
+	background-color: rgb(35, 43, 62);
+	display: none;
+	color: #fff;
+	font-size: 1.33rem;
 }
 #popBoxShow .popBoxShow{
 	width: 35rem;
 	text-align: center;
-	line-height: 4rem;
+	line-height: 7rem;
 	padding: 10rem 5rem;
 }
 #popBoxShow .sure,
 #popBoxShow .cancel{
 	background: #333;
 	color: #fff;
-	border-radius: 10px;
+	border-radius: 0.5rem;
 	display: inline-block;
-	width: 60px;
-	height: 30px;
-	line-height: 30px;
+	width: 6rem;
+	height: 3rem;
+	line-height: 3rem;
 	text-align: center;
 }
 #popBoxShow .btn .focus{
-	background: #FF0000;
+	background: #68CAD5;
 }
 
 /*divXRegistration*/
@@ -279,8 +344,17 @@ div{
 }
 
 /*changePassword*/
-#changePassword .listItem div{
-	display: inline-block;
+#changePassword .listItem div:first-child{
+	width: 21%;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+#changePassword .listItem .input{
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 50%;
 }
 
 /*IPSetting*/
@@ -307,7 +381,7 @@ div{
 #IPSetting .inputItem,
 #ipv6Config .inputItem{
 	width: 80px;
-	background: #FFB5C5;
+	background: #CDC9C9;
 	border-radius: 7px;
 	height: 30px;
 	vertical-align: middle;
@@ -322,3 +396,213 @@ div{
 .versionInfo div{
 	display: inline-block;
 }
+
+
+/*timeSetupTime*/
+#timeSetupTime .listItem div{
+	display: inline-block;
+}
+#timeSetupTime .listItem{
+	text-align: left;
+	padding: 0 2rem;
+	position: relative;
+}
+#timeSetupTime .content{
+	position: absolute;
+	right: 2rem;
+}
+#timeSetupTime span{
+    display: inline-block;
+    width: 0.6rem;
+    height: 0.6rem;
+    border-top: 0.2rem solid #fff;
+    border-right: 0.2rem solid #fff;
+    transform: rotate(45deg);
+    margin-bottom: 0.1rem;
+    margin-left: 1rem;
+}
+#timeSetupTime .listItem.focus span{
+	border-color: #232B3E;
+}
+#timeSetupTime .inputItem.inputFocus{
+	color: #FF0000;
+}
+#wirelessSetting .listItem{
+	text-align: left;
+	padding: 0 2rem;
+}
+#wirelessSetting .listItem.focus{	
+	background: #68CAD5;
+}
+#wirelessScan .scanContent{
+	padding: 2rem 4rem;
+}
+#wirelessScan .ssid{
+	display: inline-block;
+	width: 20rem;
+}
+#wirelessScan .security{
+	display: inline-block;
+	width: 30rem;
+	text-align: center;
+}
+#wirelessScan .signal{
+	display: inline-block;
+	width: 20rem;
+	text-align: right;
+}
+#wirelessScan .scanOperate div{
+	display: inline-block;
+}
+#wirelessScan .listItem{
+	text-align: left;
+}
+#wirelessScan .scanGuide{
+	margin-bottom: 1rem;
+}
+#wirelessScan .listContent{
+	height: 27rem;
+	overflow: hidden;
+	position: relative;
+}
+#wirelessScan .scanList{
+	position: absolute;
+	top: 0;
+	width: 100%;
+}
+#wirelessScan .inputkey{
+	border: 0.125rem solid #68CAD5;
+	height: 3rem;
+	line-height: 3rem;
+	border-radius: 0.15rem;
+}
+
+/*password*/
+#password .input{
+	border: 0.15rem solid #68CAD5;
+	height: 3rem;
+	line-height: 3rem;
+	border-radius: 0.25rem;
+}
+/**/
+.analogManualScan .listItem span,
+#cableChannelScanStart .rt span{
+	position: absolute;
+	right: 1.5rem;
+	top: 1.1rem;
+	vertical-align: middle;
+	display: inline-block;
+	width: 0.6rem;
+    height: 0.6rem;
+    border-top: 0.2rem solid #fff;
+    border-right: 0.2rem solid #fff;
+    transform: rotate(45deg);
+}
+.analogManualScan .listItem .input{
+	display: inline-block;
+}
+/*cableChannelScan*/
+#cableChannelScanStart .listItem{
+	text-align: left;
+}
+#cableChannelScanStart .listItem div{
+	display: inline-block;
+}
+#cableChannelScanStart .scanModeItem{
+	position: relative;
+	height: 3rem;
+	line-height: 3rem;
+	background: #CDC9C9;
+}
+#cableChannelScanStart .lf{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 30rem;
+}
+#cableChannelScanStart .mid{
+	margin-left: 30rem;
+	margin-right: 5rem;
+}
+#cableChannelScanStart .rt{
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 5rem;
+}
+#cableChannelScanStart .focus .rt span{
+	border-color: #000;
+}
+/* cableSingleRFScan */
+.scanList .listItem,
+.scanList .listItemDisabled{
+	padding: 0 3rem;
+	margin: 1rem 0;
+}
+.scanList .listItemDisabled{
+	text-align: center;
+}
+.scanList .listItem div,
+.scanList .listItemDisabled div{
+	display: inline-block;
+}
+.scanList .lf{
+	width: 21rem;
+	text-align: left;
+}
+.scanList .mid{
+	width: 22rem;
+}
+.scanList .rt{
+	width: 7rem;
+	position: relative;
+}
+.scanList .rt span{
+	display: inline-block;
+	width: 0.6rem;
+    height: 0.6rem;
+    border-top: 0.2rem solid #fff;
+    border-right: 0.2rem solid #fff;
+    transform: rotate(45deg);
+}
+.scanList .mid .inputNum{
+	background: #fff;
+	height: 2rem;
+	line-height: 2rem;
+	width: 100%;
+	color: #000;
+}
+.scanList .focus .mid .inputNum{
+	background: #000;
+	color: #fff;
+}
+.scanList .mid.progress,
+.scanProgress .progress{
+	display: inline-block;
+	position: relative;
+	vertical-align: middle;
+	height: 0.1rem;
+	width: 22rem;
+	background: #fff;
+}
+.scanList .mid.progress .front,
+.scanProgress .progress .front{
+	position: absolute;
+	top: -0.25rem;
+	width: 0.6rem;
+	height: 0.6rem;
+	border-radius: 50%;
+	background: #fff;
+}
+.scanProgress{
+	width: 30rem;
+	margin: 0 auto;
+}
+.scanProgressItem{
+	height: 3rem;
+	line-height: 3rem;
+}
+.scanProgressItem div{
+	display: inline-block;
+}
+

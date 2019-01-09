@@ -11,9 +11,9 @@ var gMenuVideoMjc = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getMinMaxValue",
+					"method": "mtk.webui.config.queryMinMaxValue",
 					"params": {
-						"configId": "g_video__vid_mjc_effect"
+						"configId": ["g_video__vid_mjc_effect"]
 					}
 				};
 			} else {
@@ -30,15 +30,15 @@ var gMenuVideoMjc = [{
 		getCallback: function(data) { //获取value值
 			//			console.log(data.result);
 			let arr = [];
-			for(let i = data.result.min; i <= data.result.max; i++) {
+			for(let i = data.result[0].min; i <= data.result[0].max; i++) {
 				arr.push(this.value.dataList[i]);
 			}
 			this.value.data = arr;
-			this.curVal = data.result.current;
+			this.curVal = data.result[0].current;
 		},
-		setCallback: function(data) { //设置value值
+		setCallback: function(val) { //设置value值
 			//			console.log(data.result);
-			this.curVal = data.result.current;
+			this.curVal = val;
 		}
 	},
 	{
@@ -53,9 +53,9 @@ var gMenuVideoMjc = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getMinMaxValue",
+					"method": "mtk.webui.config.queryMinMaxValue",
 					"params": {
-						"configId": "g_video__vid_mjc_demo"
+						"configId": ["g_video__vid_mjc_demo"]
 					}
 				};
 			} else {
@@ -72,15 +72,15 @@ var gMenuVideoMjc = [{
 		getCallback: function(data) { //获取value值
 			//			console.log(data.result);
 			let arr = [];
-			for(let i = data.result.min; i <= data.result.max; i++) {
+			for(let i = data.result[0].min; i <= data.result[0].max; i++) {
 				arr.push(this.value.dataList[i]);
 			}
 			this.value.data = arr;
-			this.curVal = data.result.current;
+			this.curVal = data.result[0].current;
 		},
-		setCallback: function(data) { //设置value值
+		setCallback: function(val) { //设置value值
 			//			console.log(data.result);
-			this.curVal = data.result.current;
+			this.curVal = val;
 		}
 	},
 	{
@@ -106,9 +106,9 @@ var gMenuVideoCt = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getMinMaxValue",
+					"method": "mtk.webui.config.queryMinMaxValue",
 					"params": {
-						"configId": "g_video__clr_temp"
+						"configId": ["g_video__clr_temp"]
 					}
 				};
 			} else {
@@ -125,15 +125,15 @@ var gMenuVideoCt = [{
 		getCallback: function(data) { //获取value值
 			//			console.log(data.result);
 			let arr = [];
-			for(let i = data.result.min; i <= data.result.max; i++) {
+			for(let i = data.result[0].min; i <= data.result[0].max; i++) {
 				arr.push(this.value.dataList[i]);
 			}
 			this.value.data = arr;
-			this.curVal = data.result.current;
+			this.curVal = data.result[0].current;
 		},
-		setCallback: function(data) { //设置value值
+		setCallback: function(val) { //设置value值
 			//			console.log(data.result);
-			this.curVal = data.result.current;
+			this.curVal = val;
 		}
 	},
 	{
@@ -148,9 +148,9 @@ var gMenuVideoCt = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getMinMaxValue",
+					"method": "mtk.webui.config.queryMinMaxValue",
 					"params": {
-						"configId": "g_video__clr_gain_r"
+						"configId": ["g_video__clr_gain_r"]
 					}
 				};
 			} else {
@@ -166,9 +166,9 @@ var gMenuVideoCt = [{
 		},
 		getCallback: function(data) { //获取value值
 			//			console.log(data);
-			this.value.min = data.result.min;
-			this.value.max = data.result.max;
-			this.value.data = data.result.current;
+			this.value.min = data.result[0].min;
+			this.value.max = data.result[0].max;
+			this.value.data = data.result[0].current;
 		}
 	},
 	{
@@ -183,9 +183,9 @@ var gMenuVideoCt = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getMinMaxValue",
+					"method": "mtk.webui.config.queryMinMaxValue",
 					"params": {
-						"configId": "g_video__clr_gain_g"
+						"configId": ["g_video__clr_gain_g"]
 					}
 				};
 			} else {
@@ -201,9 +201,9 @@ var gMenuVideoCt = [{
 		},
 		getCallback: function(data) { //获取value值
 			//			console.log(data);
-			this.value.min = data.result.min;
-			this.value.max = data.result.max;
-			this.value.data = data.result.current;
+			this.value.min = data.result[0].min;
+			this.value.max = data.result[0].max;
+			this.value.data = data.result[0].current;
 		}
 	},
 	{
@@ -218,9 +218,9 @@ var gMenuVideoCt = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getMinMaxValue",
+					"method": "mtk.webui.config.queryMinMaxValue",
 					"params": {
-						"configId": "g_video__clr_gain_b"
+						"configId": ["g_video__clr_gain_b"]
 					}
 				};
 			} else {
@@ -236,9 +236,9 @@ var gMenuVideoCt = [{
 		},
 		getCallback: function(data) { //获取value值
 			//			console.log(data);
-			this.value.min = data.result.min;
-			this.value.max = data.result.max;
-			this.value.data = data.result.current;
+			this.value.min = data.result[0].min;
+			this.value.max = data.result[0].max;
+			this.value.data = data.result[0].current;
 		}
 	}
 ];
@@ -254,9 +254,9 @@ var gMenuVideoAv = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getMinMaxValue",
+					"method": "mtk.webui.config.queryMinMaxValue",
 					"params": {
-						"configId": "g_video__vid_nr"
+						"configId": ["g_video__vid_nr"]
 					}
 				};
 			} else {
@@ -273,15 +273,15 @@ var gMenuVideoAv = [{
 		getCallback: function(data) { //获取value值
 			//			console.log(data.result);
 			let arr = [];
-			for(let i = data.result.min; i <= data.result.max; i++) {
+			for(let i = data.result[0].min; i <= data.result[0].max; i++) {
 				arr.push(this.value.dataList[i]);
 			}
 			this.value.data = arr;
-			this.curVal = data.result.current;
+			this.curVal = data.result[0].current;
 		},
-		setCallback: function(data) { //设置value值
+		setCallback: function(val) { //设置value值
 			//			console.log(data.result);
-			this.curVal = data.result.current;
+			this.curVal = val;
 		}
 	},
 	{
@@ -296,9 +296,9 @@ var gMenuVideoAv = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getMinMaxValue",
+					"method": "mtk.webui.config.queryMinMaxValue",
 					"params": {
-						"configId": "g_video__vid_mpeg_nr"
+						"configId": ["g_video__vid_mpeg_nr"]
 					}
 				};
 			} else {
@@ -315,15 +315,15 @@ var gMenuVideoAv = [{
 		getCallback: function(data) { //获取value值
 			//						console.log(data.result);
 			let arr = [];
-			for(let i = data.result.min; i <= data.result.max; i++) {
+			for(let i = data.result[0].min; i <= data.result[0].max; i++) {
 				arr.push(this.value.dataList[i]);
 			}
 			this.value.data = arr;
-			this.curVal = data.result.current;
+			this.curVal = data.result[0].current;
 		},
-		setCallback: function(data) { //设置value值
+		setCallback: function(val) { //设置value值
 			//			console.log(data.result);
-			this.curVal = data.result.current;
+			this.curVal = val;
 		}
 	},
 	{
@@ -338,9 +338,9 @@ var gMenuVideoAv = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getMinMaxValue",
+					"method": "mtk.webui.config.queryMinMaxValue",
 					"params": {
-						"configId": "g_video__vid_luma"
+						"configId": ["g_video__vid_luma"]
 					}
 				};
 			} else {
@@ -357,15 +357,15 @@ var gMenuVideoAv = [{
 		getCallback: function(data) { //获取value值
 			//						console.log(data.result);
 			let arr = [];
-			for(let i = data.result.min; i <= data.result.max; i++) {
+			for(let i = data.result[0].min; i <= data.result[0].max; i++) {
 				arr.push(this.value.dataList[i]);
 			}
 			this.value.data = arr;
-			this.curVal = data.result.current;
+			this.curVal = data.result[0].current;
 		},
-		setCallback: function(data) { //设置value值
+		setCallback: function(val) { //设置value值
 			//			console.log(data.result);
-			this.curVal = data.result.current;
+			this.curVal = val;
 		}
 	},
 	{
@@ -380,9 +380,9 @@ var gMenuVideoAv = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getMinMaxValue",
+					"method": "mtk.webui.config.queryMinMaxValue",
 					"params": {
-						"configId": "g_video__vid_flash_tone"
+						"configId": ["g_video__vid_flash_tone"]
 					}
 				};
 			} else {
@@ -399,15 +399,15 @@ var gMenuVideoAv = [{
 		getCallback: function(data) { //获取value值
 			//						console.log(data.result);
 			let arr = [];
-			for(let i = data.result.min; i <= data.result.max; i++) {
+			for(let i = data.result[0].min; i <= data.result[0].max; i++) {
 				arr.push(this.value.dataList[i]);
 			}
 			this.value.data = arr;
-			this.curVal = data.result.current;
+			this.curVal = data.result[0].current;
 		},
-		setCallback: function(data) { //设置value值
+		setCallback: function(val) { //设置value值
 			//			console.log(data.result);
-			this.curVal = data.result.current;
+			this.curVal = val;
 		}
 	},
 	{
@@ -422,9 +422,9 @@ var gMenuVideoAv = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getMinMaxValue",
+					"method": "mtk.webui.config.queryMinMaxValue",
 					"params": {
-						"configId": "g_video__vid_di_film_mode"
+						"configId": ["g_video__vid_di_film_mode"]
 					}
 				};
 			} else {
@@ -441,15 +441,15 @@ var gMenuVideoAv = [{
 		getCallback: function(data) { //获取value值
 			//						console.log(data.result);
 			let arr = [];
-			for(let i = data.result.min; i <= data.result.max; i++) {
+			for(let i = data.result[0].min; i <= data.result[0].max; i++) {
 				arr.push(this.value.dataList[i]);
 			}
 			this.value.data = arr;
-			this.curVal = data.result.current;
+			this.curVal = data.result[0].current;
 		},
-		setCallback: function(data) { //设置value值
+		setCallback: function(val) { //设置value值
 			//			console.log(data.result);
-			this.curVal = data.result.current;
+			this.curVal = val;
 		}
 	},
 	{
@@ -464,9 +464,9 @@ var gMenuVideoAv = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getMinMaxValue",
+					"method": "mtk.webui.config.queryMinMaxValue",
 					"params": {
-						"configId": "g_video__vid_blue_stretch"
+						"configId": ["g_video__vid_blue_stretch"]
 					}
 				};
 			} else {
@@ -483,15 +483,15 @@ var gMenuVideoAv = [{
 		getCallback: function(data) { //获取value值
 			//						console.log(data.result);
 			let arr = [];
-			for(let i = data.result.min; i <= data.result.max; i++) {
+			for(let i = data.result[0].min; i <= data.result[0].max; i++) {
 				arr.push(this.value.dataList[i]);
 			}
 			this.value.data = arr;
-			this.curVal = data.result.current;
+			this.curVal = data.result[0].current;
 		},
-		setCallback: function(data) { //设置value值
+		setCallback: function(val) { //设置value值
 			//			console.log(data.result);
-			this.curVal = data.result.current;
+			this.curVal = val;
 		}
 	},
 	{
@@ -506,9 +506,9 @@ var gMenuVideoAv = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getMinMaxValue",
+					"method": "mtk.webui.config.queryMinMaxValue",
 					"params": {
-						"configId": "g_video__vid_game_mode"
+						"configId": ["g_video__vid_game_mode"]
 					}
 				};
 			} else {
@@ -525,15 +525,15 @@ var gMenuVideoAv = [{
 		getCallback: function(data) { //获取value值
 			//						console.log(data.result);
 			let arr = [];
-			for(let i = data.result.min; i <= data.result.max; i++) {
+			for(let i = data.result[0].min; i <= data.result[0].max; i++) {
 				arr.push(this.value.dataList[i]);
 			}
 			this.value.data = arr;
-			this.curVal = data.result.current;
+			this.curVal = data.result[0].current;
 		},
-		setCallback: function(data) { //设置value值
+		setCallback: function(val) { //设置value值
 			//			console.log(data.result);
-			this.curVal = data.result.current;
+			this.curVal = val;
 		}
 	},
 	{
@@ -556,9 +556,9 @@ var gMenuVideoAv = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getMinMaxValue",
+					"method": "mtk.webui.config.queryMinMaxValue",
 					"params": {
-						"configId": "g_video__vid_black_bar_detect"
+						"configId": ["g_video__vid_black_bar_detect"]
 					}
 				};
 			} else {
@@ -575,15 +575,15 @@ var gMenuVideoAv = [{
 		getCallback: function(data) { //获取value值
 			//									console.log(data.result);
 			let arr = [];
-			for(let i = data.result.min; i <= data.result.max; i++) {
+			for(let i = data.result[0].min; i <= data.result[0].max; i++) {
 				arr.push(this.value.dataList[i]);
 			}
 			this.value.data = arr;
-			this.curVal = data.result.current;
+			this.curVal = data.result[0].current;
 		},
-		setCallback: function(data) { //设置value值
+		setCallback: function(val) { //设置value值
 			//			console.log(data.result);
-			this.curVal = data.result.current;
+			this.curVal = val;
 		}
 	},
 	{
@@ -598,9 +598,9 @@ var gMenuVideoAv = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getMinMaxValue",
+					"method": "mtk.webui.config.queryMinMaxValue",
 					"params": {
-						"configId": "g_video__vid_super_resolution"
+						"configId": ["g_video__vid_super_resolution"]
 					}
 				};
 			} else {
@@ -617,15 +617,15 @@ var gMenuVideoAv = [{
 		getCallback: function(data) { //获取value值
 			//									console.log(data.result);
 			let arr = [];
-			for(let i = data.result.min; i <= data.result.max; i++) {
+			for(let i = data.result[0].min; i <= data.result[0].max; i++) {
 				arr.push(this.value.dataList[i]);
 			}
 			this.value.data = arr;
-			this.curVal = data.result.current;
+			this.curVal = data.result[0].current;
 		},
-		setCallback: function(data) { //设置value值
+		setCallback: function(val) { //设置value值
 			//			console.log(data.result);
-			this.curVal = data.result.current;
+			this.curVal = val;
 		}
 	}
 ];
@@ -641,9 +641,9 @@ var gMenuVideo = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getMinMaxValue",
+					"method": "mtk.webui.config.queryMinMaxValue",
 					"params": {
-						"configId": "g_video__picture_mode"
+						"configId": ["g_video__picture_mode"]
 					}
 				};
 			} else {
@@ -660,15 +660,15 @@ var gMenuVideo = [{
 		getCallback: function(data) { //获取value值
 			//						console.log(data.result);
 			let arr = [];
-			for(let i = data.result.min; i <= data.result.max; i++) {
+			for(let i = data.result[0].min; i <= data.result[0].max; i++) {
 				arr.push(this.value.dataList[i]);
 			}
 			this.value.data = arr;
-			this.curVal = data.result.current;
+			this.curVal = data.result[0].current;
 		},
-		setCallback: function(data) { //设置value值
+		setCallback: function(val) { //设置value值
 			//						console.log(data);
-			//			this.curVal = data.result.current;
+			this.curVal = val;
 		}
 	},
 	{
@@ -683,9 +683,9 @@ var gMenuVideo = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getMinMaxValue",
+					"method": "mtk.webui.config.queryMinMaxValue",
 					"params": {
-						"configId": "g_disp__disp_back_light"
+						"configId": ["g_disp__disp_back_light"]
 					}
 				};
 			} else {
@@ -700,10 +700,10 @@ var gMenuVideo = [{
 			}
 		},
 		getCallback: function(data) { //获取value值
-			//						console.log(data.result);
-			this.value.min = data.result.min;
-			this.value.max = data.result.max;
-			this.value.data = data.result.current;
+			//									console.log(data.result);
+			this.value.min = data.result[0].min;
+			this.value.max = data.result[0].max;
+			this.value.data = data.result[0].current;
 		}
 	},
 	{
@@ -718,9 +718,9 @@ var gMenuVideo = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getMinMaxValue",
+					"method": "mtk.webui.config.queryMinMaxValue",
 					"params": {
-						"configId": "g_video__brightness"
+						"configId": ["g_video__brightness"]
 					}
 				};
 			} else {
@@ -736,9 +736,9 @@ var gMenuVideo = [{
 		},
 		getCallback: function(data) { //获取value值
 			//			console.log(data);
-			this.value.min = data.result.min;
-			this.value.max = data.result.max;
-			this.value.data = data.result.current;
+			this.value.min = data.result[0].min;
+			this.value.max = data.result[0].max;
+			this.value.data = data.result[0].current;
 		}
 	},
 	{
@@ -753,9 +753,9 @@ var gMenuVideo = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getMinMaxValue",
+					"method": "mtk.webui.config.queryMinMaxValue",
 					"params": {
-						"configId": "g_video__contrast"
+						"configId": ["g_video__contrast"]
 					}
 				};
 			} else {
@@ -771,9 +771,9 @@ var gMenuVideo = [{
 		},
 		getCallback: function(data) { //获取value值
 			//			console.log(data);
-			this.value.min = data.result.min;
-			this.value.max = data.result.max;
-			this.value.data = data.result.current;
+			this.value.min = data.result[0].min;
+			this.value.max = data.result[0].max;
+			this.value.data = data.result[0].current;
 		}
 	},
 	{
@@ -788,9 +788,9 @@ var gMenuVideo = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getMinMaxValue",
+					"method": "mtk.webui.config.queryMinMaxValue",
 					"params": {
-						"configId": "g_video__vid_sat"
+						"configId": ["g_video__vid_sat"]
 					}
 				};
 			} else {
@@ -806,9 +806,9 @@ var gMenuVideo = [{
 		},
 		getCallback: function(data) { //获取value值
 			//			console.log(data);
-			this.value.min = data.result.min;
-			this.value.max = data.result.max;
-			this.value.data = data.result.current;
+			this.value.min = data.result[0].min;
+			this.value.max = data.result[0].max;
+			this.value.data = data.result[0].current;
 		}
 	},
 	{
@@ -823,9 +823,9 @@ var gMenuVideo = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getMinMaxValue",
+					"method": "mtk.webui.config.queryMinMaxValue",
 					"params": {
-						"configId": "g_video__vid_hue"
+						"configId": ["g_video__vid_hue"]
 					}
 				};
 			} else {
@@ -841,9 +841,9 @@ var gMenuVideo = [{
 		},
 		getCallback: function(data) { //获取value值
 			//			console.log(data);
-			this.value.min = data.result.min;
-			this.value.max = data.result.max;
-			this.value.data = data.result.current;
+			this.value.min = data.result[0].min;
+			this.value.max = data.result[0].max;
+			this.value.data = data.result[0].current;
 		}
 	},
 	{
@@ -858,9 +858,9 @@ var gMenuVideo = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getMinMaxValue",
+					"method": "mtk.webui.config.queryMinMaxValue",
 					"params": {
-						"configId": "g_video__vid_shp"
+						"configId": ["g_video__vid_shp"]
 					}
 				};
 			} else {
@@ -876,9 +876,9 @@ var gMenuVideo = [{
 		},
 		getCallback: function(data) { //获取value值
 			//			console.log(data);
-			this.value.min = data.result.min;
-			this.value.max = data.result.max;
-			this.value.data = data.result.current;
+			this.value.min = data.result[0].min;
+			this.value.max = data.result[0].max;
+			this.value.data = data.result[0].current;
 		}
 	},
 	{
@@ -893,9 +893,9 @@ var gMenuVideo = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getMinMaxValue",
+					"method": "mtk.webui.config.queryMinMaxValue",
 					"params": {
-						"configId": "g_video__vid_blue_light"
+						"configId": ["g_video__vid_blue_light"]
 					}
 				};
 			} else {
@@ -911,9 +911,9 @@ var gMenuVideo = [{
 		},
 		getCallback: function(data) { //获取value值
 			//			console.log(data);
-			this.value.min = data.result.min;
-			this.value.max = data.result.max;
-			this.value.data = data.result.current;
+			this.value.min = data.result[0].min;
+			this.value.max = data.result[0].max;
+			this.value.data = data.result[0].current;
 		}
 	},
 	{
@@ -928,9 +928,9 @@ var gMenuVideo = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getValue",
+					"method": "mtk.webui.config.queryValue",
 					"params": {
-						"configId": "g_video__dovi_user_swicth"
+						"configId": ["g_video__dovi_user_swicth"]
 					}
 				};
 			} else {
@@ -945,13 +945,12 @@ var gMenuVideo = [{
 			}
 		},
 		getCallback: function(data) { //获取value值
-			//						console.log(data);
+//			console.log(data);
 			this.value.data = this.value.dataList;
-			this.curVal = data.result.current;
+			this.curVal = data.result[0].current;
 		},
-		setCallback: function(data) { //设置value值
-			//			console.log(data.result);
-			this.curVal = data.result.current;
+		setCallback: function(val) { //设置value值
+			this.curVal = val;
 		}
 	},
 	{
@@ -966,9 +965,9 @@ var gMenuVideo = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getMinMaxValue",
+					"method": "mtk.webui.config.queryMinMaxValue",
 					"params": {
-						"configId": "g_disp__disp_gamma"
+						"configId": ["g_disp__disp_gamma"]
 					}
 				};
 			} else {
@@ -984,15 +983,15 @@ var gMenuVideo = [{
 		},
 		getCallback: function(data) { //获取value值
 			let arr = [];
-			for(let i = data.result.min - 1; i <= data.result.max - 1; i++) {
+			for(let i = data.result[0].min - 1; i <= data.result[0].max - 1; i++) {
 				arr.push(this.value.dataList[i]);
 			}
 			this.value.data = arr;
-			this.curVal = data.result.current - 1;
+			this.curVal = data.result[0].current - 1;
 		},
-		setCallback: function(data) { //设置value值
+		setCallback: function(val) { //设置value值
 			//			console.log(data.result);
-			this.curVal = data.result.current - 1;
+			this.curVal = val - 1;
 		}
 	},
 	{
@@ -1007,9 +1006,9 @@ var gMenuVideo = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getMinMaxValue",
+					"method": "mtk.webui.config.queryMinMaxValue",
 					"params": {
-						"configId": "g_video__vid_hdr"
+						"configId": ["g_video__vid_hdr"]
 					}
 				};
 			} else {
@@ -1025,15 +1024,15 @@ var gMenuVideo = [{
 		},
 		getCallback: function(data) { //获取value值
 			let arr = [];
-			for(let i = data.result.min; i <= data.result.max; i++) {
+			for(let i = data.result[0].min; i <= data.result[0].max; i++) {
 				arr.push(this.value.dataList[i]);
 			}
 			this.value.data = arr;
-			this.curVal = data.result.current;
+			this.curVal = data.result[0].current;
 		},
-		setCallback: function(data) { //设置value值
+		setCallback: function(val) { //设置value值
 			//			console.log(data.result);
-			this.curVal = data.result.current;
+			this.curVal = val;
 		}
 	},
 	{
@@ -1068,9 +1067,9 @@ var gMenuAudioDol = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getMinMaxValue",
+					"method": "mtk.webui.config.queryMinMaxValue",
 					"params": {
-						"configId": "g_audio__dolby_audio_processing"
+						"configId": ["g_audio__dolby_audio_processing"]
 					}
 				};
 			} else {
@@ -1086,15 +1085,15 @@ var gMenuAudioDol = [{
 		},
 		getCallback: function(data) { //获取value值
 			let arr = [];
-			for(let i = data.result.min; i <= data.result.max; i++) {
+			for(let i = data.result[0].min; i <= data.result[0].max; i++) {
 				arr.push(this.value.dataList[i]);
 			}
 			this.value.data = arr;
-			this.curVal = data.result.current;
+			this.curVal = data.result[0].current;
 		},
-		setCallback: function(data) { //设置value值
+		setCallback: function(val) { //设置value值
 			//			console.log(data.result);
-			this.curVal = data.result.current;
+			this.curVal = val;
 		}
 	},
 	{
@@ -1109,9 +1108,9 @@ var gMenuAudioDol = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getMinMaxValue",
+					"method": "mtk.webui.config.queryMinMaxValue",
 					"params": {
-						"configId": "g_audio__dolby_sound_mode"
+						"configId": ["g_audio__dolby_sound_mode"]
 					}
 				};
 			} else {
@@ -1127,15 +1126,15 @@ var gMenuAudioDol = [{
 		},
 		getCallback: function(data) { //获取value值
 			let arr = [];
-			for(let i = data.result.min; i <= data.result.max; i++) {
+			for(let i = data.result[0].min; i <= data.result[0].max; i++) {
 				arr.push(this.value.dataList[i]);
 			}
 			this.value.data = arr;
-			this.curVal = data.result.current;
+			this.curVal = data.result[0].current;
 		},
-		setCallback: function(data) { //设置value值
+		setCallback: function(val) { //设置value值
 			//			console.log(data.result);
-			this.curVal = data.result.current;
+			this.curVal = val;
 		}
 	},
 	{
@@ -1150,9 +1149,9 @@ var gMenuAudioDol = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getMinMaxValue",
+					"method": "mtk.webui.config.queryMinMaxValue",
 					"params": {
-						"configId": "g_audio__volume_leveler"
+						"configId": ["g_audio__volume_leveler"]
 					}
 				};
 			} else {
@@ -1168,15 +1167,15 @@ var gMenuAudioDol = [{
 		},
 		getCallback: function(data) { //获取value值
 			let arr = [];
-			for(let i = data.result.min; i <= data.result.max; i++) {
+			for(let i = data.result[0].min; i <= data.result[0].max; i++) {
 				arr.push(this.value.dataList[i]);
 			}
 			this.value.data = arr;
-			this.curVal = data.result.current;
+			this.curVal = data.result[0].current;
 		},
-		setCallback: function(data) { //设置value值
-			//			console.log(data.result);
-			this.curVal = data.result.current;
+		setCallback: function(val) { //设置value值
+			//			console.log(data);
+			this.curVal = val;
 		}
 	},
 	{
@@ -1191,9 +1190,9 @@ var gMenuAudioDol = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getMinMaxValue",
+					"method": "mtk.webui.config.queryMinMaxValue",
 					"params": {
-						"configId": "g_audio__dialogue_enhancer"
+						"configId": ["g_audio__dialogue_enhancer"]
 					}
 				};
 			} else {
@@ -1209,15 +1208,15 @@ var gMenuAudioDol = [{
 		},
 		getCallback: function(data) { //获取value值
 			let arr = [];
-			for(let i = data.result.min; i <= data.result.max; i++) {
+			for(let i = data.result[0].min; i <= data.result[0].max; i++) {
 				arr.push(this.value.dataList[i]);
 			}
 			this.value.data = arr;
-			this.curVal = data.result.current;
+			this.curVal = data.result[0].current;
 		},
-		setCallback: function(data) { //设置value值
-			//			console.log(data.result);
-			this.curVal = data.result.current;
+		setCallback: function(val) { //设置value值
+			//			console.log(data);
+			this.curVal = val;
 		}
 	},
 	{
@@ -1232,9 +1231,9 @@ var gMenuAudioDol = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getMinMaxValue",
+					"method": "mtk.webui.config.queryMinMaxValue",
 					"params": {
-						"configId": "g_audio__speaker_virtualizer"
+						"configId": ["g_audio__speaker_virtualizer"]
 					}
 				};
 			} else {
@@ -1250,15 +1249,15 @@ var gMenuAudioDol = [{
 		},
 		getCallback: function(data) { //获取value值
 			let arr = [];
-			for(let i = data.result.min; i <= data.result.max; i++) {
+			for(let i = data.result[0].min; i <= data.result[0].max; i++) {
 				arr.push(this.value.dataList[i]);
 			}
 			this.value.data = arr;
-			this.curVal = data.result.current;
+			this.curVal = data.result[0].current;
 		},
-		setCallback: function(data) { //设置value值
+		setCallback: function(val) { //设置value值
 			//			console.log(data.result);
-			this.curVal = data.result.current;
+			this.curVal = val;
 		}
 	}
 ];
@@ -1284,9 +1283,9 @@ var gMenuAudioVisuallyImpaired = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getMinMaxValue",
+					"method": "mtk.webui.config.queryMinMaxValue",
 					"params": {
-						"configId": "g_audio__aud_ad_speaker"
+						"configId": ["g_audio__aud_ad_speaker"]
 					}
 				};
 			} else {
@@ -1302,15 +1301,15 @@ var gMenuAudioVisuallyImpaired = [{
 		},
 		getCallback: function(data) { //获取value值
 			let arr = [];
-			for(let i = data.result.min; i <= data.result.max; i++) {
+			for(let i = data.result[0].min; i <= data.result[0].max; i++) {
 				arr.push(this.value.dataList[i]);
 			}
 			this.value.data = arr;
-			this.curVal = data.result.current;
+			this.curVal = data.result[0].current;
 		},
-		setCallback: function(data) { //设置value值
+		setCallback: function(val) { //设置value值
 			//			console.log(data.result);
-			this.curVal = data.result.current;
+			this.curVal = val;
 		}
 	},
 	{
@@ -1325,9 +1324,9 @@ var gMenuAudioVisuallyImpaired = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getMinMaxValue",
+					"method": "mtk.webui.config.queryMinMaxValue",
 					"params": {
-						"configId": "g_audio__aud_ad_hdphone"
+						"configId": ["g_audio__aud_ad_hdphone"]
 					}
 				};
 			} else {
@@ -1343,15 +1342,15 @@ var gMenuAudioVisuallyImpaired = [{
 		},
 		getCallback: function(data) { //获取value值
 			let arr = [];
-			for(let i = data.result.min; i <= data.result.max; i++) {
+			for(let i = data.result[0].min; i <= data.result[0].max; i++) {
 				arr.push(this.value.dataList[i]);
 			}
 			this.value.data = arr;
-			this.curVal = data.result.current;
+			this.curVal = data.result[0].current;
 		},
-		setCallback: function(data) { //设置value值
+		setCallback: function(val) { //设置value值
 			//			console.log(data.result);
-			this.curVal = data.result.current;
+			this.curVal = val;
 		}
 	},
 	{
@@ -1366,9 +1365,9 @@ var gMenuAudioVisuallyImpaired = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getMinMaxValue",
+					"method": "mtk.webui.config.queryMinMaxValue",
 					"params": {
-						"configId": "g_audio__aud_ad_volume"
+						"configId": ["g_audio__aud_ad_volume"]
 					}
 				};
 			} else {
@@ -1384,9 +1383,9 @@ var gMenuAudioVisuallyImpaired = [{
 		},
 		getCallback: function(data) { //获取value值
 			//			console.log(data);
-			this.value.min = data.result.min;
-			this.value.max = data.result.max;
-			this.value.data = data.result.current;
+			this.value.min = data.result[0].min;
+			this.value.max = data.result[0].max;
+			this.value.data = data.result[0].current;
 		}
 	},
 	{
@@ -1401,9 +1400,9 @@ var gMenuAudioVisuallyImpaired = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getMinMaxValue",
+					"method": "mtk.webui.config.queryMinMaxValue",
 					"params": {
-						"configId": "g_audio__aud_ad_fade_pan"
+						"configId": ["g_audio__aud_ad_fade_pan"]
 					}
 				};
 			} else {
@@ -1419,15 +1418,15 @@ var gMenuAudioVisuallyImpaired = [{
 		},
 		getCallback: function(data) { //获取value值
 			let arr = [];
-			for(let i = data.result.min; i <= data.result.max; i++) {
+			for(let i = data.result[0].min; i <= data.result[0].max; i++) {
 				arr.push(this.value.dataList[i]);
 			}
 			this.value.data = arr;
-			this.curVal = data.result.current;
+			this.curVal = data.result[0].current;
 		},
-		setCallback: function(data) { //设置value值
+		setCallback: function(val) { //设置value值
 			//			console.log(data.result);
-			this.curVal = data.result.current;
+			this.curVal = val;
 		}
 	},
 	{
@@ -1453,9 +1452,9 @@ var gMenuAudio = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getMinMaxValue",
+					"method": "mtk.webui.config.queryMinMaxValue",
 					"params": {
-						"configId": "g_audio__aud_balance"
+						"configId": ["g_audio__aud_balance"]
 					}
 				};
 			} else {
@@ -1471,9 +1470,9 @@ var gMenuAudio = [{
 		},
 		getCallback: function(data) { //获取value值
 			//			console.log(data);
-			this.value.min = data.result.min;
-			this.value.max = data.result.max;
-			this.value.data = data.result.current;
+			this.value.min = data.result[0].min;
+			this.value.max = data.result[0].max;
+			this.value.data = data.result[0].current;
 		}
 	},
 	{
@@ -1488,9 +1487,9 @@ var gMenuAudio = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getMinMaxValue",
+					"method": "mtk.webui.config.queryMinMaxValue",
 					"params": {
-						"configId": "g_audio__aud_bass"
+						"configId": ["g_audio__aud_bass"]
 					}
 				};
 			} else {
@@ -1506,9 +1505,9 @@ var gMenuAudio = [{
 		},
 		getCallback: function(data) { //获取value值
 			//			console.log(data);
-			this.value.min = data.result.min;
-			this.value.max = data.result.max;
-			this.value.data = data.result.current;
+			this.value.min = data.result[0].min;
+			this.value.max = data.result[0].max;
+			this.value.data = data.result[0].current;
 		}
 	},
 	{
@@ -1523,9 +1522,9 @@ var gMenuAudio = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getMinMaxValue",
+					"method": "mtk.webui.config.queryMinMaxValue",
 					"params": {
-						"configId": "g_audio__aud_treble"
+						"configId": ["g_audio__aud_treble"]
 					}
 				};
 			} else {
@@ -1540,10 +1539,10 @@ var gMenuAudio = [{
 			}
 		},
 		getCallback: function(data) { //获取value值
-			//			console.log(data);
-			this.value.min = data.result.min;
-			this.value.max = data.result.max;
-			this.value.data = data.result.current;
+			//						console.log(data);
+			this.value.min = data.result[0].min;
+			this.value.max = data.result[0].max;
+			this.value.data = data.result[0].current;
 		}
 	},
 	{
@@ -1558,9 +1557,9 @@ var gMenuAudio = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getMinMaxValue",
+					"method": "mtk.webui.config.queryMinMaxValue",
 					"params": {
-						"configId": "g_audio__aud_surround"
+						"configId": ["g_audio__aud_surround"]
 					}
 				};
 			} else {
@@ -1576,15 +1575,15 @@ var gMenuAudio = [{
 		},
 		getCallback: function(data) { //获取value值
 			let arr = [];
-			for(let i = data.result.min; i <= data.result.max; i++) {
+			for(let i = data.result[0].min; i <= data.result[0].max; i++) {
 				arr.push(this.value.dataList[i]);
 			}
 			this.value.data = arr;
-			this.curVal = data.result.current;
+			this.curVal = data.result[0].current;
 		},
-		setCallback: function(data) { //设置value值
+		setCallback: function(val) { //设置value值
 			//			console.log(data.result);
-			this.curVal = data.result.current;
+			this.curVal = val;
 		}
 	},
 	{
@@ -1599,9 +1598,9 @@ var gMenuAudio = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getMinMaxValue",
+					"method": "mtk.webui.config.queryMinMaxValue",
 					"params": {
-						"configId": "g_audio__aud_equalizer"
+						"configId": ["g_audio__aud_equalizer"]
 					}
 				};
 			} else {
@@ -1617,15 +1616,15 @@ var gMenuAudio = [{
 		},
 		getCallback: function(data) { //获取value值
 			let arr = [];
-			for(let i = data.result.min; i <= data.result.max; i++) {
+			for(let i = data.result[0].min; i <= data.result[0].max; i++) {
 				arr.push(this.value.dataList[i]);
 			}
 			this.value.data = arr;
-			this.curVal = data.result.current;
+			this.curVal = data.result[0].current;
 		},
-		setCallback: function(data) { //设置value值
+		setCallback: function(val) { //设置value值
 			//			console.log(data.result);
-			this.curVal = data.result.current;
+			this.curVal = val;
 		}
 	},
 	{
@@ -1640,9 +1639,9 @@ var gMenuAudio = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getValue",
+					"method": "mtk.webui.config.queryValue",
 					"params": {
-						"configId": "g_audio__aud_out_port"
+						"configId": ["g_audio__aud_out_port"]
 					}
 				};
 			} else {
@@ -1659,11 +1658,11 @@ var gMenuAudio = [{
 		getCallback: function(data) { //获取value值
 			//			console.log(data);
 			this.value.data = this.value.dataList;
-			this.curVal = data.result.current;
+			this.curVal = data.result[0].current;
 		},
-		setCallback: function(data) { //设置value值
+		setCallback: function(val) { //设置value值
 			//			console.log(data.result);
-			this.curVal = data.result.current;
+			this.curVal = val;
 		}
 	},
 	{
@@ -1678,9 +1677,9 @@ var gMenuAudio = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getMinMaxValue",
+					"method": "mtk.webui.config.queryMinMaxValue",
 					"params": {
-						"configId": "g_audio__spdif"
+						"configId": ["g_audio__spdif"]
 					}
 				};
 			} else {
@@ -1696,15 +1695,15 @@ var gMenuAudio = [{
 		},
 		getCallback: function(data) { //获取value值
 			let arr = [];
-			for(let i = data.result.min; i <= data.result.max; i++) {
+			for(let i = data.result[0].min; i <= data.result[0].max; i++) {
 				arr.push(this.value.dataList[i]);
 			}
 			this.value.data = arr;
-			this.curVal = data.result.current;
+			this.curVal = data.result[0].current;
 		},
-		setCallback: function(data) { //设置value值
+		setCallback: function(val) { //设置value值
 			//			console.log(data.result);
-			this.curVal = data.result.current;
+			this.curVal = val;
 		}
 	},
 	{
@@ -1719,9 +1718,9 @@ var gMenuAudio = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getMinMaxValue",
+					"method": "mtk.webui.config.queryMinMaxValue",
 					"params": {
-						"configId": "g_audio__spdif_delay"
+						"configId": ["g_audio__spdif_delay"]
 					}
 				};
 			} else {
@@ -1737,9 +1736,9 @@ var gMenuAudio = [{
 		},
 		getCallback: function(data) { //获取value值
 			//			console.log(data);
-			this.value.min = data.result.min;
-			this.value.max = data.result.max;
-			this.value.data = data.result.current;
+			this.value.min = data.result[0].min;
+			this.value.max = data.result[0].max;
+			this.value.data = data.result[0].current;
 		}
 	},
 	{
@@ -1754,9 +1753,9 @@ var gMenuAudio = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getMinMaxValue",
+					"method": "mtk.webui.config.queryMinMaxValue",
 					"params": {
-						"configId": "g_audio__agc"
+						"configId": ["g_audio__agc"]
 					}
 				};
 			} else {
@@ -1773,11 +1772,11 @@ var gMenuAudio = [{
 		getCallback: function(data) { //获取value值
 			//			console.log(data);
 			this.value.data = this.value.dataList;
-			this.curVal = data.result.current;
+			this.curVal = data.result[0].current;
 		},
-		setCallback: function(data) { //设置value值
+		setCallback: function(val) { //设置value值
 			//			console.log(data.result);
-			this.curVal = data.result.current;
+			this.curVal = val;
 		}
 	},
 	{
@@ -1792,9 +1791,9 @@ var gMenuAudio = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getValue",
+					"method": "mtk.webui.config.queryValue",
 					"params": {
-						"configId": "g_audio__aud_type"
+						"configId": ["g_audio__aud_type"]
 					}
 				};
 			} else {
@@ -1811,11 +1810,11 @@ var gMenuAudio = [{
 		getCallback: function(data) { //获取value值
 			//			console.log(data);
 			this.value.data = this.value.dataList;
-			this.curVal = data.result.current;
+			this.curVal = data.result[0].current;
 		},
-		setCallback: function(data) { //设置value值
+		setCallback: function(val) { //设置value值
 			//			console.log(data.result);
-			this.curVal = data.result.current;
+			this.curVal = val;
 		}
 	},
 	{
@@ -1839,9 +1838,9 @@ var gMenuAudio = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getValue",
+					"method": "mtk.webui.config.queryValue",
 					"params": {
-						"configId": "g_audio__dolby_dmix"
+						"configId": ["g_audio__dolby_dmix"]
 					}
 				};
 			} else {
@@ -1858,11 +1857,11 @@ var gMenuAudio = [{
 		getCallback: function(data) { //获取value值
 			//			console.log(data);
 			this.value.data = this.value.dataList;
-			this.curVal = data.result.current;
+			this.curVal = data.result[0].current;
 		},
-		setCallback: function(data) { //设置value值
+		setCallback: function(val) { //设置value值
 			//			console.log(data.result);
-			this.curVal = data.result.current;
+			this.curVal = val;
 		}
 	},
 	{
@@ -1885,9 +1884,8 @@ var gMenuAudio = [{
 ];
 
 //tv下所有数据
-
-var gMenuTvChannels = [{
-		name: 'Channel Scan',
+var gMenuTvChannelsAllSate=[{
+		name: 'Satellite Re-scan',
 		value: {
 			valType: 'scan',
 			data: [],
@@ -1896,7 +1894,7 @@ var gMenuTvChannels = [{
 		opera: true
 	},
 	{
-		name: 'Update Scan',
+		name: 'Satellite Add',
 		value: {
 			valType: 'scan',
 			data: [],
@@ -1905,20 +1903,20 @@ var gMenuTvChannels = [{
 		opera: true
 	},
 	{
-		name: 'Analog Manual Scan',
+		name: 'Satellite Update',
 		value: {
 			valType: 'scan',
 			data: [],
-			renderFuc: 'analogManualScan'
+			renderFuc: 'updateScan'
 		},
 		opera: true
 	},
 	{
-		name: 'Single RF Scan',
+		name: 'Satellite Manual Tuning',
 		value: {
 			valType: 'scan',
 			data: [],
-			renderFuc: 'singleRFScan'
+			renderFuc: 'analogManualScan'
 		},
 		opera: true
 	},
@@ -1986,7 +1984,288 @@ var gMenuTvChannels = [{
 		opera: true
 	}
 ];
-
+var gMenuTvChannelsOperaSate=[{
+		name: 'Satellite Re-scan',
+		value: {
+			valType: 'scan',
+			data: [],
+			renderFuc: 'channelScan'
+		},
+		opera: true
+	},
+	{
+		name: 'Satellite Add',
+		value: {
+			valType: 'scan',
+			data: [],
+			renderFuc: 'updateScan'
+		},
+		opera: true
+	},
+	{
+		name: 'Satellite Update',
+		value: {
+			valType: 'scan',
+			data: [],
+			renderFuc: 'updateScan'
+		},
+		opera: true
+	},
+	{
+		name: 'Satellite Manual Tuning',
+		value: {
+			valType: 'scan',
+			data: [],
+			renderFuc: 'analogManualScan'
+		},
+		opera: true
+	},
+	{
+		name: 'Favorite Network select',
+		value: {
+			valType: 'scan',
+			data: []
+		},
+		opera: false
+	},
+	{
+		name: 'Channel Skip',
+		value: {
+			valType: 'scan',
+			data: {
+				name: 'gMenuTvChannelSkip'
+			},
+			renderFuc: 'channelSkip'
+		},
+		opera: true
+	},
+	{
+		name: 'Channel Sort',
+		value: {
+			valType: 'scan',
+			data: {
+				name: 'gMenuTvChannelSort'
+			},
+			renderFuc: 'channelSkip'
+		},
+		opera: true
+	},
+	{
+		name: 'Channel Edit',
+		value: {
+			valType: 'scan',
+			data: {
+				name: 'gMenuTvChannelEdit'
+			},
+			renderFuc: 'channelSkip'
+		},
+		opera: true
+	},
+	{
+		name: 'Analog Channel Fine Tune',
+		value: {
+			valType: 'scan',
+			data: {
+				name: 'gMenuTvAnalogChannel'
+			},
+			renderFuc: 'channelSkip'
+		},
+		opera: true
+	},
+	{
+		name: 'Clean Channel List',
+		value: {
+			valType: 'scan',
+			data: {
+				name: 'gMenuCleanChannelList'
+			},
+			renderFuc: 'popBoxShow'
+		},
+		opera: true
+	}
+];
+var gMenuTvChannelsCable=[{
+		name: 'Channel Scan',
+		value: {
+			valType: 'scan',
+			data: [],
+			renderFuc: 'cableChannelScan'
+		},
+		opera: true
+	},
+	{
+		name: 'Single RF Scan',
+		value: {
+			valType: 'scan',
+			data: [],
+			renderFuc: 'cableSingleRFScan'
+		},
+		opera: true
+	},
+	{
+		name: 'Favorite Network select',
+		value: {
+			valType: 'scan',
+			data: []
+		},
+		opera: false
+	},
+	{
+		name: 'Channel Skip',
+		value: {
+			valType: 'scan',
+			data: {
+				name: 'gMenuTvChannelSkip'
+			},
+			renderFuc: 'channelSkip'
+		},
+		opera: true
+	},
+	{
+		name: 'Channel Sort',
+		value: {
+			valType: 'scan',
+			data: {
+				name: 'gMenuTvChannelSort'
+			},
+			renderFuc: 'channelSkip'
+		},
+		opera: true
+	},
+	{
+		name: 'Channel Edit',
+		value: {
+			valType: 'scan',
+			data: {
+				name: 'gMenuTvChannelEdit'
+			},
+			renderFuc: 'channelSkip'
+		},
+		opera: true
+	},
+	{
+		name: 'Analog Channel Fine Tune',
+		value: {
+			valType: 'scan',
+			data: {
+				name: 'gMenuTvAnalogChannel'
+			},
+			renderFuc: 'channelSkip'
+		},
+		opera: true
+	},
+	{
+		name: 'Clean Channel List',
+		value: {
+			valType: 'scan',
+			data: {
+				name: 'gMenuCleanChannelList'
+			},
+			renderFuc: 'popBoxShow'
+		},
+		opera: true
+	}
+];
+var gMenuTvChannelsAntenna=[{
+		name: 'Channel Scan',
+		value: {
+			valType: 'scan',
+			data: [],
+			renderFuc: 'antennaChannelScan'
+		},
+		opera: true
+	},
+	{
+		name: 'Update Scan',
+		value: {
+			valType: 'scan',
+			data: [],
+			renderFuc: 'antennaUpdateScan'
+		},
+		opera: true
+	},
+	{
+		name: 'Analog Manual Scan',
+		value: {
+			valType: 'scan',
+			data: [],
+			renderFuc: 'antennaAnalogManual'
+		},
+		opera: true
+	},
+	{
+		name: 'Single RF Scan',
+		value: {
+			valType: 'scan',
+			data: [],
+			renderFuc: 'antennaSingleRF'
+		},
+		opera: true
+	},
+	{
+		name: 'Favorite Network select',
+		value: {
+			valType: 'scan',
+			data: []
+		},
+		opera: false
+	},
+	{
+		name: 'Channel Skip',
+		value: {
+			valType: 'scan',
+			data: {
+				name: 'gMenuTvChannelSkip'
+			},
+			renderFuc: 'channelSkip'
+		},
+		opera: true
+	},
+	{
+		name: 'Channel Sort',
+		value: {
+			valType: 'scan',
+			data: {
+				name: 'gMenuTvChannelSort'
+			},
+			renderFuc: 'channelSkip'
+		},
+		opera: true
+	},
+	{
+		name: 'Channel Edit',
+		value: {
+			valType: 'scan',
+			data: {
+				name: 'gMenuTvChannelEdit'
+			},
+			renderFuc: 'channelSkip'
+		},
+		opera: true
+	},
+	{
+		name: 'Analog Channel Fine Tune',
+		value: {
+			valType: 'scan',
+			data: {
+				name: 'gMenuTvAnalogChannel'
+			},
+			renderFuc: 'channelSkip'
+		},
+		opera: true
+	},
+	{
+		name: 'Clean Channel List',
+		value: {
+			valType: 'scan',
+			data: {
+				name: 'gMenuCleanChannelList'
+			},
+			renderFuc: 'popBoxShow'
+		},
+		opera: true
+	}
+];
 var gMenuTv = [{
 		name: 'Tuner Mode',
 		value: {
@@ -1999,9 +2278,9 @@ var gMenuTv = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getValue",
+					"method": "mtk.webui.config.queryValue",
 					"params": {
-						"configId": "g_bs__bs_src"
+						"configId": ["g_bs__bs_src"]
 					}
 				};
 			} else {
@@ -2016,38 +2295,38 @@ var gMenuTv = [{
 			}
 		},
 		getCallback: function(data) { //获取value值
-			//			console.log(data);
+//			console.log(data.result[0]);
 			this.value.data = this.value.dataList;
-			this.curVal = data.result.current;
+			this.curVal = data.result[0].current;
+			if(this.curVal==0){
+				gMenuTv[gMenuTv.length-1].value.data=gMenuTvChannelsAntenna;
+			}else if(this.curVal==1){
+				gMenuTv[gMenuTv.length-1].value.data=gMenuTvChannelsCable;
+			}else if(this.curVal==2){
+				gMenuTv[gMenuTv.length-1].value.data=gMenuTvChannelsOperaSate;
+			}else{
+				gMenuTv[gMenuTv.length-1].value.data=gMenuTvChannelsAllSate;
+			}
 		},
-		setCallback: function(data) { //设置value值
+		setCallback: function(val) { //设置value值
 			//			console.log(data.result);
-			this.curVal = data.result.current;
+			this.curVal = val;
 		}
 	},
-	//	{
-	//		name: 'Audio Channel',
-	//		value: {
-	//			valType: 'sel',
-	//			data: ['Stereo', 'Dual1', 'Dual2', 'Mono']
-	//		},
-	//		curVal: 'Stereo',
-	//		opera: false,
-	//		msg:function(){
-	//			
-	//		},
-	//		getCallback:function(){
-	//			
-	//		},
-	//		setCallback:function(){
-	//			
-	//		}
-	//	},
+	{
+		name: 'Audio Channel',
+		value: {
+			valType: 'sel',
+			data: ['Stereo', 'Dual1', 'Dual2', 'Mono']
+		},
+		curVal: 0,
+		opera: true
+	},
 	{
 		name: 'Channels',
 		value: {
 			valType: 'list',
-			data: gMenuTvChannels
+			data: gMenuTvChannelsAntenna
 		},
 		opera: true
 	}
@@ -2096,14 +2375,14 @@ var gMenuSetupTSTime = [{
 		},
 		opera: false
 	},
-	{
-		name: 'Power on Channel',
-		value: {
-			valType: 'list',
-			data: []
-		},
-		opera: false
-	},
+	//	{
+	//		name: 'Power on Channel',
+	//		value: {
+	//			valType: 'list',
+	//			data: []
+	//		},
+	//		opera: false
+	//	},
 	{
 		name: 'Power Off Timer',
 		value: {
@@ -2135,9 +2414,9 @@ var gMenuSetupHbbTV = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getValue",
+					"method": "mtk.webui.config.queryValue",
 					"params": {
-						"configId": "g_menu__hbbtv"
+						"configId": ["g_menu__hbbtv"]
 					}
 				};
 			} else {
@@ -2154,11 +2433,11 @@ var gMenuSetupHbbTV = [{
 		getCallback: function(data) { //获取value值
 			//			console.log(data);
 			this.value.data = this.value.dataList;
-			this.curVal = data.result.current;
+			this.curVal = data.result[0].current;
 		},
-		setCallback: function(data) { //设置value值
+		setCallback: function(val) { //设置value值
 			//			console.log(data.result);
-			this.curVal = data.result.current;
+			this.curVal = val;
 		}
 	},
 	{
@@ -2173,9 +2452,9 @@ var gMenuSetupHbbTV = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getValue",
+					"method": "mtk.webui.config.queryValue",
 					"params": {
-						"configId": "g_menu__hbbtv_donot_track"
+						"configId": ["g_menu__hbbtv_donot_track"]
 					}
 				};
 			} else {
@@ -2192,11 +2471,11 @@ var gMenuSetupHbbTV = [{
 		getCallback: function(data) { //获取value值
 			//			console.log(data);
 			this.value.data = this.value.dataList;
-			this.curVal = data.result.current;
+			this.curVal = data.result[0].current;
 		},
-		setCallback: function(data) { //设置value值
+		setCallback: function(val) { //设置value值
 			//			console.log(data.result);
-			this.curVal = data.result.current;
+			this.curVal = val;
 		}
 	},
 	{
@@ -2211,9 +2490,9 @@ var gMenuSetupHbbTV = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getValue",
+					"method": "mtk.webui.config.queryValue",
 					"params": {
-						"configId": "g_menu__hbbtv_cookies"
+						"configId": ["g_menu__hbbtv_cookies"]
 					}
 				};
 			} else {
@@ -2230,11 +2509,11 @@ var gMenuSetupHbbTV = [{
 		getCallback: function(data) { //获取value值
 			//			console.log(data);
 			this.value.data = this.value.dataList;
-			this.curVal = data.result.current;
+			this.curVal = data.result[0].current;
 		},
-		setCallback: function(data) { //设置value值
+		setCallback: function(val) { //设置value值
 			//			console.log(data.result);
-			this.curVal = data.result.current;
+			this.curVal = val;
 		}
 	},
 	{
@@ -2249,9 +2528,9 @@ var gMenuSetupHbbTV = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getValue",
+					"method": "mtk.webui.config.queryValue",
 					"params": {
-						"configId": "g_menu__hbbtv_persistent_storage"
+						"configId": ["g_menu__hbbtv_persistent_storage"]
 					}
 				};
 			} else {
@@ -2268,11 +2547,11 @@ var gMenuSetupHbbTV = [{
 		getCallback: function(data) { //获取value值
 			//			console.log(data);
 			this.value.data = this.value.dataList;
-			this.curVal = data.result.current;
+			this.curVal = data.result[0].current;
 		},
-		setCallback: function(data) { //设置value值
+		setCallback: function(val) { //设置value值
 			//			console.log(data.result);
-			this.curVal = data.result.current;
+			this.curVal = val;
 		}
 	},
 	{
@@ -2287,9 +2566,9 @@ var gMenuSetupHbbTV = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getValue",
+					"method": "mtk.webui.config.queryValue",
 					"params": {
-						"configId": "g_menu__hbbtv_blk_tracking_sites"
+						"configId": ["g_menu__hbbtv_blk_tracking_sites"]
 					}
 				};
 			} else {
@@ -2306,11 +2585,11 @@ var gMenuSetupHbbTV = [{
 		getCallback: function(data) { //获取value值
 			//			console.log(data);
 			this.value.data = this.value.dataList;
-			this.curVal = data.result.current;
+			this.curVal = data.result[0].current;
 		},
-		setCallback: function(data) { //设置value值
+		setCallback: function(val) { //设置value值
 			//			console.log(data.result);
-			this.curVal = data.result.current;
+			this.curVal = val;
 		}
 	},
 	{
@@ -2325,9 +2604,9 @@ var gMenuSetupHbbTV = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getValue",
+					"method": "mtk.webui.config.queryValue",
 					"params": {
-						"configId": "g_menu__hbbtv_device_id"
+						"configId": ["g_menu__hbbtv_device_id"]
 					}
 				};
 			} else {
@@ -2344,11 +2623,11 @@ var gMenuSetupHbbTV = [{
 		getCallback: function(data) { //获取value值
 			//			console.log(data);
 			this.value.data = this.value.dataList;
-			this.curVal = data.result.current;
+			this.curVal = data.result[0].current;
 		},
-		setCallback: function(data) { //设置value值
+		setCallback: function(val) { //设置value值
 			//			console.log(data.result);
-			this.curVal = data.result.current;
+			this.curVal = val;
 		}
 	},
 	{
@@ -2363,46 +2642,48 @@ var gMenuSetupHbbTV = [{
 		opera: true
 	}
 ];
-var gMenuSetupTS = [{
-		name: 'Time Zone',
-		value: {
-			valType: 'sel',
-			data: ['As Broadcaster', 'GMT+0:00', 'GMT+1:00', 'GMT+2:00', 'GMT+3:00', 'GMT+3:30', 'GMT+4:00',
-				'GMT+4:30', 'GMT+5:00', 'GMT+5:30', 'GMT+5:45', 'GMT+6:00', 'GMT+6:30', 'GMT+7:00', 'GMT+8:00',
-				'GMT+9:00', 'GMT+9:30', 'GMT+10:00', 'GMT+11:00', 'GMT+12:00', 'GMT+12:45', 'GMT+13:00',
-				'GMT-12:00', 'GMT-11:00', 'GMT-10:00', 'GMT-9:00', 'GMT-8:00', 'GMT-7:00', 'GMT-6:00',
-				'GMT-5:00', 'GMT-4:00', 'GMT-3:30', 'GMT-3:00', 'GMT-2:00', 'GMT-1:00'
-			]
-		},
-		curVal: 'As Broadcaster',
-		opera: true
-	},
+var gMenuSetupTS = [
+	//	{
+	//		name: 'Time Zone',
+	//		value: {
+	//			valType: 'sel',
+	//			data: ['As Broadcaster', 'GMT+0:00', 'GMT+1:00', 'GMT+2:00', 'GMT+3:00', 'GMT+3:30', 'GMT+4:00',
+	//				'GMT+4:30', 'GMT+5:00', 'GMT+5:30', 'GMT+5:45', 'GMT+6:00', 'GMT+6:30', 'GMT+7:00', 'GMT+8:00',
+	//				'GMT+9:00', 'GMT+9:30', 'GMT+10:00', 'GMT+11:00', 'GMT+12:00', 'GMT+12:45', 'GMT+13:00',
+	//				'GMT-12:00', 'GMT-11:00', 'GMT-10:00', 'GMT-9:00', 'GMT-8:00', 'GMT-7:00', 'GMT-6:00',
+	//				'GMT-5:00', 'GMT-4:00', 'GMT-3:30', 'GMT-3:00', 'GMT-2:00', 'GMT-1:00'
+	//			]
+	//		},
+	//		curVal: 'As Broadcaster',
+	//		opera: true
+	//	},
 	{
 		name: 'Time',
 		value: {
-			valType: 'list',
-			data: gMenuSetupTSTime
+			valType: 'scan',
+			data: [],
+			renderFuc: 'timeSetupTime'
 		},
 		opera: true
 	},
-	{
-		name: 'Sleep Timer',
-		value: {
-			valType: 'sel',
-			data: ['Off', '10 Minutes', '20 Minutes', '30 Minutes', '40 Minutes', '50 Minutes', '60 Minutes', '90 Minutes', '120 Minutes']
-		},
-		curVal: 'Off',
-		opera: true
-	},
-	{
-		name: 'Auto Sleep',
-		value: {
-			valType: 'sel',
-			data: ['Off', '4 Hours', '6 Hours', '8 Hours']
-		},
-		curVal: 'Off',
-		opera: true
-	}
+	//	{
+	//		name: 'Sleep Timer',
+	//		value: {
+	//			valType: 'sel',
+	//			data: ['Off', '10 Minutes', '20 Minutes', '30 Minutes', '40 Minutes', '50 Minutes', '60 Minutes', '90 Minutes', '120 Minutes']
+	//		},
+	//		curVal: 'Off',
+	//		opera: true
+	//	},
+	//	{
+	//		name: 'Auto Sleep',
+	//		value: {
+	//			valType: 'sel',
+	//			data: ['Off', '4 Hours', '6 Hours', '8 Hours']
+	//		},
+	//		curVal: 'Off',
+	//		opera: true
+	//	}
 ];
 var gMenuSetupHDMI = [{
 	name: 'Singal Format',
@@ -2416,9 +2697,9 @@ var gMenuSetupHDMI = [{
 	msg: function(key, val) {
 		if(key == 'get') {
 			return {
-				"method": "mtk.webui.config.getValue",
+				"method": "mtk.webui.config.queryValue",
 				"params": {
-					"configId": "g_menu_only__hdmi_edid_index"
+					"configId": ["g_menu_only__hdmi_edid_index"]
 				}
 			};
 		} else {
@@ -2435,11 +2716,11 @@ var gMenuSetupHDMI = [{
 	getCallback: function(data) { //获取value值
 		//			console.log(data);
 		this.value.data = this.value.dataList;
-		this.curVal = data.result.current;
+		this.curVal = data.result[0].current;
 	},
-	setCallback: function(data) { //设置value值
+	setCallback: function(val) { //设置value值
 		//			console.log(data.result);
-		this.curVal = data.result.current;
+		this.curVal = val;
 	}
 }];
 var gMenuSetupSubtitle = [{
@@ -2454,9 +2735,9 @@ var gMenuSetupSubtitle = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getValue",
+					"method": "mtk.webui.config.queryValue",
 					"params": {
-						"configId": "g_subtitle__subtitle_enable"
+						"configId": ["g_subtitle__subtitle_enable"]
 					}
 				};
 			} else {
@@ -2473,11 +2754,11 @@ var gMenuSetupSubtitle = [{
 		getCallback: function(data) { //获取value值
 			//			console.log(data);
 			this.value.data = this.value.dataList;
-			this.curVal = data.result.current;
+			this.curVal = data.result[0].current;
 		},
-		setCallback: function(data) { //设置value值
+		setCallback: function(val) { //设置value值
 			//			console.log(data.result);
-			this.curVal = data.result.current;
+			this.curVal = val;
 		}
 	},
 	{
@@ -2486,7 +2767,7 @@ var gMenuSetupSubtitle = [{
 			valType: 'sel',
 			data: ['English']
 		},
-		curVal: 'English',
+		curVal: 0,
 		opera: true
 	},
 	{
@@ -2495,7 +2776,7 @@ var gMenuSetupSubtitle = [{
 			valType: 'sel',
 			data: ['English']
 		},
-		curVal: 'English',
+		curVal: 0,
 		opera: true
 	},
 	{
@@ -2510,9 +2791,9 @@ var gMenuSetupSubtitle = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getValue",
+					"method": "mtk.webui.config.queryValue",
 					"params": {
-						"configId": "g_subtitle__subtitle_attr"
+						"configId": ["g_subtitle__subtitle_attr"]
 					}
 				};
 			} else {
@@ -2529,11 +2810,11 @@ var gMenuSetupSubtitle = [{
 		getCallback: function(data) { //获取value值
 			//			console.log(data);
 			this.value.data = this.value.dataList;
-			this.curVal = data.result.current;
+			this.curVal = data.result[0].current;
 		},
-		setCallback: function(data) { //设置value值
+		setCallback: function(val) { //设置value值
 			//			console.log(data.result);
-			this.curVal = data.result.current;
+			this.curVal = val;
 		}
 	}
 ];
@@ -2543,7 +2824,7 @@ var gMenuSetupTeletext = [{
 			valType: 'sel',
 			data: ['English']
 		},
-		curVal: 'English',
+		curVal: 0,
 		opera: true
 	},
 	{
@@ -2558,9 +2839,9 @@ var gMenuSetupTeletext = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getValue",
+					"method": "mtk.webui.config.queryValue",
 					"params": {
-						"configId": "g_ttx_lang__ttx_decode_lang"
+						"configId": ["g_ttx_lang__ttx_decode_lang"]
 					}
 				};
 			} else {
@@ -2577,11 +2858,11 @@ var gMenuSetupTeletext = [{
 		getCallback: function(data) { //获取value值
 			//			console.log(data);
 			this.value.data = this.value.dataList;
-			this.curVal = data.result.current;
+			this.curVal = data.result[0].current;
 		},
-		setCallback: function(data) { //设置value值
+		setCallback: function(val) { //设置value值
 			//			console.log(data.result);
-			this.curVal = data.result.current;
+			this.curVal = val;
 		}
 	},
 	{
@@ -2596,9 +2877,9 @@ var gMenuSetupTeletext = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getValue",
+					"method": "mtk.webui.config.queryValue",
 					"params": {
-						"configId": "g_ttx_lang__ttx_presentation_level"
+						"configId": ["g_ttx_lang__ttx_presentation_level"]
 					}
 				};
 			} else {
@@ -2615,11 +2896,11 @@ var gMenuSetupTeletext = [{
 		getCallback: function(data) { //获取value值
 			//			console.log(data);
 			this.value.data = this.value.dataList;
-			this.curVal = data.result.current;
+			this.curVal = data.result[0].current;
 		},
-		setCallback: function(data) { //设置value值
+		setCallback: function(val) { //设置value值
 			//			console.log(data.result);
-			this.curVal = data.result.current;
+			this.curVal = val;
 		}
 	}
 ];
@@ -2638,7 +2919,7 @@ var gMenuSetupCI = [{
 			valType: 'sel',
 			data: ['Default', 'AMMI', 'Broadcast']
 		},
-		curVal: 'Default',
+		curVal: 0,
 		opera: true
 	}
 ];
@@ -2681,25 +2962,23 @@ var gMenuSetupNetworkConf = [{
 				}
 			}
 		},
-		setCallback: function(data, selIndex) { //设置value值
-			if(data.error.code == 0) {
-				this.curVal = selIndex;
-				if(this.curVal == 0) {
-					for(var i = 0; i < gMenuSetupNetworkConf.length; i++) {
-						if(gMenuSetupNetworkConf[i].name == 'Internet Connection') {
-							gMenuSetupNetworkConf[i].opera = true;
-						} else {
-							gMenuSetupNetworkConf[i].opera = false;
-						}
+		setCallback: function(val) { //设置value值
+			this.curVal = val;
+			if(this.curVal == 0) {
+				for(var i = 0; i < gMenuSetupNetworkConf.length; i++) {
+					if(gMenuSetupNetworkConf[i].name == 'Internet Connection') {
+						gMenuSetupNetworkConf[i].opera = true;
+					} else {
+						gMenuSetupNetworkConf[i].opera = false;
 					}
-				} else {
-					for(var i = 0; i < gMenuSetupNetworkConf.length; i++) {
-						if(gMenuSetupNetworkConf[i].name == 'Wake On Wlan' ||
-							gMenuSetupNetworkConf[i].name == 'Wireless Setting') {
-							gMenuSetupNetworkConf[i].opera = false;
-						} else {
-							gMenuSetupNetworkConf[i].opera = true;
-						}
+				}
+			} else {
+				for(var i = 0; i < gMenuSetupNetworkConf.length; i++) {
+					if(gMenuSetupNetworkConf[i].name == 'Wake On Wlan' ||
+						gMenuSetupNetworkConf[i].name == 'Wireless Setting') {
+						gMenuSetupNetworkConf[i].opera = false;
+					} else {
+						gMenuSetupNetworkConf[i].opera = true;
 					}
 				}
 			}
@@ -2739,8 +3018,8 @@ var gMenuSetupNetworkConf = [{
 				}
 			}
 		},
-		setCallback: function(data, selIndex) { //设置value值
-			this.curVal = selIndex;
+		setCallback: function(val) { //设置value值
+			this.curVal = val;
 			if(this.curVal == 0) {
 				for(var i = 0; i < gMenuSetupNetworkConf.length; i++) {
 					if(gMenuSetupNetworkConf[i].name == 'Wake On Lan') {
@@ -2796,9 +3075,9 @@ var gMenuSetupNetworkConf = [{
 				this.curVal = 0;
 			}
 		},
-		setCallback: function(data, selIndex) { //设置value值
+		setCallback: function(val) { //设置value值
 			//			console.log(data);
-			this.curVal = selIndex;
+			this.curVal = val;
 		}
 	},
 	{
@@ -2831,9 +3110,9 @@ var gMenuSetupNetworkConf = [{
 				this.curVal = 0;
 			}
 		},
-		setCallback: function(data, selIndex) { //设置value值
+		setCallback: function(val) { //设置value值
 			//			console.log(data);
-			this.curVal = selIndex;
+			this.curVal = val;
 		}
 	},
 	{
@@ -2902,9 +3181,9 @@ var gMenuSetupNetworkConf = [{
 				this.curVal = 1;
 			}
 		},
-		setCallback: function(data,selIndex) { //设置value值
+		setCallback: function(val) { //设置value值
 			//			console.log(data);
-			this.curVal = selIndex;
+			this.curVal = val;
 		}
 	},
 	{
@@ -2954,25 +3233,24 @@ var gMenuSetupNetworkNetflix = [{
 		opera: true
 	}
 ];
-var gMenuSetupNetworkApp = [
-//	{
-//		name: 'DLNA',
-//		value: {
-//			valType: 'sel',
-//			data: ['On', 'Off']
-//		},
-//		curVal: 'On',
-//		opera: true
-//	},
-//	{
-//		name: 'DMR',
-//		value: {
-//			valType: 'sel',
-//			data: ['On', 'Off']
-//		},
-//		curVal: 'On',
-//		opera: true
-//	},
+var gMenuSetupNetworkApp = [{
+		name: 'DLNA',
+		value: {
+			valType: 'sel',
+			data: ['On', 'Off']
+		},
+		curVal: 'On',
+		opera: true
+	},
+	{
+		name: 'DMR',
+		value: {
+			valType: 'sel',
+			data: ['On', 'Off']
+		},
+		curVal: 'On',
+		opera: true
+	},
 	{
 		name: 'Netflix',
 		value: {
@@ -3023,7 +3301,7 @@ var gMenuSetupBluetooth = [{
 			valType: 'sel',
 			data: ['On', 'Off']
 		},
-		curVal: 'On',
+		curVal: 0,
 		opera: true
 	},
 	{
@@ -3041,7 +3319,7 @@ var gMenuSetupOAD = [{
 		value: {
 			valType: 'scan',
 			data: [],
-			renderFuc: 'manualOADDownload'
+			renderFuc: 'manualOADDownload' //跳转别处
 		},
 		opera: true
 	},
@@ -3051,7 +3329,7 @@ var gMenuSetupOAD = [{
 			valType: 'sel',
 			data: ['YES', 'NO']
 		},
-		curVal: 'YES',
+		curVal: 0,
 		opera: true
 	}
 ];
@@ -3059,7 +3337,7 @@ var gMenuSetupRecord = [{
 		name: 'Device Info',
 		value: {
 			valType: 'scan',
-			data: []
+			data: [] //跳转别处
 		},
 		opera: true
 	},
@@ -3067,7 +3345,7 @@ var gMenuSetupRecord = [{
 		name: 'Schedule List',
 		value: {
 			valType: 'scan',
-			data: []
+			data: [] //跳转别处
 		},
 		opera: true
 	},
@@ -3083,7 +3361,7 @@ var gMenuSetupRecord = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getValue",
+					"method": "mtk.webui.config.queryValue",
 					"params": {
 						"configId": "g_record__rec_tshift_mode"
 					}
@@ -3102,11 +3380,11 @@ var gMenuSetupRecord = [{
 		getCallback: function(data) { //获取value值
 			//			console.log(data);
 			this.value.data = this.value.dataList;
-			this.curVal = data.result.current;
+			this.curVal = data.result[0].current;
 		},
-		setCallback: function(data) { //设置value值
+		setCallback: function(val) { //设置value值
 			//			console.log(data.result);
-			this.curVal = data.result.current;
+			this.curVal = val;
 		}
 	}
 ];
@@ -3122,9 +3400,9 @@ var gMenuSetupUpdate = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getValue",
+					"method": "mtk.webui.config.queryValue",
 					"params": {
-						"configId": "g_menu__auto_ch_update"
+						"configId": ["g_menu__auto_ch_update"]
 					}
 				};
 			} else {
@@ -3141,11 +3419,11 @@ var gMenuSetupUpdate = [{
 		getCallback: function(data) { //获取value值
 			//			console.log(data);
 			this.value.data = this.value.dataList;
-			this.curVal = data.result.current;
+			this.curVal = data.result[0].current;
 		},
-		setCallback: function(data) { //设置value值
+		setCallback: function(val) { //设置value值
 			//			console.log(data.result);
-			this.curVal = data.result.current;
+			this.curVal = val;
 		}
 	},
 	{
@@ -3160,9 +3438,9 @@ var gMenuSetupUpdate = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getValue",
+					"method": "mtk.webui.config.queryValue",
 					"params": {
-						"configId": "g_menu__ch_update_msg"
+						"configId": ["g_menu__ch_update_msg"]
 					}
 				};
 			} else {
@@ -3179,24 +3457,24 @@ var gMenuSetupUpdate = [{
 		getCallback: function(data) { //获取value值
 			//			console.log(data);
 			this.value.data = this.value.dataList;
-			this.curVal = data.result.current;
+			this.curVal = data.result[0].current;
 		},
-		setCallback: function(data) { //设置value值
+		setCallback: function(val) { //设置value值
 			//			console.log(data.result);
-			this.curVal = data.result.current;
+			this.curVal = val;
 		}
 	}
 ];
 var gMenuSetup = [
-	//{
-	//		name: 'OSD Language',
-	//		value: {
-	//			valType: 'sel',
-	//			data: ['English', 'Vasco', 'Catalan', 'Hrvatski']
+	//	{
+	//			name: 'OSD Language',
+	//			value: {
+	//				valType: 'sel',
+	//				data: ['English', 'Vasco', 'Catalan', 'Hrvatski']
+	//			},
+	//			curVal: 'English',
+	//			opera: false
 	//		},
-	//		curVal: 'English',
-	//		opera: false
-	//	},
 	{
 		name: 'Blue Mute',
 		value: {
@@ -3205,13 +3483,13 @@ var gMenuSetup = [
 			dataList: ['Off', 'On']
 		},
 		curVal: 0,
-		opera: false,
+		opera: true,
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getValue",
+					"method": "mtk.webui.config.queryValue",
 					"params": {
-						"configId": "g_video__vid_blue_mute"
+						"configId": ["g_video__vid_blue_mute"]
 					}
 				};
 			} else {
@@ -3228,11 +3506,11 @@ var gMenuSetup = [
 		getCallback: function(data) { //获取value值
 			//			console.log(data);
 			this.value.data = this.value.dataList;
-			this.curVal = data.result.current;
+			this.curVal = data.result[0].current;
 		},
-		setCallback: function(data) { //设置value值
+		setCallback: function(val) { //设置value值
 			//			console.log(data.result);
-			this.curVal = data.result.current;
+			this.curVal = val;
 		}
 	},
 	{
@@ -3243,13 +3521,13 @@ var gMenuSetup = [
 			dataList: ['Off', 'On']
 		},
 		curVal: 0,
-		opera: false,
+		opera: true,
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getValue",
+					"method": "mtk.webui.config.queryValue",
 					"params": {
-						"configId": "g_menu__fast_boot"
+						"configId": ["g_menu__fast_boot"]
 					}
 				};
 			} else {
@@ -3266,11 +3544,11 @@ var gMenuSetup = [
 		getCallback: function(data) { //获取value值
 			//			console.log(data);
 			this.value.data = this.value.dataList;
-			this.curVal = data.result.current;
+			this.curVal = data.result[0].current;
 		},
-		setCallback: function(data) { //设置value值
+		setCallback: function(val) { //设置value值
 			//			console.log(data.result);
-			this.curVal = data.result.current;
+			this.curVal = val;
 		}
 	},
 	{
@@ -3281,13 +3559,13 @@ var gMenuSetup = [
 			dataList: ['Off', 'On']
 		},
 		curVal: 0,
-		opera: false,
+		opera: true,
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getValue",
+					"method": "mtk.webui.config.queryValue",
 					"params": {
-						"configId": "g_misc__mheg_inter_ch"
+						"configId": ["g_misc__mheg_inter_ch"]
 					}
 				};
 			} else {
@@ -3304,11 +3582,11 @@ var gMenuSetup = [
 		getCallback: function(data) { //获取value值
 			//			console.log(data);
 			this.value.data = this.value.dataList;
-			this.curVal = data.result.current;
+			this.curVal = data.result[0].current;
 		},
-		setCallback: function(data) { //设置value值
+		setCallback: function(val) { //设置value值
 			//			console.log(data.result);
-			this.curVal = data.result.current;
+			this.curVal = val;
 		}
 	},
 	{
@@ -3319,13 +3597,13 @@ var gMenuSetup = [
 			dataList: ['Off', 'On']
 		},
 		curVal: 0,
-		opera: false,
+		opera: true,
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.getValue",
+					"method": "mtk.webui.config.queryValue",
 					"params": {
-						"configId": "g_misc__mheg_pin_protection"
+						"configId": ["g_misc__mheg_pin_protection"]
 					}
 				};
 			} else {
@@ -3342,11 +3620,11 @@ var gMenuSetup = [
 		getCallback: function(data) { //获取value值
 			//			console.log(data);
 			this.value.data = this.value.dataList;
-			this.curVal = data.result.current;
+			this.curVal = data.result[0].current;
 		},
-		setCallback: function(data) { //设置value值
+		setCallback: function(val) { //设置value值
 			//			console.log(data.result);
-			this.curVal = data.result.current;
+			this.curVal = val;
 		}
 	},
 	{
@@ -3355,7 +3633,7 @@ var gMenuSetup = [
 			valType: 'list',
 			data: gMenuSetupHbbTV
 		},
-		opera: false
+		opera: true
 	},
 	{
 		name: 'Time Setup',
@@ -3363,7 +3641,7 @@ var gMenuSetup = [
 			valType: 'list',
 			data: gMenuSetupTS
 		},
-		opera: false
+		opera: true
 	},
 	{
 		name: 'HDMI2.0 Setting',
@@ -3371,7 +3649,7 @@ var gMenuSetup = [
 			valType: 'list',
 			data: gMenuSetupHDMI
 		},
-		opera: false
+		opera: true
 	},
 	{
 		name: 'DivX(R) Registration',
@@ -3380,7 +3658,7 @@ var gMenuSetup = [
 			data: [],
 			renderFuc: 'divXRegistration'
 		},
-		opera: false
+		opera: true
 	},
 	{
 		name: 'DivX(R) Deactivation',
@@ -3389,7 +3667,7 @@ var gMenuSetup = [
 			data: [],
 			renderFuc: 'divXDeactivation'
 		},
-		opera: false
+		opera: true
 	},
 	{
 		name: 'Subtitle',
@@ -3397,7 +3675,7 @@ var gMenuSetup = [
 			valType: 'list',
 			data: gMenuSetupSubtitle
 		},
-		opera: false
+		opera: true
 	},
 	{
 		name: 'Teletext',
@@ -3405,7 +3683,7 @@ var gMenuSetup = [
 			valType: 'list',
 			data: gMenuSetupTeletext
 		},
-		opera: false
+		opera: true
 	},
 	{
 		name: 'Common Interface',
@@ -3413,7 +3691,7 @@ var gMenuSetup = [
 			valType: 'list',
 			data: gMenuSetupCI
 		},
-		opera: false
+		opera: true
 	},
 	{
 		name: 'Network',
@@ -3495,7 +3773,9 @@ var gMenuSetup = [
 		name: 'Reset Default',
 		value: {
 			valType: 'scan',
-			data: {name:'resetDefault'},
+			data: {
+				name: 'resetDefault'
+			},
 			renderFuc: 'popBoxShow'
 		},
 		opera: true
@@ -3515,9 +3795,9 @@ var gMenuParentalProgramBlock = [{
 	msg: function(key, val) {
 		if(key == 'get') {
 			return {
-				"method": "mtk.webui.config.getMinMaxValue",
+				"method": "mtk.webui.config.queryMinMaxValue",
 				"params": {
-					"configId": "g_rating__rating_age"
+					"configId": ["g_rating__rating_age"]
 				}
 			};
 		} else {
@@ -3534,15 +3814,15 @@ var gMenuParentalProgramBlock = [{
 	getCallback: function(data) { //获取value值
 		//		console.log(data.result);
 		let arr = [];
-		for(let i = data.result.min; i <= data.result.max; i++) {
+		for(let i = data.result[0].min; i <= data.result[0].max; i++) {
 			arr.push(this.value.dataList[i]);
 		}
 		this.value.data = arr;
-		this.curVal = data.result.current;
+		this.curVal = data.result[0].current;
 	},
-	setCallback: function(data) { //设置value值
+	setCallback: function(val) { //设置value值
 		//			console.log(data.result);
-		this.curVal = data.result.current;
+		this.curVal = val;
 	}
 }];
 var gMenuParentalShow = [{
@@ -3615,6 +3895,7 @@ var gMenuParental = [{
 
 //主目录menu
 var Menu = {
+	curVal: 0,
 	valType: 'list',
 	data: [{
 			name: 'Video',
@@ -3667,8 +3948,9 @@ var Menu = {
 	]
 };
 var gMenuoIndex = 0;
-var gMenuClassName = 'firstList';
+var gMenuClassName = 'menuList';
 var gMenuPageName = 'list';
+// var gMenuPageName = 'cableSingleRFScan';
 var gMenuParent = Menu;
 var gMenuChild = Menu.data[0].value;
 var gMenuNavlist = [];

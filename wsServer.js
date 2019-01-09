@@ -510,10 +510,11 @@ testData['mtk.webui.network.setInternetInterface']={
 	"error":{"code":"0", "message":"OK"}
 }
 var ipInformation={"ip":"192.168.1.100",
-	          "netmask":"255.255.255.0",
-	          "gateway":"192.168.1.1",
-	          "1stDNS":"192.168.1.1",
-	          "2ndDNS":"192.168.1.1"
+		          "netmask":"255.255.255.0",
+		          "gateway":"192.168.1.1",
+		          "1stDNS":"192.168.1.1",
+		          "2ndDNS":"192.168.1.1",
+		          "MACAddr":"E5:62:7F:10"
 	          }
 testData['mtk.webui.network.queryInternetInformation']={
 	"method":"mtk.webui.network.queryInternetInformation",
@@ -531,17 +532,18 @@ testData['mtk.webui.network.setAddressType']={
 	"error":{"code":"0", "message":"OK"}
 }
 var ipv6Information={"ipv6":"fe80::23ef",
-	"lenOfPrefix":64,
-	"gateway":"fe80::23ef",
-	"1stDNS":"fe80::23ef",
-	"2ndDNS":""
+		"lenOfPrefix":64,
+		"gateway":"fe80::23ef",
+		"1stDNS":"fe80::23ef",
+		"2ndDNS":"",
+		"MACAddr":"E5:62:7F:10"
 	};
 testData['mtk.webui.network.queryIPv6Information']={
 	"method":"mtk.webui.network.queryIPv6Information",
 	"result":ipv6Information,
 	"error":{"code":"0", "message":"OK"}
 }
-var ipv6AddrType={"type":"auto"};
+var ipv6AddrType={"IPtype":"auto","DNStype":"auto"};
 testData['mtk.webui.network.queryIPv6AddressType']={
 	"method":"mtk.webui.network.queryIPv6AddressType",
 	"result":ipv6AddrType,
@@ -551,22 +553,69 @@ testData['mtk.webui.network.setIPv6AddressType']={
 	"method":"mtk.webui.network.setIPv6AddressType",
 	"error":{"code":"0", "message":"OK"}
 }
-var ipv6DNSType={"type":"auto"};
-testData['mtk.webui.network.queryIPv6DNSType']={
-	"method":"mtk.webui.network.queryIPv6DNSType",
-	"result":ipv6DNSType,
-	"error":{"code":"0", "message":"OK"}
-}
-testData["mtk.webui.network.setIPv6DNSType"]={
-	"method":"mtk.webui.network.setIPv6DNSType",
-	"error":{"code":"0", "message":"OK"}
-}
+
 testData['mtk.webui.network.queryConnectionTest']={
 	"method":"mtk.webui.network.queryConnectionTest",
 	"error":{"code":"0", "message":"OK"}
 }
 testData['mtk.webui.network.queryIPv6ConnectionTest']={
 	"method":"mtk.webui.network.queryIPv6ConnectionTest",
+	"error":{"code":"0", "message":"OK"}
+}
+testData["mtk.webui.system.queryVersionInfo"]={
+	"method": "mtk.webui.system.queryVersionInfo",
+	"result":{
+		"modelName":'eu_linux',
+	    "version":'t-apollo-week-1801-1851-6',
+	    "serialNumber":'111',
+	    "website":'http://www.mediatek.com/'
+	},
+	"error":{"code":"0", "message":"OK"}
+}
+testData['mtk.webui.network.queryWirelessStatus']={
+	"method":"mtk.webui.network.queryWirelessStatus",
+	"result":{"status":"unplug"},//or “plugStop” or “associating” or “disassoc” or “associate”
+	"error":{"code":"0", "message":"OK"}
+}
+testData['mtk.webui.network.queryWirelessScan']={
+	"method":"mtk.webui.network.queryWirelessScan",
+	"error":{"code":"0", "message":"OK"}
+}
+testData['mtk.webui.network.queryWirelessAssociate']={
+	"method":"mtk.webui.network.queryWirelessAssociate",
+	"error":{"code":"0", "message":"OK"}
+}
+testData["mtk.webui.network.queryIPv6Perfer"]={
+	"method":'mtk.webui.network.queryIPv6Perfer',
+	"result":"true",
+	"error":{"code":"0", "message":"OK"}
+}
+testData['mtk.webui.network.setIPv6Perfer']={
+	"method":'mtk.webui.network.setIPv6Perfer',
+	"error":{"code":"0", "message":"OK"}
+}
+var wakeOnLan={"enable":'true'};
+testData["mtk.webui.network.queryWakeOnEthernet"]={
+	"method":'mtk.webui.network.queryWakeOnEthernet',
+	result:wakeOnLan,
+	"error":{"code":"0", "message":"OK"}
+}
+testData['mtk.webui.network.setWakeOnEtherne']={
+	"method":'mtk.webui.network.setWakeOnEtherne',
+	"error":{"code":"0", "message":"OK"}
+}
+var wakeOnWLan={"enable":'true'};
+testData['mtk.webui.network.queryWakeOnWireless']={
+	"method":'mtk.webui.network.queryWakeOnWireless',
+	result:wakeOnWLan,
+	"error":{"code":"0", "message":"OK"}
+}
+testData['mtk.webui.network.setWakeOnWireless']={
+	"method":'mtk.webui.network.setWakeOnWireless',
+	"error":{"code":"0", "message":"OK"}
+}
+testData['mtk.webui.system.resetParentalInfo']={
+	"method":'mtk.webui.system.resetParentalInfo',
 	"error":{"code":"0", "message":"OK"}
 }
 
@@ -638,6 +687,8 @@ var configObj = {
 	"g_menu__hbbtv_persistent_storage":{"configId":'g_menu__hbbtv_persistent_storage',"min":0, "max":1,"current":0},
 	"g_menu__hbbtv_blk_tracking_sites":{"configId":'g_menu__hbbtv_blk_tracking_sites',"min":0, "max":1,"current":0},
 	"g_menu__hbbtv_device_id":{"configId":'g_menu__hbbtv_device_id',"min":0, "max":1,"current":0},
+	"g_password__password":{"configId":'g_password__password',"current":1234},
+	"g_bs__bs_src":{"configId":'g_bs__bs_src',"min":0, "max":3,"current":0},
 };
 
 
@@ -803,19 +854,11 @@ var server = ws.createServer(function(conn){
 												conn.sendText(JSON.stringify(testData[data.method]));
                     break;
                     case "mtk.webui.network.setIPv6AddressType":                   
-                    	ipv6AddrType.type=data.params.type;
+                    	ipv6AddrType.IPtype=data.params.IPtype;
+                    	ipv6AddrType.DNStype=data.params.DNStype;
                     	ipv6Information.ipv6=data.params.ipv6;
                     	ipv6Information.lenOfPrefix=data.params.lenOfPrefix;
                     	ipv6Information.gateway=data.params.gateway;
-                            					testData[data.method].id = data.id;   
-												conn.sendText(JSON.stringify(testData[data.method]));
-                    break;
-                    case "mtk.webui.network.queryIPv6DNSType":
-                            					testData[data.method].id = data.id;   
-												conn.sendText(JSON.stringify(testData[data.method]));
-                    break;
-                    case "mtk.webui.network.setIPv6DNSType":
-                    	ipv6DNSType.type=data.params.type;
                     	ipv6Information['1stDNS']=data.params['1stDNS'];
                     	ipv6Information['2ndDNS']=data.params['2ndDNS'];
                             					testData[data.method].id = data.id;   
@@ -843,16 +886,170 @@ var server = ws.createServer(function(conn){
                     	returnData.id = data.id;   
                     	conn.sendText(JSON.stringify(returnData));
                     break;
+                    case "mtk.webui.system.queryVersionInfo":
+                            					testData[data.method].id = data.id;   
+												conn.sendText(JSON.stringify(testData[data.method]));
+                    break;
+                    case "mtk.webui.network.queryWirelessStatus":
+                            					testData[data.method].id = data.id;   
+												conn.sendText(JSON.stringify(testData[data.method]));
+                    break;
+                    case "mtk.webui.network.queryWirelessScan":
+                    	var returnData={
+							"method":"mtk.webui.network.notify",
+							"param":{
+								"notifyType":"wirelessScan",
+								"scanlist":[{
+										"ssid":"mtktmp", 
+										"security":"WPA2-PSK",
+										"signal":"0"
+									},
+									{
+										"ssid":"mtktmp", 
+										"security":"WPA2-PSK",
+										"signal":"1"
+									},
+									{
+										"ssid":"mtkguest",
+										"security":"WPA2-PSK",
+										"signal":"2"
+									},
+									{
+										"ssid":"mtkguest",
+										"security":"WPA2-PSK",
+										"signal":"3"
+									},
+									{
+										"ssid":"mtkguest",
+										"security":"WPA2-PSK",
+										"signal":"4"
+									},
+									{
+										"ssid":"mtkguest",
+										"security":"WPA2-PSK",
+										"signal":"5"
+									},
+									{
+										"ssid":"mtkguest",
+										"security":"WPA2-PSK",
+										"signal":"6"
+									},
+									{
+										"ssid":"mtkguest",
+										"security":"WPA2-PSK",
+										"signal":"7"
+									},
+									{
+										"ssid":"mtkguest",
+										"security":"WPA2-PSK",
+										"signal":"8"
+									},
+									{
+										"ssid":"mtkguest",
+										"security":"WPA2-PSK",
+										"signal":"9"
+									},
+									{
+										"ssid":"mtkguest",
+										"security":"WPA2-PSK",
+										"signal":"10"
+									},
+									{
+										"ssid":"mtkguest",
+										"security":"WPA2-PSK",
+										"signal":"11"
+									},
+									{
+										"ssid":"mtkguest",
+										"security":"WPA2-PSK",
+										"signal":"12"
+									},
+									{
+										"ssid":"mtkguest",
+										"security":"WPA2-PSK",
+										"signal":"13"
+									}
+								]
+							}
+						}
+                    	setInterval(function(){
+	                    	returnData.id = data.id;   
+	                    	conn.sendText(JSON.stringify(returnData));
+                    	},1000);
+                    break;
+                    case "mtk.webui.network.queryWirelessAssociate":
+                    	console.log(data);
+                    	var returnData={
+							"method":"mtk.webui.network.notify",
+							"param":{
+								"notifyType":"wirelessAssociate",
+								"ret":"fail"//or “success”…
+							}
+						}
+                    	setInterval(function(){
+	                    	returnData.id = data.id;   
+	                    	conn.sendText(JSON.stringify(returnData));
+                    	},1000);
+                    break;
+                    case "mtk.webui.network.queryIPv6Perfer":
+                            					testData[data.method].id = data.id;   
+												conn.sendText(JSON.stringify(testData[data.method]));
+                    break;
+                    case "mtk.webui.network.setIPv6Perfer":
+                    	testData["mtk.webui.network.queryIPv6Perfer"].result=data.params;
+                            					testData[data.method].id = data.id;   
+												conn.sendText(JSON.stringify(testData[data.method]));
+                    break;
+                    case "mtk.webui.network.queryWakeOnEthernet":
+                    	if(wakeOnLan.enable=='true'){
+                    		testData[data.method].result='enable';
+                    	}else{
+                    		testData[data.method].result='unenable';
+                    	}
+                            					testData[data.method].id = data.id;   
+												conn.sendText(JSON.stringify(testData[data.method]));
+                    break;
+                    case "mtk.webui.network.setWakeOnEtherne":
+                    	if(data.params=='enable'){
+                    		wakeOnLan.enable='true';
+                    	}else{
+                    		wakeOnLan.enable='false';
+                    	}
+                            					testData[data.method].id = data.id;   
+												conn.sendText(JSON.stringify(testData[data.method]));
+                    break;                    
+                    case "mtk.webui.network.queryWakeOnWireless":
+                    	if(wakeOnWLan.enable=='true'){
+                    		testData[data.method].result='enable';
+                    	}else{
+                    		testData[data.method].result='unenable';
+                    	}
+                            					testData[data.method].id = data.id;   
+												conn.sendText(JSON.stringify(testData[data.method]));
+                    break;
+                    case "mtk.webui.network.setWakeOnWireless":
+                    	if(data.params=='enable'){
+                    		wakeOnWLan.enable='true';
+                    	}else{
+                    		wakeOnWLan.enable='false';
+                    	}
+                            					testData[data.method].id = data.id;   
+												conn.sendText(JSON.stringify(testData[data.method]));
+                    break;
+                    case "mtk.webui.system.resetParentalInfo":
+                            					testData[data.method].id = data.id;   
+												conn.sendText(JSON.stringify(testData[data.method]));
+                    break;
                     
                     default:
-                    var response = testData[data.method];
-                    console.log(testData[data.method]);
-                    if(response){
-                    	console.log(response);
-                        response.id = data.id;
-                        conn.sendText(JSON.stringify(response));
-                       return;
-                    }
+	                    var response = testData[data.method];
+	                    console.log(testData[data.method]);
+	                    if(response){
+	                    	console.log(response);
+	                        response.id = data.id;
+	                        conn.sendText(JSON.stringify(response));
+	                       return;
+	                    }
                     break;
                 }
             }

@@ -94,7 +94,7 @@ window.mtvuiUtil = {
         return window.top.location != window.self.location;
     },
     getParentPageID: function () {
-        return getParameterByName("parentPageID");
+        return this.getParameterByName("parentPageID");
     },
     storeFocus: function () {
         this._focusObj = $(":focus");
@@ -103,20 +103,19 @@ window.mtvuiUtil = {
         if (this._focusObj)
             this._focusObj.focus();
     },
-    procSysKey: function  (key, callback) {
+    procSysKey: function(key, callback) {
 
     },
     reinstallTv:function(){
 
     },
+	getParameterByName: function(name) {
+		name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+		var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+			results = regex.exec(location.search);
+		return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+	}
 };
-
-function getParameterByName(name) {
-    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-        results = regex.exec(location.search);
-    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-}
 
 // "hotKey": for hot key,
 // "id":      the identical,
@@ -135,7 +134,7 @@ mtvuiUtil.launchWebPage = function (id) {
 };
 
 // load the sctipt when not exist, otherwise do nothing
-var mtvuiLoadScript = function (oldurl, url, callback) {
+mtvuiUtil.loadScript = function (oldurl, url, callback) {
     var scripts = document.getElementsByTagName("script");
     for (var i = 0; i < scripts.length; i++) {
         if(scripts[i].src){
@@ -167,7 +166,7 @@ var mtvuiLoadScript = function (oldurl, url, callback) {
 mtvuiUtil.I18NElementMap = [];
 mtvuiUtil.curLang = "";
 mtvuiUtil.getLangCallback = function(data){
-    mtvuiLoadScript(mtvuiUtil.curLang ? "../i18n/"+mtvuiUtil.curLang+".js":undefined, "../i18n/"+data.Lang+".js", mtvuiUtil.langChang.bind(mtvuiUtil));
+    mtvuiUtil.loadScript(mtvuiUtil.curLang ? "../i18n/"+mtvuiUtil.curLang+".js":undefined, "../i18n/"+data.Lang+".js", mtvuiUtil.langChang.bind(mtvuiUtil));
     mtvuiUtil.curLang = data.Lang;
 }
 mtvuiUtil.langChang = function() {
@@ -197,7 +196,7 @@ mtvuiUtil.createI18NElement = function(mlmKey){
     return spanDom;
 }
 
-var MtvWebsocket = function(wsUrlStr){
+var MtvWebSocket = function(wsUrlStr){
 //  console.log("wsUrlStr = " +wsUrlStr);
     var __host = wsUrlStr;
     var __id = 1;
@@ -214,14 +213,20 @@ var MtvWebsocket = function(wsUrlStr){
         return __id;
     };
     var sendData = function(msg, callback){
-//      console.log(msg);
+//		console.log(JSON.stringify(msg));
         __ws.send(JSON.stringify(msg));
         if(callback instanceof Function){
             __callbackMap[msg.id] = callback;
         }
     };
-    var recv = function(data){
-//    console.log(data);
+    var onmessage = function(event){
+		var data = null;
+		if(typeof event == 'object'){
+			data = event.data;
+		} else {
+			data = event;
+		}
+//		console.log(data);
         if (typeof data == 'string') {
             try{
                 data = JSON.parse(data);
@@ -237,7 +242,7 @@ var MtvWebsocket = function(wsUrlStr){
                     } else {
                         //TODO:notify data flow
 //                      console.log("data.method = "+data.method);
-                        var funList = MtvWebsocket.prototype.listenerList[data.method];
+                        var funList = MtvWebSocket.prototype.listenerList[data.method];
                         funList.forEach(function (element, index, array) {
                             element.apply(null, [data]);
                         });
@@ -250,37 +255,28 @@ var MtvWebsocket = function(wsUrlStr){
         
     };
     
-    var onopen = (function(supper){
-        return function(){
-                __bConnected = "opened";
-                var getLangStr = {method:"getLang"};
-                supper.send(getLangStr, mtvuiUtil.getLangCallback);
-                var cacheItem; 
-                while(cacheItem = cacheMsg.pop()){
-                   sendData(cacheItem.msg, cacheItem.callback); 
-                }
-            }
-    })(this);
+    var onopen = function(){
+		__bConnected = "opened";
+		var getLangStr = {method:"getLang"};
+		//this.send(getLangStr, mtvuiUtil.getLangCallback);
+		var cacheItem;
+		while(cacheItem = cacheMsg.pop()){
+		   sendData(cacheItem.msg, cacheItem.callback); 
+		}
+	};
     
-    var onclose = (function(supper){
-        return function(){
-                __bConnected = "close";
-            }
-    })(this);
-    
-    var onmessage = (function(supper){
-        return function(e){
-                recv(e.data);
-            }
-    })(this);
+    var onclose = function(){
+		console.log("onclose");
+		__bConnected = "close";
+	};
     
     var startWs = function(){
 //      console.log("__host = " +__host);
         __bConnected = "opening";
         __ws = new WebSocket(__host);
-        __ws.onopen = onopen;
-        __ws.onclose = onclose;
-        __ws.onmessage = onmessage;
+        __ws.onopen = onopen.bind(this);
+        __ws.onclose = onclose.bind(this);
+        __ws.onmessage = onmessage.bind(this);
     };
     
     this.send = function(msg, callback){
@@ -307,30 +303,38 @@ var MtvWebsocket = function(wsUrlStr){
     startWs.apply(this);
 };
 
-MtvWebsocket.prototype.Event = {
-    AcfgNotify:"regAcfgNotify",
+MtvWebSocket.prototype.Event = {
+    AcfgNotify:"mtk.webui.config.notify",
+	NetworkNotify:"mtk.webui.network.notify",
+	eventNotify:"mtk.webui.event.notify",
+	channelListNotify:"mtk.webui.channelList.notify",
+	dvbcScanNotify:"mtk.webui.channelscan.dvbc.notify",
+	dvbtScanNotify:"mtk.webui.channelscan.dvbt.notify",
+	oadNotify:"mtk.webui.oad.notify",
+	fvpNotify:"mtk.webui.fvp.notify",
+	
 };
-MtvWebsocket.prototype.listenerList = {};
-MtvWebsocket.prototype.addEventListener = function(name, notifyFunc){
+MtvWebSocket.prototype.listenerList = {};
+MtvWebSocket.prototype.addEventListener = function(name, notifyFunc){
     if(notifyFunc instanceof Function){
-        if (!MtvWebsocket.prototype.listenerList.hasOwnProperty(name)) {
-            MtvWebsocket.prototype.listenerList[name] = [notifyFunc];
+        if (!MtvWebSocket.prototype.listenerList.hasOwnProperty(name)) {
+            MtvWebSocket.prototype.listenerList[name] = [notifyFunc];
             //send reg data
         } else {
-            var idx = MtvWebsocket.prototype.listenerList[name].indexOf(notifyFunc);
+            var idx = MtvWebSocket.prototype.listenerList[name].indexOf(notifyFunc);
             if (idx < 0){
-                MtvWebsocket.prototype.listenerList[name].push(notifyFunc);
+                MtvWebSocket.prototype.listenerList[name].push(notifyFunc);
             }
         }
     }
 };
 
-MtvWebsocket.prototype.removeEventListener = function(name, notifyFunc){
+MtvWebSocket.prototype.removeEventListener = function(name, notifyFunc){
     if(notifyFunc instanceof Function){
-        if (MtvWebsocket.prototype.listenerList.hasOwnProperty(name)) {
-			var index  = MtvWebsocket.prototype.listenerList[name].indexOf(notifyFunc);
+        if (MtvWebSocket.prototype.listenerList.hasOwnProperty(name)) {
+			var index  = MtvWebSocket.prototype.listenerList[name].indexOf(notifyFunc);
 			if (index > -1) {
-				MtvWebsocket.prototype.listenerList[name].splice(index, 1);
+				MtvWebSocket.prototype.listenerList[name].splice(index, 1);
 			}
         }
     }
@@ -364,5 +368,6 @@ var mtvui_debug_log = function (s) {
             onerror=mtvuiUtil.handleErr;
         }catch(err) {console.log(err);}
     }
-    window.gSocket = new MtvWebsocket("ws://172.26.149.165:3000/");
+      window.gSocket = new MtvWebSocket("ws://172.26.149.165:3000/");
+//  window.gSocket = new MtvWebSocket("ws://192.168.1.102:7681/mtk.webui.tvCmd");
 })();

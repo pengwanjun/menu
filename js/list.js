@@ -7,13 +7,12 @@ function listKeyEvent(e) {
 
 	//下键
 	if(e.keyCode == KeyEvent.DOM_VK_DOWN) {
-		if(gMenuClassName == 'firstList') {
+		if(gMenuClassName == 'menuList') {
 			gMenuoIndex = canOperaDown(gMenuParent, curIndex);
-			removeClass(curList[curIndex], 'focus');
-			addClass(curList[gMenuoIndex], 'focus');
 			gMenuChild = gMenuParent.data[gMenuoIndex].value;
 			gMenuCurrent=gMenuParent.data[gMenuoIndex].name;
 			document.querySelector('#menuNav span').innerHTML='Menu-'+gMenuCurrent;
+			gMenuRenderFirst();
 			gMenuRenderSecond();
 		} else {
 			gMenuoIndex = canOperaDown(gMenuChild, curIndex);
@@ -24,13 +23,12 @@ function listKeyEvent(e) {
 	}
 	//上键
 	if(e.keyCode == KeyEvent.DOM_VK_UP) {
-		if(gMenuClassName == 'firstList') {
+		if(gMenuClassName == 'menuList') {
 			gMenuoIndex = canOperaUp(gMenuParent, curIndex);
-			removeClass(curList[curIndex], 'focus');
-			addClass(curList[gMenuoIndex], 'focus');
 			gMenuChild = gMenuParent.data[gMenuoIndex].value;
 			gMenuCurrent=gMenuParent.data[gMenuoIndex].name;
 			document.querySelector('#menuNav span').innerHTML='Menu-'+gMenuCurrent;
+			gMenuRenderFirst();
 			gMenuRenderSecond();
 		} else {
 			gMenuoIndex = canOperaUp(gMenuChild, curIndex);
@@ -41,17 +39,14 @@ function listKeyEvent(e) {
 	}
 	//右键 || enter键
 	if(e.keyCode == KeyEvent.DOM_VK_RIGHT||e.keyCode == KeyEvent.DOM_VK_ENTER) {
-		if(gMenuClassName == 'firstList') {
-			var obj = {
-				arr: gMenuParent,
-				mark: curIndex
-			}
-			gMenuNavlist.push(obj);
-			var nextList = curFocus.parentElement.nextElementSibling;
+		if(gMenuClassName == 'menuList') {
+			gMenuParent.curVal=curIndex;
+			var nextList = document.querySelector('.showList').children;
 			gMenuoIndex = canOperaDown(gMenuChild, -1);
-			gMenuClassName = 'secondList';
+			gMenuClassName = 'showList';
 			removeClass(curList[curIndex], 'focus');
-			addClass(nextList.children[gMenuoIndex], 'focus');
+			addClass(nextList[gMenuoIndex], 'focus');
+			gMenuRenderFirst();
 			changePage();
 		} else {
 			if(gMenuChild.data[curIndex].value.valType == 'num') {
@@ -59,7 +54,7 @@ function listKeyEvent(e) {
 				showNum.render();
 			} else if(gMenuChild.data[curIndex].value.valType == 'sel') {
 				gMenuPageName = 'showSelect';
-				showSelect.render();
+				showSelect.render(gMenuChild.data[gMenuoIndex]);
 			} else if(gMenuChild.data[curIndex].value.valType == 'scan') {
 				gMenuPageName=gMenuChild.data[curIndex].value.renderFuc;
 				if(gMenuPageName=='channelSkip'){
@@ -135,13 +130,13 @@ function listKeyEvent(e) {
 	}
 	//左键
 	if(e.keyCode == KeyEvent.DOM_VK_LEFT) {
-		if(gMenuClassName == 'secondList') {
-			if(gMenuNavlist.length == 1) {
-				document.querySelector('.secondList').style.top = '0rem';
-				var prevList = curFocus.parentElement.previousElementSibling;
-				gMenuoIndex = gMenuNavlist[gMenuNavlist.length - 1].mark;
+		if(gMenuClassName == 'showList') {
+			if(gMenuNavlist.length == 0) {
+				gMenuClassName='menuList';
+				gMenuoIndex=gMenuParent.curVal;
+				document.querySelector('.showList').style.top = '0rem';
 				removeClass(curList[curIndex], 'focus');
-				addClass(prevList.children[gMenuoIndex], 'focus');
+				gMenuRenderFirst();
 			} else {
 				gMenuoIndex = gMenuNavlist[gMenuNavlist.length - 1].mark;
 				gMenuChild = gMenuNavlist[gMenuNavlist.length - 1].arr;
@@ -158,18 +153,26 @@ function listKeyEvent(e) {
 function gMenuRenderFirst() {
 	var html1 = '';
 	for(var i = 0; i < gMenuParent.data.length; i++) {
-		if(gMenuClassName == 'firstList' && i == gMenuoIndex) {
-			html1 += '<div class="listItem focus '+gMenuParent.data[i].name+'">' + gMenuParent.data[i].name + '</div>';
+		if(gMenuClassName == 'menuList') {
+			if(i == gMenuoIndex){
+				html1 += '<div class="listItem focus '+gMenuParent.data[i].name+'">' + gMenuParent.data[i].name + '<span></span></div>';	
+			}else{
+				if(gMenuParent.data[i].opera){
+					html1 += '<div class="listItem '+gMenuParent.data[i].name+'">' + gMenuParent.data[i].name + '<span></span></div>';
+				}else{
+					html1 += '<div class="listItem disabled '+gMenuParent.data[i].name+'">' + gMenuParent.data[i].name + '</div>';
+				}				
+			}
 		} else {
-			if(gMenuParent.data[i].opera) {
+			if(i==gMenuParent.curVal){
+				html1 += '<div class="listItem '+gMenuParent.data[i].name+'">' + gMenuParent.data[i].name + '<span class="itemIcon"></span></div>';
+			}else{
 				html1 += '<div class="listItem '+gMenuParent.data[i].name+'">' + gMenuParent.data[i].name + '</div>';
-			} else {
-				html1 += '<div class="listItem disabled '+gMenuParent.data[i].name+'">' + gMenuParent.data[i].name + '</div>';
 			}
 		}
 	}
-	document.querySelector('.firstList').innerHTML = html1;
-	document.querySelector('.firstList .listItem').style.height='3rem';
+	document.querySelector('.menuList').innerHTML = html1;
+	document.querySelector('.menuList .listItem').style.height='3rem';
 }
 //渲染数据--第二列
 function gMenuRenderSecond() {
@@ -177,19 +180,19 @@ function gMenuRenderSecond() {
 	var responses=[];
 	for(var c = 0; c < gMenuChild.data.length; c++) {
 		if(gMenuChild.data[c].value.valType == 'sel' || gMenuChild.data[c].value.valType == 'num') {
-			arrPromise.push(new Promise((resolve, reject) => {
-				responses.push(gMenuChild.data[c]);
-				window.gSocket.send(gMenuChild.data[c].msg('get',''), function(data) {
-					resolve(data);
-				})
-			}))
+			if(gMenuChild.data[c].msg){
+				arrPromise.push(new Promise((resolve, reject) => {
+					responses.push(gMenuChild.data[c]);
+					window.gSocket.send(gMenuChild.data[c].msg('get',''), function(data) {
+						resolve(data);
+					})
+				}))
+			}
 		}
 	}
 	Promise.all(arrPromise).then(res => {
 		for(var r = 0; r < responses.length; r++) {
-			if(responses[r].value.valType == 'sel' || responses[r].value.valType == 'num') {
-				responses[r].getCallback(res[r]);
-			}
+			responses[r].getCallback(res[r]);
 		}
 		renderList();
 	}).catch(function(reason) {
@@ -198,19 +201,20 @@ function gMenuRenderSecond() {
 }
 
 function renderList() {
+//	console.log(gMenuChild);
 	var html2=``;
 	for(var i = 0; i < gMenuChild.data.length; i++) {
 		if(gMenuChild.data[i].value.valType == 'sel') {
 			if(gMenuChild.data[i].opera) {
-				if(gMenuClassName == 'secondList' && i == gMenuoIndex) {
+				if(gMenuClassName == 'showList' && i == gMenuoIndex) {
 					html2 += `
 						<div class="listItem focus">
 							<div class='left'>
 								${gMenuChild.data[i].name}
 							</div>
 							<div class="right">
-								<div class="selName">${gMenuChild.data[i].value.dataList[gMenuChild.data[i].curVal]}</div>
-								<span>></span>
+								<div class="selName">${gMenuChild.data[i].value.data[gMenuChild.data[i].curVal]}</div>					
+								<span class="itemFocusIcon"></span>
 							</div>
 						</div>
 					`;
@@ -221,8 +225,8 @@ function renderList() {
 								${gMenuChild.data[i].name}
 							</div>
 							<div class="right">
-								<div class="selName">${gMenuChild.data[i].value.dataList[gMenuChild.data[i].curVal]}</div>
-								<span>></span>
+								<div class="selName">${gMenuChild.data[i].value.data[gMenuChild.data[i].curVal]}</div>
+								<span class="itemFocusIcon"></span>
 							</div>
 						</div>
 					`;
@@ -234,15 +238,15 @@ function renderList() {
 							${gMenuChild.data[i].name}
 						</div>
 						<div class="right">
-							<div class="selName">${gMenuChild.data[i].value.dataList[gMenuChild.data[i].curVal]}</div>
-							<span>></span>
+							<div class="selName">${gMenuChild.data[i].value.data[gMenuChild.data[i].curVal]}</div>
+							<span class="itemFocusIcon"></span>
 						</div>
 					</div>
 				`;
 			}
 		} else if(gMenuChild.data[i].value.valType == 'num') {
 			if(gMenuChild.data[i].opera) {
-				if(gMenuClassName == 'secondList' && i == gMenuoIndex) {
+				if(gMenuClassName == 'showList' && i == gMenuoIndex) {
 					html2 += `
 						<div class="listItem focus">
 							<div class='left' data-max='${gMenuChild.data[i].value.max}' data-min='${gMenuChild.data[i].value.min}'>
@@ -252,7 +256,7 @@ function renderList() {
 								<div class="progress">
 									<div style="left:${(gMenuChild.data[i].value.data - gMenuChild.data[i].value.min) / (gMenuChild.data[i].value.max - gMenuChild.data[i].value.min) * 20-0.3}rem" class="front"></div>
 								</div>
-								<span>${gMenuChild.data[i].value.data}</span>
+								<span class="itemNumShow">${gMenuChild.data[i].value.data}</span>
 							</div>
 						</div>
 					`;
@@ -266,7 +270,7 @@ function renderList() {
 								<div class="progress">
 									<div style="left:${((gMenuChild.data[i].value.data - gMenuChild.data[i].value.min) / (gMenuChild.data[i].value.max - gMenuChild.data[i].value.min) * 20)-0.3}rem" class="front"></div>
 								</div>
-								<span>${gMenuChild.data[i].value.data}</span>
+								<span class="itemNumShow">${gMenuChild.data[i].value.data}</span>
 							</div>
 						</div>
 					`;
@@ -278,21 +282,21 @@ function renderList() {
 							${gMenuChild.data[i].name}
 						</div>
 						<div class="right">
-							<span>${gMenuChild.data[i].value.data}</span>
+							<span class="itemNumShow">${gMenuChild.data[i].value.data}</span>
 						</div>
 					</div>
 				`;
 			}
 		} else {
 			if(gMenuChild.data[i].opera) {
-				if(gMenuClassName == 'secondList' && i == gMenuoIndex) {
+				if(gMenuClassName == 'showList' && i == gMenuoIndex) {
 					html2 += `
 						<div class="listItem focus">
 							<div class='left'>
 								${gMenuChild.data[i].name}
 							</div>
 							<div class="right">
-								<span>></span>
+								<span class="itemFocusIcon"></span>
 							</div>
 						</div>
 					`;
@@ -303,7 +307,7 @@ function renderList() {
 								${gMenuChild.data[i].name}
 							</div>
 							<div class="right">
-								<span>></span>
+								<span class="itemFocusIcon"></span>
 							</div>
 						</div>
 					`;
@@ -315,15 +319,15 @@ function renderList() {
 							${gMenuChild.data[i].name}
 						</div>
 						<div class="right">
-							<span>></span>
+							<span class="itemFocusIcon"></span>
 						</div>
 					</div>
 				`;
 			}
 		}
 	}
-	document.querySelector('.secondList').innerHTML = html2;
-	document.querySelector('.secondList .listItem').style.height='3rem';
+	document.querySelector('.showList').innerHTML = html2;
+	document.querySelector('.showList .listItem').style.height='3rem';
 }
 
 //列表分页效果
@@ -331,7 +335,7 @@ function changePage() {
 //	var itemHeight = document.querySelector(".listItem.focus").style.height;
 //	itemHeight=itemHeight.substring(0,1);
 	var floorIndex = Math.floor(gMenuoIndex / 9);
-	document.querySelector('.secondList').style.top = -(floorIndex * 9 * Number(3)) + 'rem';
+	document.querySelector('.showList').style.top = -(floorIndex * 9 * Number(3)) + 'rem';
 }
 
 

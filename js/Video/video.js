@@ -6,7 +6,7 @@ var mjcDemo = {
 			<div>MJC Demo</div>
 		</div>
 	`;
-		document.querySelector('#container').innerHTML = html;
+		document.querySelector('#showList').innerHTML = html;
 	},
 	keyEvent: function(e) {
 		//exit---返回键
@@ -23,7 +23,7 @@ var visuallyImpairedAudio={
 			<div>Eng</div>
 		</div>
 	`;
-		document.querySelector('#container').innerHTML = html;
+		document.querySelector('#showList').innerHTML = html;
 	},
 	keyEvent: function(e) {
 		//exit---返回键

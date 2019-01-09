@@ -24,7 +24,7 @@ var addBissKey = {
 			</div>
 		</div>
 	`;
-		document.querySelector('#container').innerHTML = html;
+		document.querySelector('#showList').innerHTML = html;
 	},
 	keyEvent: function(e) {
 		//enter键
@@ -45,7 +45,7 @@ var bissKey = {
 			<div class="listItem focus">Add BISS key.</div>
 		</div>
 	`;
-		document.querySelector('#container').innerHTML = html;
+		document.querySelector('#showList').innerHTML = html;
 	},
 	keyEvent: function(e) {
 		//enter键
@@ -71,7 +71,7 @@ var bluetoothSetting = {
 			</div>
 		</div>
 	`;
-		document.querySelector('#container').innerHTML = html;
+		document.querySelector('#showList').innerHTML = html;
 	},
 	keyEvent: function(e) {
 		var curFocus = document.querySelector(".focus");
@@ -105,7 +105,7 @@ var camMenu = {
 			<div class="listItem focus">No CI card presented.</div>
 		</div>
 	`;
-		document.querySelector('#container').innerHTML = html;
+		document.querySelector('#showList').innerHTML = html;
 	},
 	keyEvent: function(e) {
 		//exit---返回键
@@ -126,7 +126,7 @@ var connectionTest = {
 								The network connection test is ${data.param.connection}!
 							</div>
 						`;
-			document.querySelector('#container').innerHTML = html;
+			document.querySelector('#showList').innerHTML = html;
 		});
 		window.gSocket.addEventListener("mtk.webui.network.notify", (data) => {
 			console.log(data);
@@ -151,7 +151,7 @@ var IPv6ConnectionTest = {
 								The network connection test is ${data.param.connection}!
 							</div>
 						`;
-			document.querySelector('#container').innerHTML = html;
+			document.querySelector('#showList').innerHTML = html;
 		});
 		window.gSocket.addEventListener("mtk.webui.network.notify", (data) => {
 			console.log(data);
@@ -189,7 +189,7 @@ var divXDeactivation = {
 		</div>
 	`;
 		}
-		document.querySelector('#container').innerHTML = html;
+		document.querySelector('#showList').innerHTML = html;
 	},
 	keyEvent: function(e) {
 		console.log(gMenuPageName);
@@ -244,11 +244,11 @@ var divXRegistration = {
 			<div class="sure">OK</div>
 		</div>
 	`;
-		document.querySelector('#container').innerHTML = html;
+		document.querySelector('#showList').innerHTML = html;
 	},
 	keyEvent: function(e) {
 		if(e.keyCode == KeyEvent.DOM_VK_ENTER) {
-			document.querySelector('#container').innerHTML = `
+			document.querySelector('#showList').innerHTML = `
 				<div id="list">
 					<div class="firstList">
 					</div>
@@ -276,7 +276,7 @@ var ESN = {
 			Not available.
 		</div>
 	`;
-		document.querySelector('#container').innerHTML = html;
+		document.querySelector('#showList').innerHTML = html;
 	},
 	keyEvent: function(e) {
 		//exit---返回键
@@ -339,7 +339,7 @@ var Information = {
 						</div>
 					</div>
 				`;
-					document.querySelector('#container').innerHTML = html;
+					document.querySelector('#showList').innerHTML = html;
 				});
 			}
 		});
@@ -480,7 +480,7 @@ var IPSetting = {
 						</div>
 					`;
 		}
-		document.querySelector('#container').innerHTML = html;
+		document.querySelector('#showList').innerHTML = html;
 	},
 	keyEvent: function(e) {
 		var curFocus = document.querySelector(".focus");
@@ -686,7 +686,7 @@ var IPv6Information = {
 										</div>
 									</div>
 								`;
-						document.querySelector('#container').innerHTML = html;
+						document.querySelector('#showList').innerHTML = html;
 
 					}
 				});
@@ -719,7 +719,7 @@ var IPv6ConfigurationIP = {
 								<div id="dnsType"></div>
 							</div>
 						`;
-				document.querySelector('#container').innerHTML = html;
+				document.querySelector('#showList').innerHTML = html;
 				this.renderHtmlAddr();
 				this.renderHtmlDNS();
 				removeClass(document.querySelector('#dnsType').firstElementChild, 'focus');
@@ -1021,7 +1021,7 @@ var systemInformation = {
 			systemInformation
 		</div>
 	`;
-		document.querySelector('#container').innerHTML = html;
+		document.querySelector('#showList').innerHTML = html;
 	},
 	keyEvent: function(e) {
 		//exit---返回键
@@ -1038,7 +1038,7 @@ var systemInformation = {
 			systemInformation
 		</div>
 	`;
-		document.querySelector('#container').innerHTML = html;
+		document.querySelector('#showList').innerHTML = html;
 	},
 	keyEvent: function(e) {
 		//exit---返回键
@@ -1073,7 +1073,7 @@ var versionInfo = {
 					</div>
 				</div>
 			`;
-			document.querySelector('#container').innerHTML = html;
+			document.querySelector('#showList').innerHTML = html;
 		});
 	},
 	keyEvent: function(e) {
@@ -1091,7 +1091,7 @@ var NetworkWFD = {
 			Enable WFD
 		</div>
 	`;
-		document.querySelector('#container').innerHTML = html;
+		document.querySelector('#showList').innerHTML = html;
 	},
 	keyEvent: function(e) {
 		//exit---返回键
@@ -1110,7 +1110,7 @@ var WIFI_DIRECT = {
 			Enable WFD
 		</div>
 	`;
-		document.querySelector('#container').innerHTML = html;
+		document.querySelector('#showList').innerHTML = html;
 	},
 	keyEvent: function(e) {
 		//exit---返回键
@@ -1120,47 +1120,1024 @@ var WIFI_DIRECT = {
 	}
 }
 
-var wirelessSetting = {
-	render: function() {
-		var p1 = new Promise((resolve, reject) => {
-			window.gSocket.send({
-				"method": "mtk.webui.network.queryWirelessStatus"
-			}, (data) => {
-				console.log(data);
-			});
-		});
-		var p2 = new Promise((resolve, reject) => {
-			window.gSocket.send({
-				"method": "mtk.webui.network.queryWirelessScan"
-			}, (data) => {
-				console.log(data);
-			});
-		});
-		var p3 = new Promise((resolve, reject) => {
+var wirelessScanResult={
+	obj:{},
+	prevPage:'',
+	render:function(prevPage,thisObj,pwd){
+		this.obj=thisObj;
+		this.prevPage=prevPage;
+		if(pwd==''){			
+			var html=`
+				<div id="wirelessScan">
+					<div class="scanTitle">Wireless Setting</div>
+					<div class="scanContent">
+						<div>Invalid WPA Key, Please check it.</div>
+					</div>
+					<div class="scanOperate">
+						<div>Previous</div>
+						<div>input</div>
+						<div>Next</div>
+						<div>Cancel</div>
+					</div>
+				</div>							
+			`;	
+		}else{
+			var html=`
+				<div id="wirelessScan">
+					<div class="scanTitle">Wireless Setting</div>
+					<div class="scanContent">
+						<div>TV is connecting the AP</div>
+						<div>Please wait...</div>
+					</div>
+					<div class="scanOperate">
+						<div>Previous</div>
+						<div>input</div>
+						<div>Next</div>
+						<div>Cancel</div>
+					</div>
+				</div>							
+			`;	
 			window.gSocket.send({
 				"method": "mtk.webui.network.queryWirelessAssociate",
 				"param": {
-					"ssid": "mtktmp",
-					"password": "12345678"
+					"ssid": this.obj.ssid,
+					"password": pwd
 				}
 			}, (data) => {
 				console.log(data);
+				if(data.param.ret=='success'){
+					
+				}else{					
+					document.querySelector('.scanContent').innerHTML =`
+						<div>No match Access Point is found. Please try again.</div>
+					`;
+				}
 			});
+		}
+		document.querySelector('#container').innerHTML =html;
+	},
+	keyEvent:function(e){	
+		//左键
+		if(e.keyCode == KeyEvent.DOM_VK_LEFT) {
+			if(this.prevPage=='wirelessManualSecurity'){
+				gMenuPageName='wirelessManualSecurity';
+				wirelessManualSecurity.render(this.obj.ssid);
+			}else{
+				gMenuPageName='wirelessScanKey';
+				wirelessScanKey.render(this.prevPage,this.obj);
+			}
+		}
+		//exit---返回键
+		if(e.keyCode == KeyEvent.DOM_VK_BACK_SPACE) {
+			returnListPage();
+		}
+	}
+}
+
+var wirelessScanKey={
+	obj:{},
+	prevPage:'',
+	render:function(prevPage,obj){
+		this.obj=obj;
+		this.prevPage=prevPage;
+		var html=`
+			<div id="wirelessScan">
+				<div class="scanTitle">Wireless Setting</div>
+				<div class="scanContent">
+					<div>Please input ${this.obj.security} key</div>
+					<div class="inputkey"></div>
+				</div>
+				<div class="scanOperate">
+					<div>Previous</div>
+					<div>input</div>
+					<div>Next</div>
+					<div>Cancel</div>
+				</div>
+			</div>							
+		`;	
+		document.querySelector('#container').innerHTML =html;
+	},
+	keyEvent:function(e){	
+		//左键
+		if(e.keyCode == KeyEvent.DOM_VK_LEFT) {
+			if(this.prevPage=='wirelessSettingScan'){
+				gMenuPageName='wirelessSettingScan';
+				wirelessSettingScan.render();
+			}else{
+				gMenuPageName='wirelessSetting';
+				wirelessSetting.render();
+			}
+		}
+		//exit---返回键
+		if(e.keyCode == KeyEvent.DOM_VK_BACK_SPACE) {
+			returnListPage();
+		}
+		//数字键
+		if(e.keyCode == KeyEvent.DOM_VK_0 || e.keyCode == KeyEvent.DOM_VK_1 || e.keyCode == KeyEvent.DOM_VK_2 ||
+			e.keyCode == KeyEvent.DOM_VK_3 || e.keyCode == KeyEvent.DOM_VK_4 || e.keyCode == KeyEvent.DOM_VK_5 ||
+			e.keyCode == KeyEvent.DOM_VK_6 || e.keyCode == KeyEvent.DOM_VK_7 || e.keyCode == KeyEvent.DOM_VK_8 ||
+			e.keyCode == KeyEvent.DOM_VK_9) {
+			document.querySelector('.inputkey').innerHTML+=e.key;	
+		}
+		//enter键
+		if(e.keyCode == KeyEvent.DOM_VK_ENTER || e.keyCode == KeyEvent.DOM_VK_RIGHT) {
+			gMenuPageName='wirelessScanResult';
+			wirelessScanResult.render(this.prevPage,this.obj,document.querySelector('.inputkey').innerHTML);			
+		}
+	}
+}
+
+var wirelessSettingScan ={
+	render:function(){			
+		document.querySelector('#container').innerHTML = `
+			<div>TV is scanning APs</div>
+			<div>Please wait...</div>
+		`;
+		window.gSocket.send({
+			"method": "mtk.webui.network.queryWirelessScan"
+		}, (data) => {
+			if(gMenuPageName=='wirelessSettingScan'){
+//				console.log(data);
+				var html1=`
+					<div id="wirelessScan">
+						<div class="scanTitle">Wireless Setting</div>
+						<div class="scanContent">
+							<div class="scanGuide">
+								<div class="ssid">SSID</div>
+								<div class="security">Security</div>
+								<div class="signal">Signal</div>
+							</div>
+							<div class="listContent">
+								<div class="scanList">
+				`;
+				var html2=``;
+				for(var i=0;i<data.param.scanlist.length;i++){
+					if(i==0){
+						html2+=`	
+							<div class="listItem focus">
+								<div class="ssid">${data.param.scanlist[i].ssid}</div>
+								<div class="security">${data.param.scanlist[i].security}</div>
+								<div class="signal">${data.param.scanlist[i].signal}</div>
+							</div>
+						`;
+					}else{					
+						html2+=`	
+							<div class="listItem">
+								<div class="ssid">${data.param.scanlist[i].ssid}</div>
+								<div class="security">${data.param.scanlist[i].security}</div>
+								<div class="signal">${data.param.scanlist[i].signal}</div>
+							</div>
+						`;
+					}
+				}
+				var html3=`				
+								</div>
+							</div>
+						</div>
+						<div class="scanOperate">
+							<div>Previous</div>
+							<div>Select</div>
+							<div>Next</div>
+							<div>Cancel</div>
+						</div>
+					</div>
+				`;
+				document.querySelector('#container').innerHTML =html1+html2+html3;
+			}
 		});
-		Promise.all([p1, p2, p3]).then(res => {
-			console.log(res);
-		}).catch(function(reason) {
-			console.log(reason);
-		});
+	},
+	keyEvent:function(e){	
+		if(e.keyCode == KeyEvent.DOM_VK_LEFT) {//左键
+			gMenuPageName='wirelessSetting';
+			wirelessSetting.render();
+		}else if(e.keyCode == KeyEvent.DOM_VK_BACK_SPACE) {//exit---返回键
+			returnListPage();
+		}else{
+			var curFocus = document.querySelector(".listItem.focus");
+			var curList = document.querySelector("#wirelessScan").getElementsByClassName("listItem");
+			var curIndex = [].indexOf.call(curList, curFocus);
+			//下键
+			if(e.keyCode == KeyEvent.DOM_VK_DOWN) {
+				if(curIndex != curList.length - 1) {
+					addClass(curList[curIndex + 1], 'focus');
+					removeClass(curFocus, 'focus');
+					var floorIndex = Math.floor((curIndex + 1) / 9);
+					document.querySelector('.scanList').style.top = -(floorIndex * 9 * Number(3)) + 'rem';
+				}
+			}
+			//上键
+			if(e.keyCode == KeyEvent.DOM_VK_UP) {
+				if(curIndex != 0) {
+					addClass(curList[curIndex - 1], 'focus');
+					removeClass(curFocus, 'focus');
+					var floorIndex = Math.floor((curIndex - 1) / 9);
+					document.querySelector('.scanList').style.top = -(floorIndex * 9 * Number(3)) + 'rem';
+				}
+			}
+			//enter键
+			if(e.keyCode == KeyEvent.DOM_VK_ENTER || e.keyCode == KeyEvent.DOM_VK_RIGHT) {
+				var obj={
+					ssid:curFocus.querySelector('.ssid').innerHTML,
+					security:curFocus.querySelector('.security').innerHTML
+				}
+				gMenuPageName='wirelessScanKey';
+				wirelessScanKey.render('wirelessSettingScan',obj);
+			}
+		}
+	}
+}
+
+var wirelessManualSSID={
+	render:function(){
+		var html=`
+			<div id="wirelessScan">
+				<div class="scanTitle">Wireless Setting</div>
+				<div class="scanContent">
+					<div>The valid length of SSID is 1~32 words.Please check the SSID.</div>
+				</div>
+				<div class="scanOperate">
+					<div>Previous</div>
+					<div>Set</div>
+					<div>Next</div>
+					<div>Cancel</div>
+				</div>
+			</div>							
+		`;	
+		document.querySelector('#container').innerHTML =html;
+	},
+	keyEvent:function(e){
+		//左键
+		if(e.keyCode == KeyEvent.DOM_VK_LEFT) {
+			gMenuPageName='wirelessSettingManual';
+			wirelessSettingManual.render();
+		}
+		//exit---返回键
+		if(e.keyCode == KeyEvent.DOM_VK_BACK_SPACE) {
+			returnListPage();
+		}
+	}
+}
+
+var wirelessManualSecurity={
+	ssid:'',
+	list:["NONE","WEP","WPA(AES)","WPA(TKIP)","WPA-PSK(AES)","WPA-PSK(TKIP)","WPA-PSK(AUTO)","WPA-EAP(AES)",
+		"WPA-EAP(TKIP)","WPA-EAP(AUTO)","WPA2(AES)","WPA2(TKIP)","WPA2-PSK(AES)","WPA2-PSK(TKIP)","WPA2-PSK(AUTO)",
+		"WPA2-EAP(AES)","WPA2-EAP(TKIP)","WPA2-EAP(AUTO)","WPA/WPA2-PSK(AES)","WPA/WPA2-PSK(TKIP)","WPA/WPA2-PSK(AUTO)"
+	],
+	render:function(ssid){
+		this.ssid=ssid;
+		var html1=`
+			<div id="wirelessScan">
+				<div class="scanTitle">Wireless Setting</div>
+				<div class="scanContent">
+					<div class="scanGuide">Please Select the Security Mode</div>
+					<div class="listContent">
+						<div class="scanList">
+		`;
+		var html2=``;
+		for(var i=0;i<this.list.length;i++){
+			if(i==0){
+				html2+=`	
+					<div class="listItem focus">${this.list[i]}</div>
+				`;
+			}else{					
+				html2+=`	
+					<div class="listItem">${this.list[i]}</div>
+				`;
+			}
+		}
+		var html3=`				
+						</div>
+					</div>
+				</div>
+				<div class="scanOperate">
+					<div>Previous</div>
+					<div>Select</div>
+					<div>Next</div>
+					<div>Cancel</div>
+				</div>
+			</div>
+		`;
+		document.querySelector('#container').innerHTML =html1+html2+html3;
+	},
+	keyEvent:function(e){	
+		if(e.keyCode == KeyEvent.DOM_VK_LEFT) {//左键
+			gMenuPageName='wirelessSettingManual';
+			wirelessSettingManual.render();
+		}else if(e.keyCode == KeyEvent.DOM_VK_BACK_SPACE) {//exit---返回键
+			returnListPage();
+		}else{
+			var curFocus = document.querySelector(".listItem.focus");
+			var curList = document.querySelector("#wirelessScan").getElementsByClassName("listItem");
+			var curIndex = [].indexOf.call(curList, curFocus);
+			//下键
+			if(e.keyCode == KeyEvent.DOM_VK_DOWN) {
+				if(curIndex != curList.length - 1) {
+					addClass(curList[curIndex + 1], 'focus');
+					removeClass(curFocus, 'focus');
+					var floorIndex = Math.floor((curIndex + 1) / 9);
+					document.querySelector('.scanList').style.top = -(floorIndex * 9 * Number(3)) + 'rem';
+				}
+			}
+			//上键
+			if(e.keyCode == KeyEvent.DOM_VK_UP) {
+				if(curIndex != 0) {
+					addClass(curList[curIndex - 1], 'focus');
+					removeClass(curFocus, 'focus');
+					var floorIndex = Math.floor((curIndex - 1) / 9);
+					document.querySelector('.scanList').style.top = -(floorIndex * 9 * Number(3)) + 'rem';
+				}
+			}
+			//enter键
+			if(e.keyCode == KeyEvent.DOM_VK_ENTER || e.keyCode == KeyEvent.DOM_VK_RIGHT) {
+				if(curFocus.innerHTML=='NONE'){
+					var thisObj={
+						ssid:this.ssid,
+						security:'NONE'
+					}
+					gMenuPageName='wirelessScanResult';
+					wirelessScanResult.render('wirelessManualSecurity',thisObj,'');
+				}else{
+					var obj={
+						ssid:this.ssid,
+						security:curFocus.innerHTML
+					}
+					gMenuPageName='wirelessScanKey';
+					wirelessScanKey.render('wirelessManualSecurity',obj);
+				}
+			}
+		}
+	}
+}
+
+var wirelessSettingManual={
+	render:function(){
+		var html=`
+			<div id="wirelessScan">
+				<div class="scanTitle">Wireless Setting</div>
+				<div class="scanContent">
+					<div>Please input SSID</div>
+					<div class="inputkey"></div>
+				</div>
+				<div class="scanOperate">
+					<div>Previous</div>
+					<div>Set</div>
+					<div>Next</div>
+					<div>Cancel</div>
+				</div>
+			</div>							
+		`;	
+		document.querySelector('#container').innerHTML =html;
+	},
+	keyEvent:function(e){	
+		//左键
+		if(e.keyCode == KeyEvent.DOM_VK_LEFT) {
+			gMenuPageName='wirelessSetting';
+			wirelessSetting.render();
+		}
+		//exit---返回键
+		if(e.keyCode == KeyEvent.DOM_VK_BACK_SPACE) {
+			returnListPage();
+		}
+		//数字键
+		if(e.keyCode == KeyEvent.DOM_VK_0 || e.keyCode == KeyEvent.DOM_VK_1 || e.keyCode == KeyEvent.DOM_VK_2 ||
+			e.keyCode == KeyEvent.DOM_VK_3 || e.keyCode == KeyEvent.DOM_VK_4 || e.keyCode == KeyEvent.DOM_VK_5 ||
+			e.keyCode == KeyEvent.DOM_VK_6 || e.keyCode == KeyEvent.DOM_VK_7 || e.keyCode == KeyEvent.DOM_VK_8 ||
+			e.keyCode == KeyEvent.DOM_VK_9) {
+			document.querySelector('.inputkey').innerHTML+=e.key;	
+		}
+		//enter键
+		if(e.keyCode == KeyEvent.DOM_VK_ENTER || e.keyCode == KeyEvent.DOM_VK_RIGHT) {
+			var length=document.querySelector('.inputkey').innerHTML.length;
+			if(length<1 || length>32){
+				gMenuPageName='wirelessManualSSID';
+				wirelessManualSSID.render();
+			}else{
+				gMenuPageName='wirelessManualSecurity';
+				wirelessManualSecurity.render(document.querySelector('.inputkey').innerHTML);	
+			}		
+		}
+	}
+}
+
+var wirelessAutoPIN={
+	render:function(){
 		var html = `
-		<div id="wirelessSetting">
-			<div>Wireless Setting</div>
-			<div>There is no wireless device connected to TV!</div>
-		</div>
-	`;
+			<div id="wirelessScan">
+				<div class="scanTitle">Wireless Setting</div>
+				<div class="scanContent">
+					<div class="scanGuide">Please ensure the following PIN code is installed to the AP before you click the below 'Next' button.</div>
+					<div class="listContent">
+						<div class="scanList">
+							<div class="listItem">PIN Code:[23423423423]</div>
+							<div class="listItem focus">Refresh PIN</div>
+						</div>
+					</div>
+				</div>
+				<div class="scanOperate">
+					<div>Previous</div>
+					<div>Next</div>
+					<div>Cancel</div>
+				</div>
+			</div>
+		`;
+		document.querySelector('#container').innerHTML = html;
+	},
+	keyEvent:function(e){
+		//左键
+		if(e.keyCode == KeyEvent.DOM_VK_LEFT) {
+			gMenuPageName='wirelessSetting';
+			wirelessSetting.render();
+		}
+		//exit---返回键
+		if(e.keyCode == KeyEvent.DOM_VK_BACK_SPACE) {
+			returnListPage();
+		}
+		//右键
+		if(e.keyCode == KeyEvent.DOM_VK_RIGHT){
+			
+		}
+		//enter键
+		if(e.keyCode == KeyEvent.DOM_VK_ENTER) {
+			
+		}
+	}
+}
+
+var wirelessAutoPBC={
+	render:function(){
+		var html = `
+			<div id="wirelessScan">
+				<div class="scanTitle">Wireless Setting</div>
+				<div class="scanContent">
+					<div class="scanGuide">Please press Push Button on the AP within 120 seconds after you click the below 'Next' button.</div>
+				</div>
+				<div class="scanOperate">
+					<div>Previous</div>
+					<div>Next</div>
+					<div>Cancel</div>
+				</div>
+			</div>
+		`;
+		document.querySelector('#container').innerHTML = html;
+	},
+	keyEvent:function(e){
+		//左键
+		if(e.keyCode == KeyEvent.DOM_VK_LEFT) {
+			gMenuPageName='wirelessSetting';
+			wirelessSetting.render();
+		}
+		//exit---返回键
+		if(e.keyCode == KeyEvent.DOM_VK_BACK_SPACE) {
+			returnListPage();
+		}
+		//enter键
+		if(e.keyCode == KeyEvent.DOM_VK_ENTER || e.keyCode == KeyEvent.DOM_VK_RIGHT) {
+			
+		}
+	}
+}
+
+var wirelessSettingAuto={
+	render:function(){
+		var html = `
+			<div id="wirelessScan">
+				<div class="scanTitle">Wireless Setting</div>
+				<div class="scanContent">
+					<div class="scanGuide">
+						<div>WPS(Wi-Fi Protected Setup)</div>
+						<div>-PIN(Protected Identification Number)</div>
+						<div>-PBC(Push Bottom Configuration)</div>
+					</div>
+					<div class="listContent">
+						<div class="scanList">
+							<div class="listItem focus">PIN</div>
+							<div class="listItem">PBC</div>
+						</div>
+					</div>
+				</div>
+				<div class="scanOperate">
+					<div>Previous</div>
+					<div>Select</div>
+					<div>Next</div>
+					<div>Cancel</div>
+				</div>
+			</div>
+		`;
+		document.querySelector('#container').innerHTML = html;
+	},
+	keyEvent:function(e){
+		var curFocus = document.querySelector(".listItem.focus");
+		var curList = document.querySelector("#wirelessScan").getElementsByClassName("listItem");
+		var curIndex = [].indexOf.call(curList, curFocus);
+		//下键
+		if(e.keyCode == KeyEvent.DOM_VK_DOWN) {
+			if(curIndex != curList.length - 1) {
+				addClass(curList[curIndex + 1], 'focus');
+				removeClass(curFocus, 'focus');
+			}
+		}
+		//上键
+		if(e.keyCode == KeyEvent.DOM_VK_UP) {
+			if(curIndex != 0) {
+				addClass(curList[curIndex - 1], 'focus');
+				removeClass(curFocus, 'focus');
+			}
+		}
+		//左键
+		if(e.keyCode == KeyEvent.DOM_VK_LEFT) {
+			gMenuPageName='wirelessSetting';
+			wirelessSetting.render();
+		}
+		//exit---返回键
+		if(e.keyCode == KeyEvent.DOM_VK_BACK_SPACE) {
+			returnListPage();
+		}
+		//enter键
+		if(e.keyCode == KeyEvent.DOM_VK_ENTER || e.keyCode == KeyEvent.DOM_VK_RIGHT) {
+			if(curFocus.innerHTML=='PIN'){
+				gMenuPageName='wirelessAutoPIN';
+				wirelessAutoPIN.render();
+			}
+			if(curFocus.innerHTML=='PBC'){
+				gMenuPageName='wirelessAutoPBC';
+				wirelessAutoPBC.render();
+			}
+		}
+	}
+}
+
+var wirelessSetting = {
+	render: function() {
+		var html = `
+			<div id="wirelessSetting">
+				<div>Wireless Setting</div>
+				<div style="margin-top:1rem;">
+					<div class="listItem focus">Scan</div>
+					<div class="listItem">Manual</div>
+					<div class="listItem">Auto</div>
+				</div>
+			</div>
+		`;
 		document.querySelector('#container').innerHTML = html;
 	},
 	keyEvent: function(e) {
+		var curFocus = document.querySelector(".listItem.focus");
+		var curList = document.querySelector("#wirelessSetting").getElementsByClassName("listItem");
+		var curIndex = [].indexOf.call(curList, curFocus);
+		//下键
+		if(e.keyCode == KeyEvent.DOM_VK_DOWN) {
+			if(curIndex == curList.length - 1) {
+				addClass(curList[0], 'focus');
+				removeClass(curFocus, 'focus');
+			} else {
+				addClass(curList[curIndex + 1], 'focus');
+				removeClass(curFocus, 'focus');
+			}
+		}
+		//上键
+		if(e.keyCode == KeyEvent.DOM_VK_UP) {
+			if(curIndex == 0) {
+				addClass(curList[curList.length-1], 'focus');
+				removeClass(curFocus, 'focus');
+			} else {
+				addClass(curList[curIndex - 1], 'focus');
+				removeClass(curFocus, 'focus');
+			}
+		}
+		//enter键
+		if(e.keyCode == KeyEvent.DOM_VK_ENTER || e.keyCode == KeyEvent.DOM_VK_RIGHT) {
+			if(curFocus.innerHTML=='Scan'){
+				gMenuPageName='wirelessSettingScan';
+				wirelessSettingScan.render();
+			}
+			if(curFocus.innerHTML=='Manual'){
+				gMenuPageName='wirelessSettingManual';
+				wirelessSettingManual.render();
+			}
+			if(curFocus.innerHTML=='Auto'){
+				gMenuPageName='wirelessSettingAuto';
+				wirelessSettingAuto.render();
+			}
+		}
+		//exit---返回键
+		if(e.keyCode == KeyEvent.DOM_VK_BACK_SPACE) {
+			returnListPage();
+		}
+	}
+}
+
+//timeSetupTime
+var timeSetupTime= {
+	autoSync: 'On',
+	autoSyncDate:'2019/01/12',
+	autoSyncTime:'23:58:58',
+	onTimer: 'Off',
+	offTimer:'Off',
+	focusIndex: 0,
+	timer:'',
+	render: function() {
+//		window.gSocket.send({
+//			"method": 'mtk.webui.network.queryIPv6AddressType'
+//		}, (data) => {
+////			console.log(data);
+//			if(data.error.code == 0) {
+//				this.addrType = data.result.IPtype;
+//				this.dnsType = data.result.DNStype;
+//				var html = `
+//							<div id="ipv6Config">
+//								<div id="addrType"></div>
+//								<div id="dnsType"></div>
+//							</div>
+//						`;
+//				document.querySelector('#showList').innerHTML = html;
+//				this.renderHtmlAutoSync();
+//				this.renderHtmlOnTimer();
+//				removeClass(document.querySelector('#dnsType').firstElementChild, 'focus');
+//			}
+//		});
+		var html = `
+					<div id="menuNav">
+						<span>Menu-Video</span>
+					</div>
+					<div id="listContainer">
+						<div class="menuList">
+						</div>
+						<div id="showList">
+							<div id="timeSetupTime">
+								<div id="timeSetup" class="autoSync"></div>
+								<div id="timeSetup" class="onTimer"></div>
+								<div id="timeSetup" class="onChannel">
+									<div class="listItem disabled">
+										<div class="label">Power on Channel</div>
+										<div class="content">
+											<span class="secondItemFocus"></span>
+										</div>
+									</div>
+								</div>
+								<div id="timeSetup" class="offTimer"></div>
+							</div>
+						</div>
+					</div>
+					<div id="menuOperate">
+						<div class="menuOperate">
+							<div>Enter</div>
+							<div>Select</div>
+							<div>Exit</div>
+						</div>
+					</div>
+				`;
+		document.querySelector('#container').innerHTML = html;
+		gMenuRenderFirst();
+		this.renderHtmlAutoSync();
+		this.renderHtmlOnTimer();
+		this.renderHtmlOffTimer();
+//		this.getTime();
+	},
+	interval:function(){
+		var theDate=new Date((Date.parse(this.autoSyncDate+' '+this.autoSyncTime)/1000+1)*1000);
+		var _hour = String(theDate.getHours());		
+		var _minute = theDate.getMinutes();		
+		var _second = theDate.getSeconds();		
+		var _year = theDate.getFullYear()		
+		var _month = theDate.getMonth();		
+		var _date = theDate.getDate();		
+		if(_hour<10){_hour="0"+_hour;}		
+		if(_minute<10){_minute="0"+_minute; }		
+		if(_second<10){_second="0"+_second;}		
+		_month = _month + 1;		
+		if(_month < 10){_month = "0" + _month;}		
+		if(_date<10){_date="0"+_date  }
+//		return _year + "/" + _month + "/" + _date+' '+_hour + ":" + _minute + ":" + _second;
+		console.log(document.getElementsByClassName('autoSyncTime'));
+		console.log(_hour.split(''));
+//		document.querySelector('#timeSetup.autoSync .autoSyncDate').innerHTML=_year + "/" + _month + "/" + _date;
+//		document.querySelector('#timeSetup.autoSync .autoSyncTime').innerHTML=_hour + ":" + _minute + ":" + _second;
+//		this.getTime();
+	},
+	getTime:function () {
+		this.interval();
+//		setInterval(()=>{
+//			this.interval();
+//		},1000);
+	},
+	renderHtmlAutoSync: function() {
+		if(this.autoSync == "On") {
+			var html1=`
+				<div class="listItem focus setupSelect">
+					<div class="label">Auto Synchronization</div>
+					<div class="content">
+						<div>${this.autoSync}</div>
+						<span></span>
+					</div>
+				</div>
+				<div class="listItem disabled setupInput">
+					<div class="label">Date</div>
+					<div class="content">
+			`;
+			var html2=``;
+			var date=this.autoSyncDate.split(' ');
+			for(var i=0;i<date.length;i++){
+				if(date[i]=='/'){					
+					html2+=`${date[i]}`;
+				}else{
+					html2+=`<div class="inputItem autoSyncDate">${date[i]}</div>`;
+				}
+			}
+			var html3=`
+					</div>
+				</div>
+				<div class="listItem disabled setupInput">
+					<div class="label">Time</div>
+					<div class="content">
+			`;
+			var html4=``;
+			var time=this.autoSyncTime.split('');
+			for(var j=0;j<time.length;j++){
+				if(time[j]==':'){					
+					html4+=`${time[j]}`;
+				}else{
+					html4+=`<div class="inputItem autoSyncTime">${time[j]}</div>`;
+				}
+			};
+		} else {
+			var html1=`
+				<div class="listItem focus setupSelect">
+					<div class="label">Auto Synchronization</div>
+					<div class="content">
+						<div>${this.autoSync}</div>
+						<span></span>
+					</div>
+				</div>
+				<div class="listItem setupInput">
+					<div class="label">Date</div>
+					<div class="content">
+			`;
+			var html2=``;
+			var date=this.autoSyncDate.split('');
+			for(var i=0;i<date.length;i++){
+				if(date[i]=='/'){					
+					html2+=`${date[i]}`;
+				}else{
+					html2+=`<div class="inputItem autoSyncDate">${date[i]}</div>`;
+				}
+			}
+			var html3=`
+					</div>
+				</div>
+				<div class="listItem setupInput">
+					<div class="label">Time</div>
+					<div class="content">
+			`;
+			var html4=``;
+			var time=this.autoSyncTime.split('');
+			for(var j=0;j<time.length;j++){
+				if(time[j]==':'){					
+					html4+=`${time[j]}`;
+				}else{
+					html4+=`<div class="inputItem autoSyncTime">${time[j]}</div>`;
+				}
+			};
+		}
+		document.querySelector('.autoSync').innerHTML = html1+html2+html3+html4;
+	},
+	renderHtmlOnTimer: function() {
+		if(this.onTimer == 'Off') {
+			var html = `
+						<div class="listItem setupSelect">
+								<div class="label">Power On Timer</div>
+								<div class="content">
+									<div>${this.onTimer}</div>
+									<span class="secondItemFocus"></span>
+								</div>
+							</div>
+							<div class="listItem disabled setupInput">
+								<div class="label">Timer</div>
+								<div class="content">
+									<div class="inputItem">0</div>
+									<div class="inputItem">0</div> :
+									<div class="inputItem">0</div>
+									<div class="inputItem">0</div> :
+									<div class="inputItem">0</div>
+									<div class="inputItem">0</div>
+								</div>
+							</div>
+					`;
+		} else {
+			var html = `
+						<div class="listItem setupSelect">
+								<div class="label">Power On Timer</div>
+								<div class="content">
+									<div>${this.onTimer}</div>
+									<span class="secondItemFocus"></span>
+								</div>
+							</div>
+							<div class="listItem setupInput">
+								<div class="label">Timer</div>
+								<div class="content">
+									<div class="inputItem">0</div>
+									<div class="inputItem">0</div> :
+									<div class="inputItem">0</div>
+									<div class="inputItem">0</div> :
+									<div class="inputItem">0</div>
+									<div class="inputItem">0</div>
+								</div>
+							</div>
+					`;
+		}
+		document.querySelector('.onTimer').innerHTML = html;
+	},
+	renderHtmlOffTimer: function() {
+		if(this.offTimer == 'Off') {
+			var html = `
+						<div class="listItem setupSelect">
+								<div class="label">Power Off Timer</div>
+								<div class="content">
+									<div>${this.offTimer}</div>
+									<span class="secondItemFocus"></span>
+								</div>
+							</div>
+							<div class="listItem disabled setupInput">
+								<div class="label">Timer</div>
+								<div class="content">
+									<div class="inputItem">0</div>
+									<div class="inputItem">0</div> :
+									<div class="inputItem">0</div>
+									<div class="inputItem">0</div> :
+									<div class="inputItem">0</div>
+									<div class="inputItem">0</div>
+								</div>
+							</div>
+					`;
+		} else {
+			var html = `
+						<div class="listItem setupSelect">
+								<div class="label">Power Off Timer</div>
+								<div class="content">
+									<div>${this.offTimer}</div>
+									<span class="secondItemFocus"></span>
+								</div>
+							</div>
+							<div class="listItem setupInput">
+								<div class="label">Timer</div>
+								<div class="content">
+									<div class="inputItem">0</div>
+									<div class="inputItem">0</div> :
+									<div class="inputItem">0</div>
+									<div class="inputItem">0</div> :
+									<div class="inputItem">0</div>
+									<div class="inputItem">0</div>
+								</div>
+							</div>
+					`;
+		}
+		document.querySelector('.offTimer').innerHTML = html;
+	},
+	keyEvent: function(e) {
+		var curFocus = document.querySelector(".listItem.focus");
+		var allList = document.querySelector("#timeSetupTime").getElementsByClassName("listItem");
+		var curList = [];
+		for(var i = 0; i < allList.length; i++) {
+			if(!(hasClass(allList[i], 'disabled'))) {
+				curList.push(allList[i]);
+			}
+		}
+		var curIndex = [].indexOf.call(curList, curFocus);
+		//下键
+		if(e.keyCode == KeyEvent.DOM_VK_DOWN) {
+			var inputItems=document.querySelector("#timeSetupTime").getElementsByClassName("inputItem");
+			for(var j=0;j<inputItems.length;j++){
+				removeClass(inputItems[j],'inputFocus');
+			}
+			if(curIndex == curList.length - 1) {
+				if(hasClass(curList[0],'setupInput')){
+					addClass(curList[0].querySelector('.inputItem'),'inputFocus');
+				}
+				addClass(curList[0], 'focus');
+				removeClass(curFocus, 'focus');
+			} else {
+				if(hasClass(curList[curIndex + 1],'setupInput')){
+					addClass(curList[curIndex + 1].querySelector('.inputItem'),'inputFocus');
+				}
+				addClass(curList[curIndex + 1], 'focus');
+				removeClass(curFocus, 'focus');
+			}
+		}
+		//上键
+		if(e.keyCode == KeyEvent.DOM_VK_UP) {
+			var inputItems=document.querySelector("#timeSetupTime").getElementsByClassName("inputItem");
+			for(var j=0;j<inputItems.length;j++){
+				removeClass(inputItems[j],'inputFocus');
+			}
+			if(curIndex == 0) {
+				if(hasClass(curList[curList.length-1],'setupInput')){
+					addClass(curList[curList.length-1].querySelector('.inputItem'),'inputFocus');
+				}
+				addClass(curList[curList.length-1], 'focus');
+				removeClass(curFocus, 'focus');
+			} else {
+				if(hasClass(curList[curIndex - 1],'setupInput')){
+					addClass(curList[curIndex - 1].querySelector('.inputItem'),'inputFocus');
+				}
+				addClass(curList[curIndex - 1], 'focus');
+				removeClass(curFocus, 'focus');
+			}
+		}
+		//enter键
+		if(e.keyCode == KeyEvent.DOM_VK_ENTER || e.keyCode == KeyEvent.DOM_VK_RIGHT) {
+			if(hasClass(curFocus, 'setupSelect')) {
+				if(hasClass(curFocus.parentElement,'autoSync')){
+					var arr=['On', 'Off'];
+					var index=[].indexOf.call(arr,this.autoSync);
+					var obj={
+						name:'Auto Synchronization',
+						value: {
+							data: arr
+						},
+						curVal: index
+					};
+				}
+				if(hasClass(curFocus.parentElement,'onTimer')){		
+					var arr=['Off', 'On', 'Once'];
+					var index=[].indexOf.call(arr,this.onTimer);
+					var obj={
+						name:'Power On Timer',
+						value: {
+							data: arr
+						},
+						curVal:index
+					};
+				}
+				if(hasClass(curFocus.parentElement,'offTimer')){
+					var arr=['Off', 'On', 'Once'];
+					var index=[].indexOf.call(arr,this.offTimer);
+					var obj={
+						name:'Power Off Timer',
+						value: {
+							data: arr
+						},
+						curVal:index
+					};
+				}
+				gMenuPageName='showSelect';
+				showSelect.render(obj);
+			}
+			if(e.keyCode == KeyEvent.DOM_VK_RIGHT&&hasClass(curFocus, 'setupInput')){
+				var inputList=curFocus.getElementsByClassName('inputItem');
+				var inputFocus;
+				var inputIndex;
+				for(var l=0;l<inputList.length;l++){
+					if(hasClass(inputList[l],'inputFocus')){
+						inputFocus=inputList[l];
+						inputIndex=l;
+					}
+				}
+				if(inputIndex!=inputList.length-1){
+					addClass(inputList[inputIndex+1],'inputFocus');
+					removeClass(inputFocus,'inputFocus');
+				}
+			}
+		}
+		//左键
+		if(e.keyCode == KeyEvent.DOM_VK_LEFT){
+			if(hasClass(curFocus, 'setupInput')){
+				var inputList=curFocus.getElementsByClassName('inputItem');
+				var inputFocus;
+				var inputIndex;
+				for(var l=0;l<inputList.length;l++){
+					if(hasClass(inputList[l],'inputFocus')){
+						inputFocus=inputList[l];
+						inputIndex=l;
+					}
+				}
+				if(inputIndex!=0){
+					addClass(inputList[inputIndex-1],'inputFocus');
+					removeClass(inputFocus,'inputFocus');
+				}
+			}
+		}
+		//数字键
+		if(e.keyCode == KeyEvent.DOM_VK_0 || e.keyCode == KeyEvent.DOM_VK_1 || e.keyCode == KeyEvent.DOM_VK_2 ||
+			e.keyCode == KeyEvent.DOM_VK_3 || e.keyCode == KeyEvent.DOM_VK_4 || e.keyCode == KeyEvent.DOM_VK_5 ||
+			e.keyCode == KeyEvent.DOM_VK_6 || e.keyCode == KeyEvent.DOM_VK_7 || e.keyCode == KeyEvent.DOM_VK_8 ||
+			e.keyCode == KeyEvent.DOM_VK_9) {
+			if(hasClass(curFocus, 'setupInput')) {
+				var inputList=curFocus.getElementsByClassName('inputItem');
+				var inputFocus;
+				var inputIndex;
+				for(var l=0;l<inputList.length;l++){
+					if(hasClass(inputList[l],'inputFocus')){
+						inputFocus=inputList[l];
+						inputIndex=l;
+					}
+				}
+				inputList[inputIndex].innerHTML=e.key;
+				if(inputIndex!=inputList.length-1){
+					addClass(inputList[inputIndex+1],'inputFocus');
+					removeClass(inputFocus,'inputFocus');
+				}
+			}
+		}
 		//exit---返回键
 		if(e.keyCode == KeyEvent.DOM_VK_BACK_SPACE) {
 			returnListPage();
