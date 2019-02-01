@@ -8,9 +8,11 @@ var popBoxShow = {
 			var html = `
 				<div id="popBoxShow">
 					<div class="popBoxShow">
-						<div>Wi-Fi Direct</div>
-						<div>Are you sure to exit?</div>
-						<div>Please Confirm</div>
+						<div class="title">
+							<div>Wi-Fi Direct</div>
+							<div>Are you sure to exit?</div>
+							<div>Please Confirm</div>
+						</div>
 						<div class="btn">
 							<div class="sure">Yes</div>
 							<div class="cancel focus">Cancel</div>
@@ -22,7 +24,7 @@ var popBoxShow = {
 			var html = `
 				<div id="popBoxShow">
 					<div class="popBoxShow">
-						<div>Are you sure?</div>
+						<div class="title">Are you sure?</div>
 						<div class="btn">
 							<div class="sure">OK</div>
 							<div class="cancel focus">Cancel</div>
@@ -71,11 +73,12 @@ var popBoxShow = {
 					}
 					window.gSocket.send(msg, function(data) {
 						if(data.error.code == 0) {
-							for(var i = 0; i < gMenuTvChannels.length; i++) {
-								if(gMenuTvChannels[i].name == 'Channel Skip' || gMenuTvChannels[i].name == 'Channel Sort' ||
-									gMenuTvChannels[i].name == 'Channel Edit' || gMenuTvChannels[i].name == 'Analog Channel Fine Tune' ||
-									gMenuTvChannels[i].name == 'Clean Channel List') {
-									gMenuTvChannels[i].opera = false;
+							var curChannelData=gMenuTv[gMenuTv.length-1].value.data;
+							for(var i = 0; i < curChannelData.length; i++) {
+								if(curChannelData[i].name == 'Channel Skip' || curChannelData[i].name == 'Channel Sort' ||
+									curChannelData[i].name == 'Channel Edit' || curChannelData[i].name == 'Analog Channel Fine Tune' ||
+									curChannelData[i].name == 'Clean Channel List') {
+									curChannelData[i].opera = false;
 								}
 							}
 							gMenuoIndex = 0;
@@ -100,7 +103,16 @@ var popBoxShow = {
 					
 				}
 				if(this.pageName=='resetDefault'){
-					
+					window.gSocket.send({
+						"method":"mtk.webui.system.reset",
+						"params":{"type":"resetDefault"}
+					},data=>{
+						if(data.error.code==0){
+							console.log('成功');
+						}else{
+							console.log('失败');
+						}
+					});
 				}
 			}
 		}
@@ -123,11 +135,11 @@ var showNum = {
 					${gMenuChild.data[gMenuoIndex].name}
 					<span>HDMI2</span>
 				</div>
-				<div>
-					<div class="progress" style="margin: 3.5rem 0;">
+				<div class="progress">
+					<div class="progressBar">
 						<div style="left:${(gMenuChild.data[gMenuoIndex].value.data - gMenuChild.data[gMenuoIndex].value.min) / (gMenuChild.data[gMenuoIndex].value.max - gMenuChild.data[gMenuoIndex].value.min) * 30-0.3}rem" class="front focus"></div>
 					</div>
-					<span style="margin-left: 1rem;">${Math.round(((gMenuChild.data[gMenuoIndex].value.data - gMenuChild.data[gMenuoIndex].value.min) /(gMenuChild.data[gMenuoIndex].value.max - gMenuChild.data[gMenuoIndex].value.min)) * 10000) / 100.00}%</span>
+					<div class="progressNum">${Math.round(((gMenuChild.data[gMenuoIndex].value.data - gMenuChild.data[gMenuoIndex].value.min) /(gMenuChild.data[gMenuoIndex].value.max - gMenuChild.data[gMenuoIndex].value.min)) * 10000) / 100.00}%</div>
 				</div>
 				<div class="operate">
 					<div class="left">Adjust</div>
@@ -135,7 +147,9 @@ var showNum = {
 				</div>
 			</div>
 		`;
-		document.querySelector('#container').innerHTML = html;
+		document.querySelector('#popBoxSelect').style.display='block';
+		document.querySelector('#popBoxSelect').innerHTML = html;
+		gMenuPageName = 'showNum';
 	},
 	keyEvent: function(e) {
 		if(e.keyCode == KeyEvent.DOM_VK_RIGHT) {
@@ -163,7 +177,9 @@ var showNum = {
 		}
 		//exit---返回键
 		if(e.keyCode == KeyEvent.DOM_VK_BACK_SPACE) {
-			returnListPage();
+			gMenuRenderSecond();
+			gMenuPageName='list';
+			document.querySelector('#popBoxSelect').style.display='none';
 		}
 	}
 }
@@ -172,12 +188,13 @@ var showNum = {
 var showSelect = {
 	curObj:{},
 	render: function(obj) {
-//		console.log(obj);
+		// console.log(obj);
+		gMenuPageName='showSelect';
 		this.curObj=obj;
 		var html1 = `
 			<div id="showNum">
 				<div class="title">
-					${this.curObj.name}
+					${this.curObj.popName}
 					<span>HDMI2</span>
 				</div>
 				<div class="selectBox">
@@ -204,25 +221,27 @@ var showSelect = {
 				`;
 			}
 		}
-		document.querySelector('#popBoxShow').style.display='block';
-		document.querySelector('#popBoxShow').innerHTML = html1 + html + html2;
+		document.querySelector('#popBoxSelect').style.display='block';
+		document.querySelector('#popBoxSelect').innerHTML = html1 + html + html2;
 		this.changePage(this.curObj.curVal);
 	},
 	keyEvent: function(e) {
-		var curFocus = document.querySelector("#showNum .listItem.focus");
+		var curFocus = popBoxSelect.querySelector("#showNum .listItem.focus");
 		var curList = curFocus.parentElement.children;
 		var curIndex = [].indexOf.call(curList, curFocus);
+		//下键
 		if(e.keyCode == KeyEvent.DOM_VK_DOWN) {
 			if(curIndex == curList.length - 1) {
 				removeClass(curList[curIndex], 'focus');
 				addClass(curList[0], 'focus');
-				document.querySelector('.selectList').style.top = '0px';
+				popBoxSelect.querySelector('.selectList').style.top = '0px';
 			} else {
 				removeClass(curList[curIndex], 'focus');
 				addClass(curList[curIndex + 1], 'focus');
 				this.changePage(curIndex+1);
 			}
 		}
+		//上键
 		if(e.keyCode == KeyEvent.DOM_VK_UP) {
 			if(curIndex == 0) {
 				removeClass(curList[curIndex], 'focus');
@@ -234,43 +253,183 @@ var showSelect = {
 				this.changePage(curIndex-1);
 			}
 		}
+		//enter键
 		if(e.keyCode == KeyEvent.DOM_VK_ENTER) {
-			if(this.curObj.name=='Auto Synchronization'){
-				timeSetupTime.autoSync=this.curObj.value.data[curIndex];
-			}else if(this.curObj.name=='Power On Timer'){
-				timeSetupTime.onTimer=this.curObj.value.data[curIndex];
-			}else if(this.curObj.name=='Power Off Timer'){
-				timeSetupTime.offTimer=this.curObj.value.data[curIndex];
-			}else if(this.curObj.name=='singleRFScan'){
-//					window.gSocket.send({},data=>{});
-			}else if(this.curObj.name=='cableSingleRFScan'){
-				cableSingleRFScan.modulation=this.curObj.value.data[curIndex];
-				cableSingleRFScan.frequency=this.curObj.frequency;
-				cableSingleRFScan.symbolRate=this.curObj.symbolRate;
-			}else{
-				window.gSocket.send(this.curObj.msg('set',curIndex),function(data){
-					// console.log(data);
-					if(data.error.code==0){
-						this.curObj.setCallback(curIndex);
+			switch (this.curObj.name){
+				case 'timeSetupTime':
+					if(this.curObj.popName=='Auto Synchronization'){
+						timeSetupTime.autoSync=this.curObj.value.data[curIndex];
 					}
-				}.bind(this));
+					if(this.curObj.popName=='Power On Timer'){
+						timeSetupTime.onTimer=this.curObj.value.data[curIndex];
+					}
+					if(this.curObj.popName=='Power Off Timer'){
+						timeSetupTime.offTimer=this.curObj.value.data[curIndex];
+					}
+				break;
+				case 'antennaSingleRF':
+					antennaSingleRF.listIndex=curIndex;
+					antennaSingleRF.setFrequency();
+				break;
+				case 'cableSingleRFScan':
+					cableSingleRFScan.modulation=this.curObj.value.data[curIndex];
+				break;
+				case 'cableChannelScanStart':
+					cableChannelScanStart.curIndex=curIndex;
+				break;
+				case 'targetRegionPoloUp':
+					if(this.curObj.popName=='Region1'){
+						targetRegionPoloUp.index1=curIndex;
+						targetRegionPoloUp.index2=0;
+						targetRegionPoloUp.index3=0;
+					}
+					if(this.curObj.popName=='Region2'){
+						targetRegionPoloUp.index2=curIndex;
+						targetRegionPoloUp.index3=0;
+					}
+					if(this.curObj.popName=='Region3'){
+						targetRegionPoloUp.index3=curIndex;
+					}
+				break;
+				case "operaSateChannelScanStart":
+					if(this.curObj.popName=='Scan Mode'){
+						operaSateChannelScanStart.scanMode=curFocus.innerHTML;
+					}
+					if(this.curObj.popName=='Channels'){
+						operaSateChannelScanStart.channels=curFocus.innerHTML;
+					}
+				break;
+				case 'operaSateAntennaType':
+					if(this.curObj.popName=='Tuner'){
+						operaSateAntennaType.curTuner=curIndex;
+						operaSateAntennaType.curBandFrequency=0;
+						operaSateAntennaType.focusIndex=0;
+					}
+					if(this.curObj.popName=='Band frequency'){
+						operaSateAntennaType.curBandFrequency=curIndex;
+						operaSateAntennaType.BandFrequencyDefine=curFocus.innerHTML;
+						operaSateAntennaType.focusIndex=1;
+					}
+					if(this.curObj.popName=='SubTuner'){
+						operaSateAntennaType.curSubTuner=curIndex;
+						operaSateAntennaType.focusIndex=2;
+					}
+					if(this.curObj.popName=='SubBand frequency'){
+						operaSateAntennaType.curSubBandFrequency=curIndex;
+						operaSateAntennaType.SubBandFrequencyDefine=curFocus.innerHTML;
+						operaSateAntennaType.focusIndex=3;
+					}
+				break;
+				case 'operaSatelliteEdit':
+					if(this.curObj.popName=='Satellite status'){
+						operaSatelliteEdit.value.satStatus.curIndex=curIndex;
+					}
+					if(this.curObj.popName=='LNB power'){
+						operaSatelliteEdit.value.lnbPower.curIndex=curIndex;
+					}
+					if(this.curObj.popName=='LNB frequency'){
+						operaSatelliteEdit.value.lnbFreq.curIndex=curIndex;
+					}
+					if(this.curObj.popName=='Tone 22KHz'){
+						operaSatelliteEdit.value.Tone22k.curIndex=curIndex;
+					}
+				break;
+				case "operaSatelliteDiSEqC":
+					if(this.curObj.popName=='DiSEqC 1.0 port'){
+						operaSatelliteDiSEqC.disEqcSet.set10port.curIndex=curIndex;
+					}
+					if(this.curObj.popName=='DiSEqC 1.1 port'){
+						operaSatelliteDiSEqC.disEqcSet.set11port.curIndex=curIndex;
+					}
+					if(this.curObj.popName=='DiSEqC motor'){
+						operaSatelliteDiSEqC.disEqcSet.setMotor.curIndex=curIndex;
+					}
+				break;
+				case "operaSatelliteTransponder":
+					operaSatelliteTransponder.transponder.pol.curIndex=curIndex;
+				break;
+				case 'operaSatelliteDiSEqCMotor':
+					if(this.curObj.popName=='Store position'){
+						operaSatelliteDiSEqCMotor.value.StorePosition.curIndex=curIndex;
+					}
+					if(this.curObj.popName=='Goto position'){
+						operaSatelliteDiSEqCMotor.value.GotoPosition.curIndex=curIndex;
+					}	
+				break;
+				case 'operaSatelliteDiSEqCMovement':
+					operaSatelliteDiSEqCMovement.moveMent.curIndex=curIndex;
+				break;
+				default:
+					window.gSocket.send(this.curObj.msg('set',curIndex),function(data){
+						// console.log(data);
+						if(data.error.code==0){
+							this.curObj.setCallback(curIndex);
+						}
+					}.bind(this));
 			}
+			this.returnPage();	
 		}
 		//exit---返回键
 		if(e.keyCode == KeyEvent.DOM_VK_BACK_SPACE) {
-			document.querySelector('#popBoxShow').style.display='none';
-			if(!this.curObj.msg){
-				gMenuPageName=this.curObj.name;
-				eval(this.curObj.name).render();
-			}else{
+			this.returnPage();
+		}
+	},
+	returnPage:function(){
+		switch(this.curObj.name){
+			case 'timeSetupTime':
+				gMenuPageName='timeSetupTime';
+				if(this.curObj.popName=='Auto Synchronization'){
+					timeSetupTime.renderHtmlAutoSync();
+				}
+				if(this.curObj.popName='Power On Timer'){
+					timeSetupTime.renderHtmlOnTimer();
+				}
+				if(this.curObj.popName=='Power Off Timer'){
+					timeSetupTime.renderHtmlOffTimer();
+				}
+			break;
+			case 'antennaSingleRF':
+				antennaSingleRF.getLevel();	
+			break;
+			case 'cableSingleRFScan':
+				cableSingleRFScan.renderData();
+			break;
+			case 'targetRegionPoloUp':
+				targetRegionPoloUp.renderData();
+			break;
+			case "operaSateChannelScanStart":
+				operaSateChannelScanStart.renderData();
+			break;
+			case 'cableChannelScanStart':
+				cableChannelScanStart.renderData();
+			break;
+			case 'operaSatelliteEdit':
+				operaSatelliteEdit.renderData();
+			break;
+			case 'operaSateAntennaType':
+				operaSateAntennaType.renderData();
+			break;
+			case "operaSatelliteDiSEqC":
+				operaSatelliteDiSEqC.renderData();
+			break;
+			case "operaSatelliteTransponder":
+				operaSatelliteTransponder.renderData();
+			break;
+			case 'operaSatelliteDiSEqCMotor':
+				operaSatelliteDiSEqCMotor.renderData();
+			break;
+			case 'operaSatelliteDiSEqCMovement':
+				operaSatelliteDiSEqCMovement.renderData();
+			break;
+			default:
 				gMenuRenderSecond();
 				gMenuPageName='list';
-			}
 		}
+		document.querySelector('#popBoxSelect').style.display='none';
 	},
 	changePage: function(index) {
 //		var itemHeight = document.querySelector(".listItem.focus").offsetHeight;
 		var floorIndex = Math.floor(index / 4);
-		document.querySelector('.selectList').style.top = -(floorIndex * 4 * Number(3)) + 'rem';
+		document.querySelector('#popBoxSelect .selectList').style.top = -(floorIndex * 4 * Number(3)) + 'rem';
 	}
 }

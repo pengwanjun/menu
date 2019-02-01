@@ -1,22 +1,28 @@
 var changePassword = {
 	render: function() {
 		var html = `
-			<div id="changePassword">
+			<div id="changePassword" class="scanList">
 				<div class="listItem focus new">
-					<div>New Password</div>
-					<div class="input" data-pwd=""></div>
+					<div class="lf">New Password</div>
+					<div class="mid">
+						<div class="inputNum" data-pwd=""></div>
+					</div>
+					<div class="rt"></div>
 				</div>
 				<div class="listItem confirm">
-					<div>Confirm Password</div>
-					<div class="input" data-pwd=""></div>
+					<div class="lf">Confirm Password</div>
+					<div class="mid">
+						<div class="inputNum" data-pwd=""></div>
+					</div>
+					<div class="rt"></div>
 				</div>
 			</div>
 		`;
 		document.querySelector('#showList').innerHTML = html;
 	},
 	keyEvent: function(e) {
-		var curFocus = document.querySelector('.focus');
-		var pwd = curFocus.children[1].getAttribute('data-pwd');
+		var curFocus = document.querySelector('#changePassword .focus');
+		var pwd = curFocus.querySelector('.inputNum').getAttribute('data-pwd');
 		if(e.keyCode == KeyEvent.DOM_VK_0 || e.keyCode == KeyEvent.DOM_VK_1 || e.keyCode == KeyEvent.DOM_VK_2 ||
 			e.keyCode == KeyEvent.DOM_VK_3 || e.keyCode == KeyEvent.DOM_VK_4 || e.keyCode == KeyEvent.DOM_VK_5 ||
 			e.keyCode == KeyEvent.DOM_VK_6 || e.keyCode == KeyEvent.DOM_VK_7 || e.keyCode == KeyEvent.DOM_VK_8 ||
@@ -24,26 +30,26 @@ var changePassword = {
 			if(hasClass(curFocus, 'new')) {
 				if(pwd.length == 3) {
 					pwd += e.key;
-					curFocus.children[1].innerHTML += '*';
-					curFocus.children[1].setAttribute('data-pwd', pwd);
+					curFocus.querySelector('.inputNum').innerHTML += '*';
+					curFocus.querySelector('.inputNum').setAttribute('data-pwd', pwd);
 					removeClass(document.querySelector('.new'), 'focus');
 					addClass(document.querySelector('.confirm'), 'focus');
 				} else {
 					pwd += e.key;
-					curFocus.children[1].innerHTML += '*';
-					curFocus.children[1].setAttribute('data-pwd', pwd);
+					curFocus.querySelector('.inputNum').innerHTML += '*';
+					curFocus.querySelector('.inputNum').setAttribute('data-pwd', pwd);
 				}
 			} else {
 				if(pwd.length == 3) {
 					pwd += e.key;
-					curFocus.children[1].innerHTML += '*';
-					curFocus.children[1].setAttribute('data-pwd', pwd);
-					if(pwd != document.querySelector('.new').children[1].getAttribute('data-pwd')) {
+					curFocus.querySelector('.inputNum').innerHTML += '*';
+					curFocus.querySelector('.inputNum').setAttribute('data-pwd', pwd);
+					if(pwd != document.querySelector('.new .inputNum').getAttribute('data-pwd')) {
 						alert('两次密码不一致！');
-						document.querySelector('.confirm').children[1].setAttribute('data-pwd', '');
-						document.querySelector('.confirm').children[1].innerHTML = '';
-						document.querySelector('.new').children[1].setAttribute('data-pwd', '');
-						document.querySelector('.new').children[1].innerHTML = '';
+						document.querySelector('.confirm').querySelector('.inputNum').setAttribute('data-pwd', '');
+						document.querySelector('.confirm').querySelector('.inputNum').innerHTML = '';
+						document.querySelector('.new').querySelector('.inputNum').setAttribute('data-pwd', '');
+						document.querySelector('.new').querySelector('.inputNum').innerHTML = '';
 						removeClass(document.querySelector('.confirm'), 'focus');
 						addClass(document.querySelector('.new'), 'focus');
 					} else {
@@ -60,8 +66,8 @@ var changePassword = {
 					}
 				} else {
 					pwd += e.key;
-					curFocus.children[1].innerHTML += '*';
-					curFocus.children[1].setAttribute('data-pwd', pwd);
+					curFocus.querySelector('.inputNum').innerHTML += '*';
+					curFocus.querySelector('.inputNum').setAttribute('data-pwd', pwd);
 				}
 			}
 
@@ -96,13 +102,13 @@ var inputBlock = {
 					html += `<div class="listItem focus">
 							<div class="number">${this.list[this.page][i].index}</div>
 							<div class="acName">${this.list[this.page][i].name}</div>
-							<div class="sel hasSel">选中</div>
+							<div class="sel hasSel locked">选中</div>
 						</div>`;
 				} else {
 					html += `<div class="listItem">
 							<div class="number">${this.list[this.page][i].index}</div>
 							<div class="acName">${this.list[this.page][i].name}</div>
-							<div class="sel hasSel">选中</div>
+							<div class="sel hasSel locked">选中</div>
 						</div>`;
 				}
 			} else {
@@ -110,13 +116,13 @@ var inputBlock = {
 					html += `<div class="listItem focus">
 							<div class="number">${this.list[this.page][i].index}</div>
 							<div class="acName">${this.list[this.page][i].name}</div>
-							<div class="sel">未选中</div>
+							<div class="sel unlocked">未选中</div>
 						</div>`;
 				} else {
 					html += `<div class="listItem">
 							<div class="number">${this.list[this.page][i].index}</div>
 							<div class="acName">${this.list[this.page][i].name}</div>
-							<div class="sel">未选中</div>
+							<div class="sel unlocked">未选中</div>
 						</div>`;
 				}
 			}
@@ -367,17 +373,23 @@ var password = {
 	curPwd: '',
 	render: function() {
 		window.gSocket.send({
-			"method": "mtk.webui.config.getValue",
+			"method": "mtk.webui.config.queryValue",
 			"params": {
-				"configId": "g_password__password"
+				"configId": ["g_password__password"]
 			}
 		}, (data) => {
-//			console.log(data);
+			// console.log(data);
 			if(data.error.code == 0) {
-				this.curPwd += data.result.current;
+				this.curPwd += data.result[0].current;
 				var html = `
-					<div id="password">
-						<div class="input" data-pwd=""></div>
+					<div id="password" class="scanList">
+						<div class="listItem">
+							<div class="lf">Password</div>
+							<div class="mid">
+								<div class="inputNum" data-pwd=""></div>
+							</div>
+							<div class="rt"></div>
+						</div>
 					</div>
 				`;
 				document.querySelector('#showList').innerHTML = html;
@@ -385,29 +397,40 @@ var password = {
 		})
 	},
 	keyEvent: function(e) {
-		var pwd = document.querySelector('.input').getAttribute('data-pwd');
+		//数字键
 		if(e.keyCode == KeyEvent.DOM_VK_0 || e.keyCode == KeyEvent.DOM_VK_1 || e.keyCode == KeyEvent.DOM_VK_2 ||
 			e.keyCode == KeyEvent.DOM_VK_3 || e.keyCode == KeyEvent.DOM_VK_4 || e.keyCode == KeyEvent.DOM_VK_5 ||
 			e.keyCode == KeyEvent.DOM_VK_6 || e.keyCode == KeyEvent.DOM_VK_7 || e.keyCode == KeyEvent.DOM_VK_8 ||
 			e.keyCode == KeyEvent.DOM_VK_9) {
+				// console.log(typeof this.curPwd);
+			var pwd = document.querySelector('#password .inputNum').getAttribute('data-pwd');
 			if(pwd == this.curPwd.substring(0, this.curPwd.length - 1) && e.key == this.curPwd.substring(this.curPwd.length - 1, this.curPwd.length)) {
 				Menu.data[4].value = {
 					valType: 'list',
 					data: gMenuParentalShow
 				}
 				gMenuChild = gMenuParent.data[4].value;
-				gMenuoIndex = canOperaDown(gMenuChild, -1);
+				gMenuoIndex = menuList.canOperaDown(gMenuChild, -1);
 				gMenuClassName = 'showList';
 				returnListPage();
 			} else if(pwd.length == 3) {
-				document.querySelector('.input').innerHTML = '';
-				document.querySelector('.input').setAttribute('data-pwd', '');
+				document.querySelector('#password .inputNum').innerHTML = '';
+				document.querySelector('#password .inputNum').setAttribute('data-pwd', '');
 				alert('密码错误，重新输入！');
 			} else {
 				pwd += e.key;
-				document.querySelector('.input').innerHTML += '*';
-				document.querySelector('.input').setAttribute('data-pwd', pwd);
+				document.querySelector('#password .inputNum').innerHTML += '*';
+				document.querySelector('#password .inputNum').setAttribute('data-pwd', pwd);
 			}
+		}
+		//exit---返回键
+		if(e.keyCode == KeyEvent.DOM_VK_BACK_SPACE || e.keyCode == KeyEvent.DOM_VK_LEFT) {
+			gMenuPageName='list';
+			gMenuClassName='menuList';
+			gMenuoIndex=gMenuParent.curVal;
+			addClass(document.querySelector('.menuList').getElementsByClassName('listItem')[gMenuoIndex], 'focus');
+			removeClass(document.querySelector('#password .listItem'),'focus');
+			menuList.gMenuRenderFirst();
 		}
 	}
 }

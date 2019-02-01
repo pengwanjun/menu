@@ -1,6 +1,404 @@
+
+/******factory menu下数据************/
+//factory Video
+var gMenuFactoryMenuColorTemp=[
+	{
+		name: 'Color Temperature',
+		value: {
+			valType: 'select',
+			data: ['Color Temperature1','Color Temperature2'],
+			dataList: []
+		},
+		curVal:0,
+		opera: false
+	},
+	{
+		name: 'R Gain',
+		value: {
+			valType: 'num',
+			data: 0,
+			min:-20,
+			max:20
+		},
+		opera: true
+	},
+	{
+		name: 'G Gain',
+		value: {
+			valType: 'num',
+			data: 0,
+			min:-20,
+			max:20
+		},
+		opera: true
+	},
+	{
+		name: 'B Gain',
+		value: {
+			valType: 'num',
+			data: 0,
+			min:-20,
+			max:20
+		},
+		opera: true
+	},
+	{
+		name: 'R Offset',
+		value: {
+			valType: 'num',
+			data: 0,
+			min:-20,
+			max:20
+		},
+		opera: true
+	},
+	{
+		name: 'G Offset',
+		value: {
+			valType: 'num',
+			data: 0,
+			min:-20,
+			max:20
+		},
+		opera: true
+	},
+	{
+		name: 'B Offset',
+		value: {
+			valType: 'num',
+			data: 0,
+			min:-20,
+			max:20
+		},
+		opera: true
+	}
+]
+var gMenuFactoryMenuVideo=[
+	{
+		name: 'Auto Color',
+		value: {
+			valType: 'list',
+			index:0,
+			data: '' 
+		},
+		opera: false
+	},
+	{
+		name: 'Color Temperature',
+		value: {
+			valType: 'list',
+			index:0,
+			data: gMenuFactoryMenuColorTemp
+		},
+		opera: true
+	},
+	{
+		name: 'DI MA',
+		value: {
+			valType: 'select',
+			data: ['DI MA1','DI MA2','DI MA3'],
+			dataList: []
+		},
+		curVal:0,
+		opera: true
+	},
+	{
+		name: 'DI Edge',
+		value: {
+			valType: 'select',
+			data: ['DI Edge1','DI Edge2','DI Edge3'],
+			dataList: []
+		},
+		curVal:0,
+		opera: true
+	},
+	{
+		name: 'WCG',
+		value: {
+			valType: 'select',
+			data: ['WCG1','WCG2','WCG3'],
+			dataList: []
+		},
+		curVal:0,
+		opera: true
+	},
+	{
+		name: 'Flip',
+		value: {
+			valType: 'select',
+			data: ['Flip1','Flip2','Flip3'],
+			dataList: []
+		},
+		curVal:0,
+		opera: true
+	},
+	{
+		name: 'Mirror',
+		value: {
+			valType: 'select',
+			data: ['Mirror1','Mirror2','Mirror3'],
+			dataList: []
+		},
+		curVal:0,
+		opera: true
+	},
+	{
+		name: 'Local dimming',
+		value: {
+			valType: 'select',
+			data: ['Local dimming1','Local dimming2','Local dimming3'],
+			dataList: []
+		},
+		curVal:0,
+		opera: true
+	}
+];
+//factory Audio
+var gMenuFactoryMenuAudio=[
+	{
+		name: 'Dolby Banner',
+		value: {
+			valType: 'select',
+			data: [],
+			dataList:[]
+		},
+		curVal:0,
+		opera: true
+	},
+	{
+		name: 'Compression',
+		value: {
+			valType: 'select',
+			data: [],
+			dataList:[]
+		},
+		curVal:0,
+		opera: true
+	},
+	{
+		name: 'Compression Factor',
+		value: {
+			valType: 'select',
+			data: [],
+			dataList: []
+		},
+		curVal:0,
+		opera: true
+	},
+	{
+		name: 'A2 System',
+		value: {
+			valType: 'scan',
+			renderFuc:'A2System'
+		},
+		opera: true
+	},
+	{
+		name: 'PAL Syatem',
+		value: {
+			valType: 'scan',
+			renderFuc: 'PALSyatem'
+		},
+		opera: true
+	},
+	{
+		name: 'EU System',
+		value: {
+			valType: 'scan',
+			renderFuc: 'EUSystem'
+		},
+		opera: true
+	},
+	{
+		name: 'Latency',
+		value: {
+			valType: 'num',
+			data: 0,
+			min:0,
+			max:680
+		},
+		opera: true
+	}
+]
+//factory TV
+var gMenuFactoryMenuTV=[
+	{
+		name: 'Digital Channel Range Scan',
+		value: {
+			valType: 'scan',
+			renderFuc: 'digitalChannelRangeScan'
+		},
+		opera: true
+	},
+	{
+		name: 'Tuner Diagnostic',
+		value: {
+			valType: 'scan',
+			renderFuc: 'tunerDiagnostic'
+		},
+		opera: true
+	}
+]
+//factory Setup
+var gMenuFactoryMenuSetup=[
+	{
+		name: 'Event Form',
+		value: {
+			valType: 'select',
+			data: [],
+			dataList:[]
+		},
+		curVal:0,
+		opera: true
+	},
+	{
+		name: 'Burning Mode',
+		value: {
+			valType: 'select',
+			data: [],
+			dataList:[]
+		},
+		curVal:0,
+		opera: true
+	},
+	{
+		name: 'Uart Factory Mode',
+		value: {
+			valType: 'select',
+			data: [],
+			dataList: []
+		},
+		curVal:0,
+		opera: true
+	},
+	{
+		name: 'Update CI+ Credential From USB',
+		value: {
+			valType: 'scan',
+			renderFuc:''//跳转别处
+		},
+		opera: true
+	},
+	{
+		name: 'Update CI+ ECP Credential From USB',
+		value: {
+			valType: 'scan',
+			renderFuc: '' //跳转别处
+		},
+		opera: true
+	},
+	{
+		name: 'Erase CI+ Credential',
+		value: {
+			valType: 'scan',
+			renderFuc: '' //跳转别处
+		},
+		opera: true
+	},
+	{
+		name: 'Availability Condition',
+		value: {
+			valType: 'select',
+			data: [],
+			dataList:[]
+		},
+		curVal:0,
+		opera: true
+	},
+	{
+		name: 'Clean Storage',
+		value: {
+			valType: 'scan',
+			renderFuc:'popBoxShow'
+		},
+		opera: true
+	}
+];
+var gMenuFactoryMenuPresetCh=[
+	{
+		name: 'Dump Ch',
+		value: {
+			valType: 'scan',
+			renderFuc:'' //不知道操作
+		},
+		opera: true
+	},
+	{
+		name: 'Print Ch',
+		value: {
+			valType: 'scan',
+			renderFuc:'' //不知道操作
+		},
+		opera: true
+	},
+	{
+		name: 'Restore Ch',
+		value: {
+			valType: 'scan',
+			renderFuc:'' //不知道操作
+		},
+		opera: true
+	}
+];
+//factory首页menu
+var gMenuFactoryMenu={
+	index:0,
+	valType:'list',
+	data:[
+		{
+			name:'Video',
+			value:{
+				valType: 'list',
+				index: 0,
+				data: gMenuFactoryMenuVideo
+			},
+			opera:true
+		},
+		{
+			name:'Audio',
+			value:{
+				valType:'list',
+				index:0,
+				data:gMenuFactoryMenuAudio
+			},
+			opera:true
+		},
+		{
+			name:'TV',
+			value:{
+				valType:'list',
+				index:0,
+				data:gMenuFactoryMenuTV
+			},
+			opera:true
+		},
+		{
+			name:'Setup',
+			value:{
+				valType:'list',
+				index:0,
+				data:gMenuFactoryMenuSetup
+			},
+			opera:true
+		},
+		{
+			name:'Preset Ch',
+			value:{
+				valType:'list',
+				index: 0,
+				data:gMenuFactoryMenuPresetCh
+			},
+			opera:true
+		}
+	]
+}
+
+
+
 //video下所有数据
 var gMenuVideoMjc = [{
 		name: 'Effect',
+		popName:'Effect',
 		value: {
 			valType: 'sel',
 			data: [],
@@ -43,6 +441,7 @@ var gMenuVideoMjc = [{
 	},
 	{
 		name: 'Demo Partition',
+		popName:'Demo Partition',
 		value: {
 			valType: 'sel',
 			data: [],
@@ -88,7 +487,7 @@ var gMenuVideoMjc = [{
 		value: {
 			valType: 'scan',
 			data: [],
-			renderFuc: 'mjcDemo'
+			renderFuc: '' //不知道操作
 		},
 		opera: true
 	}
@@ -96,6 +495,7 @@ var gMenuVideoMjc = [{
 
 var gMenuVideoCt = [{
 		name: 'Color Temperature',
+		popName:'Color Temperature',
 		value: {
 			valType: 'sel',
 			data: [],
@@ -166,9 +566,9 @@ var gMenuVideoCt = [{
 		},
 		getCallback: function(data) { //获取value值
 			//			console.log(data);
-			this.value.min = data.result[0].min;
+			this.value.min = unsignToSign(data.result[0].min);
 			this.value.max = data.result[0].max;
-			this.value.data = data.result[0].current;
+			this.value.data = unsignToSign(data.result[0].current);
 		}
 	},
 	{
@@ -201,9 +601,9 @@ var gMenuVideoCt = [{
 		},
 		getCallback: function(data) { //获取value值
 			//			console.log(data);
-			this.value.min = data.result[0].min;
+			this.value.min = unsignToSign(data.result[0].min);
 			this.value.max = data.result[0].max;
-			this.value.data = data.result[0].current;
+			this.value.data = unsignToSign(data.result[0].current);
 		}
 	},
 	{
@@ -236,14 +636,15 @@ var gMenuVideoCt = [{
 		},
 		getCallback: function(data) { //获取value值
 			//			console.log(data);
-			this.value.min = data.result[0].min;
+			this.value.min = unsignToSign(data.result[0].min);
 			this.value.max = data.result[0].max;
-			this.value.data = data.result[0].current;
+			this.value.data = unsignToSign(data.result[0].current);
 		}
 	}
 ];
 var gMenuVideoAv = [{
 		name: 'DNR',
+		popName:'DNR',
 		value: {
 			valType: 'sel',
 			data: [],
@@ -286,6 +687,7 @@ var gMenuVideoAv = [{
 	},
 	{
 		name: 'MPEG NR',
+		popName:'MPEG NR',
 		value: {
 			valType: 'sel',
 			data: [],
@@ -328,6 +730,7 @@ var gMenuVideoAv = [{
 	},
 	{
 		name: 'Adaptive Luma Control',
+		popName:'Adaptive Luma Control',
 		value: {
 			valType: 'sel',
 			data: [],
@@ -370,6 +773,7 @@ var gMenuVideoAv = [{
 	},
 	{
 		name: 'Flesh Tone',
+		popName:'Flesh Tone',
 		value: {
 			valType: 'sel',
 			data: [],
@@ -412,6 +816,7 @@ var gMenuVideoAv = [{
 	},
 	{
 		name: 'Dl Film Mode',
+		popName:'Dl Film Mode',
 		value: {
 			valType: 'sel',
 			data: [],
@@ -454,6 +859,7 @@ var gMenuVideoAv = [{
 	},
 	{
 		name: 'Blue stretch',
+		popName:'Blue stretch',
 		value: {
 			valType: 'sel',
 			data: [],
@@ -496,6 +902,7 @@ var gMenuVideoAv = [{
 	},
 	{
 		name: 'Game Mode',
+		popName: 'Game Mode',
 		value: {
 			valType: 'sel',
 			data: [],
@@ -546,6 +953,7 @@ var gMenuVideoAv = [{
 	},
 	{
 		name: 'Black Bar Detection',
+		popName: 'Black Bar Detection',
 		value: {
 			valType: 'sel',
 			data: [],
@@ -588,6 +996,7 @@ var gMenuVideoAv = [{
 	},
 	{
 		name: 'Super Resolution',
+		popName: 'Super Resolution',
 		value: {
 			valType: 'sel',
 			data: [],
@@ -631,6 +1040,7 @@ var gMenuVideoAv = [{
 ];
 var gMenuVideo = [{
 		name: 'Picture Mode',
+		popName: 'Picture Mode',
 		value: {
 			valType: 'sel',
 			data: [],
@@ -841,9 +1251,9 @@ var gMenuVideo = [{
 		},
 		getCallback: function(data) { //获取value值
 			//			console.log(data);
-			this.value.min = data.result[0].min;
+			this.value.min = unsignToSign(data.result[0].min);
 			this.value.max = data.result[0].max;
-			this.value.data = data.result[0].current;
+			this.value.data = unsignToSign(data.result[0].current);
 		}
 	},
 	{
@@ -918,6 +1328,7 @@ var gMenuVideo = [{
 	},
 	{
 		name: 'Dolby Vision Notification',
+		popName: 'Dolby Vision Notification',
 		value: {
 			valType: 'sel',
 			data: [],
@@ -930,14 +1341,14 @@ var gMenuVideo = [{
 				return {
 					"method": "mtk.webui.config.queryValue",
 					"params": {
-						"configId": ["g_video__dovi_user_swicth"]
+						"configId": ["g_video__dovi_user_switch"]
 					}
 				};
 			} else {
 				return {
 					"method": "mtk.webui.config.setValue",
 					"params": {
-						"configId": "g_video__dovi_user_swicth",
+						"configId": "g_video__dovi_user_switch",
 						"value": val,
 						"apply": true
 					}
@@ -955,6 +1366,7 @@ var gMenuVideo = [{
 	},
 	{
 		name: 'Gamma',
+		popName:'Gamma',
 		value: {
 			valType: 'sel',
 			data: [],
@@ -996,6 +1408,7 @@ var gMenuVideo = [{
 	},
 	{
 		name: 'HDR',
+		popName: 'HDR',
 		value: {
 			valType: 'sel',
 			data: [],
@@ -1057,6 +1470,7 @@ var gMenuVideo = [{
 
 var gMenuAudioDol = [{
 		name: 'Dolby Audio Processing',
+		popName: 'Dolby Audio Processing',
 		value: {
 			valType: 'sel',
 			data: [],
@@ -1098,6 +1512,7 @@ var gMenuAudioDol = [{
 	},
 	{
 		name: 'Sound Mode',
+		popName: 'Sound Mode',
 		value: {
 			valType: 'sel',
 			data: [],
@@ -1139,6 +1554,7 @@ var gMenuAudioDol = [{
 	},
 	{
 		name: 'Volume Leveler',
+		popName: 'Volume Leveler',
 		value: {
 			valType: 'sel',
 			data: [],
@@ -1180,6 +1596,7 @@ var gMenuAudioDol = [{
 	},
 	{
 		name: 'Dialogue Enhancement',
+		popName: 'Dialogue Enhancement',
 		value: {
 			valType: 'sel',
 			data: [],
@@ -1221,6 +1638,7 @@ var gMenuAudioDol = [{
 	},
 	{
 		name: 'Speaker Virtualizer',
+		popName: 'Speaker Virtualizer',
 		value: {
 			valType: 'sel',
 			data: [],
@@ -1273,6 +1691,7 @@ var gMenuAudioAdvanced = [{
 
 var gMenuAudioVisuallyImpaired = [{
 		name: 'Speaker',
+		popName: 'Speaker',
 		value: {
 			valType: 'sel',
 			data: [],
@@ -1314,6 +1733,7 @@ var gMenuAudioVisuallyImpaired = [{
 	},
 	{
 		name: 'Headphone',
+		popName: 'Headphone',
 		value: {
 			valType: 'sel',
 			data: [],
@@ -1390,6 +1810,7 @@ var gMenuAudioVisuallyImpaired = [{
 	},
 	{
 		name: 'Pan and Fade',
+		popName:'Pan and Fade',
 		value: {
 			valType: 'sel',
 			data: [],
@@ -1470,9 +1891,9 @@ var gMenuAudio = [{
 		},
 		getCallback: function(data) { //获取value值
 			//			console.log(data);
-			this.value.min = data.result[0].min;
+			this.value.min = unsignToSign(data.result[0].min);
 			this.value.max = data.result[0].max;
-			this.value.data = data.result[0].current;
+			this.value.data = unsignToSign(data.result[0].current);
 		}
 	},
 	{
@@ -1547,6 +1968,7 @@ var gMenuAudio = [{
 	},
 	{
 		name: 'Sound Surround',
+		popName: 'Sound Surround',
 		value: {
 			valType: 'sel',
 			data: [],
@@ -1557,7 +1979,7 @@ var gMenuAudio = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.queryMinMaxValue",
+					"method": "mtk.webui.config.queryValue",
 					"params": {
 						"configId": ["g_audio__aud_surround"]
 					}
@@ -1574,11 +1996,8 @@ var gMenuAudio = [{
 			}
 		},
 		getCallback: function(data) { //获取value值
-			let arr = [];
-			for(let i = data.result[0].min; i <= data.result[0].max; i++) {
-				arr.push(this.value.dataList[i]);
-			}
-			this.value.data = arr;
+			//			console.log(data);
+			this.value.data = this.value.dataList;
 			this.curVal = data.result[0].current;
 		},
 		setCallback: function(val) { //设置value值
@@ -1588,6 +2007,7 @@ var gMenuAudio = [{
 	},
 	{
 		name: 'Equalizer',
+		popName:'Equalizer',
 		value: {
 			valType: 'sel',
 			data: [],
@@ -1629,6 +2049,7 @@ var gMenuAudio = [{
 	},
 	{
 		name: 'Speaker',
+		popName: 'Speaker',
 		value: {
 			valType: 'sel',
 			data: [],
@@ -1667,6 +2088,7 @@ var gMenuAudio = [{
 	},
 	{
 		name: 'SPDIF Type',
+		popName: 'SPDIF Type',
 		value: {
 			valType: 'sel',
 			data: [],
@@ -1743,6 +2165,7 @@ var gMenuAudio = [{
 	},
 	{
 		name: 'Auto Volume Control',
+		popName: 'Auto Volume Control',
 		value: {
 			valType: 'sel',
 			data: [],
@@ -1753,7 +2176,7 @@ var gMenuAudio = [{
 		msg: function(key, val) {
 			if(key == 'get') {
 				return {
-					"method": "mtk.webui.config.queryMinMaxValue",
+					"method": "mtk.webui.config.queryValue",
 					"params": {
 						"configId": ["g_audio__agc"]
 					}
@@ -1781,6 +2204,7 @@ var gMenuAudio = [{
 	},
 	{
 		name: 'Type',
+		popName: 'Type',
 		value: {
 			valType: 'sel',
 			data: [],
@@ -1828,6 +2252,7 @@ var gMenuAudio = [{
 	},
 	{
 		name: 'Downmix Mode',
+		popName:'Downmix Mode',
 		value: {
 			valType: 'sel',
 			data: [],
@@ -1871,7 +2296,7 @@ var gMenuAudio = [{
 			data: []
 		},
 		opera: false,
-		renderFuc: 'soundtracks'
+		renderFuc: '' //看不到页面
 	},
 	{
 		name: 'Advanced',
@@ -1889,7 +2314,7 @@ var gMenuTvChannelsAllSate=[{
 		value: {
 			valType: 'scan',
 			data: [],
-			renderFuc: 'channelScan'
+			renderFuc: 'operaSateAntennaType'
 		},
 		opera: true
 	},
@@ -1898,7 +2323,7 @@ var gMenuTvChannelsAllSate=[{
 		value: {
 			valType: 'scan',
 			data: [],
-			renderFuc: 'updateScan'
+			renderFuc: 'operaSateChannelAddScan'
 		},
 		opera: true
 	},
@@ -1907,7 +2332,7 @@ var gMenuTvChannelsAllSate=[{
 		value: {
 			valType: 'scan',
 			data: [],
-			renderFuc: 'updateScan'
+			renderFuc: 'operaSateChannelUpdateScan'
 		},
 		opera: true
 	},
@@ -1916,7 +2341,7 @@ var gMenuTvChannelsAllSate=[{
 		value: {
 			valType: 'scan',
 			data: [],
-			renderFuc: 'analogManualScan'
+			renderFuc: 'operaSateChannelManualTuningScan'
 		},
 		opera: true
 	},
@@ -1926,7 +2351,8 @@ var gMenuTvChannelsAllSate=[{
 			valType: 'scan',
 			data: []
 		},
-		opera: false
+		opera: false,
+		renderFuc:'' //看不到页面
 	},
 	{
 		name: 'Channel Skip',
@@ -1989,7 +2415,7 @@ var gMenuTvChannelsOperaSate=[{
 		value: {
 			valType: 'scan',
 			data: [],
-			renderFuc: 'channelScan'
+			renderFuc: 'operaSateChannelReScan'
 		},
 		opera: true
 	},
@@ -1998,7 +2424,7 @@ var gMenuTvChannelsOperaSate=[{
 		value: {
 			valType: 'scan',
 			data: [],
-			renderFuc: 'updateScan'
+			renderFuc: 'operaSateChannelAddScan'
 		},
 		opera: true
 	},
@@ -2007,7 +2433,7 @@ var gMenuTvChannelsOperaSate=[{
 		value: {
 			valType: 'scan',
 			data: [],
-			renderFuc: 'updateScan'
+			renderFuc: 'operaSateChannelUpdateScan'
 		},
 		opera: true
 	},
@@ -2016,7 +2442,7 @@ var gMenuTvChannelsOperaSate=[{
 		value: {
 			valType: 'scan',
 			data: [],
-			renderFuc: 'analogManualScan'
+			renderFuc: 'operaSateChannelManualTuningScan'
 		},
 		opera: true
 	},
@@ -2268,6 +2694,7 @@ var gMenuTvChannelsAntenna=[{
 ];
 var gMenuTv = [{
 		name: 'Tuner Mode',
+		popName: 'Tuner Mode',
 		value: {
 			valType: 'sel',
 			data: [],
@@ -2315,6 +2742,7 @@ var gMenuTv = [{
 	},
 	{
 		name: 'Audio Channel',
+		popName: 'Audio Channel',
 		value: {
 			valType: 'sel',
 			data: ['Stereo', 'Dual1', 'Dual2', 'Mono']
@@ -2335,6 +2763,7 @@ var gMenuTv = [{
 //setup下所有数据
 var gMenuSetupTSTime = [{
 		name: 'Auto Synchronization',
+		popName: 'Auto Synchronization',
 		value: {
 			valType: 'sel',
 			data: ['On', 'Off']
@@ -2360,6 +2789,7 @@ var gMenuSetupTSTime = [{
 	},
 	{
 		name: 'Power On Timer',
+		popName: 'Power On Timer',
 		value: {
 			valType: 'sel',
 			data: ['Off', 'On', 'Once']
@@ -2385,6 +2815,7 @@ var gMenuSetupTSTime = [{
 	//	},
 	{
 		name: 'Power Off Timer',
+		popName: 'Power Off Timer',
 		value: {
 			valType: 'sel',
 			data: ['Off', 'On', 'Once']
@@ -2404,6 +2835,7 @@ var gMenuSetupTSTime = [{
 
 var gMenuSetupHbbTV = [{
 		name: 'HbbTV Support',
+		popName: 'HbbTV Support',
 		value: {
 			valType: 'sel',
 			data: [],
@@ -2442,6 +2874,7 @@ var gMenuSetupHbbTV = [{
 	},
 	{
 		name: 'Do Not Track',
+		popName: 'Do Not Track',
 		value: {
 			valType: 'sel',
 			data: [],
@@ -2480,6 +2913,7 @@ var gMenuSetupHbbTV = [{
 	},
 	{
 		name: 'Cookie Settings',
+		popName: 'Cookie Settings',
 		value: {
 			valType: 'sel',
 			data: [],
@@ -2518,6 +2952,7 @@ var gMenuSetupHbbTV = [{
 	},
 	{
 		name: 'Persistent Storage',
+		popName:'Persistent Storage',
 		value: {
 			valType: 'sel',
 			data: [],
@@ -2556,6 +2991,7 @@ var gMenuSetupHbbTV = [{
 	},
 	{
 		name: 'Blcok Tracking Sites',
+		popName: 'Blcok Tracking Sites',
 		value: {
 			valType: 'sel',
 			data: [],
@@ -2594,6 +3030,7 @@ var gMenuSetupHbbTV = [{
 	},
 	{
 		name: 'Device ID',
+		popName: 'Device ID',
 		value: {
 			valType: 'sel',
 			data: [],
@@ -2630,7 +3067,7 @@ var gMenuSetupHbbTV = [{
 			this.curVal = val;
 		}
 	},
-	{
+	{	//无API
 		name: 'Reset Device ID',
 		value: {
 			valType: 'scan',
@@ -2645,6 +3082,7 @@ var gMenuSetupHbbTV = [{
 var gMenuSetupTS = [
 	//	{
 	//		name: 'Time Zone',
+	// 		popName: 'Time Zone',
 	//		value: {
 	//			valType: 'sel',
 	//			data: ['As Broadcaster', 'GMT+0:00', 'GMT+1:00', 'GMT+2:00', 'GMT+3:00', 'GMT+3:30', 'GMT+4:00',
@@ -2668,6 +3106,7 @@ var gMenuSetupTS = [
 	},
 	//	{
 	//		name: 'Sleep Timer',
+	// 		popName: 'Sleep Timer',
 	//		value: {
 	//			valType: 'sel',
 	//			data: ['Off', '10 Minutes', '20 Minutes', '30 Minutes', '40 Minutes', '50 Minutes', '60 Minutes', '90 Minutes', '120 Minutes']
@@ -2677,6 +3116,7 @@ var gMenuSetupTS = [
 	//	},
 	//	{
 	//		name: 'Auto Sleep',
+	// 		popName: 'Auto Sleep',
 	//		value: {
 	//			valType: 'sel',
 	//			data: ['Off', '4 Hours', '6 Hours', '8 Hours']
@@ -2687,6 +3127,7 @@ var gMenuSetupTS = [
 ];
 var gMenuSetupHDMI = [{
 	name: 'Singal Format',
+	popName:'Singal Format',
 	value: {
 		valType: 'sel',
 		data: [],
@@ -2725,6 +3166,7 @@ var gMenuSetupHDMI = [{
 }];
 var gMenuSetupSubtitle = [{
 		name: 'Analog Subtitle',
+		popName: 'Analog Subtitle',
 		value: {
 			valType: 'sel',
 			data: [],
@@ -2763,6 +3205,7 @@ var gMenuSetupSubtitle = [{
 	},
 	{
 		name: 'Digital Subtitle Lang.',
+		popName: 'Digital Subtitle Lang.',
 		value: {
 			valType: 'sel',
 			data: ['English']
@@ -2772,6 +3215,7 @@ var gMenuSetupSubtitle = [{
 	},
 	{
 		name: 'Digital Subtitle Lang. 2nd',
+		popName: 'Digital Subtitle Lang. 2nd',
 		value: {
 			valType: 'sel',
 			data: ['English']
@@ -2781,6 +3225,7 @@ var gMenuSetupSubtitle = [{
 	},
 	{
 		name: 'Subtitle Type',
+		popName: 'Subtitle Type',
 		value: {
 			valType: 'sel',
 			data: [],
@@ -2820,6 +3265,7 @@ var gMenuSetupSubtitle = [{
 ];
 var gMenuSetupTeletext = [{
 		name: 'Digital Teletext Language',
+		popName: 'Digital Teletext Language',
 		value: {
 			valType: 'sel',
 			data: ['English']
@@ -2829,6 +3275,7 @@ var gMenuSetupTeletext = [{
 	},
 	{
 		name: 'Decoding Page Language',
+		popName: 'Decoding Page Language',
 		value: {
 			valType: 'sel',
 			data: [],
@@ -2867,6 +3314,7 @@ var gMenuSetupTeletext = [{
 	},
 	{
 		name: 'TTX Presentation Level',
+		popName: 'TTX Presentation Level',
 		value: {
 			valType: 'sel',
 			data: [],
@@ -2915,6 +3363,7 @@ var gMenuSetupCI = [{
 	},
 	{
 		name: 'RF Channel',
+		popName: 'RF Channel',
 		value: {
 			valType: 'sel',
 			data: ['Default', 'AMMI', 'Broadcast']
@@ -2926,6 +3375,7 @@ var gMenuSetupCI = [{
 
 var gMenuSetupNetworkConf = [{
 		name: 'Internet Connection',
+		popName: 'Internet Connection',
 		value: {
 			valType: 'sel',
 			data: [],
@@ -2986,6 +3436,7 @@ var gMenuSetupNetworkConf = [{
 	},
 	{
 		name: 'Interface',
+		popName: 'Interface',
 		value: {
 			valType: 'sel',
 			data: [],
@@ -3047,6 +3498,7 @@ var gMenuSetupNetworkConf = [{
 	},
 	{
 		name: 'Wake On Lan',
+		popName: 'Wake On Lan',
 		value: {
 			valType: 'sel',
 			data: [],
@@ -3082,6 +3534,7 @@ var gMenuSetupNetworkConf = [{
 	},
 	{
 		name: 'Wake On Wlan',
+		popName: 'Wake On Wlan',
 		value: {
 			valType: 'sel',
 			data: [],
@@ -3153,6 +3606,7 @@ var gMenuSetupNetworkConf = [{
 	},
 	{
 		name: 'IP Prefer',
+		popName:'IP Prefer',
 		value: {
 			valType: 'sel',
 			data: [],
@@ -3219,7 +3673,7 @@ var gMenuSetupNetworkNetflix = [{
 		value: {
 			valType: 'scan',
 			data: [],
-			renderFuc: 'Deactivate'
+			renderFuc: '' //看不到页面
 		},
 		opera: false
 	},
@@ -3235,6 +3689,7 @@ var gMenuSetupNetworkNetflix = [{
 ];
 var gMenuSetupNetworkApp = [{
 		name: 'DLNA',
+		popName:'DLNA',
 		value: {
 			valType: 'sel',
 			data: ['On', 'Off']
@@ -3244,6 +3699,7 @@ var gMenuSetupNetworkApp = [{
 	},
 	{
 		name: 'DMR',
+		popName: 'DMR',
 		value: {
 			valType: 'sel',
 			data: ['On', 'Off']
@@ -3273,7 +3729,7 @@ var gMenuSetupNetwork = [{
 		value: {
 			valType: 'scan',
 			data: [],
-			renderFuc: 'NetworkWFD'
+			renderFuc: '' //不知道操作
 		},
 		opera: true
 	},
@@ -3282,7 +3738,7 @@ var gMenuSetupNetwork = [{
 		value: {
 			valType: 'scan',
 			data: [],
-			renderFuc: 'WIFI_DIRECT'
+			renderFuc: 'WIFI_DIRECT' //不知道操作
 		},
 		opera: true
 	},
@@ -3297,6 +3753,7 @@ var gMenuSetupNetwork = [{
 ];
 var gMenuSetupBluetooth = [{
 		name: 'Switch',
+		popName: 'Switch',
 		value: {
 			valType: 'sel',
 			data: ['On', 'Off']
@@ -3319,25 +3776,55 @@ var gMenuSetupOAD = [{
 		value: {
 			valType: 'scan',
 			data: [],
-			renderFuc: 'manualOADDownload' //跳转别处
+			renderFuc: '' //跳转别处
 		},
 		opera: true
 	},
 	{
 		name: 'Auto Download',
+		popName: 'Auto Download',
 		value: {
 			valType: 'sel',
-			data: ['YES', 'NO']
+			data:[],
+			dataList: ['YES', 'NO']
 		},
 		curVal: 0,
-		opera: true
+		opera: true,
+		msg: function(key, val) {
+			if(key == 'get') {
+				return {
+					"method": "mtk.webui.config.queryValue",
+					"params": {
+						"configId": ["g_oad__oad_sel_options_auto_download"]
+					}
+				};
+			} else {
+				return {
+					"method": "mtk.webui.config.setValue",
+					"params": {
+						"configId": "g_oad__oad_sel_options_auto_download",
+						"value": val,
+						"apply": true
+					}
+				};
+			}
+		},
+		getCallback: function(data) { //获取value值
+			// console.log(data);
+			this.value.data = this.value.dataList;
+			this.curVal = data.result[0].current;
+		},
+		setCallback: function(val) { //设置value值
+			//			console.log(data.result);
+			this.curVal = val;
+		}
 	}
 ];
 var gMenuSetupRecord = [{
 		name: 'Device Info',
 		value: {
 			valType: 'scan',
-			data: [] //跳转别处
+			data: [] //跳转到nav record
 		},
 		opera: true
 	},
@@ -3345,12 +3832,13 @@ var gMenuSetupRecord = [{
 		name: 'Schedule List',
 		value: {
 			valType: 'scan',
-			data: [] //跳转别处
+			data: [] //跳转到nav schedule
 		},
 		opera: true
 	},
 	{
 		name: 'Time Shifting Mode',
+		popName: 'Time Shifting Mode',
 		value: {
 			valType: 'sel',
 			data: [],
@@ -3363,7 +3851,7 @@ var gMenuSetupRecord = [{
 				return {
 					"method": "mtk.webui.config.queryValue",
 					"params": {
-						"configId": "g_record__rec_tshift_mode"
+						"configId": ["g_record__rec_tshift_mode"]
 					}
 				};
 			} else {
@@ -3390,6 +3878,7 @@ var gMenuSetupRecord = [{
 ];
 var gMenuSetupUpdate = [{
 		name: 'Auto Channel Update',
+		popName: 'Auto Channel Update',
 		value: {
 			valType: 'sel',
 			data: [],
@@ -3428,6 +3917,7 @@ var gMenuSetupUpdate = [{
 	},
 	{
 		name: 'Channel Update Message',
+		popName: 'Channel Update Message',
 		value: {
 			valType: 'sel',
 			data: [],
@@ -3466,17 +3956,19 @@ var gMenuSetupUpdate = [{
 	}
 ];
 var gMenuSetup = [
-	//	{
-	//			name: 'OSD Language',
-	//			value: {
-	//				valType: 'sel',
-	//				data: ['English', 'Vasco', 'Catalan', 'Hrvatski']
-	//			},
-	//			curVal: 'English',
-	//			opera: false
-	//		},
+	{   //无API
+		name: 'OSD Language',
+		popName: 'OSD Language',
+		value: {
+			valType: 'sel',
+			data: ['English', 'Vasco', 'Catalan', 'Hrvatski']
+		},
+		curVal: 'English',
+		opera: false
+	},
 	{
 		name: 'Blue Mute',
+		popName: 'Blue Mute',
 		value: {
 			valType: 'sel',
 			data: [],
@@ -3515,6 +4007,7 @@ var gMenuSetup = [
 	},
 	{
 		name: 'Hot Boot',
+		popName: 'Hot Boot',
 		value: {
 			valType: 'sel',
 			data: [],
@@ -3553,6 +4046,7 @@ var gMenuSetup = [
 	},
 	{
 		name: 'Interaction Channel',
+		popName: 'Interaction Channel',
 		value: {
 			valType: 'sel',
 			data: [],
@@ -3591,6 +4085,7 @@ var gMenuSetup = [
 	},
 	{
 		name: 'MHEG PIN Protection',
+		popName: 'MHEG PIN Protection',
 		value: {
 			valType: 'sel',
 			data: [],
@@ -3651,7 +4146,7 @@ var gMenuSetup = [
 		},
 		opera: true
 	},
-	{
+	{	//无API
 		name: 'DivX(R) Registration',
 		value: {
 			valType: 'scan',
@@ -3660,7 +4155,7 @@ var gMenuSetup = [
 		},
 		opera: true
 	},
-	{
+	{	//无API
 		name: 'DivX(R) Deactivation',
 		value: {
 			valType: 'scan',
@@ -3740,7 +4235,7 @@ var gMenuSetup = [
 		value: {
 			valType: 'scan',
 			data: [],
-			renderFuc: 'licenseInfo'
+			renderFuc: 'licenseInfo' //无API
 		},
 		opera: true
 	},
@@ -3785,6 +4280,7 @@ var gMenuSetup = [
 //parental下所有数据
 var gMenuParentalProgramBlock = [{
 	name: 'Age Rating',
+	popName: 'Age Rating',
 	value: {
 		valType: 'sel',
 		data: [],
@@ -3883,15 +4379,6 @@ var gMenuParentalShow = [{
 		opera: true
 	}
 ];
-var gMenuParental = [{
-	name: 'Password',
-	value: {
-		valType: 'scan',
-		data: [],
-		renderFuc: 'password'
-	},
-	opera: true
-}];
 
 //主目录menu
 var Menu = {
@@ -3933,7 +4420,8 @@ var Menu = {
 			name: 'Parental',
 			value: {
 				valType: 'scan',
-				data: gMenuParental
+				data: [],
+				renderFuc:'password'
 			},
 			opera: true
 		},
@@ -3950,8 +4438,14 @@ var Menu = {
 var gMenuoIndex = 0;
 var gMenuClassName = 'menuList';
 var gMenuPageName = 'list';
-// var gMenuPageName = 'cableSingleRFScan';
 var gMenuParent = Menu;
 var gMenuChild = Menu.data[0].value;
 var gMenuNavlist = [];
 var gMenuCurrent = 'Video';
+var parentalPwd='';
+var gMenuEnterFactoryMenu='';
+
+
+
+
+

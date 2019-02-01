@@ -45,6 +45,7 @@ function returnListPage() {
 					</div>
 					<div id="showList">
 						<div class="showList">
+							<div class="showListContainer"></div>
 						</div>
 					</div>
 				</div>
@@ -57,7 +58,10 @@ function returnListPage() {
 				</div>
 			`;
 	gMenuPageName = 'list';
-	gMenuRenderSecond();
-	gMenuRenderFirst();
-	changePage();
+	menuList.render();
+}
+function reRenderList(){
+	document.querySelector('#showList').innerHTML=`<div class="showList"></div>`;
+	gMenuPageName = 'list';
+	menuList.gMenuRenderSecond();
 }

@@ -1,20 +1,4 @@
 
-var mjcDemo = {
-	render: function() {
-		var html = `
-		<div id="mjcDemo">
-			<div>MJC Demo</div>
-		</div>
-	`;
-		document.querySelector('#showList').innerHTML = html;
-	},
-	keyEvent: function(e) {
-		//exit---返回键
-		if(e.keyCode == KeyEvent.DOM_VK_BACK_SPACE) {
-			returnListPage();
-		}
-	}
-}
 
 var visuallyImpairedAudio={
 	render: function() {
@@ -28,16 +12,8 @@ var visuallyImpairedAudio={
 	keyEvent: function(e) {
 		//exit---返回键
 		if(e.keyCode == KeyEvent.DOM_VK_BACK_SPACE) {
-			returnListPage();
+			reRenderList();
 		}
 	}
 }
 
-var soundtracks={
-	render:function(){
-		
-	},
-	keyEvent:function(){
-		
-	}
-}

@@ -1,3 +1,6 @@
+// import { resolve } from "path";
+// import { rejects } from "assert";
+
 var addBissKey = {
 	render: function() {
 		var html = `
@@ -169,30 +172,35 @@ var divXDeactivation = {
 	render: function(value) {
 		if(gMenuPageName == 'divXDeactivationOk') {
 			var html = `
-		<div id="divXRegistration">
-			<div>You must register your device to play DivX® protected videos.</div>
-			<div>Registration Code:</div>
-			<div>Register at http://vod.divx.com</div>
-			<div class="sure">OK</div>
-		</div>
-	`;
+				<div id="divXRegistration">
+					<div class="content">
+						<div>You must register your device to play DivX® protected videos.</div>
+						<div>Registration Code:</div>
+						<div>Register at http://vod.divx.com</div>
+					</div>
+					<div class="btn">
+						<div class="sure focus">OK</div>
+					</div>
+				</div>
+			`;
 		} else {
 			var html = `
-		<div id="divXDeactivation">
-			<div>Deregistration code:</div>
-			<div>Deregister at http://vod.divx.com</div>
-			<div>Continue width registration?</div>
-			<div class="btn">
-				<span class="item focus ok">OK</span>
-				<span class="item cancel">Cancel</span>
-			</div>
-		</div>
-	`;
+				<div id="divXRegistration">
+					<div class="content">
+						<div>Deregistration code:</div>
+						<div>Deregister at http://vod.divx.com</div>
+						<div>Continue width registration?</div>
+					</div>
+					<div class="btn">
+						<div class="item focus ok">OK</div>
+						<div class="item cancel">Cancel</div>
+					</div>
+				</div>
+			`;
 		}
 		document.querySelector('#showList').innerHTML = html;
 	},
 	keyEvent: function(e) {
-		console.log(gMenuPageName);
 		var curFocus = document.querySelector(".focus");
 		var curList = document.querySelector(".btn").children;
 		var curIndex = [].indexOf.call(curList, curFocus);
@@ -224,12 +232,12 @@ var divXDeactivation = {
 		}
 		//exit---返回键
 		if(e.keyCode == KeyEvent.DOM_VK_BACK_SPACE) {
-			returnListPage();
+			reRenderList();
 		}
 	},
 	keyEventOK: function(e) {
 		if(e.keyCode == KeyEvent.DOM_VK_ENTER || e.keyCode == KeyEvent.DOM_VK_BACK_SPACE) {
-			returnListPage();
+			reRenderList();
 		}
 	}
 }
@@ -238,33 +246,25 @@ var divXRegistration = {
 	render: function() {
 		var html = `
 		<div id="divXRegistration">
-			<div>You register your device to play DivX® protected videos.</div>
-			<div>Register Code:7QBUBDC7GV</div>
-			<div>Registration http://vod.divx.com</div>
-			<div class="sure">OK</div>
+			<div class="content">
+				<div>You register your device to play DivX® protected videos.</div>
+				<div>Register Code:7QBUBDC7GV</div>
+				<div>Registration http://vod.divx.com</div>
+			</div>
+			<div class="btn">
+				<div class="sure focus">OK</div>
+			</div>
 		</div>
 	`;
 		document.querySelector('#showList').innerHTML = html;
 	},
 	keyEvent: function(e) {
 		if(e.keyCode == KeyEvent.DOM_VK_ENTER) {
-			document.querySelector('#showList').innerHTML = `
-				<div id="list">
-					<div class="firstList">
-					</div>
-					<div class="secondList">
-					</div>
-				</div>
-			`;
-			gMenuRenderFirst();
-			gMenuRenderSecond();
-			addClass(document.querySelector('.' + gMenuClassName + '').children[gMenuoIndex], 'focus');
-			changePage(gMenuoIndex, gMenuClassName);
-			gMenuPageName = 'list';
+			reRenderList();
 		}
 		//exit---返回键
 		if(e.keyCode == KeyEvent.DOM_VK_BACK_SPACE) {
-			returnListPage();
+			reRenderList();
 		}
 	}
 }
@@ -304,38 +304,46 @@ var Information = {
 						type = 'Manual';
 					}
 					var html = `
-					<div id="Information">
+					<div id="Information" class="scanList">
 						<div class="listItem">
-							<span>Interface</span>
-							<span>${gMenuSetupNetworkConf[1].value.data[gMenuSetupNetworkConf[1].curVal]}</span>
+							<div class="lf">Interface</div>
+							<div class="mid"></div>
+							<div class="rt">${gMenuSetupNetworkConf[1].value.data[gMenuSetupNetworkConf[1].curVal]}</div>
 						</div>
 						<div class="listItem">
-							<span>Address Type</span>
-							<span>${type}</span>
+							<div class="lf">Address Type</div>
+							<div class="mid"></div>
+							<div class="rt">${type}</div>
 						</div>
 						<div class="listItem">
-							<span>IP Address</span>
-							<span>${data.result.ip}</span>
+							<div class="lf">IP Address</div>
+							<div class="mid"></div>
+							<div class="rt">${data.result.ip}</div>
 						</div>
 						<div class="listItem">
-							<span>Subnet Mask</span>
-							<span>${data.result.netmask}</span>
+							<div class="lf">Subnet Mask</div>
+							<div class="mid"></div>
+							<div class="rt">${data.result.netmask}</div>
 						</div>
 						<div class="listItem">
-							<span>Default Gateway</span>
-							<span>${data.result.gateway}</span>
+							<div class="lf">Default Gateway</div>
+							<div class="mid"></div>
+							<div class="rt">${data.result.gateway}</div>
 						</div>
 						<div class="listItem">
-							<span>Primary DNS</span>
-							<span>${data.result['1stDNS']}</span>
+							<div class="lf">Primary DNS</div>
+							<div class="mid"></div>
+							<div class="rt">${data.result['1stDNS']}</div>
 						</div>
 						<div class="listItem">
-							<span>Secondary DNS</span>
-							<span>${data.result['2ndDNS']}</span>
+							<div class="lf">Secondary DNS</div>
+							<div class="mid"></div>
+							<div class="rt">${data.result['2ndDNS']}</div>
 						</div>
 						<div class="listItem">
-							<span>Ethernet MAC</span>
-							<span>${data.result.MACAddr}</span>
+							<div class="lf">Ethernet MAC</div>
+							<div class="mid"></div>
+							<div class="rt">${data.result.MACAddr}</div>
 						</div>
 					</div>
 				`;
@@ -647,42 +655,51 @@ var IPv6Information = {
 							dnsType = 'Manual';
 						}
 						var html = `
-									<div id="Information">
+									<div id="IPv6Information" class="scanList">
 										<div class="listItem">
-											<span>Interface</span>
-											<span>${gMenuSetupNetworkConf[1].value.data[gMenuSetupNetworkConf[1].curVal]}</span>
+											<div class="lf">Interface</div>
+											<div class="mid"></div>
+											<div class="rt">${gMenuSetupNetworkConf[1].value.data[gMenuSetupNetworkConf[1].curVal]}</div>
 										</div>
 										<div class="listItem">
-											<span>Address Type</span>
-											<span>${addrType}</span>
+											<div class="lf">Address Type</div>
+											<div class="mid"></div>
+											<div class="rt">${addrType}</div>
 										</div>
 										<div class="listItem">
-											<span>IP Address</span>
-											<span>${data.result.ipv6}</span>
+											<div class="lf">IP Address</div>
+											<div class="mid"></div>
+											<div class="rt">${data.result.ipv6}</div>
 										</div>
 										<div class="listItem">
-											<span>Length of Prefix</span>
-											<span>${data.result.lenOfPrefix}</span>
+											<div class="lf">Length of Prefix</div>
+											<div class="mid"></div>
+											<div class="rt">${data.result.lenOfPrefix}</div>
 										</div>
 										<div class="listItem">
-											<span>Default Gateway</span>
-											<span>${data.result.gateway}</span>
+											<div class="lf">Default Gateway</div>
+											<div class="mid"></div>
+											<div class="rt">${data.result.gateway}</div>
 										</div>
 										<div class="listItem">
-											<span>DNS Type</span>
-											<span>${dnsType}</span>
+											<div class="lf">DNS Type</div>
+											<div class="mid"></div>
+											<div class="rt">${dnsType}</div>
 										</div>
 										<div class="listItem">
-											<span>Primary DNS</span>
-											<span>${data.result['1stDNS']}</span>
+											<div class="lf">Primary DNS</div>
+											<div class="mid"></div>
+											<div class="rt">${data.result['1stDNS']}</div>
 										</div>
 										<div class="listItem">
-											<span>Secondary DNS</span>
-											<span>${data.result['2ndDNS']}</span>
+											<div class="lf">Secondary DNS</div>
+											<div class="mid"></div>
+											<div class="rt">${data.result['2ndDNS']}</div>
 										</div>
 										<div class="listItem">
-											<span>Ethernet MAC</span>
-											<span>${data.result['MACAddr']}</span>
+											<div class="lf">Ethernet MAC</div>
+											<div class="mid"></div>
+											<div class="rt">${data.result['MACAddr']}</div>
 										</div>
 									</div>
 								`;
@@ -1016,64 +1033,148 @@ var IPv6ConfigurationIP = {
 
 var systemInformation = {
 	render: function() {
-		var html = `
-		<div id="systemInformation">
-			systemInformation
-		</div>
-	`;
-		document.querySelector('#showList').innerHTML = html;
-	},
-	keyEvent: function(e) {
-		//exit---返回键
-		if(e.keyCode == KeyEvent.DOM_VK_BACK_SPACE) {
-			returnListPage();
+		var configIds=[
+			'g_menu__sys_info_ch_name',
+			'g_menu__sys_info_pre_viterbi',
+			'g_menu__sys_info_c_n',
+			'g_menu__sys_info_uce',
+			'g_menu__sys_info_ber',
+			'g_menu__sys_info_5s',
+			'g_menu__sys_info_agc',
+			'g_menu__sys_info_pre_rs',
+			'g_menu__sys_info_sym_rate',
+			'g_menu__sys_info_modulation',
+			'g_menu__sys_info_ch_freq',
+			'g_menu__sys_info_prog',
+			'g_menu__sys_info_service_id',
+			'g_menu__sys_info_ts_id',
+			'g_menu__sys_info_on_id',
+			'g_menu__sys_info_network_id'
+		];
+		var allPromises=[];
+		for(var i in configIds){
+			allPromises.push(
+				new Promise((resolve, reject) => {
+					window.gSocket.send({
+						"method": "mtk.webui.config.queryValue",
+						"params": {
+							"configId": [configIds[i]]
+						}
+					}, function(data) {
+						resolve(data);
+					})
+				})
+			);
 		}
-	}
-}
-
-var systemInformation = {
-	render: function() {
-		var html = `
-		<div id="systemInformation">
-			systemInformation
-		</div>
-	`;
-		document.querySelector('#showList').innerHTML = html;
-	},
-	keyEvent: function(e) {
-		//exit---返回键
-		if(e.keyCode == KeyEvent.DOM_VK_BACK_SPACE) {
-			returnListPage();
-		}
-	}
-}
-
-var versionInfo = {
-	render: function() {
-		window.gSocket.send({
-			"method": "mtk.webui.system.queryVersionInfo"
-		}, (data) => {
+		allPromises.push(
+			new Promise((resolve,rehect)=>{
+				window.gSocket.send({
+					"method":"mtk.webui.broadcast.querySignalInfo"
+				}, function(data) {
+					resolve(data);
+				})
+			})
+		)
+		Promise.all(allPromises).then(res=>{
+			console.log(res);
+			var list=[],signal={};
+			for(var r in res){
+				if(res[r].error.code==0){
+					if(r==res.length-1){
+						signal=res[r].result;
+					}else{
+						list.push(res[r].result[0].current);
+					}
+				}else{
+					console.log(res);
+				}
+			}
+			console.log(list);
 			var html = `
-				<div id="versionInfo">
-					<div class="versionInfo">
-						<div>Model Name:</div>
-						<div>${data.result.modelName}</div>
+				<div id="systemInformation">
+					<div class="scanProgress">
+						<div class="scanProgressItem">
+							<div class="lf">Signal Quality</div>
+							<div class="mid">
+								<div class="progress">
+									<div style="width: ${signal.quality/100*30}rem;" class="front"></div>
+								</div>
+							</div>
+							<div class="rt">${(Math.round((signal.quality /100) * 10000) / 100.00)}%</div>
+						</div>
+						<div class="scanProgressItem">
+							<div class="lf">Signal Level</div>
+							<div class="mid">
+								<div class="progress">
+									<div style="width: ${signal.level/100*30}rem;" class="front"></div>
+								</div>
+							</div>
+							<div class="rt">${(Math.round((signal.level /100) * 10000) / 100.00)}%</div>
+						</div>
 					</div>
-					<div class="versionInfo">
-						<div>Version:</div>
-						<div>${data.result.version}</div>
-					</div>
-					<div class="versionInfo">
-						<div>Serial Number:</div>
-						<div>${data.result.serialNumber}</div>
-					</div>
-					<div class="versionInfo">
-						<div>Website:</div>
-						<div>${data.result.website}</div>
+					<div class="sysInfoList">
+						<div class="sysInfoListItem">
+							<div class="name">Channel:</div>
+							<div class="value">${list[0]}</div>
+						</div>
+						<div class="sysInfoListItem">
+							<div class="name">Frequency:</div>
+							<div class="value">${list[10]}</div>
+						</div>
+						<div class="sysInfoListItem">
+							<div class="name">Pre Viterbi:</div>
+							<div class="value">${list[1]}</div>
+						</div>
+						<div class="sysInfoListItem">
+							<div class="name">Prog:</div>
+							<div class="value">${list[11]}</div>
+						</div>
+						<div class="sysInfoListItem">
+							<div class="name">C/N:</div>
+							<div class="value">${list[2]}</div>
+						</div>
+						<div class="sysInfoListItem">
+							<div class="name">Service ID:</div>
+							<div class="value">${list[12]}</div>
+						</div>
+						<div class="sysInfoListItem">
+							<div class="name">UEC:</div>
+							<div class="value">${list[3]}</div>
+						</div>
+						<div class="sysInfoListItem">
+							<div class="name">TS ID:</div>
+							<div class="value">${list[13]}</div>
+						</div>
+						<div class="sysInfoListItem">
+							<div class="name">Post Viterbi:</div>
+							<div class="value">${list[4]}</div>
+						</div>
+						<div class="sysInfoListItem">
+							<div class="name">ON IDi:</div>
+							<div class="value">${list[14]}</div>
+						</div>
+						<div class="sysInfoListItem">
+							<div class="name">5S:</div>
+							<div class="value">${list[5]}</div>
+						</div>
+						<div class="sysInfoListItem">
+							<div class="name">Network ID:</div>
+							<div class="value">${list[15]}</div>
+						</div>
+						<div class="sysInfoListItem">
+							<div class="name">AGC:</div>
+							<div class="value">${list[6]}</div>
+						</div>
 					</div>
 				</div>
 			`;
 			document.querySelector('#showList').innerHTML = html;
+			document.querySelector('.menuOperate').innerHTML=`
+				<div class="operaExit">Back</div>
+			`;
+			gMenuPageName = 'systemInformation';
+		}).catch(function(reason) {
+			console.log(reason);
 		});
 	},
 	keyEvent: function(e) {
@@ -1084,33 +1185,42 @@ var versionInfo = {
 	}
 }
 
-var NetworkWFD = {
-	render: function() {
-		var html = `
-		<div id="WFD">
-			Enable WFD
-		</div>
-	`;
-		document.querySelector('#showList').innerHTML = html;
-	},
-	keyEvent: function(e) {
-		//exit---返回键
-		if(e.keyCode == KeyEvent.DOM_VK_BACK_SPACE) {
-			gMenuPageName='popBoxShow';
-			popBoxShow.render(gMenuChild.data[gMenuoIndex].name);
-//			returnListPage();
-		}
-	}
-}
 
-var WIFI_DIRECT = {
+var versionInfo = {
 	render: function() {
-		var html = `
-		<div id="WIFI_DIRECT">
-			Enable WFD
-		</div>
-	`;
-		document.querySelector('#showList').innerHTML = html;
+		window.gSocket.send({
+			"method": "mtk.webui.system.queryVersionInfo"
+		}, (data) => {
+			var html = `
+				<div id="versionInfo" class="scanList">
+					<div class="listItem">
+						<div class="lf">Model Name:</div>
+						<div class="mid">${data.result.modelName}</div>
+						<div class="rt"></div>
+					</div>
+					<div class="listItem">
+						<div class="lf">Version:</div>
+						<div class="mid">${data.result.version}</div>
+						<div class="rt"></div>
+					</div>
+					<div class="listItem">
+						<div class="lf">Serial Number:</div>
+						<div class="mid">${data.result.serialNumber}</div>
+						<div class="rt"></div>
+					</div>
+					<div class="listItem">
+						<div class="lf">Website:</div>
+						<div class="mid">${data.result.website}</div>
+						<div class="rt"></div>
+					</div>
+				</div>
+			`;
+			document.querySelector('#showList').innerHTML = html;
+			document.querySelector('.menuOperate').innerHTML=`
+				<div class="operaExit">Back</div>
+			`;
+			gMenuPageName = 'systemInformation';
+		});
 	},
 	keyEvent: function(e) {
 		//exit---返回键
@@ -1119,6 +1229,7 @@ var WIFI_DIRECT = {
 		}
 	}
 }
+
 
 var wirelessScanResult={
 	obj:{},
@@ -1257,7 +1368,7 @@ var wirelessSettingScan ={
 			"method": "mtk.webui.network.queryWirelessScan"
 		}, (data) => {
 			if(gMenuPageName=='wirelessSettingScan'){
-//				console.log(data);
+				console.log(data);
 				var html1=`
 					<div id="wirelessScan">
 						<div class="scanTitle">Wireless Setting</div>
@@ -1522,26 +1633,34 @@ var wirelessSettingManual={
 
 var wirelessAutoPIN={
 	render:function(){
-		var html = `
-			<div id="wirelessScan">
-				<div class="scanTitle">Wireless Setting</div>
-				<div class="scanContent">
-					<div class="scanGuide">Please ensure the following PIN code is installed to the AP before you click the below 'Next' button.</div>
-					<div class="listContent">
-						<div class="scanList">
-							<div class="listItem">PIN Code:[23423423423]</div>
-							<div class="listItem focus">Refresh PIN</div>
+		window.gSocket.send({
+			"method":"mtk.webui.network.queryWirelessWPSPIN",
+			"params":{"update":true}	
+		},data=>{
+			console.log(data);
+			if(data.error.code==0){
+				var html = `
+					<div id="wirelessScan">
+						<div class="scanTitle">Wireless Setting</div>
+						<div class="scanContent">
+							<div class="scanGuide">Please ensure the following PIN code is installed to the AP before you click the below 'Next' button.</div>
+							<div class="listContent">
+								<div class="scanList">
+									<div class="listItem">PIN Code:[${data.result.PIN}]</div>
+									<div class="listItem focus">Refresh PIN</div>
+								</div>
+							</div>
+						</div>
+						<div class="scanOperate">
+							<div>Previous</div>
+							<div>Next</div>
+							<div>Cancel</div>
 						</div>
 					</div>
-				</div>
-				<div class="scanOperate">
-					<div>Previous</div>
-					<div>Next</div>
-					<div>Cancel</div>
-				</div>
-			</div>
-		`;
-		document.querySelector('#container').innerHTML = html;
+				`;
+				document.querySelector('#container').innerHTML = html;
+			}
+		});
 	},
 	keyEvent:function(e){
 		//左键
@@ -1559,7 +1678,7 @@ var wirelessAutoPIN={
 		}
 		//enter键
 		if(e.keyCode == KeyEvent.DOM_VK_ENTER) {
-			
+			this.render();
 		}
 	}
 }
@@ -1757,38 +1876,20 @@ var timeSetupTime= {
 //			}
 //		});
 		var html = `
-					<div id="menuNav">
-						<span>Menu-Video</span>
+			<div id="timeSetupTime">
+				<div id="timeSetup" class="autoSync scanList"></div>
+				<div id="timeSetup" class="onTimer scanList"></div>
+				<div id="timeSetup" class="onChannel scanList">
+					<div class="listItem disabled">
+						<div class="lf">Power on Channel</div>
+						<div class="mid"></div>
+						<div class="rt"><span></span></div>
 					</div>
-					<div id="listContainer">
-						<div class="menuList">
-						</div>
-						<div id="showList">
-							<div id="timeSetupTime">
-								<div id="timeSetup" class="autoSync"></div>
-								<div id="timeSetup" class="onTimer"></div>
-								<div id="timeSetup" class="onChannel">
-									<div class="listItem disabled">
-										<div class="label">Power on Channel</div>
-										<div class="content">
-											<span class="secondItemFocus"></span>
-										</div>
-									</div>
-								</div>
-								<div id="timeSetup" class="offTimer"></div>
-							</div>
-						</div>
-					</div>
-					<div id="menuOperate">
-						<div class="menuOperate">
-							<div>Enter</div>
-							<div>Select</div>
-							<div>Exit</div>
-						</div>
-					</div>
-				`;
-		document.querySelector('#container').innerHTML = html;
-		gMenuRenderFirst();
+				</div>
+				<div id="timeSetup" class="offTimer scanList"></div>
+			</div>
+		`;
+		document.querySelector('#showList').innerHTML = html;
 		this.renderHtmlAutoSync();
 		this.renderHtmlOnTimer();
 		this.renderHtmlOffTimer();
@@ -1824,16 +1925,14 @@ var timeSetupTime= {
 	renderHtmlAutoSync: function() {
 		if(this.autoSync == "On") {
 			var html1=`
-				<div class="listItem focus setupSelect">
-					<div class="label">Auto Synchronization</div>
-					<div class="content">
-						<div>${this.autoSync}</div>
-						<span></span>
-					</div>
+				<div class="listItem setupSelect">
+					<div class="lf">Auto Synchronization</div>
+					<div class="mid">${this.autoSync}</div>
+					<div class="rt"><span></span></div>
 				</div>
 				<div class="listItem disabled setupInput">
-					<div class="label">Date</div>
-					<div class="content">
+					<div class="lf">Date</div>
+					<div class="mid">
 			`;
 			var html2=``;
 			var date=this.autoSyncDate.split(' ');
@@ -1846,10 +1945,11 @@ var timeSetupTime= {
 			}
 			var html3=`
 					</div>
+					<div class="rt"></div>
 				</div>
 				<div class="listItem disabled setupInput">
-					<div class="label">Time</div>
-					<div class="content">
+					<div class="lf">Time</div>
+					<div class="mid">
 			`;
 			var html4=``;
 			var time=this.autoSyncTime.split('');
@@ -1860,18 +1960,21 @@ var timeSetupTime= {
 					html4+=`<div class="inputItem autoSyncTime">${time[j]}</div>`;
 				}
 			};
+			var html5=`
+					</div>
+					<div class="rt"></div>
+				</div>
+			`;
 		} else {
 			var html1=`
 				<div class="listItem focus setupSelect">
-					<div class="label">Auto Synchronization</div>
-					<div class="content">
-						<div>${this.autoSync}</div>
-						<span></span>
-					</div>
+					<div class="lf">Auto Synchronization</div>
+					<div class="mid">${this.autoSync}</div>
+					<div class="rt"><span></span></div>
 				</div>
 				<div class="listItem setupInput">
-					<div class="label">Date</div>
-					<div class="content">
+					<div class="lf">Date</div>
+					<div class="mid">
 			`;
 			var html2=``;
 			var date=this.autoSyncDate.split('');
@@ -1884,10 +1987,11 @@ var timeSetupTime= {
 			}
 			var html3=`
 					</div>
+					<div class="rt"></div>
 				</div>
 				<div class="listItem setupInput">
-					<div class="label">Time</div>
-					<div class="content">
+					<div class="lf">Time</div>
+					<div class="mid">
 			`;
 			var html4=``;
 			var time=this.autoSyncTime.split('');
@@ -1898,100 +2002,110 @@ var timeSetupTime= {
 					html4+=`<div class="inputItem autoSyncTime">${time[j]}</div>`;
 				}
 			};
+			var html5=`
+					</div>
+					<div class="rt"></div>
+				</div>
+			`;
 		}
-		document.querySelector('.autoSync').innerHTML = html1+html2+html3+html4;
+		document.querySelector('.autoSync').innerHTML = html1+html2+html3+html4+html5;
+		if(this.focusIndex==0){
+			addClass(document.querySelector('#timeSetupTime').getElementsByClassName('listItem')[0],'focus');
+		}
 	},
 	renderHtmlOnTimer: function() {
 		if(this.onTimer == 'Off') {
 			var html = `
 						<div class="listItem setupSelect">
-								<div class="label">Power On Timer</div>
-								<div class="content">
-									<div>${this.onTimer}</div>
-									<span class="secondItemFocus"></span>
-								</div>
+							<div class="lf">Power On Timer</div>
+							<div class="mid">${this.onTimer}</div>
+							<div class="rt"><span></span></div>
+						</div>
+						<div class="listItem disabled setupInput">
+							<div class="lf">Timer</div>
+							<div class="mid">
+								<div class="inputItem">0</div>
+								<div class="inputItem">0</div> :
+								<div class="inputItem">0</div>
+								<div class="inputItem">0</div> :
+								<div class="inputItem">0</div>
+								<div class="inputItem">0</div>
 							</div>
-							<div class="listItem disabled setupInput">
-								<div class="label">Timer</div>
-								<div class="content">
-									<div class="inputItem">0</div>
-									<div class="inputItem">0</div> :
-									<div class="inputItem">0</div>
-									<div class="inputItem">0</div> :
-									<div class="inputItem">0</div>
-									<div class="inputItem">0</div>
-								</div>
-							</div>
+							<div class="rt"></div>
+						</div>
 					`;
 		} else {
 			var html = `
 						<div class="listItem setupSelect">
-								<div class="label">Power On Timer</div>
-								<div class="content">
-									<div>${this.onTimer}</div>
-									<span class="secondItemFocus"></span>
-								</div>
+							<div class="lf">Power On Timer</div>
+							<div class="mid">${this.onTimer}</div>
+							<div class="rt"><span></span></div>
+						</div>
+						<div class="listItem setupInput">
+							<div class="lf">Timer</div>
+							<div class="mid">
+								<div class="inputItem">0</div>
+								<div class="inputItem">0</div> :
+								<div class="inputItem">0</div>
+								<div class="inputItem">0</div> :
+								<div class="inputItem">0</div>
+								<div class="inputItem">0</div>
 							</div>
-							<div class="listItem setupInput">
-								<div class="label">Timer</div>
-								<div class="content">
-									<div class="inputItem">0</div>
-									<div class="inputItem">0</div> :
-									<div class="inputItem">0</div>
-									<div class="inputItem">0</div> :
-									<div class="inputItem">0</div>
-									<div class="inputItem">0</div>
-								</div>
-							</div>
+							<div class="rt"></div>
+						</div>
 					`;
 		}
 		document.querySelector('.onTimer').innerHTML = html;
+		if(this.focusIndex==3){
+			addClass(document.querySelector('#timeSetupTime').getElementsByClassName('listItem')[3],'focus');
+		}
 	},
 	renderHtmlOffTimer: function() {
 		if(this.offTimer == 'Off') {
 			var html = `
 						<div class="listItem setupSelect">
-								<div class="label">Power Off Timer</div>
-								<div class="content">
-									<div>${this.offTimer}</div>
-									<span class="secondItemFocus"></span>
-								</div>
+							<div class="lf">Power Off Timer</div>
+							<div class="mid">${this.offTimer}</div>
+							<div class="rt"><span></span></div>
+						</div>
+						<div class="listItem disabled setupInput">
+							<div class="lf">Timer</div>
+							<div class="mid">
+								<div class="inputItem">0</div>
+								<div class="inputItem">0</div> :
+								<div class="inputItem">0</div>
+								<div class="inputItem">0</div> :
+								<div class="inputItem">0</div>
+								<div class="inputItem">0</div>
 							</div>
-							<div class="listItem disabled setupInput">
-								<div class="label">Timer</div>
-								<div class="content">
-									<div class="inputItem">0</div>
-									<div class="inputItem">0</div> :
-									<div class="inputItem">0</div>
-									<div class="inputItem">0</div> :
-									<div class="inputItem">0</div>
-									<div class="inputItem">0</div>
-								</div>
-							</div>
+							<div class="rt"></div>
+						</div>
 					`;
 		} else {
 			var html = `
 						<div class="listItem setupSelect">
-								<div class="label">Power Off Timer</div>
-								<div class="content">
-									<div>${this.offTimer}</div>
-									<span class="secondItemFocus"></span>
-								</div>
+							<div class="lf">Power Off Timer</div>
+							<div class="mid">${this.offTimer}</div>
+							<div class="rt"><span></span></div>
+						</div>
+						<div class="listItem setupInput">
+							<div class="lf">Timer</div>
+							<div class="mid">
+								<div class="inputItem">0</div>
+								<div class="inputItem">0</div> :
+								<div class="inputItem">0</div>
+								<div class="inputItem">0</div> :
+								<div class="inputItem">0</div>
+								<div class="inputItem">0</div>
 							</div>
-							<div class="listItem setupInput">
-								<div class="label">Timer</div>
-								<div class="content">
-									<div class="inputItem">0</div>
-									<div class="inputItem">0</div> :
-									<div class="inputItem">0</div>
-									<div class="inputItem">0</div> :
-									<div class="inputItem">0</div>
-									<div class="inputItem">0</div>
-								</div>
-							</div>
+							<div class="rt"></div>
+						</div>
 					`;
 		}
 		document.querySelector('.offTimer').innerHTML = html;
+		if(this.focusIndex==6){
+			addClass(document.querySelector('#timeSetupTime').getElementsByClassName('listItem')[6],'focus');
+		}
 	},
 	keyEvent: function(e) {
 		var curFocus = document.querySelector(".listItem.focus");
@@ -2050,7 +2164,8 @@ var timeSetupTime= {
 					var arr=['On', 'Off'];
 					var index=[].indexOf.call(arr,this.autoSync);
 					var obj={
-						name:'Auto Synchronization',
+						name:'timeSetupTime',
+						popName:'Auto Synchronization',
 						value: {
 							data: arr
 						},
@@ -2061,7 +2176,8 @@ var timeSetupTime= {
 					var arr=['Off', 'On', 'Once'];
 					var index=[].indexOf.call(arr,this.onTimer);
 					var obj={
-						name:'Power On Timer',
+						name:'timeSetupTime',
+						popName:'Power On Timer',
 						value: {
 							data: arr
 						},
@@ -2072,14 +2188,15 @@ var timeSetupTime= {
 					var arr=['Off', 'On', 'Once'];
 					var index=[].indexOf.call(arr,this.offTimer);
 					var obj={
-						name:'Power Off Timer',
+						name:'timeSetupTime',
+						popName:'Power Off Timer',
 						value: {
 							data: arr
 						},
 						curVal:index
 					};
 				}
-				gMenuPageName='showSelect';
+				this.focusIndex=[].indexOf.call(allList, curFocus);
 				showSelect.render(obj);
 			}
 			if(e.keyCode == KeyEvent.DOM_VK_RIGHT&&hasClass(curFocus, 'setupInput')){
